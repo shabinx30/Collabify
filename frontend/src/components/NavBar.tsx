@@ -4,12 +4,12 @@ const NavBar = () => {
     return (
         <nav className="bg-white text-black">
             <ul className="flex py-2 justify-between px-4">
-                <li className="flex-1 font-bold my-1 text-2xl">Logo</li>
+                <li className="flex-1 font-bold my-1 text-lg md:text-2xl">Logo</li>
                 <li className="hidden md:flex flex-1 items-center px-4 gap-2 border border-[#868686] rounded-xl">
                     <FiSearch />
                     <input type="text" className="w-full h-full outline-none" placeholder="Search"/>
                 </li>
-                <li className="flex-1 flex justify-end gap-6 my-1">
+                <li className="flex-1/3 lg:flex-1 flex text-sm lg:text-base justify-end gap-6 my-1">
                     <p>Login</p>
                     <p>Join as Brand</p>
                     <p className="text-[#FFBF00]">Join as Creator</p>
