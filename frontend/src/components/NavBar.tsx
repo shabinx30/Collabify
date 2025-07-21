@@ -5,9 +5,9 @@ const NavBar = () => {
         <nav className="bg-white text-black">
             <ul className="flex py-2 justify-between px-4">
                 <li className="flex-1 font-bold my-1 text-2xl">Logo</li>
-                <li className="hidden md:flex flex-1 items-center px-2 border rounded-lg">
+                <li className="hidden md:flex flex-1 items-center px-4 gap-2 border border-[#868686] rounded-xl">
                     <FiSearch />
-                    <input type="text" className="w-full px-2 h-full outline-none" placeholder="Search"/>
+                    <input type="text" className="w-full h-full outline-none" placeholder="Search"/>
                 </li>
                 <li className="flex-1 flex justify-end gap-6 my-1">
                     <p>Login</p>
