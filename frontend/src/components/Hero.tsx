@@ -4,18 +4,18 @@ import { LiaTelegramPlane } from "react-icons/lia";
 
 const Hero = () => {
     return (
-        <div className="w-full bg-white flex flex-col items-center px-[2em] lg:px-[10em] pt-[4em]">
+        <div className="w-full bg-white flex flex-col items-center px-[2em] lg:px-[6em] xl:px-[12em] pt-[4em]">
             <h1 className="w-full text-black text-3xl md:text-4xl lg:text-5xl font-semibold text-center">
                 Symplifiying Influencer Marketing For Everyone
             </h1>
-            <p className="text-gray-800 mt-[1em] w-[75%] text-sm md:text-base lg:w-[50%] text-center leading-[1.2]">
+            <p className="text-gray-800 mt-[1em] w-[75%] text-sm md:text-base lg:w-[60%] text-center leading-[1.2]">
                 Discover a smarter way to connect with content creators, launch
                 campaigns, and grow your, all in one simple, seamless platform.
             </p>
             <div className="bg-[#fff4c9] w-full md:flex p-2 rounded-2xl my-[4em] text-black">
                 <div className="flex-1/4">
                     <img
-                        className="saturate-[130%] rounded-2xl min-h-full object-cover object-left-top"
+                        className="saturate-[130%] rounded-2xl min-h-full object-cover object-center"
                         src="/images/vlog.jpg"
                         alt="hero.png"
                     />
