@@ -15,19 +15,19 @@ const Hero = () => {
             <div className="bg-[#fff4c9] w-full md:flex p-2 rounded-2xl my-[4em] text-black">
                 <div className="flex-1/4">
                     <img
-                        className="saturate-[130%] rounded-2xl"
+                        className="saturate-[130%] rounded-2xl min-h-full object-cover object-left-top"
                         src="/images/vlog.jpg"
                         alt="hero.png"
                     />
                 </div>
-                <div className="flex-1 pl-4 pr-2 py-2">
+                <div className="flex-1 pl-4 pr-2 py-2 md:py-0 lg:py-2">
                     <div className="flex flex-col h-full justify-between">
                         <div className="flex gap-4 mb-[2em] md:mb-0">
-                            <div className="flex-1 flex gap-4 justify-center items-center bg-[#F4E1FF] text-[#7B00E0] h-[3em] rounded-2xl">
+                            <div className="flex-1 flex gap-4 justify-center items-center bg-[#F4E1FF] text-[#7B00E0] h-[2.5em] lg:h-[3em] rounded-2xl">
                                 <FaInstagram size={22}/>
                                 Instagram
                             </div>
-                            <div className="flex-1 flex gap-4 justify-center items-center bg-white h-[3em] rounded-2xl">
+                            <div className="flex-1 flex gap-4 justify-center items-center bg-white h-[2.5em] lg:h-[3em] rounded-2xl">
                                 <FaYoutube size={22} className="text-red-500"/>
                                 Youtube
                             </div>
@@ -42,10 +42,10 @@ const Hero = () => {
                                 <h2>$100</h2>
                             </div>
                             <div className="flex gap-2 justify-center">
-                                <span className="bg-white px-4 py-0.5 text-sm rounded-2xl">
+                                <span className="bg-white px-4 py-0.5 text-[0.8em] lg:text-sm rounded-2xl">
                                     Beauty Marketer
                                 </span>
-                                <span className="bg-white px-4 py-0.5 text-sm rounded-2xl">
+                                <span className="bg-white px-4 py-0.5 text-[0.8em] lg:text-sm rounded-2xl">
                                     Content Creator
                                 </span>
                             </div>
@@ -55,11 +55,11 @@ const Hero = () => {
                             </div>
                         </div>
                         <div className="flex gap-4 mt-[2em] md:mt-0">
-                            <div className="flex-1 flex gap-2 justify-center items-center bg-[#FFBF00] font-semibold h-[3em] rounded-2xl">
+                            <div className="flex-1 flex gap-2 justify-center items-center bg-[#FFBF00] font-semibold h-[2.5em] lg:h-[3em] rounded-2xl">
                                 <VscEye size={24} />
                                 View Profile
                             </div>
-                            <div className="flex-1 flex gap-2 justify-center items-center bg-white font-semibold h-[3em] rounded-2xl">
+                            <div className="flex-1 flex gap-2 justify-center items-center bg-white font-semibold h-[2.5em] lg:h-[3em] rounded-2xl">
                                 <LiaTelegramPlane size={22} />
                                 Chat
                             </div>
