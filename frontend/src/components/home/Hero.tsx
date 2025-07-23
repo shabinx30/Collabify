@@ -4,7 +4,7 @@ import { LiaTelegramPlane } from "react-icons/lia";
 
 const Hero = () => {
     return (
-        <div className="w-full bg-white flex flex-col items-center px-[2em] lg:px-[6em] xl:px-[12em] pt-[4em]">
+        <section className="w-full bg-white flex flex-col items-center px-[2em] lg:px-[6em] xl:px-[12em] pt-[4em]">
             <h1 className="w-full text-black text-3xl md:text-4xl lg:text-5xl font-semibold text-center">
                 Symplifiying Influencer Marketing For Everyone
             </h1>
@@ -67,7 +67,7 @@ const Hero = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 

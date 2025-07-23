@@ -1,11 +1,13 @@
 import NavBar from "./components/NavBar";
-import Hero from "./components/Hero";
+import Featured from "./components/home/Featured";
+import Hero from "./components/home/Hero";
 
 function App() {
 
     return <>
         <NavBar />
         <Hero />
+        <Featured />
     </>;
 }
 
