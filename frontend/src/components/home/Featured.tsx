@@ -12,7 +12,7 @@ const Featured = () => {
                             <p>Beauty marketer & Content...</p>
                             <p className="text-gray-600">Los Angeles, US</p>
                         </div>
-                        <strong className="text-lg">$100</strong>
+                        <strong className="text-base">$100</strong>
                     </div>
                 </div>
                 <div className="aspect-[9/14]">
@@ -24,7 +24,7 @@ const Featured = () => {
                             <p>Beauty marketer & Content...</p>
                             <p className="text-gray-600">Los Angeles, US</p>
                         </div>
-                        <strong className="text-lg">$100</strong>
+                        <strong className="text-base">$100</strong>
                     </div>
                 </div>
                 <div className="aspect-[9/14]">
@@ -36,7 +36,7 @@ const Featured = () => {
                             <p>Beauty marketer & Content...</p>
                             <p className="text-gray-600">Los Angeles, US</p>
                         </div>
-                        <strong className="text-lg">$100</strong>
+                        <strong className="text-base">$100</strong>
                     </div>
                 </div>
                 <div className="aspect-[9/14]">
@@ -48,7 +48,7 @@ const Featured = () => {
                             <p>Beauty marketer & Content...</p>
                             <p className="text-gray-600">Los Angeles, US</p>
                         </div>
-                        <strong className="text-lg">$100</strong>
+                        <strong className="text-base">$100</strong>
                     </div>
                 </div>
             </div>
