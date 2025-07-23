@@ -2,7 +2,7 @@ const Benefits = () => {
     return (
         <section className="flex flex-col gap-2">
             <h3 className="text-black text-xl font-semibold">Why Choose us?</h3>
-            <section className="bg-[#202020] flex flex-col gap-[4em] w-full p-4 rounded-3xl">
+            <section className="bg-[#202020] flex flex-col gap-[4em] p-4 rounded-3xl">
                 <div className="pt-2 pl-2">
                     <h3 className="text-[#FFCF3E] text-xl font-semibold">
                         For Creators
@@ -12,14 +12,14 @@ const Benefits = () => {
                         projects they love on their own terms.
                     </p>
                 </div>
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-4 gap-2">
                     <div className="aspect-square bg-white rounded-xl"></div>
                     <div className="aspect-square bg-white rounded-xl"></div>
                     <div className="aspect-square bg-white rounded-xl"></div>
                     <div className="aspect-square bg-white rounded-xl"></div>
                 </div>
             </section>
-            <section className="bg-[#202020] flex flex-col gap-[4em] w-full p-4 rounded-3xl">
+            <section className="bg-[#202020] flex flex-col gap-[4em] p-4 rounded-3xl">
                 <div className="pt-2 pl-2">
                     <h3 className="text-[#FFCF3E] text-xl font-semibold">
                         For Brands
@@ -29,7 +29,7 @@ const Benefits = () => {
                         right talent to bring it to life.
                     </p>
                 </div>
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-4 gap-2">
                     <div className="aspect-square bg-white rounded-xl"></div>
                     <div className="aspect-square bg-white rounded-xl"></div>
                     <div className="aspect-square bg-white rounded-xl"></div>

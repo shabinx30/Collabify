@@ -1,5 +1,6 @@
 import Benefits from "../components/home/Benefits";
 import Featured from "../components/home/Featured";
+import Footer from "../components/Footer";
 import Hero from "../components/home/Hero";
 import NavBar from "../components/NavBar";
 
@@ -12,6 +13,7 @@ const Home = () => {
                 <Featured />
                 <Benefits />
             </main>
+            <Footer />
         </>
     );
 };
