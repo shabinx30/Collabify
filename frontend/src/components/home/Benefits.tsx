@@ -1,3 +1,5 @@
+import { CiImageOn } from "react-icons/ci";
+
 const Benefits = () => {
     return (
         <section className="flex flex-col gap-2">
@@ -13,10 +15,42 @@ const Benefits = () => {
                     </p>
                 </div>
                 <div className="grid grid-cols-4 gap-2">
-                    <div className="aspect-square bg-white rounded-xl"></div>
-                    <div className="aspect-square bg-white rounded-xl"></div>
-                    <div className="aspect-square bg-white rounded-xl"></div>
-                    <div className="aspect-square bg-white rounded-xl"></div>
+                    <div className="aspect-square bg-white text-black rounded-xl p-1">
+                        <div className="flex justify-center items-center h-[80%]">
+                            <CiImageOn size={40} />
+                        </div>
+                        <p className="text-sm text-center">
+                            Lorem Ipsum is simply dummy text of the printing and
+                            typesetting industry.
+                        </p>
+                    </div>
+                    <div className="aspect-square bg-white text-black rounded-xl p-1">
+                        <div className="flex justify-center items-center h-[80%]">
+                            <CiImageOn size={40} />
+                        </div>
+                        <p className="text-sm text-center">
+                            Lorem Ipsum is simply dummy text of the printing and
+                            typesetting industry.
+                        </p>
+                    </div>
+                    <div className="aspect-square bg-white text-black rounded-xl p-1">
+                        <div className="flex justify-center items-center h-[80%]">
+                            <CiImageOn size={40} />
+                        </div>
+                        <p className="text-sm text-center">
+                            Lorem Ipsum is simply dummy text of the printing and
+                            typesetting industry.
+                        </p>
+                    </div>
+                    <div className="aspect-square bg-white text-black rounded-xl p-1">
+                        <div className="flex justify-center items-center h-[80%]">
+                            <CiImageOn size={40} />
+                        </div>
+                        <p className="text-sm text-center">
+                            Lorem Ipsum is simply dummy text of the printing and
+                            typesetting industry.
+                        </p>
+                    </div>
                 </div>
             </section>
             <section className="bg-[#202020] flex flex-col gap-[4em] p-4 rounded-3xl">
@@ -30,10 +64,42 @@ const Benefits = () => {
                     </p>
                 </div>
                 <div className="grid grid-cols-4 gap-2">
-                    <div className="aspect-square bg-white rounded-xl"></div>
-                    <div className="aspect-square bg-white rounded-xl"></div>
-                    <div className="aspect-square bg-white rounded-xl"></div>
-                    <div className="aspect-square bg-white rounded-xl"></div>
+                    <div className="aspect-square bg-white text-black rounded-xl p-1">
+                        <div className="flex justify-center items-center h-[80%]">
+                            <CiImageOn size={40} />
+                        </div>
+                        <p className="text-sm text-center">
+                            Lorem Ipsum is simply dummy text of the printing and
+                            typesetting industry.
+                        </p>
+                    </div>
+                    <div className="aspect-square bg-white text-black rounded-xl p-1">
+                        <div className="flex justify-center items-center h-[80%]">
+                            <CiImageOn size={40} />
+                        </div>
+                        <p className="text-sm text-center">
+                            Lorem Ipsum is simply dummy text of the printing and
+                            typesetting industry.
+                        </p>
+                    </div>
+                    <div className="aspect-square bg-white text-black rounded-xl p-1">
+                        <div className="flex justify-center items-center h-[80%]">
+                            <CiImageOn size={40} />
+                        </div>
+                        <p className="text-sm text-center">
+                            Lorem Ipsum is simply dummy text of the printing and
+                            typesetting industry.
+                        </p>
+                    </div>
+                    <div className="aspect-square bg-white text-black rounded-xl p-1">
+                        <div className="flex justify-center items-center h-[80%]">
+                            <CiImageOn size={40} />
+                        </div>
+                        <p className="text-sm text-center">
+                            Lorem Ipsum is simply dummy text of the printing and
+                            typesetting industry.
+                        </p>
+                    </div>
                 </div>
             </section>
         </section>
