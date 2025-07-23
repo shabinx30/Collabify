@@ -12,7 +12,7 @@ const Hero = () => {
                 Discover a smarter way to connect with content creators, launch
                 campaigns, and grow your, all in one simple, seamless platform.
             </p>
-            <div className="bg-[#fff4c9] w-full md:flex p-2 rounded-2xl mt-[4em] text-black">
+            <div className="bg-[#fff4c9] w-full md:flex p-2 rounded-3xl mt-[4em] text-black">
                 <div className="flex-1/4">
                     <img
                         className="saturate-[130%] rounded-2xl min-h-full object-cover object-center"
