@@ -14,7 +14,7 @@ const Benefits = () => {
                         projects they love on their own terms.
                     </p>
                 </div>
-                <div className="grid grid-cols-4 gap-2">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 items-center">
                     <div className="aspect-square bg-white dark:bg-[#2b2b2b] rounded-xl p-1">
                         <div className="flex justify-center items-center h-[80%]">
                             <CiImageOn size={40} />
@@ -63,7 +63,7 @@ const Benefits = () => {
                         right talent to bring it to life.
                     </p>
                 </div>
-                <div className="grid grid-cols-4 gap-2">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 items-center">
                     <div className="aspect-square bg-white dark:bg-[#2b2b2b] rounded-xl p-1">
                         <div className="flex justify-center items-center h-[80%]">
                             <CiImageOn size={40} />

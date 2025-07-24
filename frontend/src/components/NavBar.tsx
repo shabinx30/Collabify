@@ -9,7 +9,7 @@ const NavBar = ({ page }: { page: "login" | "signup" }) => {
                     {" "}
                     <Link to="/">Logo</Link>{" "}
                 </li>
-                <li className="hidden md:flex flex-1 items-center px-4 gap-2 border border-[#868686] dark:border-gray-600 dark:bg-[#2b2b2b] rounded-xl">
+                <li className="hidden md:flex flex-1 items-center px-4 gap-2 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-xl">
                     <FiSearch />
                     <input
                         type="text"
