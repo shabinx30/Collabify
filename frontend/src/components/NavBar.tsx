@@ -9,7 +9,7 @@ const NavBar = ({ page }: { page: "login" | "signup" }) => {
                     {" "}
                     <Link to="/">Logo</Link>{" "}
                 </li>
-                <li className="hidden md:flex flex-1 items-center px-4 gap-2 border border-[#868686] rounded-xl">
+                <li className="hidden md:flex flex-1 items-center px-4 gap-2 border border-[#868686] dark:border-gray-600 dark:bg-[#2b2b2b] rounded-xl">
                     <FiSearch />
                     <input
                         type="text"
@@ -19,8 +19,8 @@ const NavBar = ({ page }: { page: "login" | "signup" }) => {
                 </li>
                 <li className="flex-1/3 lg:flex-1 flex text-sm lg:text-base justify-end gap-6 my-1">
                     {page != "login" && <Link to="/login">Login</Link>}
-                    <p>Join as Brand</p>
-                    <p className="text-[#FFBF00]">Join as Creator</p>
+                    <Link to="/signup"><p>Join as Brand</p></Link>
+                    <Link to="/signup"><p className="text-[#FFBF00]">Join as Creator</p></Link>
                 </li>
             </ul>
         </nav>
