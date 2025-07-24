@@ -2,7 +2,7 @@ import { FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { LuFacebook } from "react-icons/lu";
 
 const Footer = () => {
-    return <footer className="bg-[#202020] p-4 flex justify-between items-center">
+    return <footer className="bg-[#202020] dark:bg-black p-4 flex justify-between items-center">
         <h3 className="text-xl">Logo</h3>
         <p className="text-sm text-gray-400">All right reserved &copy; 2025</p>
         <div className="flex gap-2">

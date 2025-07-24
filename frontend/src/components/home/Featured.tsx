@@ -1,6 +1,6 @@
 const Featured = () => {
     return (
-        <section className="bg-white text-black">
+        <section className="bg-white dark:bg-[#1b1b1b]">
             <h1 className="font-semibold text-xl">Featured</h1>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 py-[1em]">
                 <div className="aspect-[9/14]">
@@ -10,7 +10,7 @@ const Featured = () => {
                     <div className="flex justify-between text-[0.9rem]">
                         <div>
                             <p>Beauty marketer & Content...</p>
-                            <p className="text-gray-600">Los Angeles, US</p>
+                            <p className="text-gray-600 dark:text-gray-400">Los Angeles, US</p>
                         </div>
                         <strong className="text-base">$100</strong>
                     </div>
@@ -22,7 +22,7 @@ const Featured = () => {
                     <div className="flex justify-between text-[0.9rem]">
                         <div>
                             <p>Beauty marketer & Content...</p>
-                            <p className="text-gray-600">Los Angeles, US</p>
+                            <p className="text-gray-600 dark:text-gray-400">Los Angeles, US</p>
                         </div>
                         <strong className="text-base">$100</strong>
                     </div>
@@ -34,7 +34,7 @@ const Featured = () => {
                     <div className="flex justify-between text-[0.9rem]">
                         <div>
                             <p>Beauty marketer & Content...</p>
-                            <p className="text-gray-600">Los Angeles, US</p>
+                            <p className="text-gray-600 dark:text-gray-400">Los Angeles, US</p>
                         </div>
                         <strong className="text-base">$100</strong>
                     </div>
@@ -46,7 +46,7 @@ const Featured = () => {
                     <div className="flex justify-between text-[0.9rem]">
                         <div>
                             <p>Beauty marketer & Content...</p>
-                            <p className="text-gray-600">Los Angeles, US</p>
+                            <p className="text-gray-600 dark:text-gray-400">Los Angeles, US</p>
                         </div>
                         <strong className="text-base">$100</strong>
                     </div>
