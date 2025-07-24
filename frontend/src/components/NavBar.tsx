@@ -1,6 +1,6 @@
 import { FiSearch } from "react-icons/fi";
 
-const NavBar = () => {
+const NavBar = ({page}: {page: 'login' | 'signup'}) => {
     return (
         <nav className="bg-white text-black">
             <ul className="flex py-2 justify-between px-4">
@@ -10,7 +10,7 @@ const NavBar = () => {
                     <input type="text" className="w-full h-full outline-none" placeholder="Search"/>
                 </li>
                 <li className="flex-1/3 lg:flex-1 flex text-sm lg:text-base justify-end gap-6 my-1">
-                    <p>Login</p>
+                    {page != "login" && <p>Login</p>}
                     <p>Join as Brand</p>
                     <p className="text-[#FFBF00]">Join as Creator</p>
                 </li>

@@ -7,7 +7,7 @@ import NavBar from "../components/NavBar";
 const Home = () => {
     return (
         <>
-            <NavBar />
+            <NavBar page="signup" />
             <main className="flex flex-col gap-[4em] py-[4em] bg-white px-[2em] lg:px-[6em] xl:px-[12em]">
                 <Hero />
                 <Featured />
