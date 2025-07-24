@@ -8,7 +8,7 @@ const Hero = () => {
             <h3 className="w-full text-3xl md:text-4xl lg:text-5xl font-semibold text-center">
                 Symplifiying Influencer Marketing For Everyone
             </h3>
-            <p className="text-gray-800 dark:text-gray-200 mt-[1em] w-[75%] text-sm md:text-base lg:w-[60%] text-center leading-[1.2]">
+            <p className="text-gray-800 dark:text-gray-300/75 mt-[1em] w-[75%] text-sm md:text-base lg:w-[60%] text-center leading-[1.2]">
                 Discover a smarter way to connect with content creators, launch
                 campaigns, and grow your, all in one simple, seamless platform.
             </p>
