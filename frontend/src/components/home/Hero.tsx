@@ -20,6 +20,7 @@ const Hero = () => {
                         src="/images/vlog.jpg"
                         alt="hero.png"
                         fill
+                        blurDataURL="/images/vlog_low.jpg"
                     />
                 </div>
                 <div className="flex-1 pl-4 pr-2 py-2 md:py-0 lg:py-2">
