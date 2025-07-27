@@ -1,6 +1,8 @@
+"use client"
+
 import { useState } from "react";
-import NavBar from "../components/NavBar";
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import NavBar from "@/components/NavBar";
 
 const Login = () => {
 
@@ -92,7 +94,7 @@ const Login = () => {
                                     <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                         Don’t have an account yet?{" "}
                                         <Link
-                                            to="/signup"
+                                            href="/signup"
                                             className="font-medium text-black dark:text-[#FFBF00] hover:underline cursor-pointer"
                                         >
                                             Sign up
