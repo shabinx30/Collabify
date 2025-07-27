@@ -17,7 +17,7 @@ const NavBar = ({ page }: { page: "login" | "signup" }) => {
                         placeholder="Search"
                     />
                 </li>
-                <li className="flex-1/3 lg:flex-1 flex text-sm lg:text-base justify-end gap-6 my-1">
+                <li className="flex-1/3 lg:flex-1 flex text-sm items-center lg:text-base justify-end gap-6 my-1">
                     {page != "login" && <Link href="/login">Login</Link>}
                     <Link href="/signup"><p>Join as Brand</p></Link>
                     <Link href="/signup"><p className="text-[#FFBF00]">Join as Creator</p></Link>
