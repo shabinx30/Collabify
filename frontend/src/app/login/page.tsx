@@ -21,8 +21,8 @@ const Login = () => {
             <NavBar page="login" />
             <main className="flex flex-col md:flex-row gap-8 md:gap-0">
                 {/* <Features page={"login"} /> */}
-                <section className="bg-gray-50 flex-1/4 dark:bg-black pt-14 md:pt-0">
-                    <div className="flex flex-col items-center justify-center md:h-screen px-6 py-8 mx-auto lg:py-0">
+                <section className="bg-gray-50 flex-1/4 dark:bg-black">
+                    <div className="flex flex-col items-center justify-center h-screen px-6 mx-auto">
                         <div className="w-full bg-white rounded-3xl shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-[#1b1b1b] dark:border-[#2b2b2b]">
                             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
                                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
@@ -97,7 +97,7 @@ const Login = () => {
                                             href="/signup"
                                             className="font-medium text-black dark:text-[#FFBF00] hover:underline cursor-pointer"
                                         >
-                                            Sign up
+                                            Join
                                         </Link>
                                     </p>
                                 </form>
