@@ -95,7 +95,7 @@ const SignUp = () => {
                                                         {valid.profile.message}
                                                     </span>
                                                 ) : (
-                                                    "Your profile photo"
+                                                    userType == 'brand' ? "Brand's profile photo" : "Your profile photo"
                                                 )}
                                             </label>
                                             <input
@@ -121,7 +121,7 @@ const SignUp = () => {
                                                         {valid.name.message}
                                                     </span>
                                                 ) : (
-                                                    "Your name"
+                                                    userType == 'brand' ? "Brand's name" : "Your name"
                                                 )}
                                             </label>
                                             <input
@@ -148,7 +148,7 @@ const SignUp = () => {
                                                     {valid.email.message}
                                                 </span>
                                             ) : (
-                                                "Your email"
+                                                userType == 'brand' ? "Brand's email" : "Your email"
                                             )}
                                         </label>
                                         <input

@@ -59,11 +59,11 @@ const Hero = () => {
                             </div>
                         </div>
                         <div className="flex gap-4 mt-[2em] md:mt-0">
-                            <div className="flex-1 flex gap-2 justify-center items-center bg-[#FFBF00] dark:bg-[#2b2b2b] border border-[#FFBF00] dark:text-[#FFBF00] font-semibold h-[2.5em] lg:h-[3em] rounded-2xl">
+                            <div className="flex-1 flex gap-2 justify-center items-center bg-[#FFBF00] dark:bg-[#312500] border-2 border-[#FFBF00] dark:text-[#FFBF00] font-semibold h-[2.5em] lg:h-[3em] rounded-2xl cursor-pointer">
                                 <VscEye size={24} />
                                 View Profile
                             </div>
-                            <div className="flex-1 flex gap-2 justify-center items-center bg-white dark:bg-[#2b2b2b] font-semibold h-[2.5em] lg:h-[3em] rounded-2xl">
+                            <div className="flex-1 flex gap-2 justify-center items-center bg-white dark:bg-[#2b2b2b] font-semibold h-[2.5em] lg:h-[3em] rounded-2xl cursor-pointer">
                                 <LiaTelegramPlane size={22} />
                                 Chat
                             </div>
