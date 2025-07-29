@@ -1,10 +1,10 @@
 import { FiSearch } from "react-icons/fi";
 import Link from "next/link";
 
-const NavBar = ({ page }: { page: "login" | "signup" }) => {
+const NavBar = ({ page }: { page: "login" | "signup" | "home" }) => {
     return (
-        <nav className="bg-white dark:bg-[#1b1b1b] fixed w-screen">
-            <ul className="flex py-2 justify-between px-4">
+        <nav className="bg-white dark:bg-[#1b1b1b] z-[999] fixed w-screen">
+            <ul className="flex py-2 justify-between pr-8 pl-4">
                 <li className="flex-1 font-bold my-1 text-lg md:text-2xl">
                     {" "}
                     <Link href="/">Logo</Link>{" "}
@@ -18,9 +18,20 @@ const NavBar = ({ page }: { page: "login" | "signup" }) => {
                     />
                 </li>
                 <li className="flex-1/3 lg:flex-1 flex text-sm items-center lg:text-base justify-end gap-6 my-1">
-                    {page != "login" && <Link href="/login">Login</Link>}
-                    <Link href="/signup"><p>Join as Brand</p></Link>
-                    <Link href="/signup"><p className="text-[#FFBF00]">Join as Creator</p></Link>
+                    {page != "login" ? (
+                        <Link href="/login">Login</Link>
+                    ) : (
+                        <>
+                            <Link href="/signup">
+                                <p>Join as Brand</p>
+                            </Link>
+                            <Link href="/signup">
+                                <p className="text-[#FFBF00]">
+                                    Join as Creator
+                                </p>
+                            </Link>
+                        </>
+                    )}
                 </li>
             </ul>
         </nav>
