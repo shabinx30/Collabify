@@ -1,7 +1,14 @@
+"use client";
+
 import { FiSearch } from "react-icons/fi";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-const NavBar = ({ page }: { page: "login" | "signup" | "home" }) => {
+const NavBar = () => {
+
+    const pathnames = usePathname().split("/");
+    const path = pathnames[pathnames.length - 1];
+
     return (
         <nav className="bg-white dark:bg-[#1b1b1b] z-[999] fixed w-screen">
             <ul className="flex py-2 justify-between pr-8 pl-4">
@@ -18,7 +25,19 @@ const NavBar = ({ page }: { page: "login" | "signup" | "home" }) => {
                     />
                 </li>
                 <li className="flex-1/3 lg:flex-1 flex text-sm items-center lg:text-base justify-end gap-6 my-1">
-                    {page != "login" ? (
+                    {!path ? (
+                        <>
+                            <Link href="/login">Login</Link>{" "}
+                            <Link href="/signup">
+                                <p>Join as Brand</p>
+                            </Link>
+                            <Link href="/signup">
+                                <p className="text-[#FFBF00]">
+                                    Join as Creator
+                                </p>
+                            </Link>
+                        </>
+                    ) : path != "login" ? (
                         <Link href="/login">Login</Link>
                     ) : (
                         <>
