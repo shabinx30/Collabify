@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import NavBar from "@/components/NavBar";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 
 const SignUp = () => {
     const [valid] = useState({
@@ -13,6 +14,8 @@ const SignUp = () => {
         password: { status: true, message: "" },
         confirmPassword: { status: true, message: "" },
     });
+
+    const [userType, setUserType] = useState<string>("brand");
 
     const router = usePathname();
     useEffect(() => {
@@ -35,6 +38,47 @@ const SignUp = () => {
                                 <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                     Create your account
                                 </h1>
+                                <div className="flex w-full relative rounded-lg overflow-hidden">
+                                    {/* Animated background */}
+                                    <motion.div
+                                        initial={false}
+                                        animate={{
+                                            left:
+                                                userType === "brand"
+                                                    ? "0%"
+                                                    : "50%",
+                                        }}
+                                        transition={{
+                                            type: "spring",
+                                            stiffness: 300,
+                                            damping: 30,
+                                        }}
+                                        className="absolute h-full w-1/2 rounded-lg bg-[#FFBF00] z-0"
+                                    />
+
+                                    {/* Buttons */}
+                                    <div
+                                        onClick={() => setUserType("brand")}
+                                        className={`flex-1 flex py-3 justify-center z-10 cursor-pointer transition-colors duration-300 ${
+                                            userType === "brand"
+                                                ? "text-black"
+                                                : "text-gray-300"
+                                        }`}
+                                    >
+                                        Join as Brand
+                                    </div>
+                                    <div
+                                        onClick={() => setUserType("creator")}
+                                        className={`flex-1 flex py-3 justify-center z-10 cursor-pointer transition-colors duration-300 ${
+                                            userType === "creator"
+                                                ? "text-black"
+                                                : "text-gray-300"
+                                        }`}
+                                    >
+                                        Join as Creator
+                                    </div>
+                                </div>
+
                                 <form
                                     noValidate
                                     className="space-y-4 md:space-y-6"
