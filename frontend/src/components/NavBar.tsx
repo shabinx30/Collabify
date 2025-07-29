@@ -27,7 +27,7 @@ const NavBar = () => {
                 <li className="flex-1/3 lg:flex-1 flex text-sm items-center lg:text-base justify-end gap-6 my-1">
                     {!path ? (
                         <>
-                            <Link href="/login">Login</Link>{" "}
+                            <Link href="/signin">Login</Link>{" "}
                             <Link href="/signup">
                                 <p>Join as Brand</p>
                             </Link>
@@ -37,8 +37,8 @@ const NavBar = () => {
                                 </p>
                             </Link>
                         </>
-                    ) : path != "login" ? (
-                        <Link href="/login">Login</Link>
+                    ) : path != "signin" ? (
+                        <Link href="/signin">Login</Link>
                     ) : (
                         <>
                             <Link href="/signup">
