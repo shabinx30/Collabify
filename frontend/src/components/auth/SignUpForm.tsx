@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { UserType } from "@/types/auth/SignUpTypes";
 
-const SignUpForm = ({ userType }: { userType: "brand" | "creator" }) => {
+const SignUpForm = ({ userType }: { userType: UserType }) => {
     const [valid] = useState({
         profile: { status: true, message: "" },
         name: { status: true, message: "" },

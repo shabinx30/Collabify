@@ -28,10 +28,10 @@ const NavBar = () => {
                     {!path ? (
                         <>
                             <Link href="/signin">Login</Link>{" "}
-                            <Link href="/signup">
+                            <Link href="/signup?type=brand">
                                 <p>Join as Brand</p>
                             </Link>
-                            <Link href="/signup">
+                            <Link href="/signup?type=creator">
                                 <p className="text-[#FFBF00]">
                                     Join as Creator
                                 </p>
@@ -41,10 +41,10 @@ const NavBar = () => {
                         <Link href="/signin">Login</Link>
                     ) : (
                         <>
-                            <Link href="/signup">
+                            <Link href="/signup?type=brand">
                                 <p>Join as Brand</p>
                             </Link>
-                            <Link href="/signup">
+                            <Link href="/signup?type=creator">
                                 <p className="text-[#FFBF00]">
                                     Join as Creator
                                 </p>

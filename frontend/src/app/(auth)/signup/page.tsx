@@ -3,9 +3,19 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import SignUpForm from "@/components/auth/SignUpForm";
+import { UserType } from "@/types/auth/SignUpTypes";
+import { useSearchParams } from "next/navigation";
 
 const SignUp = () => {
-    const [userType, setUserType] = useState<"brand" | "creator">("brand");
+    const searchParams = useSearchParams();
+    const typeParam = searchParams.get("type");
+
+    const isValidType = (type: string | null): type is UserType =>
+        type === "brand" || type === "creator";
+
+    const [userType, setUserType] = useState<UserType>(
+        isValidType(typeParam) ? typeParam : "brand"
+    );
 
     return (
         <main className="flex flex-col md:flex-row gap-8 md:gap-0">
