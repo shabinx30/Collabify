@@ -26,7 +26,7 @@ const SignUp = () => {
                             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                                 Create your account
                             </h1>
-                            <div className="flex w-full relative rounded-xl overflow-hidden bg-gray-50 dark:bg-black">
+                            <div className="flex w-full relative rounded-xl overflow-hidden bg-gray-100 dark:bg-black">
                                 {/* Animated background */}
                                 <motion.div
                                     initial={false}
@@ -39,7 +39,7 @@ const SignUp = () => {
                                         stiffness: 300,
                                         damping: 30,
                                     }}
-                                    className="absolute h-full w-1/2 rounded-xl bg-[#312500] border-2 border-[#FFBF00] z-0"
+                                    className="absolute h-full w-1/2 rounded-xl dark:bg-[#312500] bg-[#FFBF00] dark:border-2 dark:border-[#FFBF00] z-0"
                                 />
 
                                 {/* Buttons */}
@@ -47,8 +47,8 @@ const SignUp = () => {
                                     onClick={() => setUserType("brand")}
                                     className={`flex-1 flex py-3 justify-center z-10 cursor-pointer transition-colors duration-300 ${
                                         userType === "brand"
-                                            ? "text-[#FFBF00]"
-                                            : "text-gray-300"
+                                            ? "dark:text-[#FFBF00]"
+                                            : "dark:text-gray-300"
                                     }`}
                                 >
                                     Join as Brand
@@ -57,8 +57,8 @@ const SignUp = () => {
                                     onClick={() => setUserType("creator")}
                                     className={`flex-1 flex py-3 justify-center z-10 cursor-pointer transition-colors duration-300 ${
                                         userType === "creator"
-                                            ? "text-[#FFBF00]"
-                                            : "text-gray-300"
+                                            ? "dark:text-[#FFBF00]"
+                                            : "dark:text-gray-300"
                                     }`}
                                 >
                                     Join as Creator

@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import Link from "next/link";
 import { UserType } from "@/types/auth/SignUpTypes";
 
 const SignUpForm = ({ userType }: { userType: UserType }) => {
+
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        password: "",
+    })
+
     const [valid] = useState({
         profile: { status: true, message: "" },
         name: { status: true, message: "" },
@@ -16,11 +23,17 @@ const SignUpForm = ({ userType }: { userType: UserType }) => {
     const regularClass =
         "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#2b2b2b] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
 
+    const formSubmission = (e: FormEvent) => {
+        e.preventDefault()
+        console.log(formData)
+
+    }
+
     return (
         <form
             noValidate
             className="space-y-4 md:space-y-6"
-            // onSubmit={formSubmission}
+            onSubmit={formSubmission}
         >
             <div className="flex gap-2">
                 <div>
@@ -65,7 +78,12 @@ const SignUpForm = ({ userType }: { userType: UserType }) => {
                         )}
                     </label>
                     <input
-                        // onChange={validate}
+                        onChange={(e) =>
+                            setFormData((p) => ({
+                                ...p,
+                                [e.target.name]: e.target.value,
+                            }))
+                        }
                         type="text"
                         name="name"
                         id="name"
@@ -92,7 +110,12 @@ const SignUpForm = ({ userType }: { userType: UserType }) => {
                     )}
                 </label>
                 <input
-                    // onChange={validate}
+                    onChange={(e) =>
+                            setFormData((p) => ({
+                                ...p,
+                                [e.target.name]: e.target.value,
+                            }))
+                        }
                     type="email"
                     name="email"
                     id="email"
@@ -115,7 +138,12 @@ const SignUpForm = ({ userType }: { userType: UserType }) => {
                         )}
                     </label>
                     <input
-                        // onChange={validate}
+                        onChange={(e) =>
+                            setFormData((p) => ({
+                                ...p,
+                                [e.target.name]: e.target.value,
+                            }))
+                        }
                         type="password"
                         name="password"
                         id="password1"
@@ -161,7 +189,7 @@ const SignUpForm = ({ userType }: { userType: UserType }) => {
             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Already have an account?{" "}
                 <Link
-                    href="/login"
+                    href="/signin"
                     className="font-medium text-black hover:underline dark:text-[#FFBF00] cursor-pointer"
                 >
                     Login
