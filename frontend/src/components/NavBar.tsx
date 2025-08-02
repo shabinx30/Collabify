@@ -15,7 +15,11 @@ const NavBar = () => {
                 (path && "z-[999] fixed w-screen")
             }
         >
-            <ul className="flex py-2 justify-between pr-8 pl-4">
+            <ul
+                className={
+                    "flex py-2 justify-between pl-4 " + (path ? "pr-8" : "pr-4")
+                }
+            >
                 <li className="flex-1 font-bold my-1 text-lg md:text-2xl">
                     {" "}
                     <Link href="/">Logo</Link>{" "}

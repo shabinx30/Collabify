@@ -1,6 +1,7 @@
 import React, { FormEvent, useState } from "react";
 import Link from "next/link";
 import { UserType } from "@/types/auth/SignUpTypes";
+import axios from "axios";
 
 const SignUpForm = ({ userType }: { userType: UserType }) => {
 
@@ -23,10 +24,10 @@ const SignUpForm = ({ userType }: { userType: UserType }) => {
     const regularClass =
         "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#2b2b2b] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
 
-    const formSubmission = (e: FormEvent) => {
+    const formSubmission = async (e: FormEvent) => {
         e.preventDefault()
-        console.log(formData)
-
+        const res = await axios.post('http://localhost:3001/mone', formData)
+        console.log(res)
     }
 
     return (
