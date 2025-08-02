@@ -5,12 +5,16 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const NavBar = () => {
-
     const pathnames = usePathname().split("/");
     const path = pathnames[pathnames.length - 1];
 
     return (
-        <nav className="bg-white dark:bg-[#1b1b1b] z-[999] fixed w-screen">
+        <nav
+            className={
+                "bg-white dark:bg-[#1b1b1b] " +
+                (path && "z-[999] fixed w-screen")
+            }
+        >
             <ul className="flex py-2 justify-between pr-8 pl-4">
                 <li className="flex-1 font-bold my-1 text-lg md:text-2xl">
                     {" "}

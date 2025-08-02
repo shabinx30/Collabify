@@ -27,11 +27,11 @@ const Hero = () => {
                 <div className="flex-1 pl-4 pr-2 py-2 md:py-0 lg:py-2">
                     <div className="flex flex-col h-full justify-between">
                         <div className="flex gap-4 mb-[2em] md:mb-0">
-                            <div className="flex-1 flex gap-4 justify-center items-center bg-[#F4E1FF] dark:bg-[#46255a] text-[#7B00E0] dark:text-[#ecd4ff] h-[2.5em] lg:h-[3em] rounded-2xl">
+                            <div className="flex-1 flex gap-4 justify-center items-center bg-[#F4E1FF] dark:bg-[#46255a] text-[#7B00E0] dark:text-[#ecd4ff] h-[2.5em] lg:h-[3em] rounded-2xl cursor-pointer">
                                 <FaInstagram size={22} />
                                 Instagram
                             </div>
-                            <div className="flex-1 flex gap-4 justify-center items-center bg-white dark:bg-[#2b2b2b] h-[2.5em] lg:h-[3em] rounded-2xl">
+                            <div className="flex-1 flex gap-4 justify-center items-center bg-white dark:bg-[#2b2b2b] h-[2.5em] lg:h-[3em] rounded-2xl cursor-pointer">
                                 <FaYoutube size={22} className="text-red-500" />
                                 Youtube
                             </div>
