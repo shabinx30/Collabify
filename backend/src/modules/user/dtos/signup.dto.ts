@@ -4,7 +4,7 @@ import { UserTypes } from 'src/common/interfaces/userTypes';
 export class createUserDto {
     @IsNotEmpty()
     @IsString()
-    name: string;
+    username: string;
 
     @IsNotEmpty()
     @IsEmail()

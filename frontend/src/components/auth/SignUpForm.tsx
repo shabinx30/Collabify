@@ -25,8 +25,9 @@ const SignUpForm = ({ userType }: { userType: UserType }) => {
     } = useForm<SignupFormInput>({ resolver: zodResolver(signupSchema) });
 
     const onSubmit = async (data: SignupFormInput) => {
-        console.log(process.env.API_URL);
-        // const res = await axios.post(`${process.env.API_URL}`)
+        const formData = {...data, role: userType}
+        const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/signup`, formData);
+        console.log(res);
     };
 
     useEffect(() => {
@@ -61,7 +62,7 @@ const SignUpForm = ({ userType }: { userType: UserType }) => {
                     className={
                         errors.username?.message ? errorClass : regularClass
                     }
-                    placeholder="Alice"
+                    placeholder={userType === "brand" ? "Apple" : "Alice"}
                 />
             </div>
             <div>
