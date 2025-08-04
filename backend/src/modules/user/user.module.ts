@@ -4,6 +4,7 @@ import { User, userSchema } from './schemas/user.schema';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
 import { Otp } from './schemas/otp.schema';
+import { UserRepository } from './user.repository.impl';
 
 @Module({
     imports: [
@@ -13,6 +14,7 @@ import { Otp } from './schemas/otp.schema';
         ]),
     ],
     controllers: [UserController],
-    providers: [UserService],
+    providers: [UserService, UserRepository],
+    // exports: [UserRepository]
 })
 export class UserModule {}
