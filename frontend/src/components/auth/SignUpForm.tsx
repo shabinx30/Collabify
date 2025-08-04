@@ -9,6 +9,7 @@ import {
     SignupFormInput,
     signupSchema,
 } from "@/libs/validations/signupFormData";
+import axios from "axios";
 
 const SignUpForm = ({ userType }: { userType: UserType }) => {
     const errorClass =
@@ -23,10 +24,12 @@ const SignUpForm = ({ userType }: { userType: UserType }) => {
         clearErrors,
     } = useForm<SignupFormInput>({ resolver: zodResolver(signupSchema) });
 
-    const onSubmit = (data: SignupFormInput) => {};
+    const onSubmit = async (data: SignupFormInput) => {
+        console.log(process.env.API_URL);
+        // const res = await axios.post(`${process.env.API_URL}`)
+    };
 
     useEffect(() => {
-        // setFormData((p) => ({ ...p, role: userType }));
         clearErrors();
     }, [userType]);
 
@@ -35,59 +38,31 @@ const SignUpForm = ({ userType }: { userType: UserType }) => {
             onSubmit={handleSubmit(onSubmit)}
             className="space-y-4 md:space-y-6"
         >
-            <div className="flex gap-2 items-end">
-                <div>
-                    <label
-                        htmlFor="profile"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                        {errors.profile?.message ? (
-                            <span className="text-red-500">
-                                {errors.profile.message}
-                            </span>
-                        ) : userType == "brand" ? (
-                            "Brand's profile photo"
-                        ) : (
-                            "Your profile photo"
-                        )}
-                    </label>
-                    <input
-                        {...register("profile")}
-                        name="profile"
-                        type="file"
-                        id="profile"
-                        className={
-                            errors.profile?.message ? errorClass : regularClass
-                        }
-                        accept="image/*"
-                    />
-                </div>
-                <div>
-                    <label
-                        htmlFor="username"
-                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                    >
-                        {errors.username?.message ? (
-                            <span className="text-red-500">
-                                {errors.username?.message}
-                            </span>
-                        ) : userType == "brand" ? (
-                            "Brand name"
-                        ) : (
-                            "Your name"
-                        )}
-                    </label>
-                    <input
-                        {...register("username")}
-                        type="text"
-                        name="username"
-                        id="username"
-                        className={
-                            errors.username?.message ? errorClass : regularClass
-                        }
-                        placeholder="Alice"
-                    />
-                </div>
+            <div>
+                <label
+                    htmlFor="username"
+                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                    {errors.username?.message ? (
+                        <span className="text-red-500">
+                            {errors.username?.message}
+                        </span>
+                    ) : userType == "brand" ? (
+                        "Brand name"
+                    ) : (
+                        "Your name"
+                    )}
+                </label>
+                <input
+                    {...register("username")}
+                    type="text"
+                    name="username"
+                    id="username"
+                    className={
+                        errors.username?.message ? errorClass : regularClass
+                    }
+                    placeholder="Alice"
+                />
             </div>
             <div>
                 <label

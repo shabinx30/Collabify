@@ -1,16 +1,5 @@
 import { z } from "zod";
 
-const profile = z.object({
-    profilePicture: z
-        .instanceof(File)
-        .refine((file) => file.size <= 5 * 1024 * 1024, {
-            message: "Image must be under 5MB",
-        })
-        .refine((file) => ["image/jpeg", "image/png"].includes(file.type), {
-            message: "Only JPEG or PNG images are allowed",
-        }),
-});
-
 const password = z
     .string()
     .min(8, { message: "Password must be at least 8 characters long" })
@@ -26,7 +15,6 @@ const password = z
 
 export const signupSchema = z
     .object({
-        profile,
         username: z
             .string()
             .min(3, { message: "Username must be at least 3 characters long" })
