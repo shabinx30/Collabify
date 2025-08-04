@@ -1,15 +1,17 @@
-import React, { FormEvent, useState } from "react";
+"use client";
+
+import React, { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import { UserType } from "@/types/auth/SignUpTypes";
 import axios from "axios";
 
 const SignUpForm = ({ userType }: { userType: UserType }) => {
-
     const [formData, setFormData] = useState({
         name: "",
         email: "",
         password: "",
-    })
+        role: userType,
+    });
 
     const [valid] = useState({
         profile: { status: true, message: "" },
@@ -25,10 +27,14 @@ const SignUpForm = ({ userType }: { userType: UserType }) => {
         "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#2b2b2b] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
 
     const formSubmission = async (e: FormEvent) => {
-        e.preventDefault()
-        const res = await axios.post('http://localhost:3001/mone', formData)
-        console.log(res)
-    }
+        e.preventDefault();
+        const res = await axios.post("http://localhost:3001/signup", formData);
+        console.log(res);
+    };
+
+    useEffect(() => {
+        setFormData((p) => ({ ...p, role: userType }));
+    }, [userType]);
 
     return (
         <form
@@ -112,11 +118,11 @@ const SignUpForm = ({ userType }: { userType: UserType }) => {
                 </label>
                 <input
                     onChange={(e) =>
-                            setFormData((p) => ({
-                                ...p,
-                                [e.target.name]: e.target.value,
-                            }))
-                        }
+                        setFormData((p) => ({
+                            ...p,
+                            [e.target.name]: e.target.value,
+                        }))
+                    }
                     type="email"
                     name="email"
                     id="email"

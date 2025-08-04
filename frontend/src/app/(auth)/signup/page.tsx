@@ -44,7 +44,7 @@ const SignUp = () => {
 
                                 {/* Buttons */}
                                 <div
-                                    onClick={() => setUserType("brand")}
+                                    onClick={() => setUserType(() => "brand")}
                                     className={`flex-1 flex py-3 justify-center z-10 cursor-pointer transition-colors duration-300 ${
                                         userType === "brand"
                                             ? "dark:text-[#FFBF00]"
@@ -54,7 +54,7 @@ const SignUp = () => {
                                     Join as Brand
                                 </div>
                                 <div
-                                    onClick={() => setUserType("creator")}
+                                    onClick={() => setUserType(() => "creator")}
                                     className={`flex-1 flex py-3 justify-center z-10 cursor-pointer transition-colors duration-300 ${
                                         userType === "creator"
                                             ? "dark:text-[#FFBF00]"
