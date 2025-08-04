@@ -26,6 +26,9 @@ export class User {
 
     @Prop()
     companyName?: string;
+
+    @Prop({ default: false })
+    isVerified: boolean;
 }
 
 export type UserDocument = User & Document;

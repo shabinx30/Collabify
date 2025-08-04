@@ -11,6 +11,7 @@ interface IUser extends Document {
     profile: string;
     socialLinks: string[];
     companyName: string;
+    isVerified: boolean;
 }
 
 export default IUser;

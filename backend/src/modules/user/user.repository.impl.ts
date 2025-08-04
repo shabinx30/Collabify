@@ -1,14 +1,28 @@
-import { InjectModel } from "@nestjs/mongoose";
-import { User, UserDocument } from "./schemas/user.schema";
-import { Model } from "mongoose";
-import { Injectable } from "@nestjs/common";
+import { InjectModel } from '@nestjs/mongoose';
+import { User, UserDocument } from './schemas/user.schema';
+import { Model } from 'mongoose';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class UserRepository {
-    constructor(@InjectModel(User.name) private userSchema: Model<UserDocument>) {}
+    constructor(
+        @InjectModel(User.name) private userSchema: Model<UserDocument>,
+    ) {}
 
-    async create(data: Partial<UserDocument>): Promise<UserDocument> {
-        const newUser = new this.userSchema(data)
-        return newUser.save()
+    async create(data: Partial<UserDocument>): Promise<UserDocument | void> {
+        try {
+            const newUser = new this.userSchema(data);
+            return newUser.save();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async findByEmail(email: string): Promise<UserDocument | void | null> {
+        try {
+            return await this.userSchema.findOne({ email });
+        } catch (error) {
+            console.log(error);
+        }
     }
 }
