@@ -15,7 +15,9 @@ export class UserRepository {
             return newUser.save();
         } catch (error) {
             console.log(error);
-            throw new InternalServerErrorException(error);
+            throw new InternalServerErrorException(
+                'An unexpected error occurred.',
+            );
         }
     }
 
