@@ -1,7 +1,7 @@
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './schemas/user.schema';
 import { Model } from 'mongoose';
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 
 @Injectable()
 export class UserRepository {
@@ -15,6 +15,7 @@ export class UserRepository {
             return newUser.save();
         } catch (error) {
             console.log(error);
+            throw new InternalServerErrorException(error);
         }
     }
 
@@ -23,6 +24,9 @@ export class UserRepository {
             return await this.userSchema.findOne({ email });
         } catch (error) {
             console.log(error);
+            throw new InternalServerErrorException(
+                'An unexpected error occurred.',
+            );
         }
     }
 }
