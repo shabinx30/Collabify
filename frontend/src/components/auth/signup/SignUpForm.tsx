@@ -11,9 +11,18 @@ import {
 } from "@/libs/validations/signupFormData";
 import axios from "axios";
 import UserTypeSelector from "./RoleSelector";
+import { useSearchParams } from "next/navigation";
 
 const SignUpForm = () => {
-    const [role, setRole] = useState<RoleType>();
+    const searchParams = useSearchParams();
+    const typeParam = searchParams.get("type");
+
+    const isValidType = (type: string | null): type is RoleType =>
+        type === "brand" || type === "creator";
+
+    const [role, setRole] = useState<RoleType>(
+        isValidType(typeParam) ? typeParam : "brand"
+    );
 
     const errorClass =
         "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-500 focus:border-primary-600 block w-full p-2.5 dark:bg-[#2b2b2b] dark:border-red-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500";

@@ -1,19 +1,7 @@
-import React, { Suspense, useEffect } from "react";
 import { motion } from "framer-motion";
-import { IRoleSelector, RoleType } from "@/types/auth/SignUpTypes";
-import { useSearchParams } from "next/navigation";
+import { IRoleSelector } from "@/types/auth/SignUpTypes";
 
 const RoleSelector = ({ role, setRole }: IRoleSelector) => {
-    const searchParams = useSearchParams();
-    const typeParam = searchParams.get("type");
-
-    const isValidType = (type: string | null): type is RoleType =>
-        type === "brand" || type === "creator";
-
-    useEffect(() => {
-        isValidType(typeParam) ? typeParam : "brand";
-    }, []);
-
     return (
         <div className="flex w-full relative rounded-xl overflow-hidden bg-gray-100 dark:bg-black">
             {/* Animated background */}
