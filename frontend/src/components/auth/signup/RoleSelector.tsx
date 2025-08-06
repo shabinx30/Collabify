@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { IRoleSelector } from "@/types/auth/SignUpTypes";
+import { IRoleSelector } from "@/types/auth/signup.type";
 
 const RoleSelector = ({ role, setRole }: IRoleSelector) => {
     return (
