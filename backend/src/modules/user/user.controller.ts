@@ -1,5 +1,3 @@
-// src/user/user.controller.ts
-
 import { Body, Controller, Post } from '@nestjs/common';
 import { UserService } from './user.service';
 import { createUserDto } from './dtos/signup.dto';
@@ -10,6 +8,10 @@ export class UserController {
 
     @Post('signup')
     createUser(@Body() createUserDto: createUserDto): object {
-        return this.userService.createUser(createUserDto);
+        const newUser = this.userService.createUser(createUserDto);
+        return {
+            message: 'success',
+            newUser,
+        };
     }
 }
