@@ -19,3 +19,4 @@ export interface IAuthState {
     error: string | null;
     isLoading: boolean;
 }
+
