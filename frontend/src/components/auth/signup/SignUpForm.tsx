@@ -58,7 +58,7 @@ const SignUpForm = () => {
     return (
         <>
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Create your account{user+""}
+                Create your account{" "+user}
             </h1>
             {/* Role selector */}
             <UserTypeSelector role={role} setRole={setRole} />

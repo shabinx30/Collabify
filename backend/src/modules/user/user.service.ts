@@ -18,7 +18,7 @@ export class UserService {
                 throw new BadRequestException('User is already Existing');
             }
 
-            return this.userRepository.create(body);
+            return await this.userRepository.create(body);
         } catch (error) {
             console.log(error);
             throw new InternalServerErrorException(
