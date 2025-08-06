@@ -9,9 +9,11 @@ import {
     SignupFormInput,
     signupSchema,
 } from "@/libs/validations/signupFormData";
-import axios from "axios";
 import UserTypeSelector from "./RoleSelector";
 import { useSearchParams } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store/store";
+import { signupUser } from "@/redux/slices/auth.slice";
 
 const SignUpForm = () => {
     const searchParams = useSearchParams();
@@ -36,23 +38,27 @@ const SignUpForm = () => {
         clearErrors,
     } = useForm<SignupFormInput>({ resolver: zodResolver(signupSchema) });
 
+    const dispatch = useDispatch<AppDispatch>();
+    const { user } = useSelector((state: RootState) => state.auth)
+
     const onSubmit = async (data: SignupFormInput) => {
         const formData = { ...data, role: role };
-        const res = await axios.post(
-            `${process.env.NEXT_PUBLIC_API_URL}/signup`,
-            formData
-        );
-        console.log(res);
+        dispatch(signupUser(formData))
+        console.log('submitting', formData)
     };
 
     useEffect(() => {
         clearErrors();
     }, [role]);
 
+    useEffect(() => {
+        console.log(user)
+    },[user])
+
     return (
         <>
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Create your account
+                Create your account{user+""}
             </h1>
             {/* Role selector */}
             <UserTypeSelector role={role} setRole={setRole} />

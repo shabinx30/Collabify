@@ -15,7 +15,8 @@ export const signupUser = createAsyncThunk(
     "auth/signup",
     async (formData: SignupFormOutput, { rejectWithValue }) => {
         try {
-            await signup(formData);
+            return await signup(formData);
+            // console.log('success')
         } catch (error) {
             if (axios.isAxiosError(error) && error.response) {
                 return rejectWithValue(error.response.data);
@@ -42,8 +43,11 @@ const auth = createSlice({
             .addCase(signupUser.pending, (state) => {
                 (state.isLoading = true), (state.error = null);
             })
-            .addCase(signupUser.fulfilled, (state) => {
-                (state.isLoading = false), (state.error = null);
+            .addCase(signupUser.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.error = null;
+                state.user = action.payload.user;
+                state.token = action.payload.token;
             })
             .addCase(signupUser.rejected, (state, action) => {
                 (state.isLoading = false),

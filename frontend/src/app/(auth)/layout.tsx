@@ -1,6 +1,18 @@
-import React from "react";
+"use client"
 
-const SignUp = ({ children }: { children: React.ReactNode }) => {
+import { store } from "@/redux/store/store";
+import React from "react";
+import { Provider } from "react-redux";
+
+const Root = ({ children }: { children: React.ReactNode }) => {
+    return (
+        <Provider store={store}>
+            <Layout>{children}</Layout>
+        </Provider>
+    );
+};
+
+const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
         <main className="flex flex-col md:flex-row gap-8 md:gap-0">
             <section className="bg-gray-50 flex-1/4 dark:bg-black">
@@ -16,4 +28,4 @@ const SignUp = ({ children }: { children: React.ReactNode }) => {
     );
 };
 
-export default SignUp;
+export default Root;
