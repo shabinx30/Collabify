@@ -1,7 +1,7 @@
 import { IsString, IsEmail, IsNotEmpty, MinLength } from 'class-validator';
-import { UserTypes } from 'src/common/interfaces/userTypes';
+import { TRoles } from 'src/common/interfaces/user/role';
 
-export class createUserDto {
+export class SignDto {
     @IsNotEmpty()
     @IsString()
     username: string;
@@ -17,5 +17,5 @@ export class createUserDto {
 
     @IsNotEmpty()
     @IsString()
-    role: UserTypes
+    role: TRoles
 }

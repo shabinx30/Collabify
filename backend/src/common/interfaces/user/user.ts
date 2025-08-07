@@ -1,12 +1,12 @@
 import { Document, ObjectId } from 'mongoose';
-import { UserTypes } from './userTypes';
+import { TRoles } from './role';
 
 interface IUser extends Document {
     id: ObjectId;
     name: string;
     email: string;
     password: string;
-    role: UserTypes;
+    role: TRoles;
     categories: string[];
     profile: string;
     socialLinks: string[];
