@@ -1,13 +1,6 @@
 import { SignupFormOutput } from "@/libs/validations/signupFormData";
-import axios from "axios";
+import { clientApi } from "./client.api";
 
-const clientApi = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL,
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    withCredentials: true,
-})
 
 export const signup = async (formData: SignupFormOutput) => {
     try {
