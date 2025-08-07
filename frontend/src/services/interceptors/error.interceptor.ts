@@ -1,5 +1,6 @@
 import { AxiosError, InternalAxiosRequestConfig } from "axios";
 import { clientApi } from "../client.api";
+import { refreshToken } from "..";
 
 interface ExtendedAxiosRequestConfig extends InternalAxiosRequestConfig {
     _retry?: boolean;
@@ -11,8 +12,7 @@ const errorInterceptor = async (error: AxiosError) => {
     if (error.response?.status === 401 && !originRequest._retry) {
         originRequest._retry = true;
 
-        const res = await clientApi.post("/refresh-token");
-        const { accessToken } = res.data;
+        const { accessToken } = await refreshToken();
 
         clientApi.defaults.headers.common[
             "Authorization"
