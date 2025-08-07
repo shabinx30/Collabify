@@ -8,11 +8,6 @@ export class UserController {
 
     @Post('signup')
     async createUser(@Body() createUserDto: createUserDto): Promise<object> {
-        const newUser = await this.userService.createUser(createUserDto);
-        console.log(newUser)
-        return {
-            message: 'success',
-            user: newUser,
-        };
+        return await this.userService.createUser(createUserDto);
     }
 }

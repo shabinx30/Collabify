@@ -9,7 +9,7 @@ export class UserRepository {
         @InjectModel(User.name) private userSchema: Model<UserDocument>,
     ) {}
 
-    async create(data: Partial<UserDocument>): Promise<UserDocument | void> {
+    async create(data: Partial<UserDocument>): Promise<UserDocument> {
         try {
             const newUser = new this.userSchema(data);
             return newUser.save();

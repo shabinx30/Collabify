@@ -8,16 +8,13 @@ import { createUserDto } from './dtos/signup.dto';
 export class UserService {
     constructor(private readonly userRepository: UserRepository) {}
 
-    async createUser(body: createUserDto): Promise<UserDocument | void> {
+    async createUser(body: createUserDto): Promise<UserDocument> {
+        const existingUser = await this.userRepository.findByEmail(body.email);
+
+        if (existingUser?.isVerified) {
+            throw new BadRequestException('User is already Existing');
+        }
         try {
-            const existingUser = await this.userRepository.findByEmail(
-                body.email,
-            );
-
-            if (existingUser && existingUser.isVerified) {
-                throw new BadRequestException('User is already Existing');
-            }
-
             return await this.userRepository.create(body);
         } catch (error) {
             console.log(error);

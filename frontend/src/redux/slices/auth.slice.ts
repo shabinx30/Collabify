@@ -15,8 +15,8 @@ export const signupUser = createAsyncThunk(
     "auth/signup",
     async (formData: SignupFormOutput, { rejectWithValue }) => {
         try {
-            return await signup(formData);
             // console.log('success')
+            return await signup(formData);
         } catch (error) {
             if (axios.isAxiosError(error) && error.response) {
                 return rejectWithValue(error.response.data);
