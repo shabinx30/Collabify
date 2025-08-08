@@ -2,21 +2,23 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './schemas/user.schema';
 import { Model } from 'mongoose';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Otp, OtpDocument } from './schemas/otp.schema';
 
 @Injectable()
 export class UserRepository {
     constructor(
         @InjectModel(User.name) private userSchema: Model<UserDocument>,
+        @InjectModel(Otp.name) private otpSchema: Model<OtpDocument>
     ) {}
 
-    async create(data: Partial<UserDocument>): Promise<UserDocument> {
+    async createUser(data: Partial<UserDocument>): Promise<UserDocument> {
         try {
             const newUser = new this.userSchema(data);
             return newUser.save();
         } catch (error) {
             console.log(error);
             throw new InternalServerErrorException(
-                'An unexpected error occurred.',
+                'An unexpected error occurred while saving user into db',
             );
         }
     }
@@ -27,8 +29,22 @@ export class UserRepository {
         } catch (error) {
             console.log(error);
             throw new InternalServerErrorException(
-                'An unexpected error occurred.',
+                'An unexpected error occurred while find user with mail',
             );
         }
+    }
+
+    async createOtp(data) {
+        try {
+            const newOtp = new this.otpSchema(data)
+            return newOtp.save()
+        } catch (error) {
+            console.log(error)
+            throw new InternalServerErrorException("Error while creating otp")
+        }
+    }
+
+    async findOtpByEmail(email: string) {
+        return await this.otpSchema.findOne({email})
     }
 }

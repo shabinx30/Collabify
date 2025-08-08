@@ -8,10 +8,14 @@ export class UserController {
     constructor(private readonly userService: UserService) {}
 
     @Post('signup')
-    async createUser(@Body() signDto: SignDto,@Res({ passthrough: true }) res: Response): Promise<Omit<IToken, "refreshToken">> {
-        const { accessToken, refreshToken } =
-            await this.userService.createUser(signDto);
+    async createUser(@Body() signDto: SignDto) {
+        return await this.userService.createUser(signDto);
+    }
 
+    // re-validate the logic
+    @Post('verify-otp')
+    async verfyOtp(@Body() body, @Res({passthrough: true}) res: Response) {
+        const { accessToken, refreshToken } = await this.userService.verfyOtp(body)
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
             sameSite: 'strict',

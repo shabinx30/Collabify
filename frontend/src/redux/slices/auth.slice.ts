@@ -2,7 +2,7 @@ import { SignupFormOutput } from "@/libs/validations/signupFormData";
 import { signup } from "@/services";
 import { IAuthState } from "@/types/auth/signup.type";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { isAxiosError } from "axios";
 
 const initialState: IAuthState = {
     token: null,
@@ -18,7 +18,7 @@ export const signupUser = createAsyncThunk(
             // console.log('success')
             return await signup(formData);
         } catch (error) {
-            if (axios.isAxiosError(error) && error.response) {
+            if (isAxiosError(error) && error.response) {
                 return rejectWithValue(error.response.data);
             }
             return rejectWithValue(error);

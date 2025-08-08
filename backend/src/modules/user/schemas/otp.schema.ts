@@ -7,10 +7,11 @@ export class Otp extends Document {
     email: string;
 
     @Prop({ required: true })
-    otp: string;
+    otp: number;
 
     @Prop({ default: Date.now, expires: '60s' })
     createdAt: Date;
 }
 
+export type OtpDocument = Otp & Document
 export const otpSchema = SchemaFactory.createForClass(Otp);
