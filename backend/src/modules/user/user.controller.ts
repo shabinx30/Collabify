@@ -12,17 +12,24 @@ export class UserController {
         return await this.userService.createUser(signDto);
     }
 
-    // re-validate the logic
     @Post('verify-otp')
-    async verfyOtp(@Body() body, @Res({passthrough: true}) res: Response) {
-        const { accessToken, refreshToken } = await this.userService.verfyOtp(body)
-        res.cookie('refreshToken', refreshToken, {
-            httpOnly: true,
-            sameSite: 'strict',
-            secure: true,
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-        });
+    async verfyOtp(@Body() body, @Res({ passthrough: true }) res: Response) {
+        const response = await this.userService.verfyOtp(body);
 
-        return { accessToken };
+        // setting cookie if it success
+        if (response.message === 'success') {
+            const { accessToken, refreshToken } = response;
+
+            res.cookie('refreshToken', refreshToken, {
+                httpOnly: true,
+                sameSite: 'strict',
+                secure: true,
+                maxAge: 7 * 24 * 60 * 60 * 1000,
+            });
+
+            return { accessToken };
+        }
+
+        return response.message;
     }
 }

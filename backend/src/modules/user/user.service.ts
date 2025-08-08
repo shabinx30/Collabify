@@ -79,7 +79,7 @@ export class UserService {
         const { email, otp } = body;
         const storedOtp = await this.userRepository.findOtpByEmail(email);
         if (!storedOtp) {
-            throw new UnauthorizedException('Could not find the email');
+            return { message: 'Could not find the otp' };
         }
         if (storedOtp.otp !== otp) {
             return { message: 'not matching' };
