@@ -17,19 +17,19 @@ export class UserController {
         const response = await this.userService.verfyOtp(body);
 
         // setting cookie if it success
-        if (response.message === 'success') {
-            const { accessToken, refreshToken } = response;
-
-            res.cookie('refreshToken', refreshToken, {
-                httpOnly: true,
-                sameSite: 'strict',
-                secure: true,
-                maxAge: 7 * 24 * 60 * 60 * 1000,
-            });
-
-            return { accessToken };
+        if (response.message !== 'success') {
+            return response.message;
         }
 
-        return response.message;
+        const { accessToken, refreshToken } = response;
+
+        res.cookie('refreshToken', refreshToken, {
+            httpOnly: true,
+            sameSite: 'strict',
+            secure: true,
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+        });
+
+        return { accessToken };
     }
 }

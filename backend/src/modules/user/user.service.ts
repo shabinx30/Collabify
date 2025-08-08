@@ -1,8 +1,4 @@
-import {
-    BadRequestException,
-    Injectable,
-    UnauthorizedException,
-} from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { InternalServerErrorException } from '@nestjs/common';
 import { UserRepository } from './user.repository.impl';
 import { SignDto } from './dtos/signup.dto';
