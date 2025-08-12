@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import Link from "next/link";
 import React, { useState } from "react";
 
@@ -15,7 +16,17 @@ const SignInForm = () => {
         "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#2b2b2b] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
 
     return (
-        <>
+        <motion.div
+            layout
+            initial={{ height: 0 }}
+            animate={{ height: "auto" }}
+            exit={{ height: 0 }}
+            transition={{
+                type: "spring",
+                stiffness: 120,
+                damping: 25,
+            }}
+        >
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Sign in to your account
             </h1>
@@ -88,7 +99,7 @@ const SignInForm = () => {
                     </Link>
                 </p>
             </form>
-        </>
+        </motion.div>
     );
 };
 

@@ -4,7 +4,7 @@ import React from "react";
 import { store, persistor } from "@/redux/store/store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import "../../components/auth/auth.css";
 
 const Root = ({ children }: { children: React.ReactNode }) => {
@@ -19,16 +19,14 @@ const Root = ({ children }: { children: React.ReactNode }) => {
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <main className="flex justify-center items-center h-screen bg-gray-50 dark:bg-black">
-            <AnimatePresence mode="wait">
-                <motion.div
-                    layout
-                    animate={{height: "auto"}}
-                    className="bg-white dark:bg-[#1b1b1b] p-6 rounded-3xl w-full mx-4 sm:w-[80%] md:mt-0 md:w-1/2 lg:w-[calc(1/2.5*100%)] xl:w-1/3"
-                >
+        <main className="flex flex-col items-center justify-center h-screen bg-gray-50 dark:bg-black px-4 md:px-0">
+            <div
+                className="bg-white dark:bg-[#1b1b1b] p-6 rounded-3xl w-full sm:w-[80%] md:w-1/2 lg:w-[calc(1/2.5*100%)] xl:w-1/3"
+            >
+                <AnimatePresence>
                     {children}
-                </motion.div>
-            </AnimatePresence>
+                </AnimatePresence>
+            </div>
         </main>
     );
 };

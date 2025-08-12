@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store/store";
 import { signupUser } from "@/redux/slices/auth.slice";
 import Otp from "../Otp";
+import { AnimatePresence, motion } from "framer-motion";
 
 const SignUpForm = () => {
     const searchParams = useSearchParams();
@@ -75,13 +76,31 @@ const SignUpForm = () => {
     }, [scrollRef]);
 
     return (
-        <>
-            <div
-                ref={scrollRef}
-                className="sections w-full flex overflow-x-auto"
-            >
+        <motion.div
+            layout
+            initial={{ height: 0 }}
+            animate={{ height: "auto" }}
+            exit={{ height: 0 }}
+            transition={{
+                type: "spring",
+                stiffness: 120,
+                damping: 25,
+            }}
+            ref={scrollRef}
+            className="sections w-full flex overflow-x-auto"
+        >
+            <AnimatePresence>
                 {!isEnd && (
-                    <div className="section min-w-full">
+                    <motion.div
+                        animate={{ height: "auto" }}
+                        exit={{ height: 0 }}
+                        transition={{
+                            type: "spring",
+                            stiffness: 120,
+                            damping: 25,
+                        }}
+                        className="section min-w-full"
+                    >
                         <h1 className="mb-8 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                             Create your account
                         </h1>
@@ -221,12 +240,12 @@ const SignUpForm = () => {
                                 </Link>
                             </p>
                         </form>
-                    </div>
+                    </motion.div>
                 )}
-                {/* otp */}
-                <Otp isEnd={isEnd} />
-            </div>
-        </>
+            </AnimatePresence>
+            {/* otp */}
+            <Otp isEnd={isEnd} />
+        </motion.div>
     );
 };
 
