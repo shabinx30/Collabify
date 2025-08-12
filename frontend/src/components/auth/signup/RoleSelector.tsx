@@ -3,7 +3,7 @@ import { IRoleSelector } from "@/types/auth/signup.type";
 
 const RoleSelector = ({ role, setRole }: IRoleSelector) => {
     return (
-        <div className="flex w-full relative rounded-xl overflow-hidden bg-gray-100 dark:bg-black">
+        <div className="flex w-full relative rounded-xl overflow-hidden bg-gray-100 dark:bg-black mt-2 mb-3">
             {/* Animated background */}
             <motion.div
                 initial={false}
