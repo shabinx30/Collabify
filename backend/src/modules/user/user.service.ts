@@ -9,8 +9,6 @@ import { createTransport } from 'nodemailer';
 export class UserService {
     constructor(
         private userRepository: UserRepository,
-        private sign: sign,
-        private createTransport: createTransport,
     ) {}
 
     async createUser(body: SignDto): Promise<object> {
@@ -33,7 +31,7 @@ export class UserService {
     }
 
     async generateOtp() {
-        return Math.round(Math.random() * 10_000);
+        return String(Math.floor(1000 + Math.random() * 9000));
     }
 
     async sendOtp(email: string): Promise<string> {
@@ -47,7 +45,7 @@ export class UserService {
                 throw new InternalServerErrorException("Can't create otp");
             }
 
-            const transport = this.createTransport({
+            const transport = createTransport({
                 service: 'gmail',
                 auth: {
                     user: process.env.USER,
@@ -59,7 +57,7 @@ export class UserService {
                 from: process.env.USER,
                 to: email,
                 subject: 'Welcome to _',
-                text: `Here is your joining otp(one time password): ${otp}`,
+                text: `Here is your joining otp(one time password): ${otp.otp}`,
             });
 
             return 'success';
@@ -71,7 +69,7 @@ export class UserService {
         }
     }
 
-    async verfyOtp(body: { email: string; otp: number }) {
+    async verifyOtp(body: { email: string; otp: number }) {
         const { email, otp } = body;
         const storedOtp = await this.userRepository.findOtpByEmail(email);
         if (!storedOtp) {
@@ -83,12 +81,12 @@ export class UserService {
 
         const user = await this.userRepository.findByEmail(email);
 
-        const accessToken = this.sign(user, {
+        const accessToken = sign(user, {
             secret: process.env.ACCESS_TOKEN_SECRET,
             expiresIn: '15m',
         });
 
-        const refreshToken = this.sign(user?.id, {
+        const refreshToken = sign(user?.id, {
             secret: process.env.ACCESS_TOKEN_SECRET,
             expiresIn: '7d',
         });

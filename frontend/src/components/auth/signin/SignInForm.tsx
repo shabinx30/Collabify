@@ -1,5 +1,6 @@
 "use client";
 
+import { errorClass, regularClass } from "@/const/auth";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -10,17 +11,12 @@ const SignInForm = () => {
         password: { status: true, message: "" },
     });
 
-    const errorClass =
-        "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-500 focus:border-primary-600 block w-full p-2.5 dark:bg-[#2b2b2b] dark:border-red-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-red-500 dark:focus:border-red-500";
-    const regularClass =
-        "bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#2b2b2b] dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500";
-
     return (
         <motion.div
             layout
-            initial={{ height: 0 }}
-            animate={{ height: "auto" }}
-            exit={{ height: 0 }}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
             transition={{
                 type: "spring",
                 stiffness: 120,

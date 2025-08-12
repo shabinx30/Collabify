@@ -14,7 +14,7 @@ export class UserController {
 
     @Post('verify-otp')
     async verfyOtp(@Body() body, @Res({ passthrough: true }) res: Response) {
-        const response = await this.userService.verfyOtp(body);
+        const response = await this.userService.verifyOtp(body);
 
         // setting cookie if it success
         if (response.message !== 'success') {

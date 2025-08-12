@@ -43,14 +43,17 @@ const Otp = ({ isEnd }: { isEnd: boolean }) => {
         console.log("OTP:", otp.join(""));
     };
 
+    const handleResend = () => {
+
+    }
+
     const interval = useRef<number | null>(null);
     useEffect(() => {
-        console.log('reached useEffect')
+        console.log("reached useEffect");
         if (isEnd) {
             interval.current = window.setInterval(() => {
                 setTime((p) => p - 1);
             }, 1000);
-
         }
         return () => {
             if (interval.current !== null) {
@@ -69,10 +72,20 @@ const Otp = ({ isEnd }: { isEnd: boolean }) => {
     return (
         <div className="section min-w-full flex flex-col gap-10 items-center justify-center">
             <h2 className="text-center text-2xl font-semibold">
-                Enter your OTP
+                Enter Your OTP
             </h2>
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-                <div className="flex gap-4 text-white">
+                <div>
+                    <p className="text-sm">
+                        {
+                            "We have sent an OTP (One Time Password) to your email"
+                        }
+                    </p>
+                    <p className="text-sm text-center text-amber-400">
+                        {"alice@gmail.com"}
+                    </p>
+                </div>
+                <div className="flex justify-center gap-4 text-white">
                     {otp.map((value, i) => (
                         <input
                             key={i}
@@ -91,13 +104,16 @@ const Otp = ({ isEnd }: { isEnd: boolean }) => {
                     ))}
                 </div>
                 <p className="text-sm text-center">
-                    <span className="text-amber-400 hover:underline cursor-pointer">
-                        resend
+                    <span onClick={handleResend} className="text-amber-400 hover:underline cursor-pointer">
+                        Resend
                     </span>{" "}
                     otp in{" "}
-                    {`${Math.floor(time / 60)}:${(time % 60)
-                        .toString()
-                        .padStart(2, "0")}`}
+                    <span className="text-amber-400">
+                        {`${Math.floor(time / 60)}:${(time % 60)
+                            .toString()
+                            .padStart(2, "0")}`}{" "}
+                    </span>
+                    seconds
                 </p>
                 <button
                     type="submit"
