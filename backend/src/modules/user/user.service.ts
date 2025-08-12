@@ -7,20 +7,19 @@ import { createTransport } from 'nodemailer';
 
 @Injectable()
 export class UserService {
-    constructor(
-        private userRepository: UserRepository,
-    ) {}
+    constructor(private userRepository: UserRepository) {}
 
     async createUser(body: SignDto): Promise<object> {
-        const existingUser = await this.userRepository.findByEmail(body.email);
-
-        if (existingUser?.isVerified) {
-            throw new BadRequestException('User is already Existing');
-        }
         try {
-            const newUser = await this.userRepository.createUser(body);
+            const existingUser = await this.userRepository.findByEmail(
+                body.email,
+            );
 
-            await this.sendOtp(newUser.email);
+            if (existingUser?.isVerified) {
+                throw new BadRequestException('User is already Existing');
+            }
+
+            await this.sendOtp(body.email);
             return { message: 'success' };
         } catch (error) {
             console.log(error);
