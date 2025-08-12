@@ -43,7 +43,7 @@ const Otp = ({ isEnd }: { isEnd: boolean }) => {
         console.log("OTP:", otp.join(""));
     };
 
-    let interval = useRef<number | null>(null);
+    const interval = useRef<number | null>(null);
     useEffect(() => {
         console.log('reached useEffect')
         if (isEnd) {
