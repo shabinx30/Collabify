@@ -1,6 +1,5 @@
 import { Body, Controller, Post, Res } from '@nestjs/common';
 import { UserService } from './user.service';
-import { SignDto } from './dtos/signup.dto';
 import { Response } from 'express';
 
 @Controller()
@@ -8,13 +7,14 @@ export class UserController {
     constructor(private readonly userService: UserService) {}
 
     @Post('signup')
-    async createUser(@Body() signDto: SignDto) {
-        return await this.userService.createUser(signDto);
+    async createUser(@Body() body) {
+        return await this.userService.createUser(body.email);
     }
 
     @Post('verify-otp')
     async verfyOtp(@Body() body, @Res({ passthrough: true }) res: Response) {
-        const response = await this.userService.verifyOtp(body);
+        const {otp, ...user} = body
+        const response = await this.userService.verifyOtp(user, otp);
 
         // setting cookie if it success
         if (response.message !== 'success') {

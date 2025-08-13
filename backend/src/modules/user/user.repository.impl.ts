@@ -8,7 +8,7 @@ import { Otp, OtpDocument } from './schemas/otp.schema';
 export class UserRepository {
     constructor(
         @InjectModel(User.name) private userSchema: Model<UserDocument>,
-        @InjectModel(Otp.name) private otpSchema: Model<OtpDocument>
+        @InjectModel(Otp.name) private otpSchema: Model<OtpDocument>,
     ) {}
 
     async createUser(data: Partial<UserDocument>): Promise<UserDocument> {
@@ -36,15 +36,23 @@ export class UserRepository {
 
     async createOtp(data) {
         try {
-            const newOtp = new this.otpSchema(data)
-            return newOtp.save()
+            const newOtp = new this.otpSchema(data);
+            return newOtp.save();
         } catch (error) {
-            console.log(error)
-            throw new InternalServerErrorException("Error while creating otp")
+            console.log(error);
+            throw new InternalServerErrorException('Error while creating otp');
         }
     }
 
+    async createOrUpdateOtp(email: string, otp: number) {
+        return this.otpSchema.findOneAndUpdate(
+            { email },
+            { otp, createdAt: new Date(), lastOtpSentAt: new Date() },
+            { upsert: true, new: true },
+        );
+    }
+
     async findOtpByEmail(email: string) {
-        return await this.otpSchema.findOne({email})
+        return await this.otpSchema.findOne({ email });
     }
 }
