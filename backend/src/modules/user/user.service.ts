@@ -150,4 +150,12 @@ export class UserService {
             );
         }
     }
+
+    async otpStatus(email: string) {
+        const Otp = await this.userRepository.findOtpByEmail(email)
+        if(Otp && Otp.lastOtpSentAt) {
+            return Otp.lastOtpSentAt
+        }
+        return Date.now()
+    }
 }

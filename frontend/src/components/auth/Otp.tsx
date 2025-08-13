@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { FiClock } from "react-icons/fi";
 
 const Otp = ({ isEnd }: { isEnd: boolean }) => {
     const length = 4;
@@ -43,13 +44,10 @@ const Otp = ({ isEnd }: { isEnd: boolean }) => {
         console.log("OTP:", otp.join(""));
     };
 
-    const handleResend = () => {
-
-    }
+    const handleResend = () => {};
 
     const interval = useRef<number | null>(null);
     useEffect(() => {
-        console.log("reached useEffect");
         if (isEnd) {
             interval.current = window.setInterval(() => {
                 setTime((p) => p - 1);
@@ -103,17 +101,25 @@ const Otp = ({ isEnd }: { isEnd: boolean }) => {
                         />
                     ))}
                 </div>
-                <p className="text-sm text-center">
-                    <span onClick={handleResend} className="text-amber-400 hover:underline cursor-pointer">
-                        Resend
-                    </span>{" "}
-                    otp in{" "}
+                <p className="text-sm text-center flex justify-center gap-1 items-center">
+                    <FiClock />
                     <span className="text-amber-400">
                         {`${Math.floor(time / 60)}:${(time % 60)
                             .toString()
-                            .padStart(2, "0")}`}{" "}
+                            .padStart(2, "0")}`}
                     </span>
-                    seconds
+                    sec
+                    <span
+                        onClick={() => (time == 0 ? handleResend : null)}
+                        className={
+                            "cursor-pointer " +
+                            (time == 0
+                                ? "text-amber-400 hover:underline"
+                                : "text-gray-400")
+                        }
+                    >
+                        Resend OTP
+                    </span>
                 </p>
                 <button
                     type="submit"

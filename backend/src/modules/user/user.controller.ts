@@ -7,13 +7,13 @@ export class UserController {
     constructor(private readonly userService: UserService) {}
 
     @Post('signup')
-    async createUser(@Body() body) {
-        return await this.userService.createUser(body.email);
+    async createUser(@Body('email') email: string) {
+        return await this.userService.createUser(email);
     }
 
     @Post('verify-otp')
-    async verfyOtp(@Body() body, @Res({ passthrough: true }) res: Response) {
-        const {otp, ...user} = body
+    async verifyOtp(@Body() body, @Res({ passthrough: true }) res: Response) {
+        const { otp, ...user } = body;
         const response = await this.userService.verifyOtp(user, otp);
 
         // setting cookie if it success
@@ -31,5 +31,15 @@ export class UserController {
         });
 
         return { accessToken };
+    }
+
+    @Post('resend-otp')
+    async resendOtp(@Body('email') email: string) {
+        return await this.userService.resendOtp(email);
+    }
+
+    @Post('otp-status')
+    async getOtpStatus(@Body('email') email: string) {
+        return await this.userService.otpStatus(email);
     }
 }
