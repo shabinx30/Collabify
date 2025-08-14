@@ -53,8 +53,8 @@ const Otp = ({ isFormFilled, lastTime }: IOtp) => {
         if (user?.email) {
             const data = await resendOtp({ email: user?.email });
             console.log("from resend otp.tsx", data);
-            if (data == "success") {
-                setTime(60);
+            if (data.message == "success") {
+                setTime(() => 60);
                 startTimer();
             }
         }
@@ -63,6 +63,7 @@ const Otp = ({ isFormFilled, lastTime }: IOtp) => {
     const interval = useRef<number | null>(null);
 
     const startTimer = () => {
+        stopTimer(); 
         interval.current = window.setInterval(() => {
             setTime((p) => p - 1);
         }, 1000);
@@ -90,14 +91,31 @@ const Otp = ({ isFormFilled, lastTime }: IOtp) => {
         }
     }, [time]);
 
+    // time syncer
     useEffect(() => {
         console.log("mounted ", time);
-        if (lastTime == 0 && user?.email) {
+        if (lastTime <= 0 && user?.email) {
             (async function () {
                 const data = await otpStatus({ email: user.email });
-                setTime(() => data.sendTime);
+                console.log("from time sync", data);
+                setTime(() => {
+                    if (data.exist === false) {
+                        return 0;
+                    }
+                    const timeLeft =
+                        (new Date(data.sendTime).getTime() -
+                            new Date().getTime()) /
+                            1000 +
+                        60;
+                    if (timeLeft <= 0) {
+                        return 0;
+                    }
+                    startTimer();
+                    return Math.round(timeLeft);
+                });
             })();
         }
+        return stopTimer;
     }, []);
 
     return (

@@ -25,8 +25,10 @@ const SignUpForm = () => {
     const scrollRef = useRef<HTMLDivElement | null>(null);
     const dispatch = useDispatch<AppDispatch>();
     const { user } = useSelector((state: RootState) => state.auth);
-    const [isFormFilled, setFormFilled] = useState(user?.username ? true : false);
-    const [lastTime, setLastTime] = useState(0)
+    const [isFormFilled, setFormFilled] = useState(
+        user?.username ? true : false
+    );
+    const [lastTime, setLastTime] = useState(0);
 
     const isValidType = (type: string | null): type is RoleType =>
         type === "brand" || type === "creator";
@@ -42,20 +44,19 @@ const SignUpForm = () => {
         clearErrors,
     } = useForm<SignupFormInput>({ resolver: zodResolver(signupSchema) });
 
-
     const onSubmit = async (formData: SignupFormInput) => {
-        const data = await sendOtp({email: formData.email})
-        if(data.message == "success") {
-            const user =  {...formData, role: role}
-            delete user.confirmPassword
+        const data = await sendOtp({ email: formData.email });
+        if (data.message == "success") {
+            const user = { ...formData, role: role };
+            delete user.confirmPassword;
             // temperorly add user
-            dispatch(addUser({user,token: null}))
+            dispatch(addUser({ user, token: null }));
             scrollRef.current?.scrollTo({
                 left: scrollRef.current.scrollWidth,
-                behavior: "smooth"
-            })
-            setFormFilled(true)
-            setLastTime(data.sendTime)
+                behavior: "smooth",
+            });
+            setFormFilled(() => true);
+            setLastTime(() => ((new Date(data.sendTime).getTime() - new Date().getTime())/1000) + 60);
         }
     };
 

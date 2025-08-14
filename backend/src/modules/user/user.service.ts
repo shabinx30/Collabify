@@ -17,8 +17,8 @@ export class UserService {
                 throw new BadRequestException('User is already Existing');
             }
 
-            await this.sendOtp(email);
-            return { message: 'success' };
+            const sendTime = await this.sendOtp(email);
+            return { message: 'success', sendTime: sendTime };
         } catch (error) {
             console.log(error);
             throw new InternalServerErrorException(
@@ -31,7 +31,7 @@ export class UserService {
         return Math.floor(1000 + Math.random() * 9000);
     }
 
-    async sendOtp(email: string): Promise<string> {
+    async sendOtp(email: string) {
         try {
             const otp = await this.generateOtp();
             const newOtp = await this.userRepository.createOtp({
@@ -43,22 +43,22 @@ export class UserService {
                 throw new InternalServerErrorException("Can't create otp");
             }
 
-            const transport = createTransport({
-                service: 'gmail',
-                auth: {
-                    user: process.env.USER,
-                    pass: process.env.PASS,
-                },
-            });
+            // const transport = createTransport({
+            //     service: 'gmail',
+            //     auth: {
+            //         user: process.env.USER,
+            //         pass: process.env.PASS,
+            //     },
+            // });
 
-            await transport.sendMail({
-                from: process.env.USER,
-                to: email,
-                subject: 'Welcome to _',
-                text: `Here is your joining otp(one time password): ${otp}`,
-            });
+            // await transport.sendMail({
+            //     from: process.env.USER,
+            //     to: email,
+            //     subject: 'Welcome to _',
+            //     text: `Here is your joining otp(one time password): ${otp}`,
+            // });
 
-            return 'success';
+            return newOtp.lastOtpSentAt;
         } catch (error) {
             console.error('Error from sendOtp', error);
             throw new InternalServerErrorException(
@@ -93,22 +93,22 @@ export class UserService {
                 throw new InternalServerErrorException("Can't create otp");
             }
 
-            const transport = createTransport({
-                service: 'gmail',
-                auth: {
-                    user: process.env.USER,
-                    pass: process.env.PASS,
-                },
-            });
+            // const transport = createTransport({
+            //     service: 'gmail',
+            //     auth: {
+            //         user: process.env.USER,
+            //         pass: process.env.PASS,
+            //     },
+            // });
 
-            await transport.sendMail({
-                from: process.env.USER,
-                to: email,
-                subject: 'Welcome to _',
-                text: `Here is your joining otp(one time password): ${otp}`,
-            });
+            // await transport.sendMail({
+            //     from: process.env.USER,
+            //     to: email,
+            //     subject: 'Welcome to _',
+            //     text: `Here is your joining otp(one time password): ${otp}`,
+            // });
 
-            return 'success';
+            return { message: 'success', sendTime: newOtp.lastOtpSentAt };
         } catch (error) {
             console.error('Error from sendOtp', error);
             throw new InternalServerErrorException(
@@ -154,9 +154,9 @@ export class UserService {
         try {
             const Otp = await this.userRepository.findOtpByEmail(email);
             if (Otp && Otp.lastOtpSentAt) {
-                return Otp.lastOtpSentAt;
+                return { exist: true, sendTime: Otp.lastOtpSentAt };
             }
-            return Date.now();
+            return { exist: false }
         } catch (error) {
             console.log(error);
             throw new InternalServerErrorException(

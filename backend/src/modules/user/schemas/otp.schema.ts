@@ -12,7 +12,7 @@ export class Otp extends Document {
     @Prop({ default: Date.now, expires: 300 })
     createdAt: Date;
 
-    @Prop()
+    @Prop({ default: Date.now })
     lastOtpSentAt: Date;
 }
 
