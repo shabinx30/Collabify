@@ -19,9 +19,9 @@ const Root = ({ children }: { children: React.ReactNode }) => {
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <main className="flex flex-col items-center justify-center h-screen bg-gray-50 dark:bg-black px-4 md:px-0">
+        <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100 dark:bg-black px-4 md:px-0">
             <div
-                className="bg-white dark:bg-[#1b1b1b] p-6 rounded-3xl w-full sm:w-[80%] md:w-1/2 lg:w-[calc(1/2.5*100%)] xl:w-1/3"
+                className="bg-white dark:bg-[#1b1b1b] p-6 rounded-3xl w-full sm:w-[80%] md:w-1/2 lg:w-[calc(1/2.5*100%)] xl:w-1/3 border border-gray-300 dark:border-[#3a3a3a]"
             >
                 <AnimatePresence>
                     {children}

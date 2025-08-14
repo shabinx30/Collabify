@@ -1,5 +1,5 @@
 import { SignupFormOutput } from "@/libs/validations/signupFormData";
-import { signup } from "@/services";
+import { verifyOtp } from "@/services";
 import { IAuthState } from "@/types/auth/signup.type";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { isAxiosError } from "axios";
@@ -11,12 +11,11 @@ const initialState: IAuthState = {
     isLoading: false,
 };
 
-export const signupUser = createAsyncThunk(
-    "auth/signup",
+export const verifyUserOtp = createAsyncThunk(
+    "auth/verify-otp",
     async (formData: SignupFormOutput, { rejectWithValue }) => {
         try {
-            // console.log('success')
-            return await signup(formData);
+            return await verifyOtp(formData);
         } catch (error) {
             if (isAxiosError(error) && error.response) {
                 return rejectWithValue(error.response.data);
@@ -30,7 +29,7 @@ const auth = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        login: (state, action) => {
+        addUser: (state, action) => {
             (state.user = action.payload.user),
                 (state.token = action.payload.token);
         },
@@ -40,21 +39,21 @@ const auth = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(signupUser.pending, (state) => {
+            .addCase(verifyUserOtp.pending, (state) => {
                 (state.isLoading = true), (state.error = null);
             })
-            .addCase(signupUser.fulfilled, (state, action) => {
+            .addCase(verifyUserOtp.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.error = null;
                 state.user = action.payload.user;
                 state.token = action.payload.token;
             })
-            .addCase(signupUser.rejected, (state, action) => {
+            .addCase(verifyUserOtp.rejected, (state, action) => {
                 (state.isLoading = false),
                     (state.error = action.payload as string);
             });
     },
 });
 
-export const { login, logout } = auth.actions;
+export const { addUser, logout } = auth.actions;
 export default auth.reducer;

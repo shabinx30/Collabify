@@ -25,7 +25,7 @@ export const signupSchema = z
             .email({ message: "Invalid email address" })
             .min(1, { message: "Email is required" }),
         password,
-        confirmPassword: z.string(),
+        confirmPassword: z.string().optional(),
     })
     .refine((data) => data.password === data.confirmPassword, {
         message: "Passwords don't match",

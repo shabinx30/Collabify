@@ -4,7 +4,6 @@ import { UserRepository } from './user.repository.impl';
 import { SignDto } from './dtos/signup.dto';
 import { sign } from 'jsonwebtoken';
 import { createTransport } from 'nodemailer';
-import { UserDocument } from './schemas/user.schema';
 
 @Injectable()
 export class UserService {
@@ -130,7 +129,7 @@ export class UserService {
                 return { message: 'not matching' };
             }
 
-            const newUser = await this.userRepository.createUser(userDto)
+            const newUser = await this.userRepository.createUser(userDto);
 
             const accessToken = sign(newUser, {
                 secret: process.env.ACCESS_TOKEN_SECRET,
@@ -146,16 +145,23 @@ export class UserService {
         } catch (error) {
             console.log(error);
             throw new InternalServerErrorException(
-                'An unexpected error occurred while creating User',
+                'An unexpected error occurred while verifying otp',
             );
         }
     }
 
     async otpStatus(email: string) {
-        const Otp = await this.userRepository.findOtpByEmail(email)
-        if(Otp && Otp.lastOtpSentAt) {
-            return Otp.lastOtpSentAt
+        try {
+            const Otp = await this.userRepository.findOtpByEmail(email);
+            if (Otp && Otp.lastOtpSentAt) {
+                return Otp.lastOtpSentAt;
+            }
+            return Date.now();
+        } catch (error) {
+            console.log(error);
+            throw new InternalServerErrorException(
+                'An unexpected error occurred while grabbing otp status',
+            );
         }
-        return Date.now()
     }
 }

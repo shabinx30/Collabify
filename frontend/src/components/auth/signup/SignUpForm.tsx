@@ -13,16 +13,20 @@ import UserTypeSelector from "./RoleSelector";
 import { useSearchParams } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store/store";
-import { signupUser } from "@/redux/slices/auth.slice";
 import Otp from "../Otp";
 import { AnimatePresence, motion } from "framer-motion";
 import { errorClass, regularClass } from "@/const/auth";
+import { sendOtp } from "@/services";
+import { addUser } from "@/redux/slices/auth.slice";
 
 const SignUpForm = () => {
     const searchParams = useSearchParams();
     const typeParam = searchParams.get("type");
     const scrollRef = useRef<HTMLDivElement | null>(null);
-    const [isEnd, setEnd] = useState(false);
+    const dispatch = useDispatch<AppDispatch>();
+    const { user } = useSelector((state: RootState) => state.auth);
+    const [isFormFilled, setFormFilled] = useState(user?.username ? true : false);
+    const [lastTime, setLastTime] = useState(0)
 
     const isValidType = (type: string | null): type is RoleType =>
         type === "brand" || type === "creator";
@@ -38,37 +42,26 @@ const SignUpForm = () => {
         clearErrors,
     } = useForm<SignupFormInput>({ resolver: zodResolver(signupSchema) });
 
-    const dispatch = useDispatch<AppDispatch>();
-    const { user } = useSelector((state: RootState) => state.auth);
 
-    const onSubmit = async (data: SignupFormInput) => {
-        const formData = { ...data, role: role };
-        dispatch(signupUser(formData));
+    const onSubmit = async (formData: SignupFormInput) => {
+        const data = await sendOtp({email: formData.email})
+        if(data.message == "success") {
+            const user =  {...formData, role: role}
+            delete user.confirmPassword
+            // temperorly add user
+            dispatch(addUser({user,token: null}))
+            scrollRef.current?.scrollTo({
+                left: scrollRef.current.scrollWidth,
+                behavior: "smooth"
+            })
+            setFormFilled(true)
+            setLastTime(data.sendTime)
+        }
     };
 
     useEffect(() => {
         clearErrors();
     }, [role]);
-
-    useEffect(() => {
-        console.log("current user",user);
-    }, [user]);
-
-    useEffect(() => {
-        const el = scrollRef.current;
-        if (!el) return;
-
-        const handleScroll = () => {
-            const atBottom = el.scrollLeft + el.clientWidth >= el.scrollWidth;
-            if (atBottom) {
-                setEnd(() => true);
-                console.log("reached end");
-            }
-        };
-
-        el.addEventListener("scroll", handleScroll);
-        return () => el.removeEventListener("scroll", handleScroll);
-    }, [scrollRef]);
 
     return (
         <motion.div
@@ -82,10 +75,10 @@ const SignUpForm = () => {
                 damping: 25,
             }}
             ref={scrollRef}
-            className="sections w-full flex overflow-x-auto"
+            className="sections w-full flex overflow-x-hidden"
         >
             <AnimatePresence>
-                {!isEnd && (
+                {!isFormFilled && (
                     <motion.div
                         animate={{ height: "auto" }}
                         exit={{ height: 0 }}
@@ -239,7 +232,7 @@ const SignUpForm = () => {
                 )}
             </AnimatePresence>
             {/* otp */}
-            <Otp isEnd={isEnd} />
+            <Otp isFormFilled={isFormFilled} lastTime={lastTime} />
         </motion.div>
     );
 };

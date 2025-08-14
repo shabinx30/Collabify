@@ -1,11 +1,16 @@
+import { otpStatus, resendOtp } from "@/services";
 import React, { useEffect, useRef, useState } from "react";
 import { FiClock } from "react-icons/fi";
+import { IOtp } from "../../types/auth/otp.type";
+import { RootState } from "@/redux/store/store";
+import { useSelector } from "react-redux";
 
-const Otp = ({ isEnd }: { isEnd: boolean }) => {
+const Otp = ({ isFormFilled, lastTime }: IOtp) => {
     const length = 4;
     const [otp, setOtp] = useState(Array(length).fill(""));
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
-    const [time, setTime] = useState(60);
+    const { user } = useSelector((state: RootState) => state.auth);
+    const [time, setTime] = useState<number>(lastTime);
 
     const handleChange = (value: string, index: number) => {
         if (!/^\d*$/.test(value)) return;
@@ -44,21 +49,39 @@ const Otp = ({ isEnd }: { isEnd: boolean }) => {
         console.log("OTP:", otp.join(""));
     };
 
-    const handleResend = () => {};
+    const handleResend = async () => {
+        if (user?.email) {
+            const data = await resendOtp({ email: user?.email });
+            console.log("from resend otp.tsx", data);
+            if (data == "success") {
+                setTime(60);
+                startTimer();
+            }
+        }
+    };
 
     const interval = useRef<number | null>(null);
-    useEffect(() => {
-        if (isEnd) {
-            interval.current = window.setInterval(() => {
-                setTime((p) => p - 1);
-            }, 1000);
+
+    const startTimer = () => {
+        interval.current = window.setInterval(() => {
+            setTime((p) => p - 1);
+        }, 1000);
+    };
+
+    const stopTimer = () => {
+        if (interval.current !== null) {
+            clearInterval(interval.current);
         }
-        return () => {
-            if (interval.current !== null) {
-                clearInterval(interval.current);
-            }
-        };
-    }, [isEnd]);
+    };
+
+    useEffect(() => {
+        if (isFormFilled) {
+            startTimer();
+        } else {
+            stopTimer();
+        }
+        return stopTimer;
+    }, [isFormFilled]);
 
     useEffect(() => {
         if (time == 0 && interval.current !== null) {
@@ -66,6 +89,16 @@ const Otp = ({ isEnd }: { isEnd: boolean }) => {
             interval.current = null;
         }
     }, [time]);
+
+    useEffect(() => {
+        console.log("mounted ", time);
+        if (lastTime == 0 && user?.email) {
+            (async function () {
+                const data = await otpStatus({ email: user.email });
+                setTime(() => data.sendTime);
+            })();
+        }
+    }, []);
 
     return (
         <div className="section min-w-full flex flex-col gap-10 items-center justify-center">
@@ -80,7 +113,7 @@ const Otp = ({ isEnd }: { isEnd: boolean }) => {
                         }
                     </p>
                     <p className="text-sm text-center text-amber-400">
-                        {"alice@gmail.com"}
+                        {user?.email}
                     </p>
                 </div>
                 <div className="flex justify-center gap-4 text-white">
@@ -110,12 +143,11 @@ const Otp = ({ isEnd }: { isEnd: boolean }) => {
                     </span>
                     sec
                     <span
-                        onClick={() => (time == 0 ? handleResend : null)}
+                        onClick={() => time === 0 && handleResend()}
                         className={
-                            "cursor-pointer " +
-                            (time == 0
-                                ? "text-amber-400 hover:underline"
-                                : "text-gray-400")
+                            time == 0
+                                ? "text-amber-400 hover:underline cursor-pointer"
+                                : "text-gray-400 cursor-not-allowed"
                         }
                     >
                         Resend OTP
