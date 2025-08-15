@@ -37,6 +37,11 @@ export class UserService {
             if (!exist) {
                 throw new NotFoundException('User not found');
             }
+
+            if(exist.password !== userDto.password) {
+                throw new BadRequestException("Email or Password is not matching")
+            }
+
             const payload = {
                 userId: exist.id,
                 username: exist.username,
