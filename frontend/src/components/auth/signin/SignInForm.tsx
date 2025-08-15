@@ -2,15 +2,17 @@
 
 import { errorClass, regularClass } from "@/const/auth";
 import { signInSchema, TSignInForm } from "@/libs/validations/signinFromData";
-import { RootState } from "@/redux/store/store";
+import { signIn } from "@/redux/slices/auth.slice";
+import { AppDispatch, RootState } from "@/redux/store/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const SignInForm = () => {
-    const { isLoading } = useSelector((state: RootState) => state.auth)
+    const { isLoading } = useSelector((state: RootState) => state.auth);
+    const dispatch = useDispatch<AppDispatch>();
 
     const {
         register,
@@ -18,8 +20,8 @@ const SignInForm = () => {
         formState: { errors },
     } = useForm<TSignInForm>({ resolver: zodResolver(signInSchema) });
 
-    const onSubmit = () => {
-
+    const onSubmit = (formData: TSignInForm) => {
+        dispatch(signIn(formData));
     };
 
     return (
