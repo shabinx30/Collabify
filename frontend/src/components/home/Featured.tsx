@@ -12,6 +12,7 @@ const Featured = () => {
                             src="/images/infu-1.jpeg"
                             alt="infu"
                             fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
                         />
                     </div>
                     <div className="flex justify-between text-[0.9rem]">
@@ -31,6 +32,7 @@ const Featured = () => {
                             src="/images/infu-2.jpeg"
                             alt="infu"
                             fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
                         />
                     </div>
                     <div className="flex justify-between text-[0.9rem]">
@@ -50,6 +52,7 @@ const Featured = () => {
                             src="/images/infu-3.jpeg"
                             alt="infu"
                             fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
                         />
                     </div>
                     <div className="flex justify-between text-[0.9rem]">
@@ -69,6 +72,7 @@ const Featured = () => {
                             src="/images/infu-4.jpeg"
                             alt="infu"
                             fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
                         />
                     </div>
                     <div className="flex justify-between text-[0.9rem]">

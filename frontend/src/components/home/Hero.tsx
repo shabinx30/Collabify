@@ -27,6 +27,7 @@ const Hero = () => {
                         fill
                         placeholder="blur"
                         blurDataURL="/images/vlog_low.jpg"
+                        sizes="(max-width: 768px) 100vw, 50vw"
                     />
                 </div>
                 <div className="flex-1 pl-4 pr-2 py-2 md:py-0 lg:py-2">
