@@ -9,10 +9,10 @@ export class Otp extends Document {
     @Prop({ required: true })
     otp: number;
 
-    @Prop({ default: Date.now, expires: 300 })
+    @Prop({ default: () => new Date(), expires: 300 })
     createdAt: Date;
 
-    @Prop({ default: Date.now })
+    @Prop({ default: () => new Date() })
     lastOtpSentAt: Date;
 }
 

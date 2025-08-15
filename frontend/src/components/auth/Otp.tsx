@@ -49,31 +49,28 @@ const Otp = ({ isFormFilled }: IOtp) => {
         console.log("OTP:", otp.join(""));
     };
 
-    const handleResend = async () => {
-        if (user?.email) {
-            const data = await resendOtp({ email: user?.email });
-            console.log("from resend otp.tsx", data);
-            if (data.message == "success") {
-                setTime(() => 60);
-                startTimer();
-            }
-        }
-    };
-
     const interval = useRef<number | null>(null);
 
     const startTimer = () => {
         stopTimer();
-        if (time > 0) {
-            interval.current = window.setInterval(() => {
-                setTime((p) => p - 1);
-            }, 1000);
-        }
+        interval.current = window.setInterval(() => {
+            setTime((p) => p - 1);
+        }, 1000);
     };
 
     const stopTimer = () => {
         if (interval.current !== null) {
             clearInterval(interval.current);
+        }
+    };
+
+    const handleResend = async () => {
+        if (user?.email) {
+            const data = await resendOtp({ email: user?.email });
+            if (data.message == "success") {
+                setTime(() => 60);
+                startTimer();
+            }
         }
     };
 
@@ -95,11 +92,9 @@ const Otp = ({ isFormFilled }: IOtp) => {
 
     // time syncer
     useEffect(() => {
-        console.log("mounted ", time);
         if (user?.email) {
             (async function () {
                 const data = await otpStatus({ email: user.email });
-                console.log("from time sync", data);
                 setTime(() => {
                     if (data.exist === false) {
                         return 0;

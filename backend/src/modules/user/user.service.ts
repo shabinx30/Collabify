@@ -17,8 +17,8 @@ export class UserService {
                 throw new BadRequestException('User is already Existing');
             }
 
-            const sendTime = await this.sendOtp(email);
-            return { message: 'success', sendTime: sendTime };
+            await this.sendOtp(email);
+            return { message: 'success' };
         } catch (error) {
             console.log(error);
             throw new InternalServerErrorException(
@@ -154,9 +154,9 @@ export class UserService {
         try {
             const Otp = await this.userRepository.findOtpByEmail(email);
             if (Otp && Otp.lastOtpSentAt) {
-                return { exist: true, sendTime: Otp.lastOtpSentAt };
+                return { sendTime: Otp.lastOtpSentAt };
             }
-            return { exist: false }
+            return { exist: false };
         } catch (error) {
             console.log(error);
             throw new InternalServerErrorException(
