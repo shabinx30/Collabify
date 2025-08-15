@@ -1,6 +1,7 @@
 import { SignupFormOutput } from "@/libs/validations/signupFormData";
 import { clientApi } from "./client.api";
 import { IEmail } from "@/types/auth/otp.type";
+import { TSignInForm } from "@/libs/validations/signinFromData";
 
 
 export const sendOtp = async (data: IEmail) => {
@@ -10,6 +11,15 @@ export const sendOtp = async (data: IEmail) => {
     } catch (error) {
         console.log(error, "Error while sending otp")
         throw error
+    }
+}
+
+export const signInUser = async (data: TSignInForm) => {
+    try {
+        const response = await clientApi.post('/signin', data)
+        return response.data
+    } catch (error) {
+        console.log(error, "Error while signing in")
     }
 }
 

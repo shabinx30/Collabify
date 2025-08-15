@@ -1,5 +1,6 @@
+import { TSignInForm } from "@/libs/validations/signinFromData";
 import { SignupFormOutput } from "@/libs/validations/signupFormData";
-import { verifyOtp } from "@/services";
+import { signInUser, verifyOtp } from "@/services";
 import { IAuthState, IUser } from "@/types/auth/signup.type";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { isAxiosError } from "axios";
@@ -19,6 +20,20 @@ export const verifyUserOtp = createAsyncThunk(
     ) => {
         try {
             return await verifyOtp(formData, otp);
+        } catch (error) {
+            if (isAxiosError(error) && error.response) {
+                return rejectWithValue(error.response.data);
+            }
+            return rejectWithValue(error);
+        }
+    }
+);
+
+export const signIn = createAsyncThunk(
+    "auth/sign-in",
+    async (formData: TSignInForm, { rejectWithValue }) => {
+        try {
+            return await signInUser(formData)
         } catch (error) {
             if (isAxiosError(error) && error.response) {
                 return rejectWithValue(error.response.data);
@@ -54,7 +69,20 @@ const auth = createSlice({
             .addCase(verifyUserOtp.rejected, (state, action) => {
                 (state.isLoading = false),
                     (state.error = action.payload as string);
-            });
+            })
+            .addCase(signIn.pending, (state) => {
+                (state.isLoading = true), (state.error = null);
+            })
+            .addCase(signIn.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.error = null;
+                state.user = action.payload.user;
+                state.token = action.payload.token;
+            })
+            .addCase(signIn.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload as string
+            })
     },
 });
 
