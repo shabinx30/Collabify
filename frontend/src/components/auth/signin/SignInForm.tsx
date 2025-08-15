@@ -54,7 +54,7 @@ const SignInForm = () => {
                         id="email"
                         {...register("email")}
                         className={
-                            errors.email?.message ? regularClass : errorClass
+                            errors.email?.message ? errorClass : regularClass
                         }
                         placeholder="example@company.com"
                     />
@@ -78,7 +78,7 @@ const SignInForm = () => {
                         {...register("password")}
                         placeholder="&34@88$#!"
                         className={
-                            errors.password?.message ? regularClass : errorClass
+                            errors.password?.message ? errorClass : regularClass
                         }
                     />
                 </div>
