@@ -25,9 +25,6 @@ const SignUpForm = () => {
     const scrollRef = useRef<HTMLDivElement | null>(null);
     const dispatch = useDispatch<AppDispatch>();
     const { user, isLoading } = useSelector((state: RootState) => state.auth);
-    const [isFormFilled, setFormFilled] = useState(
-        user?.username ? true : false
-    );
 
     const isValidType = (type: string | null): type is RoleType =>
         type === "brand" || type === "creator";
@@ -53,8 +50,7 @@ const SignUpForm = () => {
             scrollRef.current?.scrollTo({
                 left: scrollRef.current.scrollWidth,
                 behavior: "smooth",
-            });
-            setFormFilled(() => true);
+            })
         }
     };
 
@@ -77,7 +73,7 @@ const SignUpForm = () => {
             className="sections w-full flex overflow-x-hidden"
         >
             <AnimatePresence>
-                {!isFormFilled && (
+                {!user?.username && (
                     <motion.div
                         animate={{ height: "auto" }}
                         exit={{ height: 0 }}
@@ -231,7 +227,7 @@ const SignUpForm = () => {
                 )}
             </AnimatePresence>
             {/* otp */}
-            <Otp isFormFilled={isFormFilled} />
+            <Otp />
         </motion.div>
     );
 };

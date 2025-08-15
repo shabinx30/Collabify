@@ -1,14 +1,13 @@
 import { otpStatus, resendOtp } from "@/services";
 import React, { useEffect, useRef, useState } from "react";
 import { FiClock } from "react-icons/fi";
-import { IOtp } from "../../types/auth/otp.type";
 import { AppDispatch, RootState } from "@/redux/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyUserOtp } from "@/redux/slices/auth.slice";
 import { IUser } from "@/types/auth/signup.type";
 import { SignupFormOutput } from "@/libs/validations/signupFormData";
 
-const Otp = ({ isFormFilled }: IOtp) => {
+const Otp = () => {
     const length = 4;
     const [otp, setOtp] = useState(Array(length).fill(""));
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
@@ -91,13 +90,13 @@ const Otp = ({ isFormFilled }: IOtp) => {
     };
 
     useEffect(() => {
-        if (isFormFilled) {
+        if (user?.username) {
             startTimer();
         } else {
             stopTimer();
         }
         return stopTimer;
-    }, [isFormFilled]);
+    }, [user]);
 
     useEffect(() => {
         if (time == 0 && interval.current !== null) {
