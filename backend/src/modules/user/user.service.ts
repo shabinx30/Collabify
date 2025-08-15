@@ -9,7 +9,7 @@ import { sign } from 'jsonwebtoken';
 import { createTransport } from 'nodemailer';
 import { SignInDto } from './dtos/signin.dto';
 import generateOtp from 'src/common/utils/otp.util';
-import hashPassword from 'src/common/utils/hash.util';
+import { hashPassword, compare } from 'src/common/utils/hash.util';
 
 @Injectable()
 export class UserService {
@@ -40,7 +40,7 @@ export class UserService {
                 throw new NotFoundException('User not found');
             }
 
-            if (exist.password !== userDto.password) {
+            if (await compare(userDto.password, exist.password)) {
                 throw new BadRequestException(
                     'Email or Password is not matching',
                 );
