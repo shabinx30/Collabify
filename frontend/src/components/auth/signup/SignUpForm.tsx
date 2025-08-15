@@ -28,7 +28,6 @@ const SignUpForm = () => {
     const [isFormFilled, setFormFilled] = useState(
         user?.username ? true : false
     );
-    const [lastTime, setLastTime] = useState(0);
 
     const isValidType = (type: string | null): type is RoleType =>
         type === "brand" || type === "creator";
@@ -56,7 +55,6 @@ const SignUpForm = () => {
                 behavior: "smooth",
             });
             setFormFilled(() => true);
-            setLastTime(() => ((new Date(data.sendTime).getTime() - new Date().getTime())/1000) + 60);
         }
     };
 
@@ -233,7 +231,7 @@ const SignUpForm = () => {
                 )}
             </AnimatePresence>
             {/* otp */}
-            <Otp isFormFilled={isFormFilled} lastTime={lastTime} />
+            <Otp isFormFilled={isFormFilled} />
         </motion.div>
     );
 };

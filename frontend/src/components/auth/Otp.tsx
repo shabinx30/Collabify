@@ -5,12 +5,12 @@ import { IOtp } from "../../types/auth/otp.type";
 import { RootState } from "@/redux/store/store";
 import { useSelector } from "react-redux";
 
-const Otp = ({ isFormFilled, lastTime }: IOtp) => {
+const Otp = ({ isFormFilled }: IOtp) => {
     const length = 4;
     const [otp, setOtp] = useState(Array(length).fill(""));
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
     const { user } = useSelector((state: RootState) => state.auth);
-    const [time, setTime] = useState<number>(lastTime);
+    const [time, setTime] = useState<number>(60);
 
     const handleChange = (value: string, index: number) => {
         if (!/^\d*$/.test(value)) return;
@@ -63,10 +63,12 @@ const Otp = ({ isFormFilled, lastTime }: IOtp) => {
     const interval = useRef<number | null>(null);
 
     const startTimer = () => {
-        stopTimer(); 
-        interval.current = window.setInterval(() => {
-            setTime((p) => p - 1);
-        }, 1000);
+        stopTimer();
+        if (time > 0) {
+            interval.current = window.setInterval(() => {
+                setTime((p) => p - 1);
+            }, 1000);
+        }
     };
 
     const stopTimer = () => {
@@ -94,7 +96,7 @@ const Otp = ({ isFormFilled, lastTime }: IOtp) => {
     // time syncer
     useEffect(() => {
         console.log("mounted ", time);
-        if (lastTime <= 0 && user?.email) {
+        if (user?.email) {
             (async function () {
                 const data = await otpStatus({ email: user.email });
                 console.log("from time sync", data);
