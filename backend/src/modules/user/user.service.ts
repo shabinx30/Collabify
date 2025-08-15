@@ -8,6 +8,8 @@ import { SignUpDto } from './dtos/signup.dto';
 import { sign } from 'jsonwebtoken';
 import { createTransport } from 'nodemailer';
 import { SignInDto } from './dtos/signin.dto';
+import generateOtp from 'src/common/utils/otp.util';
+import hashPassword from 'src/common/utils/hash.util';
 
 @Injectable()
 export class UserService {
@@ -75,13 +77,9 @@ export class UserService {
         }
     }
 
-    async generateOtp() {
-        return Math.floor(1000 + Math.random() * 9000);
-    }
-
     async sendOtp(email: string) {
         try {
-            const otp = await this.generateOtp();
+            const otp = generateOtp();
             const newOtp = await this.userRepository.createOtp({
                 email,
                 otp,
@@ -131,7 +129,7 @@ export class UserService {
                 );
             }
 
-            const otp = await this.generateOtp();
+            const otp = await generateOtp();
             const newOtp = await this.userRepository.createOrUpdateOtp(
                 email,
                 otp,
@@ -177,8 +175,12 @@ export class UserService {
                 return { message: 'not matching' };
             }
 
+            const { password, ...userData } = userDto;
+            const hashedPassword = await hashPassword(password);
+
             const newUser = await this.userRepository.createUser({
-                ...userDto,
+                ...userData,
+                password: hashedPassword,
                 isVerified: true,
             });
 
