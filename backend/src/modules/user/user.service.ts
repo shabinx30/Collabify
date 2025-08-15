@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, HttpException, Injectable } from '@nestjs/common';
 import {
     InternalServerErrorException,
     NotFoundException,
@@ -16,16 +16,19 @@ export class UserService {
     constructor(private userRepository: UserRepository) {}
 
     async createUser(email): Promise<object> {
+        const existingUser = await this.userRepository.findByEmail(email);
+
+        if (existingUser?.isVerified) {
+            throw new BadRequestException('User is already Existing');
+        }
+
         try {
-            const existingUser = await this.userRepository.findByEmail(email);
-
-            if (existingUser?.isVerified) {
-                throw new BadRequestException('User is already Existing');
-            }
-
             await this.sendOtp(email);
             return { message: 'success' };
         } catch (error) {
+            if (error instanceof HttpException) {
+                throw error;
+            }
             console.log(error);
             throw new InternalServerErrorException(
                 'An unexpected error occurred while signing up',
@@ -34,18 +37,16 @@ export class UserService {
     }
 
     async signIn(userDto: SignInDto) {
+        const exist = await this.userRepository.findByEmail(userDto.email);
+        if (!exist) {
+            throw new NotFoundException('User not found');
+        }
+
+        if (await compare(userDto.password, exist.password)) {
+            throw new BadRequestException('Email or Password is not matching');
+        }
+
         try {
-            const exist = await this.userRepository.findByEmail(userDto.email);
-            if (!exist) {
-                throw new NotFoundException('User not found');
-            }
-
-            if (await compare(userDto.password, exist.password)) {
-                throw new BadRequestException(
-                    'Email or Password is not matching',
-                );
-            }
-
             const payload = {
                 userId: exist.id,
                 username: exist.username,
@@ -70,6 +71,9 @@ export class UserService {
                 user: payload,
             };
         } catch (error) {
+            if (error instanceof HttpException) {
+                throw error;
+            }
             console.log(error, 'Error while signing in.');
             throw new InternalServerErrorException(
                 'An unexpected error occurred while signing in',
@@ -78,17 +82,17 @@ export class UserService {
     }
 
     async sendOtp(email: string) {
+        const otp = generateOtp();
+        const newOtp = await this.userRepository.createOtp({
+            email,
+            otp,
+        });
+
+        if (!newOtp) {
+            throw new InternalServerErrorException("Can't create otp");
+        }
+
         try {
-            const otp = generateOtp();
-            const newOtp = await this.userRepository.createOtp({
-                email,
-                otp,
-            });
-
-            if (!newOtp) {
-                throw new InternalServerErrorException("Can't create otp");
-            }
-
             const transport = createTransport({
                 service: 'gmail',
                 auth: {
@@ -106,6 +110,9 @@ export class UserService {
 
             return newOtp.lastOtpSentAt;
         } catch (error) {
+            if (error instanceof HttpException) {
+                throw error;
+            }
             console.error('Error from sendOtp', error);
             throw new InternalServerErrorException(
                 'An unexpected error occurred while sending otp',
@@ -114,31 +121,24 @@ export class UserService {
     }
 
     async resendOtp(email: string) {
+        const PreviousOtp = await this.userRepository.findOtpByEmail(email);
+
+        const now = new Date();
+        const cooldownMs = 60 * 1000;
+
+        if (
+            PreviousOtp?.lastOtpSentAt &&
+            now.getTime() - PreviousOtp.lastOtpSentAt.getTime() < cooldownMs
+        ) {
+            throw new BadRequestException('Please wait before resending OTP');
+        }
+        const otp = await generateOtp();
+        const newOtp = await this.userRepository.createOrUpdateOtp(email, otp);
+
+        if (!newOtp) {
+            throw new InternalServerErrorException("Can't create otp");
+        }
         try {
-            const PreviousOtp = await this.userRepository.findOtpByEmail(email);
-
-            const now = new Date();
-            const cooldownMs = 60 * 1000;
-
-            if (
-                PreviousOtp?.lastOtpSentAt &&
-                now.getTime() - PreviousOtp.lastOtpSentAt.getTime() < cooldownMs
-            ) {
-                throw new BadRequestException(
-                    'Please wait before resending OTP',
-                );
-            }
-
-            const otp = await generateOtp();
-            const newOtp = await this.userRepository.createOrUpdateOtp(
-                email,
-                otp,
-            );
-
-            if (!newOtp) {
-                throw new InternalServerErrorException("Can't create otp");
-            }
-
             const transport = createTransport({
                 service: 'gmail',
                 auth: {
@@ -156,6 +156,9 @@ export class UserService {
 
             return { message: 'success', sendTime: newOtp.lastOtpSentAt };
         } catch (error) {
+            if (error instanceof HttpException) {
+                throw error;
+            }
             console.error('Error from sendOtp', error);
             throw new InternalServerErrorException(
                 'An unexpected error occurred while sending otp',
