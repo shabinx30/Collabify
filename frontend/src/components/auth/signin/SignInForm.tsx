@@ -1,15 +1,20 @@
 "use client";
 
 import { errorClass, regularClass } from "@/const/auth";
+import { signInSchema, TSignInForm } from "@/libs/validations/signinFromData";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 
 const SignInForm = () => {
-    const [valid] = useState({
-        email: { status: true, message: "" },
-        password: { status: true, message: "" },
-    });
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<TSignInForm>({ resolver: zodResolver(signInSchema) });
+
+    const onSubmit = () => {};
 
     return (
         <motion.div
@@ -29,16 +34,16 @@ const SignInForm = () => {
             <form
                 noValidate
                 className="space-y-4 md:space-y-6 mt-8"
-                // onSubmit={formSubmission}
+                onSubmit={handleSubmit(onSubmit)}
             >
                 <div>
                     <label
                         htmlFor="email"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                        {valid.email.message ? (
+                        {errors.email?.message ? (
                             <span className="text-red-500">
-                                {valid.email.message}
+                                {errors.email.message}
                             </span>
                         ) : (
                             "Your email"
@@ -46,11 +51,10 @@ const SignInForm = () => {
                     </label>
                     <input
                         type="email"
-                        name="email"
                         id="email"
-                        // onChange={validate}
+                        {...register("email")}
                         className={
-                            valid.email.status ? regularClass : errorClass
+                            errors.email?.message ? regularClass : errorClass
                         }
                         placeholder="example@company.com"
                     />
@@ -60,9 +64,9 @@ const SignInForm = () => {
                         htmlFor="password"
                         className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                        {valid.password.message ? (
+                        {errors.password?.message ? (
                             <span className="text-red-500">
-                                {valid.password.message}
+                                {errors.password.message}
                             </span>
                         ) : (
                             "Your password"
@@ -70,12 +74,11 @@ const SignInForm = () => {
                     </label>
                     <input
                         type="password"
-                        name="password"
                         id="password"
-                        // onChange={validate}
+                        {...register("password")}
                         placeholder="&34@88$#!"
                         className={
-                            valid.password.status ? regularClass : errorClass
+                            errors.password?.message ? regularClass : errorClass
                         }
                     />
                 </div>

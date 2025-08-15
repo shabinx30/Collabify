@@ -14,6 +14,7 @@ export class UserController {
     @Post('signin')
     async signIn(@Body() data, @Res({passthrough: true}) res: Response) {
         const { refreshToken, ...response } = await this.userService.signIn(data)
+        
         // setting up cookie
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
