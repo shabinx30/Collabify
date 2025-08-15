@@ -13,15 +13,15 @@ export class UserController {
 
     @Post('verify-otp')
     async verifyOtp(@Body() body, @Res({ passthrough: true }) res: Response) {
-        const { otp, ...user } = body;
-        const response = await this.userService.verifyOtp(user, otp);
+        const { otp, ...userData } = body;
+        const response = await this.userService.verifyOtp(userData, otp);
 
         // setting cookie if it success
         if (response.message !== 'success') {
             return response.message;
         }
 
-        const { accessToken, refreshToken } = response;
+        const { accessToken, refreshToken, user } = response;
 
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
@@ -30,7 +30,7 @@ export class UserController {
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
-        return { accessToken };
+        return { token: accessToken, user };
     }
 
     @Post('resend-otp')

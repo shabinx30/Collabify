@@ -2,8 +2,11 @@ import { otpStatus, resendOtp } from "@/services";
 import React, { useEffect, useRef, useState } from "react";
 import { FiClock } from "react-icons/fi";
 import { IOtp } from "../../types/auth/otp.type";
-import { RootState } from "@/redux/store/store";
-import { useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { verifyUserOtp } from "@/redux/slices/auth.slice";
+import { IUser } from "@/types/auth/signup.type";
+import { SignupFormOutput } from "@/libs/validations/signupFormData";
 
 const Otp = ({ isFormFilled }: IOtp) => {
     const length = 4;
@@ -11,6 +14,7 @@ const Otp = ({ isFormFilled }: IOtp) => {
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
     const { user } = useSelector((state: RootState) => state.auth);
     const [time, setTime] = useState<number>(60);
+    const dispatch = useDispatch<AppDispatch>();
 
     const handleChange = (value: string, index: number) => {
         if (!/^\d*$/.test(value)) return;
@@ -46,7 +50,19 @@ const Otp = ({ isFormFilled }: IOtp) => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log("OTP:", otp.join(""));
+        const Enteredotp = otp.join("");
+        if (Enteredotp.length !== 4) {
+            return; // error
+        }
+        if (!user?.username) {
+            return;
+        }
+        dispatch(
+            verifyUserOtp({
+                formData: user as IUser & SignupFormOutput,
+                otp: Number(Enteredotp),
+            })
+        );
     };
 
     const interval = useRef<number | null>(null);

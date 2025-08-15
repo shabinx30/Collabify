@@ -1,6 +1,6 @@
 import { SignupFormOutput } from "@/libs/validations/signupFormData";
 import { verifyOtp } from "@/services";
-import { IAuthState } from "@/types/auth/signup.type";
+import { IAuthState, IUser } from "@/types/auth/signup.type";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { isAxiosError } from "axios";
 
@@ -13,9 +13,12 @@ const initialState: IAuthState = {
 
 export const verifyUserOtp = createAsyncThunk(
     "auth/verify-otp",
-    async (formData: SignupFormOutput, { rejectWithValue }) => {
+    async (
+        { formData, otp }: { formData: IUser & SignupFormOutput; otp: number },
+        { rejectWithValue }
+    ) => {
         try {
-            return await verifyOtp(formData);
+            return await verifyOtp(formData, otp);
         } catch (error) {
             if (isAxiosError(error) && error.response) {
                 return rejectWithValue(error.response.data);

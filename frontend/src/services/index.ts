@@ -13,12 +13,12 @@ export const sendOtp = async (data: IEmail) => {
     }
 }
 
-export const verifyOtp = async (formData: SignupFormOutput) => {
+export const verifyOtp = async (formData: SignupFormOutput, otp: number) => {
     try {
-        const response = await clientApi.post('/signup', formData)
+        const response = await clientApi.post('/verify-otp', {...formData, otp})
         return response.data
     } catch (error) {
-        console.log(error, "Error while signup")
+        console.log(error, "Error while verifying otp")
         throw error
     }
 }

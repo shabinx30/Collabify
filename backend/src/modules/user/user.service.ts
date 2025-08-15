@@ -131,17 +131,24 @@ export class UserService {
 
             const newUser = await this.userRepository.createUser(userDto);
 
-            const accessToken = sign(newUser, {
-                secret: process.env.ACCESS_TOKEN_SECRET,
+            const payload = {
+                userId: newUser.id,
+                username: newUser.username,
+                email: newUser.email,
+                role: newUser.role,
+            };
+
+            const accessToken = sign(payload, process.env.ACCESS_TOKEN_SECRET, {
                 expiresIn: '15m',
             });
 
-            const refreshToken = sign(newUser?.id, {
-                secret: process.env.ACCESS_TOKEN_SECRET,
-                expiresIn: '7d',
-            });
+            const refreshToken = sign(
+                { id: newUser?.id },
+                process.env.REFRESH_TOKEN_SECRET,
+                { expiresIn: '7d' },
+            );
 
-            return { message: 'success', accessToken, refreshToken };
+            return { message: 'success', accessToken, refreshToken, user: payload };
         } catch (error) {
             console.log(error);
             throw new InternalServerErrorException(
