@@ -2,19 +2,25 @@
 
 import { errorClass, regularClass } from "@/const/auth";
 import { signInSchema, TSignInForm } from "@/libs/validations/signinFromData";
+import { RootState } from "@/redux/store/store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 
 const SignInForm = () => {
+    const { isLoading } = useSelector((state: RootState) => state.auth)
+
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<TSignInForm>({ resolver: zodResolver(signInSchema) });
 
-    const onSubmit = () => {};
+    const onSubmit = () => {
+
+    };
 
     return (
         <motion.div
@@ -84,6 +90,7 @@ const SignInForm = () => {
                 </div>
                 <button
                     type="submit"
+                    disabled={isLoading}
                     className="w-full text-black bg-[#FFBF00] hover:bg-[#FFBF00] duration-200 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
                     Sign In

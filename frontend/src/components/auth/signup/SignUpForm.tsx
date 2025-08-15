@@ -24,7 +24,7 @@ const SignUpForm = () => {
     const typeParam = searchParams.get("type");
     const scrollRef = useRef<HTMLDivElement | null>(null);
     const dispatch = useDispatch<AppDispatch>();
-    const { user } = useSelector((state: RootState) => state.auth);
+    const { user, isLoading } = useSelector((state: RootState) => state.auth);
     const [isFormFilled, setFormFilled] = useState(
         user?.username ? true : false
     );
@@ -39,7 +39,7 @@ const SignUpForm = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors, isSubmitting },
+        formState: { errors },
         clearErrors,
     } = useForm<SignupFormInput>({ resolver: zodResolver(signupSchema) });
 
@@ -212,7 +212,7 @@ const SignUpForm = () => {
                             </div>
                             <button
                                 type="submit"
-                                disabled={isSubmitting}
+                                disabled={isLoading}
                                 className="w-full text-black bg-[#FFBF00] hover:bg-[#FFBF00] duration-200 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 cursor-pointer"
                             >
                                 Sign Up
