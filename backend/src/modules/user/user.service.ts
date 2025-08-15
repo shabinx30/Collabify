@@ -1,9 +1,13 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { InternalServerErrorException } from '@nestjs/common';
+import {
+    InternalServerErrorException,
+    NotFoundException,
+} from '@nestjs/common';
 import { UserRepository } from './user.repository.impl';
-import { SignDto } from './dtos/signup.dto';
+import { SignUpDto } from './dtos/signup.dto';
 import { sign } from 'jsonwebtoken';
 import { createTransport } from 'nodemailer';
+import { SignInDto } from './dtos/signin.dto';
 
 @Injectable()
 export class UserService {
@@ -27,6 +31,43 @@ export class UserService {
         }
     }
 
+    async signIn(userDto: SignInDto) {
+        try {
+            const exist = await this.userRepository.findByEmail(userDto.email);
+            if (!exist) {
+                throw new NotFoundException('User not found');
+            }
+            const payload = {
+                userId: exist.id,
+                username: exist.username,
+                email: exist.email,
+                role: exist.role,
+            };
+
+            const accessToken = sign(payload, process.env.ACCESS_TOKEN_SECRET, {
+                expiresIn: '15m',
+            });
+
+            const refreshToken = sign(
+                { id: exist?.id },
+                process.env.REFRESH_TOKEN_SECRET,
+                { expiresIn: '7d' },
+            );
+
+            return {
+                message: 'success',
+                accessToken,
+                refreshToken,
+                user: payload,
+            };
+        } catch (error) {
+            console.log(error, 'Error while signing in.');
+            throw new InternalServerErrorException(
+                'An unexpected error occurred while signing in',
+            );
+        }
+    }
+
     async generateOtp() {
         return Math.floor(1000 + Math.random() * 9000);
     }
@@ -43,20 +84,20 @@ export class UserService {
                 throw new InternalServerErrorException("Can't create otp");
             }
 
-            // const transport = createTransport({
-            //     service: 'gmail',
-            //     auth: {
-            //         user: process.env.USER,
-            //         pass: process.env.PASS,
-            //     },
-            // });
+            const transport = createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.USER,
+                    pass: process.env.PASS,
+                },
+            });
 
-            // await transport.sendMail({
-            //     from: process.env.USER,
-            //     to: email,
-            //     subject: 'Welcome to _',
-            //     text: `Here is your joining otp(one time password): ${otp}`,
-            // });
+            await transport.sendMail({
+                from: process.env.USER,
+                to: email,
+                subject: 'Welcome to _',
+                text: `Here is your joining otp(one time password): ${otp}`,
+            });
 
             return newOtp.lastOtpSentAt;
         } catch (error) {
@@ -93,20 +134,20 @@ export class UserService {
                 throw new InternalServerErrorException("Can't create otp");
             }
 
-            // const transport = createTransport({
-            //     service: 'gmail',
-            //     auth: {
-            //         user: process.env.USER,
-            //         pass: process.env.PASS,
-            //     },
-            // });
+            const transport = createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.USER,
+                    pass: process.env.PASS,
+                },
+            });
 
-            // await transport.sendMail({
-            //     from: process.env.USER,
-            //     to: email,
-            //     subject: 'Welcome to _',
-            //     text: `Here is your joining otp(one time password): ${otp}`,
-            // });
+            await transport.sendMail({
+                from: process.env.USER,
+                to: email,
+                subject: 'Welcome to _',
+                text: `Here is your joining otp(one time password): ${otp}`,
+            });
 
             return { message: 'success', sendTime: newOtp.lastOtpSentAt };
         } catch (error) {
@@ -117,7 +158,7 @@ export class UserService {
         }
     }
 
-    async verifyOtp(userDto: SignDto, otp: number) {
+    async verifyOtp(userDto: SignUpDto, otp: number) {
         try {
             const storedOtp = await this.userRepository.findOtpByEmail(
                 userDto.email,
@@ -148,7 +189,12 @@ export class UserService {
                 { expiresIn: '7d' },
             );
 
-            return { message: 'success', accessToken, refreshToken, user: payload };
+            return {
+                message: 'success',
+                accessToken,
+                refreshToken,
+                user: payload,
+            };
         } catch (error) {
             console.log(error);
             throw new InternalServerErrorException(

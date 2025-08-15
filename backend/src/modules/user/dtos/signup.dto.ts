@@ -1,7 +1,7 @@
 import { IsString, IsEmail, IsNotEmpty, MinLength } from 'class-validator';
 import { TRoles } from 'src/common/interfaces/user/role';
 
-export class SignDto {
+export class SignUpDto {
     @IsNotEmpty()
     @IsString()
     username: string;
