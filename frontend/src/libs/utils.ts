@@ -1,3 +1,5 @@
+import { RoleType } from "@/types/auth/signup.type";
+
 export const getTokenFromLocalStorage = () => {
     const persistedAuth = localStorage.getItem("persist:root");
     if (persistedAuth) {
@@ -12,3 +14,6 @@ export const getTokenFromLocalStorage = () => {
     }
     return null
 };
+
+export const isValidUserType = (type: string | null): type is RoleType =>
+        type === "brand" || type === "creator";

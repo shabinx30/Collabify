@@ -18,6 +18,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { errorClass, regularClass } from "@/const/auth";
 import { sendOtp } from "@/services";
 import { addUser } from "@/redux/slices/auth.slice";
+import { isValidUserType } from "@/libs/utils";
 
 const SignUpForm = () => {
     const searchParams = useSearchParams();
@@ -26,11 +27,8 @@ const SignUpForm = () => {
     const dispatch = useDispatch<AppDispatch>();
     const { user, isLoading } = useSelector((state: RootState) => state.auth);
 
-    const isValidType = (type: string | null): type is RoleType =>
-        type === "brand" || type === "creator";
-
     const [role, setRole] = useState<RoleType>(
-        isValidType(typeParam) ? typeParam : "brand"
+        isValidUserType(typeParam) ? typeParam : "brand"
     );
 
     const {

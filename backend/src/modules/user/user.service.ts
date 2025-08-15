@@ -38,8 +38,10 @@ export class UserService {
                 throw new NotFoundException('User not found');
             }
 
-            if(exist.password !== userDto.password) {
-                throw new BadRequestException("Email or Password is not matching")
+            if (exist.password !== userDto.password) {
+                throw new BadRequestException(
+                    'Email or Password is not matching',
+                );
             }
 
             const payload = {
@@ -175,7 +177,10 @@ export class UserService {
                 return { message: 'not matching' };
             }
 
-            const newUser = await this.userRepository.createUser(userDto);
+            const newUser = await this.userRepository.createUser({
+                ...userDto,
+                isVerified: true,
+            });
 
             const payload = {
                 userId: newUser.id,

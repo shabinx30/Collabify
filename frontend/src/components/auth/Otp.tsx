@@ -1,18 +1,17 @@
-import { otpStatus, resendOtp } from "@/services";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { FiClock } from "react-icons/fi";
 import { AppDispatch, RootState } from "@/redux/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyUserOtp } from "@/redux/slices/auth.slice";
 import { IUser } from "@/types/auth/signup.type";
 import { SignupFormOutput } from "@/libs/validations/signupFormData";
+import useTimer from "@/hooks/auth/useTimer";
 
 const Otp = () => {
     const length = 4;
     const [otp, setOtp] = useState(Array(length).fill(""));
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
     const { user } = useSelector((state: RootState) => state.auth);
-    const [time, setTime] = useState<number>(60);
     const dispatch = useDispatch<AppDispatch>();
 
     const handleChange = (value: string, index: number) => {
@@ -64,71 +63,8 @@ const Otp = () => {
         );
     };
 
-    const interval = useRef<number | null>(null);
-
-    const startTimer = () => {
-        stopTimer();
-        interval.current = window.setInterval(() => {
-            setTime((p) => p - 1);
-        }, 1000);
-    };
-
-    const stopTimer = () => {
-        if (interval.current !== null) {
-            clearInterval(interval.current);
-        }
-    };
-
-    const handleResend = async () => {
-        if (user?.email) {
-            const data = await resendOtp({ email: user?.email });
-            if (data.message == "success") {
-                setTime(() => 60);
-                startTimer();
-            }
-        }
-    };
-
-    useEffect(() => {
-        if (user?.username) {
-            startTimer();
-        } else {
-            stopTimer();
-        }
-        return stopTimer;
-    }, [user]);
-
-    useEffect(() => {
-        if (time == 0 && interval.current !== null) {
-            clearInterval(interval.current);
-            interval.current = null;
-        }
-    }, [time]);
-
-    // time syncer
-    useEffect(() => {
-        if (user?.email) {
-            (async function () {
-                const data = await otpStatus({ email: user.email });
-                setTime(() => {
-                    if (data.exist === false) {
-                        return 0;
-                    }
-                    const timeLeft =
-                        (new Date(data.sendTime).getTime() -
-                            new Date().getTime()) /
-                            1000 +
-                        60;
-                    if (timeLeft <= 0) {
-                        return 0;
-                    }
-                    startTimer();
-                    return Math.round(timeLeft);
-                });
-            })();
-        }
-        return stopTimer;
-    }, []);
+    // timer manager
+    const { time, handleResend } = useTimer(user);
 
     return (
         <div className="section min-w-full flex flex-col gap-10 items-center justify-center">
