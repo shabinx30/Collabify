@@ -1,6 +1,7 @@
 import Benefits from "@/components/home/Benefits";
 import Featured from "@/components/home/Featured";
 import Hero from "@/components/home/Hero";
+import "../../components/home/home.css"
 
 const Home = () => {
     return (

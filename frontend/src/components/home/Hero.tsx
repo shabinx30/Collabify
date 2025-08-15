@@ -6,14 +6,19 @@ import Image from "next/image";
 const Hero = () => {
     return (
         <section className="w-full bg-white dark:bg-[#1b1b1b] flex flex-col items-center">
-            <h3 className="w-full text-3xl md:text-4xl lg:text-5xl font-semibold text-center">
-                Symplifiying Influencer Marketing For Everyone
-            </h3>
-            <p className="text-gray-800 dark:text-gray-300/75 mt-[1em] w-[75%] text-sm md:text-base lg:w-[60%] text-center leading-[1.2]">
-                Discover a smarter way to connect with content creators, launch
-                campaigns, and grow your all in one simple, seamless platform.
-            </p>
-            <div className="bg-[#fff4c9] dark:bg-[#000] w-full md:flex p-2 rounded-3xl mt-[4em] text-black dark:text-white">
+            <div className="overflow-hidden pb-1">
+                <h3 className="w-full text-3xl md:text-4xl lg:text-5xl font-semibold text-center slide-up">
+                    Symplifiying Influencer Marketing For Everyone
+                </h3>
+            </div>
+            <div className="flex justify-center overflow-hidden">
+                <p className="text-gray-800 dark:text-gray-300/75 mt-[1em] w-[75%] text-sm md:text-base lg:w-[60%] text-center leading-[1.2] slide-up-3">
+                    Discover a smarter way to connect with content creators,
+                    launch campaigns, and grow your all in one simple, seamless
+                    platform.
+                </p>
+            </div>
+            <div className="bg-[#fff4c9] dark:bg-[#000] w-full md:flex p-2 rounded-3xl mt-[4em] text-black dark:text-white slide-up-opacity">
                 <div className="flex-1/4 relative aspect-video">
                     <Image
                         className="saturate-[130%] rounded-2xl object-cover object-center"
