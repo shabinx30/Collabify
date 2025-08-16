@@ -91,12 +91,12 @@ const SignUpForm = () => {
                         {/* Sign up form */}
                         <form
                             onSubmit={handleSubmit(onSubmit)}
-                            className="space-y-4 md:space-y-6"
+                            className="space-y-3 md:space-y-4 pt-4 md:pt-4"
                         >
                             <div>
                                 <label
                                     htmlFor="username"
-                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    className="block mb-2 leading-1.5 text-sm font-medium text-gray-900 dark:text-white"
                                 >
                                     {errors.username?.message ? (
                                         <span className="text-red-500">
@@ -126,7 +126,7 @@ const SignUpForm = () => {
                             <div>
                                 <label
                                     htmlFor="email"
-                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    className="block mb-2 leading-1.5 text-sm font-medium text-gray-900 dark:text-white"
                                 >
                                     {errors.email?.message ? (
                                         <span className="text-red-500">
@@ -155,7 +155,7 @@ const SignUpForm = () => {
                                 <div className="flex-1">
                                     <label
                                         htmlFor="password"
-                                        className="w-full mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                        className="w-full leading-1.5 mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     >
                                         {errors.password?.message ? (
                                             <span className="text-red-500">
@@ -181,7 +181,7 @@ const SignUpForm = () => {
                                 <div className="flex-1">
                                     <label
                                         htmlFor="confirmPassword"
-                                        className="w-full mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                        className="w-full leading-1.5 mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                     >
                                         {errors.confirmPassword?.message ? (
                                             <span className="text-red-500">
@@ -209,7 +209,7 @@ const SignUpForm = () => {
                                 <button
                                     type="submit"
                                     disabled={isLoading}
-                                    className="w-full text-black bg-[#FFBF00] hover:bg-[#FFBF00] duration-200 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 cursor-pointer"
+                                    className="w-full text-black bg-amber-400 hover:bg-amber-500 duration-200 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 cursor-pointer"
                                 >
                                     Sign Up
                                 </button>
