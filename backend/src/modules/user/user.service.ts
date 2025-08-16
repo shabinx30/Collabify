@@ -232,4 +232,12 @@ export class UserService {
             );
         }
     }
+
+    async getUser(username: string) {
+        const user = await this.userRepository.findByName(username)
+        if(!user) {
+            throw new NotFoundException("User not found")
+        }
+        return user
+    }
 }

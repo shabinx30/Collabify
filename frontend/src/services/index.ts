@@ -2,6 +2,7 @@ import { SignupFormOutput } from "@/libs/validations/signupFormData";
 import { clientApi } from "./client.api";
 import { IEmail } from "@/types/auth/otp.type";
 import { TSignInForm } from "@/libs/validations/signinFromData";
+import axios from "axios";
 
 export const sendOtp = async (data: IEmail) => {
     try {
@@ -65,3 +66,13 @@ export const otpStatus = async (data: IEmail) => {
         throw error;
     }
 };
+
+export const findUser = async (userid: string) => {
+    try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user/${userid}`)
+        return response.data
+    } catch (error) {
+        console.log(error)
+        throw error
+    }
+}

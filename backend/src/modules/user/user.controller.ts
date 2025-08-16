@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
 import { UserService } from './user.service';
 import { Response } from 'express';
 
@@ -56,5 +56,10 @@ export class UserController {
     @Post('otp-status')
     async getOtpStatus(@Body('email') email: string) {
         return await this.userService.otpStatus(email);
+    }
+
+    @Get('user/:username')
+    async findUser(@Param('username') username: string) {
+        return await this.userService.getUser(username)
     }
 }
