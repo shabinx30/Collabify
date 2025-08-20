@@ -13,13 +13,13 @@ async function verifyJWT(token: string, secret: string) {
 
 export async function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
-    const token = request.cookies.get("refreshToken")?.value;
+    const token = request.cookies.get("accessToken")?.value;
 
     let isAuthenticated = false;
     if (token) {
         const payload = await verifyJWT(
             token,
-            process.env.REFRESH_TOKEN_SECRET!
+            process.env.ACCESS_TOKEN_SECRET!
         );
         isAuthenticated = !!payload;
     }

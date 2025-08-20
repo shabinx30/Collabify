@@ -66,7 +66,7 @@ export class UserService {
 
             return {
                 message: 'success',
-                token: accessToken,
+                accessToken,
                 refreshToken,
                 user: payload,
             };
