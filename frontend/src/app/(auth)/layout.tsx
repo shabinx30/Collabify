@@ -6,15 +6,12 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { AnimatePresence } from "framer-motion";
 import "../../components/auth/auth.css";
-import Guard from "@/components/Guard";
 
 const Root = ({ children }: { children: React.ReactNode }) => {
     return (
         <Provider store={store}>
             <PersistGate loading={false} persistor={persistor}>
-                <Guard path="auth">
-                    <Layout>{children}</Layout>
-                </Guard>
+                <Layout>{children}</Layout>
             </PersistGate>
         </Provider>
     );
