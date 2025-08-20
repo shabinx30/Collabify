@@ -25,7 +25,7 @@ export const verifyUserOtp = createAsyncThunk(
             const res = await verifyOtp(formData, otp);
             toast.custom((t) => <Success t={t} message="welcome" />);
 
-            const user = jwtDecode(res.token);
+            const user = jwtDecode(res.token) as IUser;
 
             return { ...res, user };
         } catch (error) {
@@ -44,7 +44,7 @@ export const signIn = createAsyncThunk(
             const res = await signInUser(formData);
             toast.custom((t) => <Success t={t} message="Sign in success" />);
 
-            const user = jwtDecode(res.token);
+            const user = jwtDecode(res.token) as IUser;
 
             return { ...res, user };
         } catch (error) {
