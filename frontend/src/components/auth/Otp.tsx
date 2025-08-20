@@ -6,6 +6,7 @@ import { verifyUserOtp } from "@/redux/slices/auth.slice";
 import { IUser } from "@/types/auth/signup.type";
 import { SignupFormOutput } from "@/libs/validations/signupFormData";
 import useTimer from "@/hooks/auth/useTimer";
+import { useRouter } from "next/navigation";
 
 const Otp = () => {
     const length = 4;
@@ -13,6 +14,7 @@ const Otp = () => {
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
     const { user } = useSelector((state: RootState) => state.auth);
     const dispatch = useDispatch<AppDispatch>();
+    const router = useRouter()
 
     const handleChange = (value: string, index: number) => {
         if (!/^\d*$/.test(value)) return;
@@ -59,6 +61,7 @@ const Otp = () => {
             verifyUserOtp({
                 formData: user as IUser & SignupFormOutput,
                 otp: Number(Enteredotp),
+                router
             })
         );
     };
