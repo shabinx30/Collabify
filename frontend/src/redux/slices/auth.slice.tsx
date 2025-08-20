@@ -6,6 +6,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { isAxiosError } from "axios";
 import toast from "react-hot-toast";
 import Success from "@/components/alert/Success";
+import { jwtDecode } from "jwt-decode";
 
 const initialState: IAuthState = {
     token: null,
@@ -22,8 +23,11 @@ export const verifyUserOtp = createAsyncThunk(
     ) => {
         try {
             const res = await verifyOtp(formData, otp);
-            toast.custom((t) => <Success t={t} message="welcome" />)
-            return res
+            toast.custom((t) => <Success t={t} message="welcome" />);
+
+            const user = jwtDecode(res.token);
+
+            return { ...res, user };
         } catch (error) {
             if (isAxiosError(error) && error.response) {
                 return rejectWithValue(error.response.data);
@@ -37,10 +41,12 @@ export const signIn = createAsyncThunk(
     "auth/sign-in",
     async (formData: TSignInForm, { rejectWithValue }) => {
         try {
-            const res = await signInUser(formData)
-            toast.custom((t) => <Success t={t} message="Sign in success" />)
+            const res = await signInUser(formData);
+            toast.custom((t) => <Success t={t} message="Sign in success" />);
 
-            return res
+            const user = jwtDecode(res.token);
+
+            return { ...res, user };
         } catch (error) {
             if (isAxiosError(error) && error.response) {
                 return rejectWithValue(error.response.data);
@@ -88,8 +94,8 @@ const auth = createSlice({
             })
             .addCase(signIn.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.payload as string
-            })
+                state.error = action.payload as string;
+            });
     },
 });
 

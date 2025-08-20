@@ -68,7 +68,6 @@ export class UserService {
                 message: 'success',
                 accessToken,
                 refreshToken,
-                user: payload,
             };
         } catch (error) {
             if (error instanceof HttpException) {
@@ -207,8 +206,7 @@ export class UserService {
             return {
                 message: 'success',
                 accessToken,
-                refreshToken,
-                user: payload,
+                refreshToken
             };
         } catch (error) {
             console.log(error);

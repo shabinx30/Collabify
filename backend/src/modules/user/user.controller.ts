@@ -32,7 +32,7 @@ export class UserController {
             path: '/',
         });
 
-        return {...response, token: accessToken};
+        return { ...response, token: accessToken };
     }
 
     @Post('verify-otp')
@@ -40,12 +40,12 @@ export class UserController {
         const { otp, ...userData } = body;
         const response = await this.userService.verifyOtp(userData, otp);
 
-        // setting cookie if it success
-        if (response.message !== 'success') {
-            return response.message;
-        }
+        const { accessToken, refreshToken, message } = response;
 
-        const { accessToken, refreshToken, user } = response;
+        // setting cookie if it success
+        if (message !== 'success') {
+            return message;
+        }
 
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
@@ -63,7 +63,7 @@ export class UserController {
             path: '/',
         });
 
-        return { token: accessToken, user };
+        return { message, token: accessToken };
     }
 
     @Post('resend-otp')
