@@ -4,6 +4,8 @@ import { signInUser, verifyOtp } from "@/services";
 import { IAuthState, IUser } from "@/types/auth/signup.type";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { isAxiosError } from "axios";
+import toast from "react-hot-toast";
+import Success from "@/components/alert/Success";
 
 const initialState: IAuthState = {
     token: null,
@@ -19,7 +21,9 @@ export const verifyUserOtp = createAsyncThunk(
         { rejectWithValue }
     ) => {
         try {
-            return await verifyOtp(formData, otp);
+            const res = await verifyOtp(formData, otp);
+            toast.custom((t) => <Success t={t} message="welcome" />)
+            return res
         } catch (error) {
             if (isAxiosError(error) && error.response) {
                 return rejectWithValue(error.response.data);
@@ -33,7 +37,10 @@ export const signIn = createAsyncThunk(
     "auth/sign-in",
     async (formData: TSignInForm, { rejectWithValue }) => {
         try {
-            return await signInUser(formData)
+            const res = await signInUser(formData)
+            toast.custom((t) => <Success t={t} message="Sign in success" />)
+
+            return res
         } catch (error) {
             if (isAxiosError(error) && error.response) {
                 return rejectWithValue(error.response.data);

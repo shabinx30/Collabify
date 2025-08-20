@@ -55,4 +55,8 @@ export class UserRepository {
     async findOtpByEmail(email: string) {
         return await this.otpSchema.findOne({ email });
     }
+
+    async findByName(username: string) {
+        return await this.userSchema.findOne({ username }, { password: 0 });
+    }
 }

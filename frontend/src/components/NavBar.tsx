@@ -11,13 +11,12 @@ const NavBar = () => {
     return (
         <nav
             className={
-                "bg-white dark:bg-[#1b1b1b] " +
-                (path && "z-[999] fixed w-screen")
+                "bg-white dark:bg-[#1b1b1b]"
             }
         >
             <ul
                 className={
-                    "flex py-2 justify-between pl-4 " + (path ? "pr-8" : "pr-4")
+                    "flex py-2 justify-between px-4"
                 }
             >
                 <li className="flex-1 font-bold my-1 text-lg md:text-2xl">

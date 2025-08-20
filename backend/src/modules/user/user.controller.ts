@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
 import { UserService } from './user.service';
 import { Response } from 'express';
 
@@ -12,18 +12,27 @@ export class UserController {
     }
 
     @Post('signin')
-    async signIn(@Body() data, @Res({passthrough: true}) res: Response) {
-        const { refreshToken, ...response } = await this.userService.signIn(data)
-        
-        // setting up cookie
+    async signIn(@Body() data, @Res({ passthrough: true }) res: Response) {
+        const { refreshToken, accessToken, ...response } =
+            await this.userService.signIn(data);
+
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
             sameSite: 'strict',
             secure: true,
-            maxAge: 7 * 24 * 60 * 60 * 1000,
+            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            path: '/',
         });
 
-        return response
+        res.cookie('accessToken', accessToken, {
+            httpOnly: true,
+            sameSite: 'strict',
+            secure: true,
+            maxAge: 15 * 60 * 1000, // 15 min
+            path: '/',
+        });
+
+        return {...response, token: accessToken};
     }
 
     @Post('verify-otp')
@@ -42,7 +51,16 @@ export class UserController {
             httpOnly: true,
             sameSite: 'strict',
             secure: true,
-            maxAge: 7 * 24 * 60 * 60 * 1000,
+            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            path: '/',
+        });
+
+        res.cookie('accessToken', accessToken, {
+            httpOnly: true,
+            sameSite: 'strict',
+            secure: true,
+            maxAge: 15 * 60 * 1000, // 15 min
+            path: '/',
         });
 
         return { token: accessToken, user };
@@ -56,5 +74,10 @@ export class UserController {
     @Post('otp-status')
     async getOtpStatus(@Body('email') email: string) {
         return await this.userService.otpStatus(email);
+    }
+
+    @Get('user/:username')
+    async findUser(@Param('username') username: string) {
+        return await this.userService.getUser(username);
     }
 }
