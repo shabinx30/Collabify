@@ -1,12 +1,9 @@
 import { findUser } from "@/services";
+import { IProfile } from "@/types/profile/profile.type";
 import { notFound } from "next/navigation";
 import React from "react";
 
-export default async function Profile({
-    params,
-}: {
-    params: Promise<{ userid: string }>;
-}) {
+export default async function Profile({ params }: IProfile) {
     const userid = (await params).userid;
     const data = await findUser(userid);
 
