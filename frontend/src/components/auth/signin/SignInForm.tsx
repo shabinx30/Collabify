@@ -10,10 +10,12 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import LoginWith from "../LoginWith";
+import { useRouter } from "next/navigation";
 
 const SignInForm = () => {
     const { isLoading } = useSelector((state: RootState) => state.auth);
     const dispatch = useDispatch<AppDispatch>();
+    const router = useRouter();
 
     const {
         register,
@@ -22,7 +24,7 @@ const SignInForm = () => {
     } = useForm<TSignInForm>({ resolver: zodResolver(signInSchema) });
 
     const onSubmit = (formData: TSignInForm) => {
-        dispatch(signIn(formData));
+        const resultAction = dispatch(signIn({ formData, router }));
     };
 
     return (
