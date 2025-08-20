@@ -1,10 +1,13 @@
 import React from "react";
+import toast from "react-hot-toast";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
 
 const LoginWith = () => {
     return (
         <section className="flex gap-2">
-            <div className="flex flex-1 justify-center p-3 bg-[#3b3b3b] rounded-xl">
+            <div
+                className="flex flex-1 justify-center p-3 bg-[#3b3b3b] rounded-xl"
+            >
                 <FaGoogle />
             </div>
             <div className="flex flex-1 justify-center p-3 bg-[#3b3b3b] rounded-xl">
