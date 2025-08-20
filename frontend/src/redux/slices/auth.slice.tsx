@@ -7,6 +7,7 @@ import { isAxiosError } from "axios";
 import toast from "react-hot-toast";
 import Success from "@/components/alert/Success";
 import { jwtDecode } from "jwt-decode";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 const initialState: IAuthState = {
     token: null,
@@ -18,7 +19,15 @@ const initialState: IAuthState = {
 export const verifyUserOtp = createAsyncThunk(
     "auth/verify-otp",
     async (
-        { formData, otp }: { formData: IUser & SignupFormOutput; otp: number },
+        {
+            formData,
+            otp,
+            router,
+        }: {
+            formData: IUser & SignupFormOutput;
+            otp: number;
+            router: AppRouterInstance;
+        },
         { rejectWithValue }
     ) => {
         try {
@@ -26,6 +35,9 @@ export const verifyUserOtp = createAsyncThunk(
             toast.custom((t) => <Success t={t} message="welcome" />);
 
             const user = jwtDecode(res.token) as IUser;
+            const { username } = user;
+
+            router.push(`/${username}`);
 
             return { ...res, user };
         } catch (error) {
@@ -39,12 +51,21 @@ export const verifyUserOtp = createAsyncThunk(
 
 export const signIn = createAsyncThunk(
     "auth/sign-in",
-    async (formData: TSignInForm, { rejectWithValue }) => {
+    async (
+        {
+            formData,
+            router,
+        }: { formData: TSignInForm; router: AppRouterInstance },
+        { rejectWithValue }
+    ) => {
         try {
             const res = await signInUser(formData);
             toast.custom((t) => <Success t={t} message="Sign in success" />);
 
             const user = jwtDecode(res.token) as IUser;
+            const { username } = user;
+
+            router.push(`/${username}`);
 
             return { ...res, user };
         } catch (error) {
