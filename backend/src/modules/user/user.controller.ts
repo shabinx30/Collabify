@@ -82,5 +82,7 @@ export class UserController {
     }
 
     @Post("sign-in-google")
-    async signInWithGoogle(@Body('token'))
+    async signInWithGoogle(@Body('token')token: string) {
+        return await this.userService.signInWithGoogle(token)
+    }
 }
