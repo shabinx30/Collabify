@@ -8,7 +8,7 @@ const LoginWith = () => {
     const login = useGoogleLogin({
         onSuccess: async ({ access_token }) => {
             console.log(access_token);
-            await signInWithGoogle(access_token);
+            await signInWithGoogle({ token: access_token });
         },
         onError: () => console.log("login has been failed"),
     });

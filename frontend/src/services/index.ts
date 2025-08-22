@@ -79,10 +79,10 @@ export const findUser = async (userid: string) => {
     }
 };
 
-export const signInWithGoogle = async (token: string) => {
+export const signInWithGoogle = async (token: { token: string }) => {
     try {
         const response = await axios.post("/sign-in-google", token);
-        return response.data
+        return response.data;
     } catch (error) {
         console.log(error);
         throw error;

@@ -80,4 +80,7 @@ export class UserController {
     async findUser(@Param('username') username: string) {
         return await this.userService.getUser(username);
     }
+
+    @Post("sign-in-google")
+    async signInWithGoogle(@Body('token'))
 }
