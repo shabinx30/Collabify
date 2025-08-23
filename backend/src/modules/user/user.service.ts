@@ -276,7 +276,7 @@ export class UserService {
                 userId: exist ? exist.id : newUser?.id,
                 username: exist ? exist.username : name,
                 email,
-                role,
+                role: exist ? exist.role : role
             });
 
             const refreshToken = await this.refreshJwt.signAsync({

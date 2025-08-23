@@ -2,13 +2,19 @@ import React from "react";
 import { FaFacebookF } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa6";
 import { useGoogleLogin } from "@react-oauth/google";
-import { signInWithGoogle } from "@/services";
+import { RoleType } from "@/types/auth/signup.type";
+import { useDispatch } from "react-redux";
+import { signInWith } from "@/redux/slices/auth.slice";
+import { AppDispatch } from "@/redux/store/store";
+import { useRouter } from "next/navigation";
 
-const LoginWith = () => {
+const LoginWith = ({ role }: { role: RoleType }) => {
+    const dispatch = useDispatch<AppDispatch>();
+    const router = useRouter()
+
     const login = useGoogleLogin({
         onSuccess: async ({ access_token }) => {
-            console.log(access_token);
-            await signInWithGoogle({ token: access_token });
+            dispatch(signInWith({ token: access_token, role, router }));
         },
         onError: () => console.log("login has been failed"),
     });
