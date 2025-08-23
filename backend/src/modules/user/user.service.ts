@@ -3,6 +3,7 @@ import {
     HttpException,
     Inject,
     Injectable,
+    UnauthorizedException,
 } from '@nestjs/common';
 import {
     InternalServerErrorException,
@@ -15,14 +16,21 @@ import { SignInDto } from './dtos/signin.dto';
 import generateOtp from 'src/common/utils/otp.util';
 import { hashPassword, compare } from 'src/common/utils/hash.util';
 import { JwtService } from '@nestjs/jwt';
+import { OAuth2Client } from 'google-auth-library';
+import { TRoles } from 'src/common/interfaces/user/role';
+import { UserDocument } from './schemas/user.schema';
 
 @Injectable()
 export class UserService {
+    private client: OAuth2Client;
+
     constructor(
         private userRepository: UserRepository,
         @Inject('ACCESS_JWT') private readonly accessJwt: JwtService,
         @Inject('REFRESH_JWT') private readonly refreshJwt: JwtService,
-    ) {}
+    ) {
+        this.client = new OAuth2Client();
+    }
 
     async createUser(email: string): Promise<object> {
         const existingUser = await this.userRepository.findByEmail(email);
@@ -136,7 +144,7 @@ export class UserService {
         ) {
             throw new BadRequestException('Please wait before resending OTP');
         }
-        const otp = await generateOtp();
+        const otp = generateOtp();
         const newOtp = await this.userRepository.createOrUpdateOtp(email, otp);
 
         if (!newOtp) {
@@ -240,5 +248,51 @@ export class UserService {
         return user;
     }
 
-    async signInWithGoogle(token: string) {}
+    async signInWithGoogle(idToken: string, role: TRoles) {
+        const ticket = await this.client.verifyIdToken({
+            idToken,
+            audience: process.env.GOOGLE_CLIENT_ID,
+        });
+        const payload = ticket.getPayload();
+        if (!payload) throw new UnauthorizedException('Invalid token');
+        try {
+            const { name, email, picture } = payload;
+
+            const exist = await this.userRepository.findByEmail(
+                email as string,
+            );
+            let newUser: UserDocument | null = null;
+
+            if (!exist) {
+                newUser = await this.userRepository.createUser({
+                    username: name,
+                    email,
+                    profile: picture,
+                    role,
+                });
+            }
+
+            const accessToken = await this.accessJwt.signAsync({
+                userId: exist ? exist.id : newUser?.id,
+                username: exist ? exist.username : name,
+                email,
+                role,
+            });
+
+            const refreshToken = await this.refreshJwt.signAsync({
+                userId: exist ? exist.id : newUser?.id,
+            });
+
+            return {
+                message: 'success',
+                accessToken,
+                refreshToken,
+            };
+        } catch (error) {
+            console.log(error);
+            throw new InternalServerErrorException(
+                'An unexpected error occurred while logining with google',
+            );
+        }
+    }
 }
