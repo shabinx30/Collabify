@@ -6,6 +6,16 @@ import { usePathname } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store/store";
 import Image from "next/image";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuShortcut,
+    DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 const NavBar = () => {
     const pathnames = usePathname().split("/");
@@ -29,18 +39,43 @@ const NavBar = () => {
                 </li>
                 <li className="flex-1/3 lg:flex-1 flex text-sm items-center lg:text-base justify-end gap-6">
                     {user ? (
-                        <Link href={user.username}>
-                            <div className="flex gap-4 items-center hover:bg-[#3b3b3b] duration-200 pl-4 rounded-full cursor-default">
-                                <h3>{user.username}</h3>
-                                <Image
-                                    className="w-9 h-9 rounded-full"
-                                    src={user.profile}
-                                    alt="profile"
-                                    width={100}
-                                    height={100}
-                                />
-                            </div>
-                        </Link>
+                        <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                                <div className="flex gap-4 items-center hover:bg-gray-200 dark:hover:bg-[#3b3b3b] duration-200 pl-4 rounded-full cursor-default">
+                                    <h3>{user.username}</h3>
+                                    <Image
+                                        className="w-9 h-9 rounded-full"
+                                        src={user.profile}
+                                        alt="profile"
+                                        width={100}
+                                        height={100}
+                                    />
+                                </div>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent className="w-56" align="center">
+                                <DropdownMenuLabel>
+                                    My Account
+                                </DropdownMenuLabel>
+                                <DropdownMenuGroup>
+                                    <DropdownMenuItem>
+                                        Profile
+                                        <DropdownMenuShortcut>
+                                            ⇧⌘P
+                                        </DropdownMenuShortcut>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem>
+                                        Settings
+                                        <DropdownMenuShortcut>
+                                            ⌘S
+                                        </DropdownMenuShortcut>
+                                    </DropdownMenuItem>
+                                </DropdownMenuGroup>
+                                <DropdownMenuSeparator />
+                                <DropdownMenuItem>
+                                    <span className="text-red-500">Log out</span>
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
                     ) : !path ? (
                         <>
                             <Link href="/signin">Login</Link>{" "}
