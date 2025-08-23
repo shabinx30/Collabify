@@ -3,22 +3,18 @@
 import { FiSearch } from "react-icons/fi";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store/store";
+import Image from "next/image";
 
 const NavBar = () => {
     const pathnames = usePathname().split("/");
-    const path = pathnames[pathnames.length - 1];
+    const path = pathnames[0];
+    const { user } = useSelector((state: RootState) => state.auth);
 
     return (
-        <nav
-            className={
-                "bg-white dark:bg-[#1b1b1b]"
-            }
-        >
-            <ul
-                className={
-                    "flex py-2 justify-between px-4"
-                }
-            >
+        <nav className={"bg-white dark:bg-[#1b1b1b]"}>
+            <ul className={"flex py-2 justify-between items-center px-4"}>
                 <li className="flex-1 font-bold my-1 text-lg md:text-2xl">
                     {" "}
                     <Link href="/">Logo</Link>{" "}
@@ -27,12 +23,25 @@ const NavBar = () => {
                     <FiSearch />
                     <input
                         type="text"
-                        className="w-full h-full outline-none"
+                        className="w-full h-10 outline-none"
                         placeholder="Search"
                     />
                 </li>
-                <li className="flex-1/3 lg:flex-1 flex text-sm items-center lg:text-base justify-end gap-6 my-1">
-                    {!path ? (
+                <li className="flex-1/3 lg:flex-1 flex text-sm items-center lg:text-base justify-end gap-6">
+                    {user ? (
+                        <Link href={user.username}>
+                            <div className="flex gap-4 items-center hover:bg-[#3b3b3b] duration-200 pl-4 rounded-full cursor-default">
+                                <h3>{user.username}</h3>
+                                <Image
+                                    className="w-9 h-9 rounded-full"
+                                    src={user.profile}
+                                    alt="profile"
+                                    width={100}
+                                    height={100}
+                                />
+                            </div>
+                        </Link>
+                    ) : !path ? (
                         <>
                             <Link href="/signin">Login</Link>{" "}
                             <Link href="/signup?type=brand">
