@@ -8,7 +8,7 @@ import { signInWith } from "@/redux/slices/auth.slice";
 import { AppDispatch } from "@/redux/store/store";
 import { useRouter } from "next/navigation";
 
-const LoginWith = ({ role }: { role: RoleType }) => {
+const LoginWith = ({ role }: { role?: RoleType }) => {
     const dispatch = useDispatch<AppDispatch>();
     const router = useRouter()
 

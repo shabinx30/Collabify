@@ -80,7 +80,7 @@ export const findUser = async (userid: string) => {
     }
 };
 
-export const signInWithGoogle = async (data: { token: string, role: RoleType }) => {
+export const signInWithGoogle = async (data: { token: string, role?: RoleType }) => {
     try {
         const response = await axios.post("/sign-in-google", data);
         return response.data;

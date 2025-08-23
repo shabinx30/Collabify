@@ -84,7 +84,7 @@ export const signInWith = createAsyncThunk(
             token,
             role,
             router,
-        }: { token: string; role: RoleType; router: AppRouterInstance },
+        }: { token: string; role?: RoleType; router: AppRouterInstance },
         { rejectWithValue }
     ) => {
         try {
