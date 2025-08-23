@@ -69,10 +69,22 @@ export const otpStatus = async (data: IEmail) => {
 
 export const findUser = async (userid: string) => {
     try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user/${userid}`)
-        return response.data
+        const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_API_URL}/user/${userid}`
+        );
+        return response.data;
     } catch (error) {
-        console.log(error)
-        throw error
+        console.log(error);
+        throw error;
     }
-}
+};
+
+export const signInWithGoogle = async (token: { token: string }) => {
+    try {
+        const response = await axios.post("/sign-in-google", token);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+};

@@ -4,6 +4,7 @@ import "./globals.css";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -30,10 +31,12 @@ export default function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                <NavBar />
-                <Toaster position="top-center" reverseOrder={false} />
-                {children}
-                <Footer />
+                <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string}>
+                    <NavBar />
+                    <Toaster position="top-center" reverseOrder={false} />
+                    {children}
+                    <Footer />
+                </GoogleOAuthProvider>
             </body>
         </html>
     );

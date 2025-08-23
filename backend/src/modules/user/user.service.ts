@@ -1,21 +1,30 @@
-import { BadRequestException, HttpException, Injectable } from '@nestjs/common';
+import {
+    BadRequestException,
+    HttpException,
+    Inject,
+    Injectable,
+} from '@nestjs/common';
 import {
     InternalServerErrorException,
     NotFoundException,
 } from '@nestjs/common';
 import { UserRepository } from './user.repository.impl';
 import { SignUpDto } from './dtos/signup.dto';
-import { sign } from 'jsonwebtoken';
 import { createTransport } from 'nodemailer';
 import { SignInDto } from './dtos/signin.dto';
 import generateOtp from 'src/common/utils/otp.util';
 import { hashPassword, compare } from 'src/common/utils/hash.util';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserService {
-    constructor(private userRepository: UserRepository) {}
+    constructor(
+        private userRepository: UserRepository,
+        @Inject('ACCESS_JWT') private readonly accessJwt: JwtService,
+        @Inject('REFRESH_JWT') private readonly refreshJwt: JwtService,
+    ) {}
 
-    async createUser(email): Promise<object> {
+    async createUser(email: string): Promise<object> {
         const existingUser = await this.userRepository.findByEmail(email);
 
         if (existingUser?.isVerified) {
@@ -54,15 +63,11 @@ export class UserService {
                 role: exist.role,
             };
 
-            const accessToken = sign(payload, process.env.ACCESS_TOKEN_SECRET, {
-                expiresIn: '15m',
-            });
+            const accessToken = await this.accessJwt.signAsync(payload);
 
-            const refreshToken = sign(
-                { id: exist?.id },
-                process.env.REFRESH_TOKEN_SECRET,
-                { expiresIn: '7d' },
-            );
+            const refreshToken = await this.refreshJwt.signAsync({
+                id: exist.id,
+            });
 
             return {
                 message: 'success',
@@ -193,20 +198,16 @@ export class UserService {
                 role: newUser.role,
             };
 
-            const accessToken = sign(payload, process.env.ACCESS_TOKEN_SECRET, {
-                expiresIn: '15m',
-            });
+            const accessToken = await this.accessJwt.signAsync(payload);
 
-            const refreshToken = sign(
-                { id: newUser?.id },
-                process.env.REFRESH_TOKEN_SECRET,
-                { expiresIn: '7d' },
-            );
+            const refreshToken = await this.refreshJwt.signAsync({
+                id: newUser.id,
+            });
 
             return {
                 message: 'success',
                 accessToken,
-                refreshToken
+                refreshToken,
             };
         } catch (error) {
             console.log(error);
@@ -232,10 +233,12 @@ export class UserService {
     }
 
     async getUser(username: string) {
-        const user = await this.userRepository.findByName(username)
-        if(!user) {
-            throw new NotFoundException("User not found")
+        const user = await this.userRepository.findByName(username);
+        if (!user) {
+            throw new NotFoundException('User not found');
         }
-        return user
+        return user;
     }
+
+    async signInWithGoogle(token: string) {}
 }
