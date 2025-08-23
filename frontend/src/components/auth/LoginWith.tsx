@@ -1,33 +1,47 @@
 import React from "react";
 import { FaFacebookF } from "react-icons/fa";
-import { FaGoogle } from "react-icons/fa6";
-import { useGoogleLogin } from "@react-oauth/google";
-import { RoleType } from "@/types/auth/signup.type";
+import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
+import { IDecode, RoleType } from "@/types/auth/signup.type";
 import { useDispatch } from "react-redux";
 import { signInWith } from "@/redux/slices/auth.slice";
 import { AppDispatch } from "@/redux/store/store";
 import { useRouter } from "next/navigation";
+import { jwtDecode } from "jwt-decode";
+
 
 const LoginWith = ({ role }: { role?: RoleType }) => {
     const dispatch = useDispatch<AppDispatch>();
-    const router = useRouter()
+    const router = useRouter();
 
-    const login = useGoogleLogin({
-        onSuccess: async ({ access_token }) => {
-            dispatch(signInWith({ token: access_token, role, router }));
-        },
-        onError: () => console.log("login has been failed"),
-    });
+    const handleLogin = (credentialResponse: CredentialResponse) => {
+        if(credentialResponse && credentialResponse.credential) {
+            const decode = jwtDecode(credentialResponse.credential) as IDecode
+            const userData = {
+                given_name: decode.given_name,
+                email: decode.email,
+                picture: decode.picture
+            }
+            dispatch(signInWith({userData, role, router}))
+        }
+    }
 
     return (
         <section className="flex gap-2">
-            <div
-                onClick={() => login()}
-                className="flex flex-1 justify-center p-3 bg-[#3b3b3b] rounded-xl cursor-pointer"
-            >
-                <FaGoogle />
+            <div className="rounded-full flex flex-1 justify-center">
+                <GoogleLogin
+                    shape="pill"
+                    theme={
+                        window.matchMedia &&
+                        window.matchMedia("(prefers-color-scheme: dark)")
+                            .matches
+                            ? "filled_black"
+                            : "outline"
+                    }
+                    onSuccess={handleLogin}
+                    onError={() => console.log("failed")}
+                />
             </div>
-            <div className="flex flex-1 justify-center p-3 bg-[#3b3b3b] rounded-xl cursor-pointer">
+            <div className="flex flex-1 justify-center items-center min-h-full bg-gray-200 dark:bg-[#3b3b3b] rounded-full cursor-pointer">
                 <FaFacebookF />
             </div>
         </section>

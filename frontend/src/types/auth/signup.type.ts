@@ -20,3 +20,8 @@ export interface IAuthState {
     isLoading: boolean;
 }
 
+export interface IDecode {
+    given_name: string;
+    email: string;
+    picture: string;
+}

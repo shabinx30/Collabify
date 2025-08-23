@@ -1,7 +1,7 @@
 import { TSignInForm } from "@/libs/validations/signinFromData";
 import { SignupFormOutput } from "@/libs/validations/signupFormData";
 import { signInUser, signInWithGoogle, verifyOtp } from "@/services";
-import { IAuthState, IUser, RoleType } from "@/types/auth/signup.type";
+import { IAuthState, IDecode, IUser, RoleType } from "@/types/auth/signup.type";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { isAxiosError } from "axios";
 import toast from "react-hot-toast";
@@ -81,14 +81,14 @@ export const signInWith = createAsyncThunk(
     "auth/sign-in-google",
     async (
         {
-            token,
+            userData,
             role,
             router,
-        }: { token: string; role?: RoleType; router: AppRouterInstance },
+        }: { userData: IDecode; role?: RoleType; router: AppRouterInstance },
         { rejectWithValue }
     ) => {
         try {
-            const res = await signInWithGoogle({ token, role });
+            const res = await signInWithGoogle({ userData, role });
 
             toast.custom((t) => <Success t={t} message="Sign in success" />);
 

@@ -3,7 +3,7 @@ import { clientApi } from "./client.api";
 import { IEmail } from "@/types/auth/otp.type";
 import { TSignInForm } from "@/libs/validations/signinFromData";
 import axios from "axios";
-import { RoleType } from "@/types/auth/signup.type";
+import { IDecode, RoleType } from "@/types/auth/signup.type";
 
 export const sendOtp = async (data: IEmail) => {
     try {
@@ -80,9 +80,14 @@ export const findUser = async (userid: string) => {
     }
 };
 
-export const signInWithGoogle = async (data: { token: string, role?: RoleType }) => {
+export const signInWithGoogle = async (data: {
+    userData: IDecode;
+    role?: RoleType;
+}) => {
     try {
-        const response = await axios.post("/sign-in-google", data);
+        console.log("data from server=ce", data);
+        const response = await clientApi.post("/sign-in-google", data);
+        console.log("from services", response);
         return response.data;
     } catch (error) {
         console.log(error);
