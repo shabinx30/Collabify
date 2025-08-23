@@ -1,7 +1,7 @@
 "use client";
 
 import { errorClass, regularClass } from "@/const/auth";
-import { signInSchema, TSignInForm } from "@/libs/validations/signinFromData";
+import { signInSchema, TSignInForm } from "@/lib/validations/signinFromData";
 import { signIn } from "@/redux/slices/auth.slice";
 import { AppDispatch, RootState } from "@/redux/store/store";
 import { zodResolver } from "@hookform/resolvers/zod";

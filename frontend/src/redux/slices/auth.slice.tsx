@@ -1,5 +1,5 @@
-import { TSignInForm } from "@/libs/validations/signinFromData";
-import { SignupFormOutput } from "@/libs/validations/signupFormData";
+import { TSignInForm } from "@/lib/validations/signinFromData";
+import { SignupFormOutput } from "@/lib/validations/signupFormData";
 import { signInUser, signInWithGoogle, verifyOtp } from "@/services";
 import { IAuthState, IDecode, IUser, RoleType } from "@/types/auth/signup.type";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";

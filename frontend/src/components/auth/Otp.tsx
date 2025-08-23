@@ -4,7 +4,7 @@ import { AppDispatch, RootState } from "@/redux/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { verifyUserOtp } from "@/redux/slices/auth.slice";
 import { IUser } from "@/types/auth/signup.type";
-import { SignupFormOutput } from "@/libs/validations/signupFormData";
+import { SignupFormOutput } from "@/lib/validations/signupFormData";
 import useTimer from "@/hooks/auth/useTimer";
 import { useRouter } from "next/navigation";
 
