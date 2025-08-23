@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
 import { UserService } from './user.service';
 import { Response } from 'express';
+import { TRoles } from 'src/common/interfaces/user/role';
 
 @Controller()
 export class UserController {
@@ -81,8 +82,31 @@ export class UserController {
         return await this.userService.getUser(username);
     }
 
-    @Post("sign-in-google")
-    async signInWithGoogle(@Body('token')token: string) {
-        return await this.userService.signInWithGoogle(token)
+    @Post('sign-in-google')
+    async signInWithGoogle(
+        @Body('token') token: string,
+        @Body('role') role: TRoles,
+        @Res() res: Response
+    ) {
+        const { refreshToken, accessToken, message } =
+            await this.userService.signInWithGoogle(token, role);
+
+        res.cookie("refreshToken", refreshToken, {
+            httpOnly: true,
+            sameSite: "strict",
+            secure: true,
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            path: '/'
+        })
+
+        res.cookie("accessToken", accessToken, {
+            httpOnly: true,
+            sameSite: "strict",
+            secure: true,
+            maxAge: 15 * 60 * 1000,
+            path: '/'
+        })
+
+        return { accessToken, message };
     }
 }
