@@ -22,6 +22,8 @@ const NavBar = () => {
     const path = pathnames[0];
     const { user } = useSelector((state: RootState) => state.auth);
 
+    const handleLogout = () => {};
+
     return (
         <nav className={"bg-white dark:bg-[#1b1b1b]"}>
             <ul className={"flex py-2 justify-between items-center px-4"}>
@@ -52,17 +54,22 @@ const NavBar = () => {
                                     />
                                 </div>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent className="w-56" align="center">
+                            <DropdownMenuContent
+                                className="w-56"
+                                align="center"
+                            >
                                 <DropdownMenuLabel>
                                     My Account
                                 </DropdownMenuLabel>
                                 <DropdownMenuGroup>
-                                    <DropdownMenuItem>
-                                        Profile
-                                        <DropdownMenuShortcut>
-                                            ⇧⌘P
-                                        </DropdownMenuShortcut>
-                                    </DropdownMenuItem>
+                                    <Link href={user.username}>
+                                        <DropdownMenuItem>
+                                            Profile
+                                            <DropdownMenuShortcut>
+                                                ⇧⌘P
+                                            </DropdownMenuShortcut>
+                                        </DropdownMenuItem>
+                                    </Link>
                                     <DropdownMenuItem>
                                         Settings
                                         <DropdownMenuShortcut>
@@ -71,8 +78,10 @@ const NavBar = () => {
                                     </DropdownMenuItem>
                                 </DropdownMenuGroup>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem>
-                                    <span className="text-red-500">Log out</span>
+                                <DropdownMenuItem onClick={handleLogout}>
+                                    <span className="text-red-500">
+                                        Log out
+                                    </span>
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
