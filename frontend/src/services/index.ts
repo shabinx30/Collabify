@@ -1,7 +1,7 @@
-import { SignupFormOutput } from "@/libs/validations/signupFormData";
+import { SignupFormOutput } from "@/lib/validations/signupFormData";
 import { clientApi } from "./client.api";
 import { IEmail } from "@/types/auth/otp.type";
-import { TSignInForm } from "@/libs/validations/signinFromData";
+import { TSignInForm } from "@/lib/validations/signinFromData";
 import axios from "axios";
 import { IDecode, RoleType } from "@/types/auth/signup.type";
 

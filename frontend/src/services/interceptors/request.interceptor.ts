@@ -1,4 +1,4 @@
-import { getTokenFromLocalStorage } from "@/libs/utils";
+import { getTokenFromLocalStorage } from "@/lib/utils";
 import { InternalAxiosRequestConfig } from "axios";
 
 const requestInterceptor = (config: InternalAxiosRequestConfig) => {

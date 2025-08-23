@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import {
     SignupFormInput,
     signupSchema,
-} from "@/libs/validations/signupFormData";
+} from "@/lib/validations/signupFormData";
 import UserTypeSelector from "./RoleSelector";
 import { useSearchParams } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,8 +18,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { errorClass, regularClass } from "@/const/auth";
 import { sendOtp } from "@/services";
 import { addUser } from "@/redux/slices/auth.slice";
-import { isValidUserType } from "@/libs/utils";
 import LoginWith from "../LoginWith";
+import { isValidUserType } from "@/lib/utils";
 
 const SignUpForm = () => {
     const searchParams = useSearchParams();
