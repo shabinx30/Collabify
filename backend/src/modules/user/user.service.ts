@@ -3,7 +3,6 @@ import {
     HttpException,
     Inject,
     Injectable,
-    UnauthorizedException,
 } from '@nestjs/common';
 import {
     InternalServerErrorException,
@@ -19,6 +18,7 @@ import { JwtService } from '@nestjs/jwt';
 import { OAuth2Client } from 'google-auth-library';
 import { TRoles } from 'src/common/interfaces/user/role';
 import { UserDocument } from './schemas/user.schema';
+import { IGuser } from 'src/common/interfaces/user/user';
 
 @Injectable()
 export class UserService {
@@ -74,7 +74,7 @@ export class UserService {
             const accessToken = await this.accessJwt.signAsync(payload);
 
             const refreshToken = await this.refreshJwt.signAsync({
-                id: exist.id,
+                userId: exist.id,
             });
 
             return {
@@ -209,7 +209,7 @@ export class UserService {
             const accessToken = await this.accessJwt.signAsync(payload);
 
             const refreshToken = await this.refreshJwt.signAsync({
-                id: newUser.id,
+                userId: newUser.id,
             });
 
             return {
@@ -248,15 +248,9 @@ export class UserService {
         return user;
     }
 
-    async signInWithGoogle(idToken: string, role: TRoles) {
-        const ticket = await this.client.verifyIdToken({
-            idToken,
-            audience: process.env.GOOGLE_CLIENT_ID,
-        });
-        const payload = ticket.getPayload();
-        if (!payload) throw new UnauthorizedException('Invalid token');
+    async signInWithGoogle(userData: IGuser, role: TRoles) {
         try {
-            const { name, email, picture } = payload;
+            const { given_name, email, picture } = userData;
 
             const exist = await this.userRepository.findByEmail(
                 email as string,
@@ -265,7 +259,7 @@ export class UserService {
 
             if (!exist) {
                 newUser = await this.userRepository.createUser({
-                    username: name,
+                    username: given_name,
                     email,
                     profile: picture,
                     role,
@@ -274,9 +268,10 @@ export class UserService {
 
             const accessToken = await this.accessJwt.signAsync({
                 userId: exist ? exist.id : newUser?.id,
-                username: exist ? exist.username : name,
+                username: exist ? exist.username : given_name,
+                profile: exist ? exist.profile : picture,
                 email,
-                role,
+                role: exist ? exist.role : role,
             });
 
             const refreshToken = await this.refreshJwt.signAsync({

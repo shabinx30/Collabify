@@ -14,4 +14,10 @@ interface IUser extends Document {
     isVerified: boolean;
 }
 
+export interface IGuser {
+    given_name: string;
+    email: string;
+    picture: string;
+}
+
 export default IUser;

@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
 import { UserService } from './user.service';
 import { Response } from 'express';
 import { TRoles } from 'src/common/interfaces/user/role';
+import { IGuser } from 'src/common/interfaces/user/user';
 
 @Controller()
 export class UserController {
@@ -84,12 +85,12 @@ export class UserController {
 
     @Post('sign-in-google')
     async signInWithGoogle(
-        @Body('token') token: string,
+        @Body('userData') userData: IGuser,
         @Body('role') role: TRoles,
         @Res() res: Response
     ) {
         const { refreshToken, accessToken, message } =
-            await this.userService.signInWithGoogle(token, role);
+            await this.userService.signInWithGoogle(userData, role);
 
         res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
@@ -107,6 +108,6 @@ export class UserController {
             path: '/'
         })
 
-        return { accessToken, message };
+        return res.json({ token: accessToken, message })
     }
 }

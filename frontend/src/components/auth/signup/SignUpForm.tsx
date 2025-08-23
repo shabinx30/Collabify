@@ -213,7 +213,7 @@ const SignUpForm = () => {
                                 >
                                     Sign Up
                                 </button>
-                                <LoginWith />
+                                <LoginWith role={role}/>
                             </div>
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                 Already have an account?{" "}

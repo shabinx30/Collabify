@@ -24,7 +24,7 @@ const SignInForm = () => {
     } = useForm<TSignInForm>({ resolver: zodResolver(signInSchema) });
 
     const onSubmit = (formData: TSignInForm) => {
-        const resultAction = dispatch(signIn({ formData, router }));
+        dispatch(signIn({ formData, router }));
     };
 
     return (

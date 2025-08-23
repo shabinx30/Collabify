@@ -1,7 +1,7 @@
 import { TSignInForm } from "@/libs/validations/signinFromData";
 import { SignupFormOutput } from "@/libs/validations/signupFormData";
-import { signInUser, verifyOtp } from "@/services";
-import { IAuthState, IUser } from "@/types/auth/signup.type";
+import { signInUser, signInWithGoogle, verifyOtp } from "@/services";
+import { IAuthState, IDecode, IUser, RoleType } from "@/types/auth/signup.type";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { isAxiosError } from "axios";
 import toast from "react-hot-toast";
@@ -77,6 +77,36 @@ export const signIn = createAsyncThunk(
     }
 );
 
+export const signInWith = createAsyncThunk(
+    "auth/sign-in-google",
+    async (
+        {
+            userData,
+            role,
+            router,
+        }: { userData: IDecode; role?: RoleType; router: AppRouterInstance },
+        { rejectWithValue }
+    ) => {
+        try {
+            const res = await signInWithGoogle({ userData, role });
+
+            toast.custom((t) => <Success t={t} message="Sign in success" />);
+
+            const user = jwtDecode(res.token) as IUser;
+            const { username } = user;
+
+            router.push(`/${username}`);
+
+            return { ...res, user };
+        } catch (error) {
+            if (isAxiosError(error) && error.response) {
+                return rejectWithValue(error.response.data);
+            }
+            return rejectWithValue(error);
+        }
+    }
+);
+
 const auth = createSlice({
     name: "auth",
     initialState,
@@ -116,6 +146,19 @@ const auth = createSlice({
             .addCase(signIn.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload as string;
+            })
+            .addCase(signInWith.pending, (state) => {
+                (state.isLoading = true), (state.error = null);
+            })
+            .addCase(signInWith.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.error = null;
+                state.user = action.payload.user;
+                state.token = action.payload.token;
+            })
+            .addCase(signInWith.rejected, (state, action) => {
+                state.error = action.payload as string;
+                state.isLoading = false;
             });
     },
 });
