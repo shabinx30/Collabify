@@ -4,7 +4,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { ThemeProvider } from "next-themes";
+// import { ThemeProvider } from "next-themes";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -31,11 +31,11 @@ export default function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                <ThemeProvider
+                {/* <ThemeProvider
                     attribute="class"
                     defaultTheme="system"
                     enableSystem
-                >
+                > */}
                     <GoogleOAuthProvider
                         clientId={
                             process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string
@@ -45,7 +45,7 @@ export default function RootLayout({
                         {children}
                         <Footer />
                     </GoogleOAuthProvider>
-                </ThemeProvider>
+                {/* </ThemeProvider> */}
             </body>
         </html>
     );
