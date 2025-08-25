@@ -31,21 +31,15 @@ export default function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                {/* <ThemeProvider
-                    attribute="class"
-                    defaultTheme="system"
-                    enableSystem
-                > */}
-                    <GoogleOAuthProvider
-                        clientId={
-                            process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string
-                        }
-                    >
-                        <Toaster position="top-center" reverseOrder={false} />
-                        {children}
-                        <Footer />
-                    </GoogleOAuthProvider>
-                {/* </ThemeProvider> */}
+                <GoogleOAuthProvider
+                    clientId={
+                        process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string
+                    }
+                >
+                    <Toaster position="top-center" reverseOrder={false} />
+                    {children}
+                    <Footer />
+                </GoogleOAuthProvider>
             </body>
         </html>
     );
