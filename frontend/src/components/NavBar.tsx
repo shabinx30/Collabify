@@ -2,9 +2,9 @@
 
 import { FiSearch } from "react-icons/fi";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store/store";
+import { usePathname, useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store/store";
 import Image from "next/image";
 import {
     DropdownMenu,
@@ -16,13 +16,16 @@ import {
     DropdownMenuShortcut,
     DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { logoutUser } from "@/redux/slices/auth.slice";
 
 const NavBar = () => {
     const pathnames = usePathname().split("/");
     const path = pathnames[0];
     const { user } = useSelector((state: RootState) => state.auth);
+    const dispatch = useDispatch<AppDispatch>();
+    const router = useRouter()
 
-    const handleLogout = () => {};
+    const handleLogout = () => dispatch(logoutUser(router));
 
     return (
         <nav className={"bg-white dark:bg-[#1b1b1b]"}>
@@ -42,7 +45,10 @@ const NavBar = () => {
                 <li className="flex-1/3 lg:flex-1 flex text-sm items-center lg:text-base justify-end gap-6">
                     {user ? (
                         <DropdownMenu>
-                            <DropdownMenuTrigger asChild className="border-none">
+                            <DropdownMenuTrigger
+                                asChild
+                                className="border-none"
+                            >
                                 <div className="flex gap-4 items-center hover:bg-gray-200 dark:hover:bg-[#3b3b3b] duration-200 pl-4 rounded-full cursor-default">
                                     <h3>{user.username}</h3>
                                     <Image
@@ -78,10 +84,11 @@ const NavBar = () => {
                                     </DropdownMenuItem>
                                 </DropdownMenuGroup>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem onClick={handleLogout}>
-                                    <span className="text-red-500">
-                                        Log out
-                                    </span>
+                                <DropdownMenuItem
+                                    onClick={handleLogout}
+                                    className="text-red-500 hover:text-red-500"
+                                >
+                                    Log out
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
