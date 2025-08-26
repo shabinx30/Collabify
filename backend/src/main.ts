@@ -2,9 +2,17 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import helmet from 'helmet';
+import {
+    FastifyAdapter,
+    NestFastifyApplication,
+} from '@nestjs/platform-fastify';
+import cookie from '@fastify/cookie';
 
 async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
+    const app = await NestFactory.create<NestFastifyApplication>(
+        AppModule,
+        new FastifyAdapter(),
+    );
 
     app.use(helmet());
 
@@ -15,7 +23,6 @@ async function bootstrap() {
         credentials: true,
     });
 
-    // Global validation & transformation
     app.useGlobalPipes(
         new ValidationPipe({
             whitelist: true,
@@ -24,8 +31,12 @@ async function bootstrap() {
         }),
     );
 
+    await app.register(cookie as any, {
+        secret: process.env.COOKIE_SECRET
+    });
+
     const port = process.env.PORT || 4002;
-    await app.listen(port);
+    await app.listen(port, '0.0.0.0');
     console.log(`Server running on port ${port}`);
 }
 

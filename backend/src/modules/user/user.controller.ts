@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
 import { UserService } from './user.service';
-import { Response } from 'express';
 import { TRoles } from 'src/common/interfaces/user/role';
 import { IGuser } from 'src/common/interfaces/user/user';
+import { FastifyReply } from 'fastify';
 
 @Controller()
 export class UserController {
@@ -14,31 +14,37 @@ export class UserController {
     }
 
     @Post('signin')
-    async signIn(@Body() data, @Res({ passthrough: true }) res: Response) {
+    async signIn(
+        @Body() data,
+        @Res({ passthrough: true }) reply: FastifyReply,
+    ) {
         const { refreshToken, accessToken, ...response } =
             await this.userService.signIn(data);
 
-        res.cookie('refreshToken', refreshToken, {
+        reply.setCookie('refreshToken', refreshToken, {
             httpOnly: true,
             sameSite: 'strict',
             secure: true,
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            maxAge: 7 * 24 * 60 * 60,
             path: '/',
         });
 
-        res.cookie('accessToken', accessToken, {
+        reply.setCookie('accessToken', accessToken, {
             httpOnly: true,
             sameSite: 'strict',
             secure: true,
-            maxAge: 15 * 60 * 1000, // 15 min
+            maxAge: 15 * 60,
             path: '/',
         });
 
-        return { ...response, token: accessToken };
+        return reply.send({ ...response, token: accessToken });
     }
 
     @Post('verify-otp')
-    async verifyOtp(@Body() body, @Res({ passthrough: true }) res: Response) {
+    async verifyOtp(
+        @Body() body,
+        @Res({ passthrough: true }) reply: FastifyReply,
+    ) {
         const { otp, ...userData } = body;
         const response = await this.userService.verifyOtp(userData, otp);
 
@@ -49,23 +55,23 @@ export class UserController {
             return message;
         }
 
-        res.cookie('refreshToken', refreshToken, {
+        reply.setCookie('refreshToken', refreshToken as string, {
             httpOnly: true,
             sameSite: 'strict',
             secure: true,
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            maxAge: 7 * 24 * 60 * 60,
             path: '/',
         });
 
-        res.cookie('accessToken', accessToken, {
+        reply.setCookie('accessToken', accessToken as string, {
             httpOnly: true,
             sameSite: 'strict',
             secure: true,
-            maxAge: 15 * 60 * 1000, // 15 min
+            maxAge: 15 * 60,
             path: '/',
         });
 
-        return { message, token: accessToken };
+        return reply.send({ message, token: accessToken });
     }
 
     @Post('resend-otp')
@@ -87,27 +93,39 @@ export class UserController {
     async signInWithGoogle(
         @Body('userData') userData: IGuser,
         @Body('role') role: TRoles,
-        @Res() res: Response
+        @Res({ passthrough: true }) reply: FastifyReply,
     ) {
         const { refreshToken, accessToken, message } =
             await this.userService.signInWithGoogle(userData, role);
 
-        res.cookie("refreshToken", refreshToken, {
+        reply.setCookie('refreshToken', refreshToken, {
             httpOnly: true,
-            sameSite: "strict",
+            sameSite: 'strict',
             secure: true,
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-            path: '/'
-        })
+            maxAge: 7 * 24 * 60 * 60,
+            path: '/',
+        });
 
-        res.cookie("accessToken", accessToken, {
+        reply.setCookie('accessToken', accessToken, {
             httpOnly: true,
-            sameSite: "strict",
+            sameSite: 'strict',
             secure: true,
-            maxAge: 15 * 60 * 1000,
-            path: '/'
-        })
+            maxAge: 15 * 60,
+            path: '/',
+        });
 
-        return res.json({ token: accessToken, message })
+        return reply.send({ message, token: accessToken });
+    }
+
+    @Post('logout')
+    async logout(_, @Res({ passthrough: true }) reply: FastifyReply) {
+        reply.clearCookie('refreshToken', {
+            path: '/',
+        });
+        reply.clearCookie('accessToken', {
+            path: '/',
+        });
+
+        return reply.send({ message: 'Logged out successfully' });
     }
 }
