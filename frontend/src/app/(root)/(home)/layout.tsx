@@ -1,12 +1,12 @@
 import NavBar from "@/components/NavBar";
-import React, { Suspense } from "react";
+import React from "react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
-        <Suspense>
+        <>
             <NavBar />
             {children}
-        </Suspense>
+        </>
     );
 };
 

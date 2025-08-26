@@ -1,12 +1,15 @@
+import Link from "next/link";
 import { FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { LuFacebook } from "react-icons/lu";
 
 const Footer = () => {
     return (
-        <footer className="bg-[#202020] dark:bg-black p-4">
+        <footer className="bg-amber-100 dark:bg-black p-4">
             <div className="flex py-[2em]">
                 <div className="flex flex-1 justify-center">
-                    <h3 className="text-xl text-white my-[2em] font-bold">Logo</h3>
+                    <Link href="/">
+                        <h3 className="text-xl my-[2em] font-bold">Logo</h3>
+                    </Link>
                 </div>
                 <div className="flex-1/2 flex gap-4 text-xs justify-around items-center">
                     <div className="flex flex-col gap-2">
