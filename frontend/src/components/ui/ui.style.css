@@ -1,0 +1,167 @@
+/* Dropdown menu specific styles using your CSS variables */
+[data-slot="dropdown-menu-content"] {
+  background-color: var(--popover);
+  color: var(--popover-foreground);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  min-width: 8rem;
+  border-radius: var(--radius);
+  padding: 0.5rem;
+  overflow: hidden;
+}
+
+[data-slot="dropdown-menu-content"].dark {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Animation keyframes for the dropdown */
+@keyframes dropdownSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes dropdownSlideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.95);
+  }
+}
+
+[data-slot="dropdown-menu-content"][data-state="open"] {
+  animation: dropdownSlideIn 0.15s ease-out;
+}
+
+[data-slot="dropdown-menu-content"][data-state="closed"] {
+  animation: dropdownSlideOut 0.1s ease-in;
+}
+
+/* Dropdown menu items */
+[data-slot="dropdown-menu-item"] {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: calc(var(--radius) - 2px);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  outline: none;
+  cursor: default;
+  transition: all 0.15s ease;
+  margin-bottom: 0.125rem;
+}
+
+[data-slot="dropdown-menu-item"]:last-child {
+  margin-bottom: 0;
+}
+
+[data-slot="dropdown-menu-item"]:not([data-disabled]):hover,
+[data-slot="dropdown-menu-item"]:not([data-disabled]):focus {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+
+[data-slot="dropdown-menu-item"][data-variant="destructive"] {
+  color: var(--destructive, #dc2626);
+}
+
+[data-slot="dropdown-menu-item"][data-variant="destructive"]:not([data-disabled]):hover,
+[data-slot="dropdown-menu-item"][data-variant="destructive"]:not([data-disabled]):focus {
+  background-color: color-mix(in srgb, var(--destructive, #dc2626) 10%, transparent);
+  color: var(--destructive, #dc2626);
+}
+
+[data-slot="dropdown-menu-item"][data-disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+[data-slot="dropdown-menu-item"][data-inset] {
+  padding-left: 2rem;
+}
+
+/* Checkbox and radio items */
+[data-slot="dropdown-menu-checkbox-item"],
+[data-slot="dropdown-menu-radio-item"] {
+  position: relative;
+  padding-left: 2rem;
+}
+
+[data-slot="dropdown-menu-checkbox-item"] > span:first-child,
+[data-slot="dropdown-menu-radio-item"] > span:first-child {
+  position: absolute;
+  left: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1rem;
+  width: 1rem;
+}
+
+/* Labels and separators */
+[data-slot="dropdown-menu-label"] {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+[data-slot="dropdown-menu-label"][data-inset] {
+  padding-left: 2rem;
+}
+
+[data-slot="dropdown-menu-separator"] {
+  height: 1px;
+  background-color: var(--border);
+  margin: 0.375rem -0.375rem;
+}
+
+/* Shortcuts */
+[data-slot="dropdown-menu-shortcut"] {
+  margin-left: auto;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: var(--muted-foreground);
+}
+
+/* Submenu trigger */
+[data-slot="dropdown-menu-sub-trigger"] > svg:last-child {
+  margin-left: auto;
+  height: 1rem;
+  width: 1rem;
+}
+
+/* Submenu content */
+[data-slot="dropdown-menu-sub-content"] {
+  background-color: var(--popover);
+  color: var(--popover-foreground);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+  min-width: 8rem;
+  border-radius: var(--radius);
+  padding: 0.5rem;
+}
+
+/* Dark mode adjustments */
+.dark [data-slot="dropdown-menu-content"],
+.dark [data-slot="dropdown-menu-sub-content"] {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border);
+}
+
+/* Focus styles for accessibility */
+[data-slot="dropdown-menu-item"]:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
