@@ -42,7 +42,7 @@ const NavBar = () => {
                 <li className="flex-1/3 lg:flex-1 flex text-sm items-center lg:text-base justify-end gap-6">
                     {user ? (
                         <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
+                            <DropdownMenuTrigger asChild className="border-none">
                                 <div className="flex gap-4 items-center hover:bg-gray-200 dark:hover:bg-[#3b3b3b] duration-200 pl-4 rounded-full cursor-default">
                                     <h3>{user.username}</h3>
                                     <Image
