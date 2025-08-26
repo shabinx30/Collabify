@@ -85,9 +85,17 @@ export const signInWithGoogle = async (data: {
     role?: RoleType;
 }) => {
     try {
-        console.log("data from server=ce", data);
         const response = await clientApi.post("/sign-in-google", data);
-        console.log("from services", response);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+};
+
+export const logout = async () => {
+    try {
+        const response = await clientApi.post("/logout");
         return response.data;
     } catch (error) {
         console.log(error);

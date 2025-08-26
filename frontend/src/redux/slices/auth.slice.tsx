@@ -1,6 +1,6 @@
 import { TSignInForm } from "@/lib/validations/signinFromData";
 import { SignupFormOutput } from "@/lib/validations/signupFormData";
-import { signInUser, signInWithGoogle, verifyOtp } from "@/services";
+import { logout, signInUser, signInWithGoogle, verifyOtp } from "@/services";
 import { IAuthState, IDecode, IUser, RoleType } from "@/types/auth/signup.type";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { isAxiosError } from "axios";
@@ -107,6 +107,24 @@ export const signInWith = createAsyncThunk(
     }
 );
 
+export const logoutUser = createAsyncThunk(
+    "auth/logout",
+    async (router: AppRouterInstance, { rejectWithValue }) => {
+        try {
+            await logout();
+            toast.custom((t) => (
+                <Success t={t} message="Successfully logged out" />
+            ));
+            router.push("/");
+        } catch (error) {
+            if (isAxiosError(error) && error.response) {
+                return rejectWithValue(error.response.data);
+            }
+            return rejectWithValue(error);
+        }
+    }
+);
+
 const auth = createSlice({
     name: "auth",
     initialState,
@@ -114,9 +132,6 @@ const auth = createSlice({
         addUser: (state, action) => {
             (state.user = action.payload.user),
                 (state.token = action.payload.token);
-        },
-        logout: (state) => {
-            (state.user = null), (state.token = null);
         },
     },
     extraReducers: (builder) => {
@@ -159,9 +174,22 @@ const auth = createSlice({
             .addCase(signInWith.rejected, (state, action) => {
                 state.error = action.payload as string;
                 state.isLoading = false;
+            })
+            .addCase(logoutUser.pending, (state) => {
+                (state.isLoading = true), (state.error = null);
+            })
+            .addCase(logoutUser.fulfilled, (state) => {
+                state.user = null;
+                state.token = null;
+                state.error = null;
+                state.isLoading = false;
+            })
+            .addCase(logoutUser.rejected, (state, action) => {
+                state.error = action.payload as string;
+                state.isLoading = false;
             });
     },
 });
 
-export const { addUser, logout } = auth.actions;
+export const { addUser } = auth.actions;
 export default auth.reducer;
