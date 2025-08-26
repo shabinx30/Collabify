@@ -42,7 +42,7 @@ const NavBar = () => {
                         placeholder="Search"
                     />
                 </li>
-                <li className="flex-1/3 lg:flex-1 flex text-sm items-center lg:text-base justify-end gap-6">
+                <li className="flex-1/3 lg:flex-1 flex text-sm items-center justify-end gap-6">
                     {user ? (
                         <DropdownMenu>
                             <DropdownMenuTrigger
