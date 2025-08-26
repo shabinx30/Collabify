@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from "react";
 import { unstable_ViewTransition as ViewTransition } from "react";
 import { FiSearch } from "react-icons/fi";
 
-const page = () => {
+const Search = () => {
     const searchRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
@@ -30,4 +30,4 @@ const page = () => {
     );
 };
 
-export default page;
+export default Search;
