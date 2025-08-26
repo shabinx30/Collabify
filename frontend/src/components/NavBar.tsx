@@ -17,31 +17,34 @@ import {
     DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { logoutUser } from "@/redux/slices/auth.slice";
+import { unstable_ViewTransition as ViewTransition } from "react";
 
 const NavBar = () => {
     const pathnames = usePathname().split("/");
     const path = pathnames[0];
     const { user } = useSelector((state: RootState) => state.auth);
     const dispatch = useDispatch<AppDispatch>();
-    const router = useRouter()
+    const router = useRouter();
 
     const handleLogout = () => dispatch(logoutUser(router));
 
     return (
         <nav className={"bg-white dark:bg-[#1b1b1b]"}>
             <ul className={"flex py-2 justify-between items-center px-4"}>
-                <li className="flex-1 font-bold my-1 text-lg md:text-2xl">
+                <li className="flex-1 font-bold my-1 text-base md:text-xl">
                     {" "}
                     <Link href="/">Logo</Link>{" "}
                 </li>
-                <li className="hidden md:flex flex-1 items-center px-4 gap-2 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-xl">
-                    <FiSearch />
-                    <input
-                        type="text"
-                        className="w-full h-10 outline-none"
-                        placeholder="Search"
-                    />
-                </li>
+                <ViewTransition name="search-bar">
+                    <li onClick={() => router.push('/search')} className="hidden md:flex flex-1 items-center px-4 gap-2 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-xl">
+                        <FiSearch />
+                        <input
+                            type="text"
+                            className="w-full h-10 outline-none"
+                            placeholder="Search"
+                        />
+                    </li>
+                </ViewTransition>
                 <li className="flex-1/3 lg:flex-1 flex text-sm items-center justify-end gap-6">
                     {user ? (
                         <DropdownMenu>

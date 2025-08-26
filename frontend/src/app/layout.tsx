@@ -29,7 +29,7 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
             >
                 <GoogleOAuthProvider
                     clientId={
@@ -37,7 +37,9 @@ export default function RootLayout({
                     }
                 >
                     <Toaster position="top-center" reverseOrder={false} />
-                    {children}
+                    <main className="flex flex-1 flex-col">
+                        {children}
+                    </main>
                     <Footer />
                 </GoogleOAuthProvider>
             </body>
