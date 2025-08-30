@@ -22,6 +22,9 @@ export class User {
     profile: string;
 
     @Prop()
+    amount: number;
+
+    @Prop()
     socialLinks?: string[];
 
     @Prop()
