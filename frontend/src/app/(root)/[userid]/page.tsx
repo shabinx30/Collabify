@@ -53,14 +53,27 @@ export default async function Profile({ params }: IProfile) {
                             <span className="text-gray-400 text-xs">Email</span>
                             <h3>{data.email}</h3>
                         </div>
-                        <div>
-                            <span className="text-gray-400 text-xs">Tags</span>
-                            <div className="flex gap-1 pt-0.5 flex-wrap">
-                                {data.categories.map((category, i) => (
-                                    <p key={i} className="bg-amber-400/5 px-2 pt-0.5 pb-1 text-xs text-amber-400 border border-amber-400 rounded-full max-w-fit">
-                                        {category}
-                                    </p>
-                                ))}
+                        <div className="flex justify-between">
+                            <div>
+                                <span className="text-gray-400 text-xs">
+                                    Tags
+                                </span>
+                                <div className="flex gap-1 pt-0.5 flex-wrap">
+                                    {data.categories.map((category, i) => (
+                                        <p
+                                            key={i}
+                                            className="bg-amber-400/5 px-2 pt-0.5 pb-1 text-xs text-amber-400 border border-amber-400 rounded-full max-w-fit"
+                                        >
+                                            {category}
+                                        </p>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className="leading-[1.25]">
+                                <span className="text-gray-400 text-xs">
+                                    Location
+                                </span>
+                                <h3>{data.location ? data.location : "NA"}</h3>
                             </div>
                         </div>
                     </section>
