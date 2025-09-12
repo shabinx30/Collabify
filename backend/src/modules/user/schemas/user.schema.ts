@@ -28,6 +28,9 @@ export class User {
     socialLinks?: string[];
 
     @Prop()
+    location: string;
+
+    @Prop()
     companyName?: string;
 
     @Prop({ default: false })
