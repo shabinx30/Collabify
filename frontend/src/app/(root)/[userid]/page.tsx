@@ -12,9 +12,6 @@ export default async function Profile({ params }: IProfile) {
         notFound();
     }
 
-    data.categories.push("content creator");
-    data.categories.push("beauty");
-
     return (
         <main className="flex gap-4 p-4">
             <section className="flex-1">
@@ -42,11 +39,19 @@ export default async function Profile({ params }: IProfile) {
                                 </span>
                                 <h3>{data.username}</h3>
                             </div>
-                            <div className="leading-[1.25]">
+                            <div className="flex flex-col gap-0.5">
                                 <span className="text-gray-400 text-xs">
                                     Charge
                                 </span>
-                                <h3>{data.amount ? data.amount : 0}$</h3>
+                                {data.amount ? (
+                                    <h3>{data.amount}$</h3>
+                                ) : (
+                                    <input
+                                        type="number"
+                                        className="custom-dotted-border rounded-xl p-1.5 outline-none focus:outline-amber-400 w-24 h-[2em] text-sm"
+                                        placeholder="+ Add"
+                                    />
+                                )}
                             </div>
                         </div>
                         <div className="leading-[1.25]">
@@ -54,26 +59,42 @@ export default async function Profile({ params }: IProfile) {
                             <h3>{data.email}</h3>
                         </div>
                         <div className="flex justify-between">
-                            <div>
+                            <div className="flex flex-col gap-0.5">
                                 <span className="text-gray-400 text-xs">
                                     Tags
                                 </span>
-                                <div className="flex gap-1 pt-0.5 flex-wrap">
-                                    {data.categories.map((category, i) => (
-                                        <p
-                                            key={i}
-                                            className="bg-amber-400/5 px-2 pt-0.5 pb-1 text-xs text-amber-400 border border-amber-400 rounded-full max-w-fit"
-                                        >
-                                            {category}
-                                        </p>
-                                    ))}
-                                </div>
+                                {data.categories && data.categories.length ? (
+                                    <div className="flex gap-1 pt-0.5 flex-wrap">
+                                        {data.categories.map((category, i) => (
+                                            <p
+                                                key={i}
+                                                className="bg-amber-400/5 px-2 pt-0.5 pb-1 text-xs text-amber-400 border border-amber-400 rounded-full max-w-fit"
+                                            >
+                                                {category}
+                                            </p>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <input
+                                        type="number"
+                                        className="custom-dotted-border rounded-xl p-1.5 outline-none focus:outline-amber-400 w-[14em] h-[2em] text-sm"
+                                        placeholder="+ Add"
+                                    />
+                                )}
                             </div>
-                            <div className="leading-[1.25]">
+                            <div className="flex flex-col gap-0.5">
                                 <span className="text-gray-400 text-xs">
                                     Location
                                 </span>
-                                <h3>{data.location ? data.location : "NA"}</h3>
+                                {data.amount ? (
+                                    <h3>{data.amount}$</h3>
+                                ) : (
+                                    <input
+                                        type="number"
+                                        className="custom-dotted-border rounded-xl p-1.5 outline-none focus:outline-amber-400 w-24 h-[2em] text-sm"
+                                        placeholder="+ Add"
+                                    />
+                                )}
                             </div>
                         </div>
                     </section>
