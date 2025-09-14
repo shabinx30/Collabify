@@ -8,7 +8,7 @@ const Footer = () => {
             <div className="flex py-[2em]">
                 <div className="flex flex-1 justify-center">
                     <Link href="/">
-                        <h3 className="text-xl my-[2em] font-bold">Logo</h3>
+                        <h3 className="text-xl my-[2em] font-bold">Collabify</h3>
                     </Link>
                 </div>
                 <div className="flex-1/2 flex gap-4 text-xs justify-around items-center">

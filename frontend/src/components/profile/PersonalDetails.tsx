@@ -15,13 +15,13 @@ const PersonalDetails = ({ data }: { data: IProfileUser }) => {
                         src={data.profile}
                         alt={data.username}
                     />
-                    <div className="absolute bottom-1 left-1 py-2 w-[calc(100%-8px)] bg-[#ffffff80] backdrop-blur-md rounded-full">
+                    <div className="absolute bottom-1 left-1 py-2 w-[calc(100%-8px)] bg-[#ffffff80] backdrop-blur-md rounded-full cursor-pointer">
                         <p className="text-center text-black text-sm">
                             change profile photo
                         </p>
                     </div>
                 </div>
-                <section className="flex flex-col w-full gap-3 mx-10">
+                <section className="flex flex-col w-full gap-3 ml-4 mr-2">
                     <div className="flex justify-between">
                         <div className="leading-[1.25]">
                             <span className="text-gray-400 text-xs">Name</span>
