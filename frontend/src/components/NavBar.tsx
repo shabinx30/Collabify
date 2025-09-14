@@ -33,10 +33,13 @@ const NavBar = () => {
             <ul className={"flex py-2 justify-between items-center px-4"}>
                 <li className="flex-1 font-bold my-1 text-base md:text-xl">
                     {" "}
-                    <Link href="/">Logo</Link>{" "}
+                    <Link href="/">Collabify</Link>{" "}
                 </li>
                 <ViewTransition name="search-bar">
-                    <li onClick={() => router.push('/search')} className="hidden md:flex flex-1 items-center px-4 gap-2 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-xl">
+                    <li
+                        onClick={() => router.push("/search")}
+                        className="hidden md:flex flex-1 items-center px-4 gap-2 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-xl"
+                    >
                         <FiSearch />
                         <input
                             type="text"
@@ -71,7 +74,7 @@ const NavBar = () => {
                                     My Account
                                 </DropdownMenuLabel>
                                 <DropdownMenuGroup>
-                                    <Link href={user.username}>
+                                    <Link href={`/${user.username}`}>
                                         <DropdownMenuItem>
                                             Profile
                                             <DropdownMenuShortcut>
@@ -79,17 +82,23 @@ const NavBar = () => {
                                             </DropdownMenuShortcut>
                                         </DropdownMenuItem>
                                     </Link>
-                                    <DropdownMenuItem>
-                                        Settings
-                                        <DropdownMenuShortcut>
-                                            ⌘S
-                                        </DropdownMenuShortcut>
-                                    </DropdownMenuItem>
+                                    <Link href={`/${user.username}/settings`}>
+                                        <DropdownMenuItem>
+                                            Settings
+                                            <DropdownMenuShortcut>
+                                                ⌘S
+                                            </DropdownMenuShortcut>
+                                        </DropdownMenuItem>
+                                    </Link>
                                 </DropdownMenuGroup>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuItem
                                     onClick={handleLogout}
-                                    className="text-red-500 hover:text-red-500"
+                                    onMouseEnter={(e) =>
+                                        (e.currentTarget.style.color =
+                                            "#fb2c36")
+                                    }
+                                    className="text-red-500"
                                 >
                                     Log out
                                 </DropdownMenuItem>
