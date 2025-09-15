@@ -6,13 +6,17 @@ import { FaRegUser } from "react-icons/fa";
 import { PiUserCircleDashed } from "react-icons/pi";
 import { LuSettings } from "react-icons/lu";
 import { useRouter, usePathname } from "next/navigation";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store/store";
+import { logoutUser } from "@/redux/slices/auth.slice";
 
 const Aside = ({ children }: { children: React.ReactNode }) => {
     const router = useRouter();
+    const dispatch = useDispatch<AppDispatch>();
     const params = usePathname();
     const { user } = useSelector((state: RootState) => state.auth);
+
+    const handleLogout = () => dispatch(logoutUser(router));
 
     return (
         <div className="flex">
@@ -60,7 +64,10 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
                         <LuSettings />
                         Settings
                     </li>
-                    <li className="text-red-400 hover:bg-gray-100 dark:hover:bg-[#101010] duration-200 px-4 py-2 rounded-2xl flex gap-3 items-center cursor-pointer">
+                    <li
+                        onClick={handleLogout}
+                        className="text-red-400 hover:bg-gray-100 dark:hover:bg-[#101010] duration-200 px-4 py-2 rounded-2xl flex gap-3 items-center cursor-pointer"
+                    >
                         <TbLogout />
                         Logout
                     </li>

@@ -33,9 +33,8 @@ const Earning = () => {
             <div className="bg-gray-100 dark:bg-[#2b2b2b] w-full h-full rounded-xl px-3 pt-3">
                 <ResponsiveContainer>
                     <LineChart data={data}>
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="month" />
-                        {/* <YAxis /> */}
+                        <CartesianGrid stroke="#5d5d5d" strokeDasharray="3 3" />
+                        <XAxis dataKey="month" fontSize={12} stroke="#5d5d5d" />
                         <Tooltip
                             contentStyle={{
                                 backgroundColor: "#3d3d3d",
