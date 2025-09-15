@@ -23,9 +23,9 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
                             router.push(`/${user?.username}`);
                         }}
                         className={
-                            "hover:bg-gray-100 dark:hover:bg-[#101010] duration-200 px-4 py-2 rounded-2xl flex gap-3 items-center cursor-default" +
+                            "hover:bg-gray-100 dark:hover:bg-[#101010] duration-200 px-4 py-2 rounded-2xl flex gap-3 items-center cursor-pointer " +
                             (params.endsWith(user?.username || "") &&
-                                " bg-gray-200 dark:bg-[#0b0b0b] text-amber-400 dark:text-amber-300")
+                                "bg-gray-200 dark:bg-[#0b0b0b] text-amber-400 dark:text-amber-300")
                         }
                     >
                         <FaRegUser />
@@ -36,9 +36,9 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
                             router.push(`/${user?.username}/accounts`);
                         }}
                         className={
-                            "hover:bg-gray-100 dark:hover:bg-[#101010] duration-200 px-3.5 py-2 rounded-2xl flex gap-2 items-center cursor-default" +
+                            "hover:bg-gray-100 dark:hover:bg-[#101010] duration-200 px-3.5 py-2 rounded-2xl flex gap-2 items-center cursor-pointer " +
                             (params.endsWith("accounts") &&
-                                " bg-gray-200 dark:bg-[#0b0b0b] text-amber-400 dark:text-amber-300")
+                                "bg-gray-200 dark:bg-[#0b0b0b] text-amber-400 dark:text-amber-300")
                         }
                     >
                         <PiUserCircleDashed size={21} />
@@ -52,15 +52,15 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
                             router.push(`/${user?.username}/settings`);
                         }}
                         className={
-                            "hover:bg-gray-100 dark:hover:bg-[#101010] duration-200 px-4 py-2 rounded-2xl flex gap-3 items-center cursor-default" +
+                            "hover:bg-gray-100 dark:hover:bg-[#101010] duration-200 px-4 py-2 rounded-2xl flex gap-3 items-center cursor-pointer " +
                             (params.endsWith("settings") &&
-                                " bg-gray-200 dark:bg-[#0b0b0b] text-amber-400 dark:text-amber-300")
+                                "bg-gray-200 dark:bg-[#0b0b0b] text-amber-400 dark:text-amber-300")
                         }
                     >
                         <LuSettings />
                         Settings
                     </li>
-                    <li className="text-red-400 hover:bg-gray-100 dark:hover:bg-[#101010] duration-200 px-4 py-2 rounded-2xl flex gap-3 items-center cursor-default">
+                    <li className="text-red-400 hover:bg-gray-100 dark:hover:bg-[#101010] duration-200 px-4 py-2 rounded-2xl flex gap-3 items-center cursor-pointer">
                         <TbLogout />
                         Logout
                     </li>
