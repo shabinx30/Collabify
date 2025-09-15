@@ -6,7 +6,7 @@ const PersonalDetails = ({ data }: { data: IProfileUser }) => {
     return (
         <section className="flex-1">
             <h3 className="text-amber-400">Person Details</h3>
-            <div className="flex bg-[#2b2b2b] rounded-xl p-2">
+            <div className="flex bg-gray-100 dark:bg-[#2b2b2b] rounded-xl p-2">
                 <div className="relative max-h-fit">
                     <Image
                         className="min-w-36 rounded-2xl"
@@ -37,7 +37,7 @@ const PersonalDetails = ({ data }: { data: IProfileUser }) => {
                                 <input
                                     type="number"
                                     className="custom-dotted-border rounded-xl p-1.5 outline-none focus:outline-amber-400 w-24 h-[2em] text-sm"
-                                    placeholder="+ Add"
+                                    placeholder="Eg:- 100$"
                                 />
                             )}
                         </div>
@@ -62,9 +62,9 @@ const PersonalDetails = ({ data }: { data: IProfileUser }) => {
                                 </div>
                             ) : (
                                 <input
-                                    type="number"
+                                    type="text"
                                     className="custom-dotted-border rounded-xl p-1.5 outline-none focus:outline-amber-400 w-[14em] h-[2em] text-sm"
-                                    placeholder="+ Add"
+                                    placeholder="Eg:- Content Creator"
                                 />
                             )}
                         </div>
@@ -72,13 +72,13 @@ const PersonalDetails = ({ data }: { data: IProfileUser }) => {
                             <span className="text-gray-400 text-xs">
                                 Location
                             </span>
-                            {data.amount ? (
-                                <h3>{data.amount}$</h3>
+                            {data.location ? (
+                                <h3>{data.location}$</h3>
                             ) : (
                                 <input
-                                    type="number"
+                                    type="text"
                                     className="custom-dotted-border rounded-xl p-1.5 outline-none focus:outline-amber-400 w-24 h-[2em] text-sm"
-                                    placeholder="+ Add"
+                                    placeholder="Eg:- Los Angeles, US"
                                 />
                             )}
                         </div>

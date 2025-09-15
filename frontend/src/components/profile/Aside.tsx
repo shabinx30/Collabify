@@ -16,16 +16,16 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <div className="flex">
-            <div className="bg-[#1b1b1b] flex flex-col">
+            <div className="bg-white dark:bg-[#1b1b1b] border-r border-gray-200 dark:border-none flex flex-col">
                 <ul className="p-4">
                     <li
                         onClick={() => {
                             router.push(`/${user?.username}`);
                         }}
                         className={
-                            "hover:bg-[#101010] duration-200 px-4 py-2 rounded-2xl flex gap-3 items-center cursor-default" +
+                            "hover:bg-gray-100 dark:hover:bg-[#101010] duration-200 px-4 py-2 rounded-2xl flex gap-3 items-center cursor-pointer " +
                             (params.endsWith(user?.username || "") &&
-                                " bg-[#0b0b0b] text-amber-300")
+                                "bg-gray-200 dark:bg-[#0b0b0b] text-amber-400 dark:text-amber-300")
                         }
                     >
                         <FaRegUser />
@@ -36,9 +36,9 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
                             router.push(`/${user?.username}/accounts`);
                         }}
                         className={
-                            "hover:bg-[#101010] duration-200 px-3.5 py-2 rounded-2xl flex gap-2 items-center cursor-default" +
-                            (params.endsWith("/accounts") &&
-                                " bg-[#0b0b0b] text-amber-300")
+                            "hover:bg-gray-100 dark:hover:bg-[#101010] duration-200 px-3.5 py-2 rounded-2xl flex gap-2 items-center cursor-pointer " +
+                            (params.endsWith("accounts") &&
+                                "bg-gray-200 dark:bg-[#0b0b0b] text-amber-400 dark:text-amber-300")
                         }
                     >
                         <PiUserCircleDashed size={21} />
@@ -46,21 +46,21 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
                     </li>
                 </ul>
                 <ul className="p-4">
-                    <hr className="text-[#3b3b3b] mx-4 my-1" />
+                    <hr className="text-gray-300 dark:text-[#3b3b3b] mx-4 my-1" />
                     <li
                         onClick={() => {
                             router.push(`/${user?.username}/settings`);
                         }}
                         className={
-                            "hover:bg-[#101010] duration-200 px-4 py-2 rounded-2xl flex gap-3 items-center cursor-default" +
+                            "hover:bg-gray-100 dark:hover:bg-[#101010] duration-200 px-4 py-2 rounded-2xl flex gap-3 items-center cursor-pointer " +
                             (params.endsWith("settings") &&
-                                " bg-[#0b0b0b] text-amber-300")
+                                "bg-gray-200 dark:bg-[#0b0b0b] text-amber-400 dark:text-amber-300")
                         }
                     >
                         <LuSettings />
                         Settings
                     </li>
-                    <li className="text-red-400 hover:bg-[#101010] duration-200 px-4 py-2 rounded-2xl flex gap-3 items-center cursor-default">
+                    <li className="text-red-400 hover:bg-gray-100 dark:hover:bg-[#101010] duration-200 px-4 py-2 rounded-2xl flex gap-3 items-center cursor-pointer">
                         <TbLogout />
                         Logout
                     </li>
