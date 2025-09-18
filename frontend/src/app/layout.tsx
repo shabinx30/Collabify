@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-    title: "Unknown",
+    title: "Collabify",
     description: "Creator finding application.",
 };
 
