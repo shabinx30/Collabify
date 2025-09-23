@@ -1,5 +1,6 @@
 "use client";
 
+import Footer from "@/components/Footer";
 import { persistor, store } from "@/redux/store/store";
 import React from "react";
 import { Provider } from "react-redux";
@@ -10,6 +11,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <Provider store={store}>
             <PersistGate loading={false} persistor={persistor}>
                 {children}
+                <Footer />
             </PersistGate>
         </Provider>
     );
