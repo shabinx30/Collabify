@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
@@ -39,7 +38,6 @@ export default function RootLayout({
                     <main className="flex flex-1 flex-col">
                         {children}
                     </main>
-                    <Footer />
                 </GoogleOAuthProvider>
             </body>
         </html>
