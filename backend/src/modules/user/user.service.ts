@@ -295,4 +295,14 @@ export class UserService {
             );
         }
     }
+
+    async getBrands() {
+        try {
+            return await this.userRepository.findBrands();
+        } catch (error) {
+            throw new InternalServerErrorException(
+                'An unexpected error has been occured while find the brands',
+            );
+        }
+    }
 }
