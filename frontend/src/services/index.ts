@@ -102,3 +102,12 @@ export const logout = async () => {
         throw error;
     }
 };
+
+export const findCreators = async () => {
+    try {
+        const response = await clientApi.get("/admin/creators")
+        return response.data
+    } catch (error) {
+        
+    }
+}

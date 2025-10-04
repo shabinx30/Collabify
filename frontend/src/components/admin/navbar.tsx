@@ -27,7 +27,7 @@ const Navbar = ({
         <nav
             className={`flex justify-between backdrop-blur-2xl fixed w-full rounded-2xl py-2`}
             style={{
-                width: `calc(100vw - ${asideWidth || 0}px - 57px)`,
+                width: `calc(100vw - ${asideWidth || 0}px - 47px)`,
             }}
         >
             {/* currun page */}
@@ -39,8 +39,9 @@ const Navbar = ({
                     <FiSearch />
                     <input
                         type="text"
-                        className="rounded-2xl p-1 w-full placeholder:text-white"
+                        className="rounded-2xl p-1 w-full dark:placeholder:text-white placeholder:text-[#9ab2d0]"
                         placeholder="Search..."
+                        name="search"
                     />
                 </div>
                 <span className="h-full flex items-center rounded-full p-3">

@@ -59,4 +59,8 @@ export class UserRepository {
     async findByName(username: string) {
         return await this.userSchema.findOne({ username }, { password: 0 });
     }
+
+    async findCreators() {
+        return await this.userSchema.find({ role: 'creator' }, { password: 0 });
+    }
 }
