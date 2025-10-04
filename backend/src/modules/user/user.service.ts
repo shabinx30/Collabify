@@ -15,22 +15,17 @@ import { SignInDto } from './dtos/signin.dto';
 import generateOtp from 'src/common/utils/otp.util';
 import { hashPassword, compare } from 'src/common/utils/hash.util';
 import { JwtService } from '@nestjs/jwt';
-import { OAuth2Client } from 'google-auth-library';
 import { TRoles } from 'src/common/interfaces/user/role';
 import { UserDocument } from './schemas/user.schema';
 import { IGuser } from 'src/common/interfaces/user/user';
 
 @Injectable()
 export class UserService {
-    private client: OAuth2Client;
-
     constructor(
         private userRepository: UserRepository,
         @Inject('ACCESS_JWT') private readonly accessJwt: JwtService,
         @Inject('REFRESH_JWT') private readonly refreshJwt: JwtService,
-    ) {
-        this.client = new OAuth2Client();
-    }
+    ) {}
 
     async createUser(email: string): Promise<object> {
         const existingUser = await this.userRepository.findByEmail(email);
@@ -287,6 +282,16 @@ export class UserService {
             console.log(error);
             throw new InternalServerErrorException(
                 'An unexpected error occurred while logining with google',
+            );
+        }
+    }
+
+    async getCreators() {
+        try {
+            return await this.userRepository.findCreators();
+        } catch (error) {
+            throw new InternalServerErrorException(
+                'An unexpected error has been occured while find the creators',
             );
         }
     }

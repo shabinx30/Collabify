@@ -129,3 +129,14 @@ export class UserController {
         return reply.send({ message: 'Logged out successfully' });
     }
 }
+
+@Controller('admin')
+export class AdminUserController {
+    constructor(private readonly userService: UserService) {}
+
+    @Get('creators')
+    async GetCreators(_, @Res({ passthrough: true }) reply: FastifyReply) {
+        const data = await this.userService.getCreators();
+        return reply.send(data);
+    }
+}

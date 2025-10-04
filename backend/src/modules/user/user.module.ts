@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, userSchema } from './schemas/user.schema';
-import { UserController } from './user.controller';
+import { AdminUserController, UserController } from './user.controller';
 import { UserService } from './user.service';
 import { Otp, otpSchema } from './schemas/otp.schema';
 import { UserRepository } from './user.repository.impl';
@@ -35,7 +35,7 @@ import { JwtModule, JwtService } from '@nestjs/jwt';
                 }),
         },
     ],
-    controllers: [UserController],
-    exports:["ACCESS_JWT", "REFRESH_JWT"]
+    controllers: [UserController, AdminUserController],
+    exports: ['ACCESS_JWT', 'REFRESH_JWT'],
 })
 export class UserModule {}
