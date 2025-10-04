@@ -12,6 +12,11 @@
   --muted: oklch(0.967 0.003 264.542);
   --muted-foreground: oklch(0.551 0.027 264.364);
 
+  --creator-badge: 280 65% 60%;
+  --brand-badge: 200 90% 50%;
+  --category-bg: 220 60% 95%;
+  --category-text: 225 59% 35%;
+
   --accent: oklch(0.967 0.003 264.542);
   --accent-foreground: oklch(0.21 0.034 264.665);
 
@@ -53,6 +58,11 @@
     --primary: oklch(0.928 0.006 264.531);
     --primary-foreground: oklch(0.21 0.034 264.665);
 
+    --creator-badge: 280 60% 65%;
+    --brand-badge: 200 85% 55%;
+    --category-bg: 225 45% 25%;
+    --category-text: 220 60% 85%;
+
     --muted: oklch(0.278 0.033 256.848);
     --muted-foreground: oklch(0.707 0.022 261.325);
 
@@ -76,14 +86,14 @@ body {
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 /* Firefox */
 input[type=number] {
-    -moz-appearance: textfield;
-    appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 input {

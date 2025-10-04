@@ -139,4 +139,10 @@ export class AdminUserController {
         const data = await this.userService.getCreators();
         return reply.send(data);
     }
+
+    @Get('brands')
+    async GetBrands(_, @Res({ passthrough: true }) reply: FastifyReply) {
+        const data = await this.userService.getBrands();
+        return reply.send(data);
+    }
 }

@@ -111,3 +111,12 @@ export const findCreators = async () => {
         
     }
 }
+
+export const findBrands = async () => {
+    try {
+        const response = await clientApi.get("/admin/brands")
+        return response.data
+    } catch (error) {
+        
+    }
+}
