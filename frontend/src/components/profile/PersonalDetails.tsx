@@ -16,7 +16,7 @@ const PersonalDetails = ({ data }: { data: IProfileUser }) => {
                         alt={data.username}
                     />
                     <div className="absolute bottom-1 left-1 py-2 w-[calc(100%-8px)] bg-[#ffffff80] backdrop-blur-md rounded-full cursor-pointer">
-                        <p className="text-center text-black text-sm">
+                        <p className="text-center text-black text-xs">
                             change profile photo
                         </p>
                     </div>
