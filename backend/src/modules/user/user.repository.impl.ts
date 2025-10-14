@@ -65,6 +65,6 @@ export class UserRepository {
     }
 
     async findBrands() {
-        return await this.userSchema.find({ role: 'brands' }, { password: 0 });
+        return await this.userSchema.find({ role: 'brand' }, { password: 0 });
     }
 }
