@@ -10,8 +10,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
         <Provider store={store}>
             <PersistGate loading={false} persistor={persistor}>
-                {children}
-                <Footer />
+                <div className="flex flex-col h-screen">
+                    <div className="flex flex-col flex-1">{children}</div>
+                    <Footer />
+                </div>
             </PersistGate>
         </Provider>
     );

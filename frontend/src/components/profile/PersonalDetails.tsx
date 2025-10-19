@@ -9,10 +9,14 @@ const PersonalDetails = ({ data }: { data: IProfileUser }) => {
             <div className="flex bg-gray-100 dark:bg-[#2b2b2b] h-full rounded-xl p-2">
                 <div className="relative max-h-fit">
                     <Image
-                        className="min-w-36 rounded-2xl"
+                        className="min-w-36 rounded-2xl contrast-0 dark:contrast-100"
                         width={100}
                         height={100}
-                        src={data.profile}
+                        src={
+                            data.profile
+                                ? data.profile
+                                : "/images/icons/user.png"
+                        }
                         alt={data.username}
                     />
                     <div className="absolute bottom-1 left-1 py-2 w-[calc(100%-8px)] bg-[#ffffff80] backdrop-blur-md rounded-full cursor-pointer">
