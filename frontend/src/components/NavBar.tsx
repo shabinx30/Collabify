@@ -17,7 +17,7 @@ import {
     DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { logoutUser } from "@/redux/slices/auth.slice";
-import { unstable_ViewTransition as ViewTransition } from "react";
+import { ViewTransition } from "react";
 
 const NavBar = () => {
     const pathnames = usePathname().split("/");
