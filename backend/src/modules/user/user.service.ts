@@ -250,10 +250,16 @@ export class UserService {
             const exist = await this.userRepository.findByEmail(
                 email as string,
             );
-            let newUser: UserDocument | null = null;
+            let user: UserDocument | null = null;
 
-            if (!exist) {
-                newUser = await this.userRepository.createUser({
+            if (exist) {
+                user = await this.userRepository.upsertUser({
+                    _id: exist._id,
+                    username: given_name,
+                    profile: picture,
+                });
+            } else {
+                user = await this.userRepository.createUser({
                     username: given_name,
                     email,
                     profile: picture,
@@ -262,7 +268,7 @@ export class UserService {
             }
 
             const accessToken = await this.accessJwt.signAsync({
-                userId: exist ? exist.id : newUser?.id,
+                userId: exist ? exist.id : user?.id,
                 username: exist ? exist.username : given_name,
                 profile: exist ? exist.profile : picture,
                 email,
@@ -270,7 +276,7 @@ export class UserService {
             });
 
             const refreshToken = await this.refreshJwt.signAsync({
-                userId: exist ? exist.id : newUser?.id,
+                userId: exist ? exist.id : user?.id,
             });
 
             return {

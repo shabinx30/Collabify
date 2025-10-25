@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import { IProfileUser } from "@/types/profile/profile.type";
 
@@ -9,7 +8,9 @@ const PersonalDetails = ({ data }: { data: IProfileUser }) => {
             <div className="flex bg-gray-100 dark:bg-[#2b2b2b] h-full rounded-xl p-2">
                 <div className="relative max-h-fit">
                     <Image
-                        className="min-w-36 rounded-2xl contrast-0 dark:contrast-100"
+                        className={`min-w-36 rounded-2xl ${
+                            !data.profile ? "contrast-0 dark:contrast-100" : ""
+                        }`}
                         width={100}
                         height={100}
                         src={
@@ -27,7 +28,7 @@ const PersonalDetails = ({ data }: { data: IProfileUser }) => {
                 </div>
                 <section className="flex flex-col w-full gap-3 ml-4 mr-2">
                     <div className="flex justify-between">
-                        <div className="leading-[1.25]">
+                        <div className="leading-tight">
                             <span className="text-gray-400 text-xs">Name</span>
                             <h3>{data.username}</h3>
                         </div>
@@ -46,7 +47,7 @@ const PersonalDetails = ({ data }: { data: IProfileUser }) => {
                             )}
                         </div>
                     </div>
-                    <div className="leading-[1.25]">
+                    <div className="leading-tight">
                         <span className="text-gray-400 text-xs">Email</span>
                         <h3>{data.email}</h3>
                     </div>
