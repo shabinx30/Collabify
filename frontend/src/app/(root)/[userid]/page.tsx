@@ -3,7 +3,6 @@ import PersonalDetails from "@/components/profile/PersonalDetails";
 import { findUser } from "@/services";
 import { IProfile, IProfileUser } from "@/types/profile/profile.type";
 import { notFound } from "next/navigation";
-import React from "react";
 
 export default async function Profile({ params }: IProfile) {
     const userid = (await params).userid;

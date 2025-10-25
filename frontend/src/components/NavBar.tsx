@@ -58,15 +58,19 @@ const NavBar = () => {
                                 <div className="flex gap-4 items-center hover:bg-gray-200 dark:hover:bg-[#3b3b3b] duration-200 pl-4 rounded-full cursor-default">
                                     <h3>{user.username}</h3>
                                     <Image
-                                        className="w-9 h-9 rounded-full contrast-0 dark:contrast-100"
+                                        className={`w-9 h-9 rounded-full ${
+                                            !user.profile
+                                                ? "contrast-0 dark:contrast-100"
+                                                : ""
+                                        }`}
+                                        width={100}
+                                        height={100}
                                         src={
                                             user.profile
                                                 ? user.profile
                                                 : "/images/icons/user.png"
                                         }
-                                        alt="profile"
-                                        width={100}
-                                        height={100}
+                                        alt={user.username}
                                     />
                                 </div>
                             </DropdownMenuTrigger>

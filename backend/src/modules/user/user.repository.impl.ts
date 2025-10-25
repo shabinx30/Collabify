@@ -67,4 +67,12 @@ export class UserRepository {
     async findBrands() {
         return await this.userSchema.find({ role: 'brand' }, { password: 0 });
     }
+
+    async upsertUser(userData) {
+        return await this.userSchema.findOneAndUpdate(
+            { _id: userData._id },
+            userData,
+            { new: true },
+        );
+    }
 }
