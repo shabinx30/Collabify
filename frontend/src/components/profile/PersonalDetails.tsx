@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { IProfileUser } from "@/types/profile/profile.type";
+import { ViewTransition } from "react";
 
 const PersonalDetails = ({ data }: { data: IProfileUser }) => {
     return (
@@ -7,19 +8,19 @@ const PersonalDetails = ({ data }: { data: IProfileUser }) => {
             <h3 className="text-amber-400">Person Details</h3>
             <div className="flex bg-gray-100 dark:bg-[#2b2b2b] h-full rounded-xl p-2">
                 <div className="relative max-h-fit">
-                    <Image
-                        className={`min-w-36 rounded-2xl ${
-                            !data.profile ? "contrast-0 dark:contrast-100" : ""
-                        }`}
-                        width={100}
-                        height={100}
-                        src={
-                            data.profile
-                                ? data.profile
-                                : "/images/icons/user.png"
-                        }
-                        alt={data.username}
-                    />
+                    <ViewTransition name="profile">
+                        <Image
+                            className={`min-w-36 rounded-2xl ${
+                                !data.profile
+                                    ? "contrast-0 dark:contrast-100"
+                                    : ""
+                            }`}
+                            width={100}
+                            height={100}
+                            src={data.profile || "/images/icons/user.png"}
+                            alt={data.username}
+                        />
+                    </ViewTransition>
                     <div className="absolute bottom-1 left-1 py-2 w-[calc(100%-8px)] bg-[#ffffff80] backdrop-blur-md rounded-full cursor-pointer">
                         <p className="text-center text-black text-xs">
                             change profile photo
