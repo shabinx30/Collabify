@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import Script from "next/script";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -29,15 +30,17 @@ export default function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
             >
+                <Script
+                    src="https://accounts.google.com/gsi/client"
+                    strategy="afterInteractive"
+                />
                 <GoogleOAuthProvider
                     clientId={
                         process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID as string
                     }
                 >
                     <Toaster position="top-center" reverseOrder={false} />
-                    <main className="flex flex-1 flex-col">
-                        {children}
-                    </main>
+                    <main className="flex flex-1 flex-col">{children}</main>
                 </GoogleOAuthProvider>
             </body>
         </html>
