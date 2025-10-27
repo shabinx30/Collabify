@@ -9,6 +9,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store/store";
 import { logoutUser } from "@/redux/slices/auth.slice";
+import { googleLogout } from "@react-oauth/google";
 
 const Aside = ({ children }: { children: React.ReactNode }) => {
     const router = useRouter();
@@ -16,7 +17,10 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
     const params = usePathname();
     const { user } = useSelector((state: RootState) => state.auth);
 
-    const handleLogout = () => dispatch(logoutUser(router));
+    const handleLogout = () => {
+        googleLogout()
+        dispatch(logoutUser(router))
+    };
 
     return (
         <div className="flex">

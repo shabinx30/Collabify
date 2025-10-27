@@ -18,6 +18,7 @@ import {
 } from "./ui/dropdown-menu";
 import { logoutUser } from "@/redux/slices/auth.slice";
 import { FormEvent, ViewTransition } from "react";
+import { googleLogout } from "@react-oauth/google";
 
 const NavBar = () => {
     const pathnames = usePathname().split("/");
@@ -26,7 +27,10 @@ const NavBar = () => {
     const dispatch = useDispatch<AppDispatch>();
     const router = useRouter();
 
-    const handleLogout = () => dispatch(logoutUser(router));
+    const handleLogout = () => {
+        googleLogout()
+        dispatch(logoutUser(router))
+    };
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
