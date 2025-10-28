@@ -128,6 +128,12 @@ export class UserController {
 
         return reply.send({ message: 'Logged out successfully' });
     }
+
+    @Get('creators')
+    async GetCreators(_, @Res({ passthrough: true }) reply: FastifyReply) {
+        const creators = this.userService.searchCreators()
+        return reply.send();
+    }
 }
 
 @Controller('admin')

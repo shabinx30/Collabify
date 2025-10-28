@@ -56,9 +56,7 @@ const Search = () => {
                 </motion.span>
             </div>
             <div>
-                <Featured header={false} />
-                {/* <Featured header={false} />
-                <Featured header={false} /> */}
+                <Featured/>
             </div>
         </div>
     );
