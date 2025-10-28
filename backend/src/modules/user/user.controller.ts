@@ -131,8 +131,8 @@ export class UserController {
 
     @Get('creators')
     async GetCreators(_, @Res({ passthrough: true }) reply: FastifyReply) {
-        const creators = this.userService.searchCreators()
-        return reply.send();
+        const creators = await this.userService.searchCreators();
+        return reply.send(creators);
     }
 }
 

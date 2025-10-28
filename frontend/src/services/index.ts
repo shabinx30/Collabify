@@ -108,7 +108,8 @@ export const findCreators = async () => {
         const response = await clientApi.get("/admin/creators")
         return response.data
     } catch (error) {
-        
+        console.log(error);
+        throw error;
     }
 }
 
@@ -117,6 +118,17 @@ export const findBrands = async () => {
         const response = await clientApi.get("/admin/brands")
         return response.data
     } catch (error) {
-        
+        console.log(error);
+        throw error;
+    }
+}
+
+export const searchCreators = async () => {
+    try {
+        const response = await clientApi.get("/creators")
+        return response.data
+    } catch (error) {
+        console.log(error);
+        throw error;
     }
 }
