@@ -1,13 +1,31 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Tiles from "../ui/Tiles";
+import { searchCreators } from "@/services";
 
 const Featured = () => {
+    const [creators, setCreators] = useState([]);
+
+    useEffect(() => {
+        (async () => {
+            const response = await searchCreators();
+            console.log({ response });
+            setCreators(response);
+        })();
+    }, []);
+
     return (
-        <section className="bg-white dark:bg-[#1b1b1b]">
+        <section>
             <h1 className="font-semibold text-xl">Featured</h1>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 py-[1em]">
-                {new Array(4).fill(0).map((creator, i) => (
-                    <Tiles key={i} creator={creator}/>
-                ))}
+                {creators && creators.length ? (
+                    creators.map((creator, i) => (
+                        <Tiles key={i} creator={creator} />
+                    ))
+                ) : (
+                    <p>No creators found</p>
+                )}
             </div>
         </section>
     );
