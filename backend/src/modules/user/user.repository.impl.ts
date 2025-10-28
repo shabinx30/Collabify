@@ -75,4 +75,11 @@ export class UserRepository {
             { new: true },
         );
     }
+
+    async searchCreators() {
+        return await this.userSchema.find(
+            { role: 'creator' },
+            { password: 0, role: 0, createdAt: 0, updatedAt: 0 },
+        );
+    }
 }

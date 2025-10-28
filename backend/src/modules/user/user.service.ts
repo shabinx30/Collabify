@@ -311,4 +311,14 @@ export class UserService {
             );
         }
     }
+
+    async searchCreators() {
+        try {
+            return await this.userRepository.searchCreators()
+        } catch (error) {
+            throw new InternalServerErrorException(
+                'An unexpected error has been occured while searching creators'
+            )
+        }
+    }
 }
