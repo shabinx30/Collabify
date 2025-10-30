@@ -1,4 +1,3 @@
-import React from "react";
 import { FaFacebookF } from "react-icons/fa";
 import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
 import { IDecode, RoleType } from "@/types/auth/signup.type";

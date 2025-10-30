@@ -23,14 +23,14 @@ const Brands = () => {
     useEffect(() => {
         (async () => {
             const data = await findBrands();
-            console.log("brands from admin",data)
+            console.log("brands from admin", data);
             setBrands(data);
         })();
     }, []);
 
     return (
         <div className="w-full">
-            <div className="rounded-xl border border-border bg-[#f0f5ff] dark:bg-[#111C44] shadow-[var(--shadow-soft)] overflow-hidden">
+            <div className="rounded-xl border border-border bg-[#f0f5ff] dark:bg-[#111C44] shadow-(--shadow-soft) overflow-hidden">
                 {brands && brands.length ? (
                     <Table>
                         <TableHeader>
@@ -59,7 +59,9 @@ const Brands = () => {
                                         <div className="flex items-center gap-3">
                                             <Avatar className="h-10 w-10 border-2 border-border">
                                                 <AvatarImage
-                                                    src={user.profile}
+                                                    src={`/api/image-proxy?url=${encodeURIComponent(
+                                                        user.profile
+                                                    )}`}
                                                     alt={user.username}
                                                 />
                                                 <AvatarFallback className="bg-secondary text-secondary-foreground">
