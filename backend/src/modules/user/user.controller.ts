@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, Res } from '@nestjs/common';
 import { UserService } from './user.service';
 import { TRoles } from 'src/common/interfaces/user/role';
 import { IGuser } from 'src/common/interfaces/user/user';
@@ -6,6 +6,17 @@ import { FastifyReply } from 'fastify';
 
 @Controller()
 export class UserController {
+    constructor(private readonly userService: UserService) {}
+
+    @Get('creators')
+    async GetCreators(_, @Res({ passthrough: true }) reply: FastifyReply) {
+        const creators = await this.userService.searchCreators();
+        return reply.send(creators);
+    }
+}
+
+@Controller('auth')
+export class AuthController {
     constructor(private readonly userService: UserService) {}
 
     @Post('signup')
@@ -129,10 +140,9 @@ export class UserController {
         return reply.send({ message: 'Logged out successfully' });
     }
 
-    @Get('creators')
-    async GetCreators(_, @Res({ passthrough: true }) reply: FastifyReply) {
-        const creators = await this.userService.searchCreators();
-        return reply.send(creators);
+    @Get('instagram')
+    async authWithInstagram(@Query('code') code: string) {
+        
     }
 }
 

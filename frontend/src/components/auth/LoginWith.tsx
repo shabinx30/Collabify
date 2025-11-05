@@ -6,7 +6,6 @@ import { AppDispatch } from "@/redux/store/store";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
 import { SiInstagram } from "react-icons/si";
-import axios from "axios";
 
 const LoginWith = ({ role }: { role?: RoleType }) => {
     const dispatch = useDispatch<AppDispatch>();
@@ -24,11 +23,10 @@ const LoginWith = ({ role }: { role?: RoleType }) => {
         }
     };
 
-    const handleInsta = async () => {
-        const response = await axios.post(
+    const handleInsta = () => {
+        router.push(
             "https://www.instagram.com/oauth/authorize?force_reauth=true&client_id=1099021975409872&redirect_uri=https://unknown-shabin.vercel.app/&response_type=code&scope=instagram_business_basic%2Cinstagram_business_manage_messages%2Cinstagram_business_manage_comments%2Cinstagram_business_content_publish%2Cinstagram_business_manage_insights"
         );
-        console.log({ insta: response.data });
     };
 
     return (
