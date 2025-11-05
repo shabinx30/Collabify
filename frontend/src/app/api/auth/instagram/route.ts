@@ -18,7 +18,7 @@ export async function GET() {
 
     // storing state in a cookie
     const res = NextResponse.redirect(instagramAuthUrl);
-    res.cookies.set("ig_auth_sate", state, {
+    res.cookies.set("ig_oauth_state", state, {
         httpOnly: true,
         secure: true,
         sameSite: "lax",
