@@ -24,9 +24,7 @@ const LoginWith = ({ role }: { role?: RoleType }) => {
     };
 
     const handleInsta = () => {
-        router.push(
-            "https://www.instagram.com/oauth/authorize?force_reauth=true&client_id=1099021975409872&redirect_uri=https://unknown-shabin.vercel.app/&response_type=code&scope=instagram_business_basic%2Cinstagram_business_manage_messages%2Cinstagram_business_manage_comments%2Cinstagram_business_content_publish%2Cinstagram_business_manage_insights"
-        );
+        router.push("/api/auth/instagram");
     };
 
     return (
