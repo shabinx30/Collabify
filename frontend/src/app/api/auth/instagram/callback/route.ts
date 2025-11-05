@@ -16,6 +16,8 @@ export async function GET(request: Request) {
     const storedState = cookies["ig_oauth_state"];
 
     if (!state || state !== storedState) {
+        console.log("we have got any state", { state, storedState });
+
         return NextResponse.redirect(
             "https://collabify-shabin.vercel.app/auth/auth-error"
         );
@@ -49,7 +51,7 @@ export async function GET(request: Request) {
             path: "/",
         });
 
-        return res
+        return res;
     } catch (error: any) {
         console.error(
             "Instagram Token exchange failed",
