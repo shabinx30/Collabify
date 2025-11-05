@@ -30,7 +30,7 @@ export async function GET(request: Request) {
         params.append("grant_type", "authorization_code");
         params.append(
             "redirect_uri",
-            "https://unknown-shabin.vercel.app/api/auth/instagram/callback"
+            "https://collabify-shabin.vercel.app/api/auth/instagram/callback"
         );
         params.append("code", code || "");
 
@@ -42,7 +42,7 @@ export async function GET(request: Request) {
 
         // store the access token securely
         const res = NextResponse.redirect(
-            "https://unknown-shabin.vercel.app/dashboard"
+            "https://collabify-shabin.vercel.app/dashboard"
         );
         res.cookies.set("ig_access_token", data.access_token, {
             httpOnly: true,
