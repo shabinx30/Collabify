@@ -132,13 +132,3 @@ export const searchCreators = async () => {
         throw error;
     }
 }
-
-export const authWithInsta = async (code: string) => {
-    try {
-        const response = await axios.get(`/auth/instagram?code=${code}`)
-        return response.data
-    } catch (error) {
-        console.log(error)
-        throw error;
-    }
-}
