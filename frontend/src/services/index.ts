@@ -7,7 +7,7 @@ import { IDecode, RoleType } from "@/types/auth/signup.type";
 
 export const sendOtp = async (data: IEmail) => {
     try {
-        const response = await clientApi.post("/signup", data);
+        const response = await clientApi.post("/auth/signup", data);
         return response.data;
     } catch (error) {
         console.log(error, "Error while sending otp");
@@ -17,7 +17,7 @@ export const sendOtp = async (data: IEmail) => {
 
 export const signInUser = async (data: TSignInForm) => {
     try {
-        const response = await clientApi.post("/signin", data);
+        const response = await clientApi.post("/auth/signin", data);
         return response.data;
     } catch (error) {
         console.log(error, "Error while signing in");
@@ -27,7 +27,7 @@ export const signInUser = async (data: TSignInForm) => {
 
 export const verifyOtp = async (formData: SignupFormOutput, otp: number) => {
     try {
-        const response = await clientApi.post("/verify-otp", {
+        const response = await clientApi.post("/auth/verify-otp", {
             ...formData,
             otp,
         });
@@ -40,7 +40,7 @@ export const verifyOtp = async (formData: SignupFormOutput, otp: number) => {
 
 export const refreshToken = async () => {
     try {
-        const response = await clientApi.post("/refresh-token");
+        const response = await clientApi.post("/auth/refresh-token");
         return response.data;
     } catch (error) {
         console.log(error, "Error while refreshing token");
@@ -50,7 +50,7 @@ export const refreshToken = async () => {
 
 export const resendOtp = async (data: IEmail) => {
     try {
-        const response = await clientApi.post("/resend-otp", data);
+        const response = await clientApi.post("/auth/resend-otp", data);
         return response.data;
     } catch (error) {
         console.log(error, "Error while resending otp");
@@ -60,7 +60,7 @@ export const resendOtp = async (data: IEmail) => {
 
 export const otpStatus = async (data: IEmail) => {
     try {
-        const response = await clientApi.post("/otp-status", data);
+        const response = await clientApi.post("/auth/otp-status", data);
         return response.data;
     } catch (error) {
         console.log(error, "Error while grabbing otp status");
@@ -85,7 +85,7 @@ export const signInWithGoogle = async (data: {
     role?: RoleType;
 }) => {
     try {
-        const response = await clientApi.post("/sign-in-google", data);
+        const response = await clientApi.post("/auth/sign-in-google", data);
         return response.data;
     } catch (error) {
         console.log(error);
@@ -95,7 +95,7 @@ export const signInWithGoogle = async (data: {
 
 export const logout = async () => {
     try {
-        const response = await clientApi.post("/logout");
+        const response = await clientApi.post("/auth/logout");
         return response.data;
     } catch (error) {
         console.log(error);
@@ -129,6 +129,16 @@ export const searchCreators = async () => {
         return response.data
     } catch (error) {
         console.log(error);
+        throw error;
+    }
+}
+
+export const authWithInsta = async (code: string) => {
+    try {
+        const response = await axios.get(`/auth/instagram?code=${code}`)
+        return response.data
+    } catch (error) {
+        console.log(error)
         throw error;
     }
 }
