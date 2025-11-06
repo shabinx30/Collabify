@@ -2,10 +2,11 @@ import { IoInfinite } from "react-icons/io5";
 import { FaInstagram } from "react-icons/fa6";
 import { AiOutlineYoutube } from "react-icons/ai";
 import Link from "next/link";
+import CardAnim from "@/components/auth/CardAnim";
 
 export default function AddAccountsPage() {
     return (
-        <section className="w-full">
+        <CardAnim className="w-full">
             <header className="mb-6 text-center">
                 <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
                     Link Accounts
@@ -44,6 +45,6 @@ export default function AddAccountsPage() {
                     YouTube
                 </button>
             </div>
-        </section>
+        </CardAnim>
     );
 }

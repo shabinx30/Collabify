@@ -5,12 +5,12 @@ import { signInSchema, TSignInForm } from "@/lib/validations/signinFromData";
 import { signIn } from "@/redux/slices/auth.slice";
 import { AppDispatch, RootState } from "@/redux/store/store";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import LoginWith from "../LoginWith";
 import { useRouter } from "next/navigation";
+import CardAnim from "../CardAnim";
 
 const SignInForm = () => {
     const { isLoading } = useSelector((state: RootState) => state.auth);
@@ -28,17 +28,7 @@ const SignInForm = () => {
     };
 
     return (
-        <motion.div
-            layout
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{
-                type: "spring",
-                stiffness: 120,
-                damping: 25,
-            }}
-        >
+        <CardAnim>
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Sign in to your account
             </h1>
@@ -113,7 +103,7 @@ const SignInForm = () => {
                     </Link>
                 </p>
             </form>
-        </motion.div>
+        </CardAnim>
     );
 };
 

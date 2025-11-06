@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { RoleType } from "@/types/auth/signup.type";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,6 +20,7 @@ import { sendOtp } from "@/services";
 import { addUser } from "@/redux/slices/auth.slice";
 import LoginWith from "../LoginWith";
 import { isValidUserType } from "@/lib/utils";
+import CardAnim from "../CardAnim";
 
 const SignUpForm = () => {
     const searchParams = useSearchParams();
@@ -58,16 +59,7 @@ const SignUpForm = () => {
     }, [role]);
 
     return (
-        <motion.div
-            layout
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{
-                type: "spring",
-                stiffness: 120,
-                damping: 25,
-            }}
+        <CardAnim
             ref={scrollRef}
             className="sections w-full flex overflow-x-hidden"
         >
@@ -213,7 +205,7 @@ const SignUpForm = () => {
                                 >
                                     Sign Up
                                 </button>
-                                <LoginWith role={role}/>
+                                <LoginWith role={role} />
                             </div>
                             <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                                 Already have an account?{" "}
@@ -230,7 +222,7 @@ const SignUpForm = () => {
             </AnimatePresence>
             {/* otp */}
             <Otp />
-        </motion.div>
+        </CardAnim>
     );
 };
 
