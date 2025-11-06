@@ -23,7 +23,7 @@ const LoginWith = ({ role }: { role?: RoleType }) => {
     };
 
     return (
-        <section className="flex gap-2">
+        <section className="flex gap-2 justify-center">
             <GoogleLogin
                 shape="pill"
                 theme={

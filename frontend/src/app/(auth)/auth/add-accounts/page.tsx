@@ -23,9 +23,8 @@ export default function AddAccountsPage() {
                     </div>
                 </div>
                 <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
-                    Link your social media platform to gather real-time
-                    infromations and also for better authenticity & trust with
-                    brands
+                    Link your social media accounts to gather real-time insights
+                    and build trust with brands.
                 </p>
             </header>
 
