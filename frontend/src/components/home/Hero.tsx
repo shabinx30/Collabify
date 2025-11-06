@@ -18,10 +18,10 @@ const Hero = () => {
                     platform.
                 </p>
             </div>
-            <div className="bg-[#fff4c9] dark:bg-[#000] w-full md:flex p-2 rounded-3xl mt-[4em] text-black dark:text-white slide-up-opacity">
+            <div className="bg-[#fff4c9] dark:bg-black w-full md:flex p-2 rounded-3xl mt-[4em] text-black dark:text-white slide-up-opacity">
                 <div className="flex-1/4 relative aspect-video">
                     <Image
-                        className="saturate-[130%] rounded-2xl object-cover object-center"
+                        className="saturate-130 rounded-2xl object-cover object-center"
                         src="/images/vlog.jpg"
                         alt="hero.png"
                         fill

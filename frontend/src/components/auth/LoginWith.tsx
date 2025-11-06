@@ -5,7 +5,6 @@ import { signInWith } from "@/redux/slices/auth.slice";
 import { AppDispatch } from "@/redux/store/store";
 import { useRouter } from "next/navigation";
 import { jwtDecode } from "jwt-decode";
-import { SiInstagram } from "react-icons/si";
 
 const LoginWith = ({ role }: { role?: RoleType }) => {
     const dispatch = useDispatch<AppDispatch>();
@@ -23,10 +22,6 @@ const LoginWith = ({ role }: { role?: RoleType }) => {
         }
     };
 
-    const handleInsta = () => {
-        router.push("/api/auth/instagram");
-    };
-
     return (
         <section className="flex gap-2">
             <GoogleLogin
@@ -41,13 +36,6 @@ const LoginWith = ({ role }: { role?: RoleType }) => {
                 onSuccess={handleLogin}
                 onError={() => console.log("failed")}
             />
-            <div
-                onClick={handleInsta}
-                className="flex flex-1 justify-center items-center gap-2 min-h-full bg-gray-200 dark:bg-[#3b3b3b] rounded-full cursor-pointer"
-            >
-                <SiInstagram size={18} />
-                <p>Link with Instagram</p>
-            </div>
         </section>
     );
 };
