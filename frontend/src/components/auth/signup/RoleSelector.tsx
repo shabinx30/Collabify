@@ -23,7 +23,7 @@ const RoleSelector = ({ role, setRole }: IRoleSelector) => {
             {/* Buttons */}
             <div
                 onClick={() => setRole(() => "brand")}
-                className={`flex-1 flex py-3 justify-center items-center gap-3 z-10 cursor-pointer transition-colors duration-300 ${
+                className={`flex-1 flex py-3 justify-center items-center gap-2 md:gap-3 z-10 cursor-pointer transition-colors duration-300 ${
                     role === "brand"
                         ? "dark:text-[#FFBF00]"
                         : "dark:text-gray-300"
@@ -34,7 +34,7 @@ const RoleSelector = ({ role, setRole }: IRoleSelector) => {
             </div>
             <div
                 onClick={() => setRole(() => "creator")}
-                className={`flex-1 flex py-3 justify-center items-center gap-3 z-10 cursor-pointer transition-colors duration-300 ${
+                className={`flex-1 flex py-3 justify-center items-center gap-2 md:gap-3 z-10 cursor-pointer transition-colors duration-300 ${
                     role === "creator"
                         ? "dark:text-[#FFBF00]"
                         : "dark:text-gray-300"
