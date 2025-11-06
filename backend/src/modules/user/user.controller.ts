@@ -8,6 +8,11 @@ import { FastifyReply } from 'fastify';
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
+    @Get('user/:username')
+    async findUser(@Param('username') username: string) {
+        return await this.userService.getUser(username);
+    }
+
     @Get('creators')
     async GetCreators(_, @Res({ passthrough: true }) reply: FastifyReply) {
         const creators = await this.userService.searchCreators();
@@ -93,11 +98,6 @@ export class AuthController {
     @Post('otp-status')
     async getOtpStatus(@Body('email') email: string) {
         return await this.userService.otpStatus(email);
-    }
-
-    @Get('user/:username')
-    async findUser(@Param('username') username: string) {
-        return await this.userService.getUser(username);
     }
 
     @Post('sign-in-google')

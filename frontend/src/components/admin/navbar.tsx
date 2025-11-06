@@ -16,13 +16,9 @@ const Navbar = ({ asideWidth }: { asideWidth: number }) => {
 
     return (
         <nav
-            className="flex justify-between backdrop-blur-md bg-[#00000016] dark:bg-[#ffffff16] rounded-full z-[50] fixed p-2"
+            className="flex justify-between backdrop-blur-md bg-[#00000016] dark:bg-[#ffffff16] rounded-full z-50 fixed p-2"
             style={{
                 width: `calc(100vw - ${asideWidth || 0}px - 67px)`,
-                // borderTopLeftRadius: 46,
-                // borderBottomLeftRadius: 46,
-                // borderTopRightRadius: 100,
-                // borderBottomRightRadius: 100,
             }}
         >
             {/* current page */}
