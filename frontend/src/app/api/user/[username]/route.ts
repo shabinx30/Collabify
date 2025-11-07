@@ -3,10 +3,10 @@ import { NextResponse } from "next/server";
 
 export async function GET(
     _request: Request,
-    { params }: { params: Promise<{ username: string }> }
+    context: { params: any }
 ) {
     try {
-        const username = (await params).username;
+        const { username } = await context.params;
 
         const user = await User.findOne({ username }, { password: 0 });
         console.log({ user });
