@@ -139,11 +139,6 @@ export class AuthController {
 
         return reply.send({ message: 'Logged out successfully' });
     }
-
-    @Get('instagram')
-    async authWithInstagram(@Query('code') code: string) {
-        
-    }
 }
 
 @Controller('admin')
