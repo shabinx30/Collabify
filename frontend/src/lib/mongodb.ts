@@ -9,7 +9,7 @@ async function connectDB() {
     if (mongoose.connection.readyState >= 1) return mongoose;
     if (!connectionPromise) {
         connectionPromise = mongoose.connect(MONGODB_URI, {
-            dbName: "your_db_name",
+            dbName: "influencer-collab",
             bufferCommands: false,
         });
     }
