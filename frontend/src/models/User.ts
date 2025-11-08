@@ -1,5 +1,4 @@
 import mongoose from "@/lib/mongodb";
-
 const { Schema, models } = mongoose;
 
 const UserSchema = new Schema(

@@ -28,10 +28,9 @@ const Search = () => {
                 >
                     <Link
                         href="/"
-                        className="flex h-full flex-col items-center gap-0.5 pt-1.5 px-4 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-2xl cursor-pointer"
+                        className="flex h-full items-center px-3.5 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-2xl cursor-pointer"
                     >
                         <IoChevronBackOutline size={20} />
-                        <p className="text-xs leading-tight">Back</p>
                     </Link>
                 </motion.span>
                 <ViewTransition name="search-bar">
@@ -49,10 +48,9 @@ const Search = () => {
                     initial={{ x: 100, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ type: "tween" }}
-                    className="flex flex-col items-center pt-1.5 px-4 gap-0.5 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-2xl cursor-pointer"
+                    className="flex items-center px-3.5 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-2xl cursor-pointer"
                 >
                     <PiSlidersHorizontalBold size={20} />
-                    <p className="text-xs leading-tight">Filter</p>
                 </motion.span>
             </div>
             <div>
