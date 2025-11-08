@@ -3,9 +3,12 @@ const { Schema, models } = mongoose;
 
 const SocialMediaSchema = new Schema(
     {
+        userId: { type: Schema.Types.ObjectId, required: true },
         platform: { type: String, required: true },
         platformUserId: { type: Schema.Types.ObjectId, required: true },
+        userName: { type: String, required: true },
         profilePicture: { type: String },
+        accountType: { type: String, requied: true },
         token: {
             accessToken: String,
             expiresAt: Date,

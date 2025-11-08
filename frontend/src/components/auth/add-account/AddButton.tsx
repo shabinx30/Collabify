@@ -18,7 +18,7 @@ const AddButton = ({
     const { user } = useSelector((state: RootState) => state.auth);
 
     if (href && href?.endsWith("instagram")) {
-        href += `?userid=${user?.userId}`;
+        href += `?userId=${user?.userId}`;
     }
 
     return (

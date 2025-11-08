@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
     const url = new URL(request.url)
-    const userid = url.searchParams.get('userid')
+    const userId = url.searchParams.get('userId')
 
     const clientId = process.env.IG_CLIENT_ID;
     const redirectUri =
@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
 
     // creating a state to prevent csrf
     const csrfToken = crypto.randomBytes(8).toString("hex");
-    const statePayload = Buffer.from(JSON.stringify({userid, csrfToken})).toString('base64')
+    const statePayload = Buffer.from(JSON.stringify({userId, csrfToken})).toString('base64')
 
     // insta autherization url
     const instagramAuthUrl = `https://www.instagram.com/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(
