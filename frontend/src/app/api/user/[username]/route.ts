@@ -6,7 +6,7 @@ export async function GET(
     context: { params: any }
 ) {
     try {
-        const { username } = await context.params;
+        const { username } = context.params;
 
         const user = await User.findOne({ username }, { password: 0 });
 
