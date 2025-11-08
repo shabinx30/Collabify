@@ -1,8 +1,8 @@
 import { IoInfinite } from "react-icons/io5";
 import { FaInstagram } from "react-icons/fa6";
 import { AiOutlineYoutube } from "react-icons/ai";
-import Link from "next/link";
 import CardAnim from "@/components/auth/CardAnim";
+import AddButton from "@/components/auth/add-account/AddButton";
 
 export default function AddAccountsPage() {
     return (
@@ -30,20 +30,16 @@ export default function AddAccountsPage() {
             </header>
 
             <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
-                <Link
+                <AddButton
                     href="/api/auth/instagram"
-                    type="button"
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-amber-300 px-5 py-2.5 text-sm font-medium text-amber-400 hover:bg-amber-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-amber-300/60 active:bg-amber-300/90 transition-colors"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-amber-300 px-5 py-2.5 text-sm font-medium text-amber-400 hover:bg-amber-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-amber-300/60 active:bg-amber-300/90 transition-colors cursor-pointer"
                 >
                     Instagram
-                </Link>
+                </AddButton>
 
-                <button
-                    type="button"
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-amber-300 px-5 py-2.5 text-sm font-medium text-amber-400 hover:bg-amber-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-amber-300/60 active:bg-amber-300/90 transition-colors"
-                >
+                <AddButton className="inline-flex items-center justify-center gap-2 rounded-full border border-amber-300 px-5 py-2.5 text-sm font-medium text-amber-400 hover:bg-amber-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-amber-300/60 active:bg-amber-300/90 transition-colors cursor-pointer">
                     YouTube
-                </button>
+                </AddButton>
             </div>
         </CardAnim>
     );
