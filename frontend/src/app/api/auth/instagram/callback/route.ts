@@ -1,4 +1,5 @@
 import axios from "axios";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
@@ -6,16 +7,23 @@ export async function GET(request: Request) {
     const code = url.searchParams.get("code");
     const state = url.searchParams.get("state");
 
-    // getting the state cookie
-    const cookies = Object.fromEntries(
-        request.headers
-            .get("cookie")
-            ?.split(";")
-            .map((c) => c.trim().split("=")) || []
-    );
-    const storedState = cookies["ig_oauth_state"];
+    const cookieStore = await cookies()
 
-    if (!state || state !== storedState) {
+    // getting the state cookie
+    // const cookies = Object.fromEntries(
+    //     request.headers
+    //         .get("cookie")
+    //         ?.split(";")
+    //         .map((c) => c.trim().split("=")) || []
+    // );
+    // const storedCsrfToken = cookies["csrf_token"];
+
+    const { userId, csrfToken } = JSON.parse(
+        Buffer.from(state!, "base64").toString()
+    );
+    const storedCsrfToken = cookieStore.get("csrf_token")?.value;
+
+    if (!csrfToken || csrfToken !== storedCsrfToken) {
         return NextResponse.redirect(
             "https://collabify-shabin.vercel.app/auth/auth-error"
         );
