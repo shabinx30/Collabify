@@ -9,20 +9,10 @@ export async function GET(request: Request) {
 
     const cookieStore = await cookies()
 
-    // getting the state cookie
-    // const cookies = Object.fromEntries(
-    //     request.headers
-    //         .get("cookie")
-    //         ?.split(";")
-    //         .map((c) => c.trim().split("=")) || []
-    // );
-    // const storedCsrfToken = cookies["csrf_token"];
-
     const { userId, csrfToken } = JSON.parse(
         Buffer.from(state!, "base64").toString()
     );
-    const storedCsrfToken = cookieStore.get("csrf_token")
-    console.log({storedCsrfToken})
+    const storedCsrfToken = cookieStore.get("csrf_token")?.value
 
     if (!csrfToken || csrfToken !== storedCsrfToken) {
         return NextResponse.redirect(

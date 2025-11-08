@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
 
     // storing state in a cookie
     const res = NextResponse.redirect(instagramAuthUrl);
-    res.cookies.set("csrf_token", statePayload, {
+    res.cookies.set("csrf_token", csrfToken, {
         httpOnly: true,
         secure: true,
         sameSite: "lax",
