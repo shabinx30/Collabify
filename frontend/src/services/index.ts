@@ -70,7 +70,6 @@ export const otpStatus = async (data: IEmail) => {
 
 export const findUser = async (userid: string) => {
     try {
-        console.log("url", process.env.NEXT_PUBLIC_BASE_URL);
         const response = await axios.get(
             `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/${userid}`
         );
