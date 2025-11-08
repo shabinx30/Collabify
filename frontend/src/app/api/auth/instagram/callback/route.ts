@@ -21,7 +21,8 @@ export async function GET(request: Request) {
     const { userId, csrfToken } = JSON.parse(
         Buffer.from(state!, "base64").toString()
     );
-    const storedCsrfToken = cookieStore.get("csrf_token")?.value;
+    const storedCsrfToken = cookieStore.get("csrf_token")
+    console.log({storedCsrfToken})
 
     if (!csrfToken || csrfToken !== storedCsrfToken) {
         return NextResponse.redirect(
