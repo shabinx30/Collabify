@@ -9,7 +9,6 @@ export async function GET(
         const { username } = await context.params;
 
         const user = await User.findOne({ username }, { password: 0 });
-        console.log({ user });
 
         if (!user) {
             return NextResponse.json(
