@@ -56,6 +56,8 @@ export async function GET(request: Request) {
             },
         });
 
+        media.save()
+
         const res = NextResponse.redirect(
             "https://collabify-shabin.vercel.app/dashboard"
         );
