@@ -70,6 +70,7 @@ export const otpStatus = async (data: IEmail) => {
 
 export const findUser = async (userid: string) => {
     try {
+        console.log("url", process.env.NEXT_PUBLIC_BASE_URL);
         const response = await axios.get(
             `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/${userid}`
         );
@@ -105,30 +106,30 @@ export const logout = async () => {
 
 export const findCreators = async () => {
     try {
-        const response = await clientApi.get("/admin/creators")
-        return response.data
+        const response = await clientApi.get("/admin/creators");
+        return response.data;
     } catch (error) {
         console.log(error);
         throw error;
     }
-}
+};
 
 export const findBrands = async () => {
     try {
-        const response = await clientApi.get("/admin/brands")
-        return response.data
+        const response = await clientApi.get("/admin/brands");
+        return response.data;
     } catch (error) {
         console.log(error);
         throw error;
     }
-}
+};
 
 export const searchCreators = async () => {
     try {
-        const response = await clientApi.get("/creators")
-        return response.data
+        const response = await clientApi.get("/creators");
+        return response.data;
     } catch (error) {
         console.log(error);
         throw error;
     }
-}
+};
