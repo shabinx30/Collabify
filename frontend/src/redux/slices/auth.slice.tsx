@@ -35,9 +35,13 @@ export const verifyUserOtp = createAsyncThunk(
             toast.custom((t) => <Success t={t} message="welcome" />);
 
             const user = jwtDecode(res.token) as IUser;
-            const { username } = user;
+            const { username, role } = user;
 
-            router.push(`/${username}`);
+            if (role === "creator") {
+                router.push("/auth/add-account");
+            } else if (role === "brand") {
+                router.push(`/${username}`);
+            }
 
             return { ...res, user };
         } catch (error) {
