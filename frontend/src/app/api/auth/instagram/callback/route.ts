@@ -2,6 +2,7 @@ import SocialMedia from "@/models/SocialMedia";
 import axios from "axios";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { connectDB } from "@/lib/mongodb";
 
 export async function GET(request: Request) {
     const url = new URL(request.url);
@@ -21,6 +22,9 @@ export async function GET(request: Request) {
     }
 
     try {
+        // Ensure MongoDB connection is established
+        await connectDB();
+
         const params = new URLSearchParams({
             client_id: process.env.IG_CLIENT_ID!,
             client_secret: process.env.IG_CLIENT_SECRET!,

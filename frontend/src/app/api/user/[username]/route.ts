@@ -1,11 +1,15 @@
 import User from "@/models/User";
 import { NextResponse } from "next/server";
+import { connectDB } from "@/lib/mongodb";
 
 export async function GET(
     _request: Request,
     context: { params: Promise<{ username: string }> | { username: string } }
 ) {
     try {
+        // Ensure MongoDB connection is established
+        await connectDB();
+
         // Handle params - in Next.js 15+, params is a Promise
         const params = context.params instanceof Promise 
             ? await context.params 
