@@ -8,6 +8,7 @@ import { IDecode, RoleType } from "@/types/auth/signup.type";
 export const sendOtp = async (data: IEmail) => {
     try {
         const response = await clientApi.post("/auth/signup", data);
+        console.log({response})
         return response.data;
     } catch (error) {
         console.log(error, "Error while sending otp");

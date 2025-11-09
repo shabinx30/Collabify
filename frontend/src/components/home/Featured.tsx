@@ -10,7 +10,6 @@ const Featured = () => {
     useEffect(() => {
         (async () => {
             const response = await searchCreators();
-            console.log({ response });
             setCreators(response);
         })();
     }, []);
