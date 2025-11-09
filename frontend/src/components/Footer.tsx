@@ -4,52 +4,78 @@ import { LuFacebook } from "react-icons/lu";
 
 const Footer = () => {
     return (
-        <footer className="bg-amber-100 dark:bg-black p-4">
-            <div className="flex py-[2em]">
-                <div className="flex flex-1 justify-center">
+        <footer className="bg-amber-100 dark:bg-black p-4 sm:p-6 md:p-8">
+            <div className="flex flex-col md:flex-row py-6 md:py-8 lg:py-12 gap-8 md:gap-4">
+                {/* Logo Section */}
+                <div className="flex flex-1 justify-center md:justify-start">
                     <Link href="/">
-                        <h3 className="text-xl my-[2em] font-bold">Collabify</h3>
+                        <h3 className="text-lg sm:text-xl md:text-2xl my-0 md:my-8 font-bold">Collabify</h3>
                     </Link>
                 </div>
-                <div className="flex-1/2 flex gap-4 text-xs justify-around items-center">
-                    <div className="flex flex-col gap-2">
-                        <p>About Us</p>
-                        <p>Signin</p>
-                        <p>SignUp</p>
+                
+                {/* Links Section */}
+                <div className="flex-1 flex flex-col sm:flex-row gap-6 sm:gap-4 md:gap-6 lg:gap-8 text-xs sm:text-sm justify-center md:justify-around items-start sm:items-center">
+                    <div className="flex flex-col gap-2 sm:gap-3">
+                        <p className="font-semibold mb-1">Quick Links</p>
+                        <p className="hover:text-gray-600 dark:hover:text-gray-400 cursor-pointer">About Us</p>
+                        <p className="hover:text-gray-600 dark:hover:text-gray-400 cursor-pointer">Signin</p>
+                        <p className="hover:text-gray-600 dark:hover:text-gray-400 cursor-pointer">SignUp</p>
                     </div>
-                    <div className="flex flex-col gap-2">
-                        <p>Search for influencers</p>
-                        <p>Search for brands by category</p>
-                        <p>Search for brands</p>
+                    <div className="flex flex-col gap-2 sm:gap-3">
+                        <p className="font-semibold mb-1">Search</p>
+                        <p className="hover:text-gray-600 dark:hover:text-gray-400 cursor-pointer">Search for influencers</p>
+                        <p className="hover:text-gray-600 dark:hover:text-gray-400 cursor-pointer">Search for brands by category</p>
+                        <p className="hover:text-gray-600 dark:hover:text-gray-400 cursor-pointer">Search for brands</p>
                     </div>
-                    <div className="flex flex-col gap-2">
-                        <p>Search for influencers</p>
-                        <p>Search for brands by category</p>
-                        <p>Search for brands</p>
+                    <div className="flex flex-col gap-2 sm:gap-3">
+                        <p className="font-semibold mb-1">Resources</p>
+                        <p className="hover:text-gray-600 dark:hover:text-gray-400 cursor-pointer">Help Center</p>
+                        <p className="hover:text-gray-600 dark:hover:text-gray-400 cursor-pointer">Contact Us</p>
+                        <p className="hover:text-gray-600 dark:hover:text-gray-400 cursor-pointer">Privacy Policy</p>
                     </div>
                 </div>
             </div>
-            <div className="flex justify-center gap-4 items-center">
-                <p className="text-xs text-gray-400">
+            
+            {/* Bottom Section */}
+            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-4 items-center pt-4 border-t border-gray-300 dark:border-gray-700">
+                <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 text-center sm:text-left">
                     All right reserved &copy; 2025
                 </p>
-                <div className="flex gap-2">
-                    <a target="_blank" rel="noopener noreferrer">
+                <div className="flex gap-3 sm:gap-2">
+                    <a 
+                        href="#" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="transition-transform hover:scale-110"
+                        aria-label="Instagram"
+                    >
                         <FaInstagram
-                            size={24}
-                            className="bg-white text-black p-1 rounded-full"
+                            size={20}
+                            className="sm:w-6 sm:h-6 bg-white text-black p-1 rounded-full"
                         />
                     </a>
-                    <a target="_blank" rel="noopener noreferrer">
+                    <a 
+                        href="#" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="transition-transform hover:scale-110"
+                        aria-label="Twitter"
+                    >
                         <FaXTwitter
-                            size={24}
-                            className="bg-white text-black p-1 rounded-full"
+                            size={20}
+                            className="sm:w-6 sm:h-6 bg-white text-black p-1 rounded-full"
                         />
                     </a>
-                    <a target="_blank" rel="noopener noreferrer">
+                    <a 
+                        href="#" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="transition-transform hover:scale-110"
+                        aria-label="Facebook"
+                    >
                         <LuFacebook
-                            size={24}
-                            className="bg-white text-black p-1 rounded-full"
+                            size={20}
+                            className="sm:w-6 sm:h-6 bg-white text-black p-1 rounded-full"
                         />
                     </a>
                 </div>
