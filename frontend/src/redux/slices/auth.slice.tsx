@@ -38,7 +38,7 @@ export const verifyUserOtp = createAsyncThunk(
             const { username, role } = user;
 
             if (role === "creator") {
-                router.push("/auth/add-account");
+                router.push("/auth/add-accounts");
             } else if (role === "brand") {
                 router.push(`/${username}`);
             }
