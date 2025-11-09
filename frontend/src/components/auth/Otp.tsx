@@ -85,14 +85,14 @@ const Otp = () => {
                         {user?.email}
                     </p>
                 </div>
-                <div className="flex justify-center gap-4 text-white">
+                <div className="flex justify-center gap-4">
                     {otp.map((value, i) => (
                         <input
                             key={i}
                             ref={(el) => {
                                 inputsRef.current[i] = el;
                             }}
-                            className="w-[3em] h-[3em] border-2 border-gray-500 focus:border-white rounded-xl text-center outline-none"
+                            className="w-[3em] h-[3em] border-2 border-gray-300 dark:border-gray-500 focus:border-black dark:focus:border-white rounded-xl text-center outline-none"
                             type="text"
                             inputMode="numeric"
                             maxLength={1}
