@@ -34,18 +34,8 @@ export class UserService {
             throw new BadRequestException('User is already Existing');
         }
 
-        try {
-            await this.sendOtp(email);
-            return { message: 'success' };
-        } catch (error) {
-            if (error instanceof HttpException) {
-                throw error;
-            }
-            console.log(error);
-            throw new InternalServerErrorException(
-                'An unexpected error occurred while signing up',
-            );
-        }
+        await this.sendOtp(email);
+        return { message: 'success' };
     }
 
     async signIn(userDto: SignInDto) {
@@ -311,11 +301,11 @@ export class UserService {
 
     async searchCreators() {
         try {
-            return await this.userRepository.searchCreators()
+            return await this.userRepository.searchCreators();
         } catch (error) {
             throw new InternalServerErrorException(
-                'An unexpected error has been occured while searching creators'
-            )
+                'An unexpected error has been occured while searching creators',
+            );
         }
     }
 }
