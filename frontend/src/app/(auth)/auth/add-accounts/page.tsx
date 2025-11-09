@@ -2,7 +2,7 @@ import { IoInfinite } from "react-icons/io5";
 import { FaInstagram } from "react-icons/fa6";
 import { AiOutlineYoutube } from "react-icons/ai";
 import CardAnim from "@/components/auth/CardAnim";
-import AddButton from "@/components/auth/add-account/AddButton";
+import AddButton from "@/components/auth/add-accounts/AddButton";
 
 export default function AddAccountsPage() {
     return (
