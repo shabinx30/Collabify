@@ -90,10 +90,7 @@ export class UserService {
 
     async sendOtp(email: string) {
         const otp = generateOtp();
-        const newOtp = await this.userRepository.createOtp({
-            email,
-            otp,
-        });
+        const newOtp = await this.userRepository.createOrUpdateOtp(email, otp);
 
         if (!newOtp) {
             throw new InternalServerErrorException("Can't create otp");
