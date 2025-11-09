@@ -3,10 +3,21 @@ import { NextResponse } from "next/server";
 
 export async function GET(
     _request: Request,
-    context: { params: any }
+    context: { params: Promise<{ username: string }> | { username: string } }
 ) {
     try {
-        const { username } = context.params;
+        // Handle params - in Next.js 15+, params is a Promise
+        const params = context.params instanceof Promise 
+            ? await context.params 
+            : context.params;
+        const { username } = params;
+
+        if (!username) {
+            return NextResponse.json(
+                { message: "Username is required" },
+                { status: 400 }
+            );
+        }
 
         const user = await User.findOne({ username }, { password: 0 });
 
@@ -19,6 +30,10 @@ export async function GET(
 
         return NextResponse.json(user);
     } catch (error: any) {
-        return NextResponse.json({ error: error.message }, { status: 500 });
+        console.error("Error fetching user:", error);
+        return NextResponse.json(
+            { error: error.message || "Internal server error" },
+            { status: 500 }
+        );
     }
 }
