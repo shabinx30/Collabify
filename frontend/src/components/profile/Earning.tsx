@@ -27,10 +27,10 @@ const Earning = () => {
     ];
 
     return (
-        <section className="flex-1">
+        <section className="flex-1 min-w-0">
             <h3 className="text-[#ffcc00]">Earning</h3>
-            <div className="bg-gray-100 dark:bg-[#2b2b2b] w-full h-full rounded-xl px-3 pt-3">
-                <ResponsiveContainer>
+            <div className="bg-gray-100 dark:bg-[#2b2b2b] w-full h-full min-h-[300px] md:min-h-0 rounded-xl px-2 sm:px-3 pt-3 pb-2">
+                <ResponsiveContainer width="100%" height="100%" minHeight={250}>
                     <LineChart data={data}>
                         <CartesianGrid stroke="#5d5d5d" strokeDasharray="3 3" />
                         <XAxis dataKey="month" fontSize={12} stroke="#5d5d5d" />
