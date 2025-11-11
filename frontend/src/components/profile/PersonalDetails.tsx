@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { IProfileUser } from "@/types/profile/profile.type";
-import { ViewTransition } from "react";
 
 const PersonalDetails = ({ data }: { data: IProfileUser }) => {
     return (
@@ -8,19 +7,15 @@ const PersonalDetails = ({ data }: { data: IProfileUser }) => {
             <h3 className="text-amber-400">Person Details</h3>
             <div className="flex flex-col sm:flex-row bg-gray-100 dark:bg-[#2b2b2b] h-full min-h-fit rounded-xl p-2 sm:p-4 gap-4">
                 <div className="relative max-h-fit shrink-0 self-center sm:self-start">
-                    <ViewTransition name="profile">
-                        <Image
-                            className={`min-w-36 rounded-2xl ${
-                                !data.profile
-                                    ? "contrast-0 dark:contrast-100"
-                                    : ""
-                            }`}
-                            width={100}
-                            height={100}
-                            src={data.profile || "/images/icons/user.png"}
-                            alt={data.username}
-                        />
-                    </ViewTransition>
+                    <Image
+                        className={`min-w-36 rounded-2xl ${
+                            !data.profile ? "contrast-0 dark:contrast-100" : ""
+                        }`}
+                        width={100}
+                        height={100}
+                        src={data.profile || "/images/icons/user.png"}
+                        alt={data.username}
+                    />
                     <div className="absolute bottom-1 left-1 py-2 w-[calc(100%-8px)] bg-[#ffffff80] backdrop-blur-md rounded-full cursor-pointer">
                         <p className="text-center text-black text-xs">
                             change profile photo
@@ -50,7 +45,9 @@ const PersonalDetails = ({ data }: { data: IProfileUser }) => {
                     </div>
                     <div className="leading-tight">
                         <span className="text-gray-400 text-xs">Email</span>
-                        <h3 className="wrap-break-word break-all">{data.email}</h3>
+                        <h3 className="wrap-break-word break-all">
+                            {data.email}
+                        </h3>
                     </div>
                     <div className="flex flex-col sm:flex-row sm:justify-between gap-3 sm:gap-0">
                         <div className="flex flex-col gap-0.5 flex-1 min-w-0">
@@ -79,7 +76,9 @@ const PersonalDetails = ({ data }: { data: IProfileUser }) => {
                                 Location
                             </span>
                             {data.location ? (
-                                <h3 className="wrap-break-word">{data.location}</h3>
+                                <h3 className="wrap-break-word">
+                                    {data.location}
+                                </h3>
                             ) : (
                                 <input
                                     type="text"
