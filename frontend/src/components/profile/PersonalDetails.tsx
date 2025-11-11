@@ -7,7 +7,7 @@ const PersonalDetails = ({ data }: { data: IProfileUser }) => {
         <section className="flex-1 min-w-0">
             <h3 className="text-amber-400">Person Details</h3>
             <div className="flex flex-col sm:flex-row bg-gray-100 dark:bg-[#2b2b2b] h-full min-h-fit rounded-xl p-2 sm:p-4 gap-4">
-                <div className="relative max-h-fit flex-shrink-0 self-center sm:self-start">
+                <div className="relative max-h-fit shrink-0 self-center sm:self-start">
                     <ViewTransition name="profile">
                         <Image
                             className={`min-w-36 rounded-2xl ${
@@ -31,7 +31,7 @@ const PersonalDetails = ({ data }: { data: IProfileUser }) => {
                     <div className="flex flex-col sm:flex-row sm:justify-between gap-3 sm:gap-0">
                         <div className="leading-tight">
                             <span className="text-gray-400 text-xs">Name</span>
-                            <h3 className="break-words">{data.username}</h3>
+                            <h3 className="wrap-break-word">{data.username}</h3>
                         </div>
                         <div className="flex flex-col gap-0.5">
                             <span className="text-gray-400 text-xs">
@@ -50,7 +50,7 @@ const PersonalDetails = ({ data }: { data: IProfileUser }) => {
                     </div>
                     <div className="leading-tight">
                         <span className="text-gray-400 text-xs">Email</span>
-                        <h3 className="break-words break-all">{data.email}</h3>
+                        <h3 className="wrap-break-word break-all">{data.email}</h3>
                     </div>
                     <div className="flex flex-col sm:flex-row sm:justify-between gap-3 sm:gap-0">
                         <div className="flex flex-col gap-0.5 flex-1 min-w-0">
@@ -79,7 +79,7 @@ const PersonalDetails = ({ data }: { data: IProfileUser }) => {
                                 Location
                             </span>
                             {data.location ? (
-                                <h3 className="break-words">{data.location}</h3>
+                                <h3 className="wrap-break-word">{data.location}</h3>
                             ) : (
                                 <input
                                     type="text"
