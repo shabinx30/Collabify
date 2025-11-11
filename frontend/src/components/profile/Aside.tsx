@@ -24,7 +24,7 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <div className="flex">
-            <div className="bg-white dark:bg-[#1b1b1b] border-r border-gray-200 dark:border-none flex flex-col">
+            <div className="bg-white dark:bg-[#1b1b1b] border-r border-gray-200 dark:border-none hidden md:flex flex-col">
                 <ul className="p-4">
                     <li
                         onClick={() => {
