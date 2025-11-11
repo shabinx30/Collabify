@@ -18,8 +18,8 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
     const { user } = useSelector((state: RootState) => state.auth);
 
     const handleLogout = () => {
-        googleLogout()
-        dispatch(logoutUser(router))
+        googleLogout();
+        dispatch(logoutUser(router));
     };
 
     return (
@@ -37,7 +37,7 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
                         }
                     >
                         <FaRegUser />
-                        Personal Details
+                        <p className="hidden xl:block">Personal Details</p>
                     </li>
                     <li
                         onClick={() => {
@@ -50,7 +50,7 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
                         }
                     >
                         <PiUserCircleDashed size={21} />
-                        Social Media Accounts
+                        <p className="hidden xl:block">Social Media Accounts</p>
                     </li>
                 </ul>
                 <ul className="p-4">
@@ -66,14 +66,14 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
                         }
                     >
                         <LuSettings />
-                        Settings
+                        <p className="hidden xl:block">Settings</p>
                     </li>
                     <li
                         onClick={handleLogout}
                         className="text-red-400 hover:bg-red-100 hover:text-red-500 dark:hover:bg-[#101010] duration-200 px-4 py-2 rounded-2xl flex gap-3 items-center cursor-pointer"
                     >
                         <TbLogout />
-                        Logout
+                        <p className="hidden xl:block">Logout</p>
                     </li>
                 </ul>
             </div>
