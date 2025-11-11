@@ -28,8 +28,8 @@ const NavBar = () => {
     const router = useRouter();
 
     const handleLogout = () => {
-        googleLogout()
-        dispatch(logoutUser(router))
+        googleLogout();
+        dispatch(logoutUser(router));
     };
 
     const handleSubmit = (e: FormEvent) => {
@@ -69,22 +69,20 @@ const NavBar = () => {
                                 >
                                     <div className="flex gap-4 items-center hover:bg-gray-200 dark:hover:bg-[#3b3b3b] duration-200 pl-4 rounded-full cursor-default">
                                         <h3>{user.username}</h3>
-                                        <ViewTransition name="profile">
-                                            <Image
-                                                className={`w-9 h-9 rounded-full ${
-                                                    !user.profile
-                                                        ? "contrast-0 dark:contrast-100"
-                                                        : ""
-                                                }`}
-                                                width={100}
-                                                height={100}
-                                                src={
-                                                    user.profile ||
-                                                    "/images/icons/user.png"
-                                                }
-                                                alt={user.username}
-                                            />
-                                        </ViewTransition>
+                                        <Image
+                                            className={`w-9 h-9 rounded-full ${
+                                                !user.profile
+                                                    ? "contrast-0 dark:contrast-100"
+                                                    : ""
+                                            }`}
+                                            width={100}
+                                            height={100}
+                                            src={
+                                                user.profile ||
+                                                "/images/icons/user.png"
+                                            }
+                                            alt={user.username}
+                                        />
                                     </div>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent
