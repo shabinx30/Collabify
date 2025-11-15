@@ -1,7 +1,14 @@
-import Image from "next/image";
-import { IProfileUser } from "@/types/profile/profile.type";
+"use client";
 
-const PersonalDetails = ({ data }: { data: IProfileUser }) => {
+import Image from "next/image";
+import { useUserData } from "@/contexts/UserDataContext";
+
+const PersonalDetails = () => {
+    const { userData: data } = useUserData();
+
+    if (!data) {
+        return null;
+    }
     return (
         <section className="flex-1 min-w-0">
             <h3 className="text-amber-400">Person Details</h3>
