@@ -4,6 +4,7 @@ import { IEmail } from "@/types/auth/otp.type";
 import { TSignInForm } from "@/lib/validations/signinFromData";
 import axios from "axios";
 import { IDecode, RoleType } from "@/types/auth/signup.type";
+import { cache } from "react";
 
 export const sendOtp = async (data: IEmail) => {
     try {
@@ -68,7 +69,7 @@ export const otpStatus = async (data: IEmail) => {
     }
 };
 
-export const findUser = async (userid: string) => {
+const _findUser = async (userid: string) => {
     try {
         const response = await axios.get(
             `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/${userid}`
@@ -79,6 +80,8 @@ export const findUser = async (userid: string) => {
         throw error;
     }
 };
+
+export const findUser = cache(_findUser);
 
 export const signInWithGoogle = async (data: {
     userData: IDecode;
