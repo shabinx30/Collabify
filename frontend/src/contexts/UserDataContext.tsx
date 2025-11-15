@@ -26,4 +26,3 @@ export const UserDataProvider = ({
         </UserDataContext.Provider>
     );
 };
-
