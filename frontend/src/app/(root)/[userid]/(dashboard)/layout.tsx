@@ -9,11 +9,13 @@ const Layout = async ({
     children,
     personalDetails,
     earning,
+    socialAccounts,
     params,
 }: {
     children: React.ReactNode;
     personalDetails: React.ReactNode;
     earning: React.ReactNode;
+    socialAccounts: React.ReactNode;
     params: Promise<{ userid: string }>;
 }) => {
     const userid = (await params).userid;
@@ -25,11 +27,14 @@ const Layout = async ({
 
     return (
         <UserDataProvider userData={userData}>
-            <main className="flex flex-col md:flex-row flex-1 gap-4 p-2 sm:p-4">
-                {personalDetails}
-                {earning}
-                {children}
-                <Logout />
+            <main className="flex flex-col gap-8 p-2 sm:p-4">
+                <section className="flex flex-col md:flex-row flex-1 gap-4">
+                    {personalDetails}
+                    {earning}
+                    {children}
+                    <Logout />
+                </section>
+                <section>{socialAccounts}</section>
             </main>
         </UserDataProvider>
     );
