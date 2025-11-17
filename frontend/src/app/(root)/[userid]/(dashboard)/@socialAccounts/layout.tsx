@@ -1,6 +1,6 @@
 "use client"
 
-import PlatformSelector from "@/components/profile/PlatformSelector";
+import PlatformSelector from "@/components/profile/socialAccounts/PlatformSelector";
 import React, { useState } from "react";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
