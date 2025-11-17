@@ -23,7 +23,7 @@ const PlatformSelector = ({
     };
 
     return (
-        <div className="flex w-full text-sm md:text-base relative rounded-xl overflow-hidden bg-gray-100 dark:bg-black mt-2 mb-3">
+        <div className="flex w-full text-sm md:text-base relative rounded-xl overflow-hidden bg-gray-100 dark:bg-black mb-3">
             {/* Animated background */}
             <motion.div
                 initial={false}

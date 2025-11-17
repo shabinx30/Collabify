@@ -32,7 +32,7 @@ export default function ProfileTabs({ userId }: { userId: string | null }) {
     ];
 
     return (
-        <div className="relative mt-6 z-500 dark:bg-black border-t border-[#DBDBDB] dark:border-[#2e2e2e] md:mr-8 lg:mx-[6em] pb-[0.5em]">
+        <div className="relative mt-6 z-500 border-t border-[#DBDBDB] dark:border-[#2e2e2e] md:mr-8 lg:mx-[6em] pb-[0.5em]">
             <div className="relative flex justify-evenly text-[#8f8f8f]">
                 {tabs.map((tab) => (
                     <div
