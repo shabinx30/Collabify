@@ -34,7 +34,7 @@ const Layout = async ({
                     {children}
                     <Logout />
                 </section>
-                <section>{socialAccounts}</section>
+                <section className="bg-black rounded-3xl mt-2">{socialAccounts}</section>
             </main>
         </UserDataProvider>
     );

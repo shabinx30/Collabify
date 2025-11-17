@@ -5,7 +5,7 @@ const PostsPage = () => {
 
     if (!posts.length) {
         return (
-            <div className="flex flex-col justify-center items-center w-full bg-background h-[10em] mt-[6em] mb-[8em]">
+            <div className="flex flex-col justify-center items-center w-full h-[10em] mt-[6em] mb-[8em]">
                 <div className="mx-auto flex justify-center items-center border-3 rounded-full border-black w-[5.25em] h-[5.25em] dark:border-white">
                     <PiCameraLight
                         size={58}
@@ -26,7 +26,7 @@ const PostsPage = () => {
                     <div
                         onContextMenu={(e) => e.preventDefault()}
                         key={index}
-                        className="bg-[#2B2B2B] w-full relative aspect-square"
+                        className="bg-gray-200 dark:bg-[#2B2B2B] w-full relative aspect-square"
                     ></div>
                 ))}
             </div>
