@@ -50,7 +50,7 @@ export class UserService {
 
         try {
             const payload = {
-                userId: exist.id,
+                userId: exist._id,
                 username: exist.username,
                 email: exist.email,
                 role: exist.role,
@@ -59,7 +59,7 @@ export class UserService {
             const accessToken = await this.accessJwt.signAsync(payload);
 
             const refreshToken = await this.refreshJwt.signAsync({
-                userId: exist.id,
+                userId: exist._id,
             });
 
             return {
@@ -182,7 +182,7 @@ export class UserService {
             });
 
             const payload = {
-                userId: newUser.id,
+                userId: newUser._id,
                 username: newUser.username,
                 email: newUser.email,
                 role: newUser.role,
@@ -191,7 +191,7 @@ export class UserService {
             const accessToken = await this.accessJwt.signAsync(payload);
 
             const refreshToken = await this.refreshJwt.signAsync({
-                userId: newUser.id,
+                userId: newUser._id,
             });
 
             return {
@@ -255,7 +255,7 @@ export class UserService {
             }
 
             const accessToken = await this.accessJwt.signAsync({
-                userId: exist ? exist.id : user?.id,
+                userId: exist ? exist._id : user?._id,
                 username: exist ? exist.username : given_name,
                 profile: exist ? exist.profile : picture,
                 email,
@@ -263,7 +263,7 @@ export class UserService {
             });
 
             const refreshToken = await this.refreshJwt.signAsync({
-                userId: exist ? exist.id : user?.id,
+                userId: exist ? exist._id : user?._id,
             });
 
             return {
