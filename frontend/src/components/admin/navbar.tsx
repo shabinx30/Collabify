@@ -16,14 +16,14 @@ const Navbar = ({ asideWidth }: { asideWidth: number }) => {
 
     return (
         <nav
-            className="flex justify-between backdrop-blur-md bg-[#00000016] dark:bg-[#ffffff16] rounded-full z-50 fixed p-2"
+            className="flex gap-8 justify-between backdrop-blur-md bg-[#00000016] dark:bg-[#ffffff16] rounded-full z-50 fixed p-2"
             style={{
                 width: `calc(100vw - ${asideWidth || 0}px - 67px)`,
             }}
         >
             {/* current page */}
             <div className="flex items-center pl-4">
-                <span className="text-xl font-semibold">{currentPath}</span>
+                <span className="text-lg md:text-xl font-semibold">{currentPath}</span>
             </div>
 
             <div className="bg-white dark:bg-[#111C44] rounded-full flex gap-2 p-2">
@@ -32,7 +32,7 @@ const Navbar = ({ asideWidth }: { asideWidth: number }) => {
                     <FiSearch />
                     <input
                         type="text"
-                        className="rounded-2xl p-1 w-full bg-transparent outline-none dark:placeholder:text-white placeholder:text-[#9ab2d0]"
+                        className="hidden md:block rounded-2xl p-1 w-full bg-transparent outline-none dark:placeholder:text-white placeholder:text-[#9ab2d0]"
                         placeholder="Search..."
                         name="search"
                     />
