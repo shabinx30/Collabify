@@ -35,14 +35,14 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
             <div className="fixed flex p-3">
                 <aside
                     ref={asideRef}
-                    className="bg-white dark:bg-[#111C44] py-4 px-4 h-[calc(100vh-24px)] flex flex-col justify-between rounded-2xl"
+                    className="bg-white dark:bg-[#111C44] py-4 px-2 md:px-4 h-[calc(100vh-24px)] flex flex-col justify-between rounded-2xl"
                 >
                     {/* upper menu */}
                     <div>
-                        <h3 className="text-[1.75rem] text-center px-14 mt-4 mb-6 font-semibold">
+                        <h3 className="text-lg md:text-[1.75rem] text-center md:px-14 mt-2 md:mt-4 mb-8 md:mb-6 font-semibold">
                             Collabify
                         </h3>
-                        <ul className="flex flex-col gap-1 text-[1.05rem]">
+                        <ul className="flex flex-col md:items-start items-center gap-6 md:gap-1 text-[1.05rem]">
                             <li
                                 onClick={() => router.push("/admin/dashboard")}
                                 className={`flex gap-3 items-center hover:text-black dark:hover:text-white duration-150 px-4 py-2 rounded-2xl cursor-default 
@@ -60,7 +60,7 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
                                         "text-[#422AFB] dark:text-white"
                                     }`}
                                 />
-                                Dashboard
+                                <p className="hidden md:block">Dashboard</p>
                             </li>
                             <li
                                 onClick={() => router.push("/admin/creators")}
@@ -79,7 +79,7 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
                                         "text-[#422AFB] dark:text-white"
                                     }`}
                                 />
-                                Creators
+                                <p className="hidden md:block">Creators</p>
                             </li>
                             <li
                                 onClick={() => router.push("/admin/brands")}
@@ -98,13 +98,13 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
                                         "text-[#422AFB] dark:text-white"
                                     }`}
                                 />
-                                Brands
+                                <p className="hidden md:block">Brands</p>
                             </li>
                         </ul>
                     </div>
                     {/* lower menu */}
                     <div>
-                        <ul className="flex flex-col text-[1.05rem]">
+                        <ul className="flex flex-col md:items-start items-center gap-6 md:gap-1 text-[1.05rem]">
                             <li
                                 onClick={() => router.push("/admin/settings")}
                                 className="flex gap-3 items-center text-[#9ab2d0] dark:text-[#9ab2d0] hover:text-black dark:hover:text-white duration-150 px-4 py-2 rounded-2xl cursor-default"
@@ -116,11 +116,11 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
                                         "text-[#422AFB] dark:text-white"
                                     }`}
                                 />
-                                Settings
+                                <p className="hidden md:block">Settings</p>
                             </li>
                             <li className="flex gap-3 items-center text-red-400 hover:text-red-500 dark:hover:text-red-500 duration-150 px-4 py-2 rounded-2xl cursor-default">
                                 <FiLogOut size={20} />
-                                Logout
+                                <p className="hidden md:block">Logout</p>
                             </li>
                         </ul>
                     </div>
@@ -134,7 +134,7 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
                     style={{
                         width: `calc(100vw - ${asideWidth || 0}px - 37px)`,
                     }}
-                    className="py-[7em] px-10"
+                    className="py-[7em] px-2 md:px-5 lg:px-10"
                 >
                     {children}
                 </div>
