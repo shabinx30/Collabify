@@ -86,32 +86,34 @@ export class UserService {
             throw new InternalServerErrorException("Can't create otp");
         }
 
-        try {
-            const transport = createTransport({
-                service: 'gmail',
-                auth: {
-                    user: process.env.USER,
-                    pass: process.env.PASS,
-                },
-            });
+        // it's not working on render ******************************************
 
-            await transport.sendMail({
-                from: process.env.USER,
-                to: email,
-                subject: 'Welcome to _',
-                text: `Here is your joining otp(one time password): ${otp}`,
-            });
+        // try {
+        //     const transport = createTransport({
+        //         service: 'gmail',
+        //         auth: {
+        //             user: process.env.USER,
+        //             pass: process.env.PASS,
+        //         },
+        //     });
 
-            return newOtp.lastOtpSentAt;
-        } catch (error) {
-            if (error instanceof HttpException) {
-                throw error;
-            }
-            console.error('Error from sendOtp', error);
-            throw new InternalServerErrorException(
-                'An unexpected error occurred while sending otp',
-            );
-        }
+        //     await transport.sendMail({
+        //         from: process.env.USER,
+        //         to: email,
+        //         subject: 'Welcome to _',
+        //         text: `Here is your joining otp(one time password): ${otp}`,
+        //     });
+
+        //     return newOtp.lastOtpSentAt;
+        // } catch (error) {
+        //     if (error instanceof HttpException) {
+        //         throw error;
+        //     }
+        //     console.error('Error from sendOtp', error);
+        //     throw new InternalServerErrorException(
+        //         'An unexpected error occurred while sending otp',
+        //     );
+        // }
     }
 
     async resendOtp(email: string) {
