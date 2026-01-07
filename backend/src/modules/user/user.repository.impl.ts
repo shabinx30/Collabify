@@ -1,14 +1,15 @@
 import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './schemas/user.schema';
-import { Model } from 'mongoose';
+import { Model, ObjectId } from 'mongoose';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { Otp, OtpDocument } from './schemas/otp.schema';
-import { Social } from 'src/common/interfaces/social/social';
+import { SocialMedia, SocialMediaDocument } from './schemas/socialMedia.schema';
 
 @Injectable()
 export class UserRepository {
     constructor(
         @InjectModel(User.name) private userSchema: Model<UserDocument>,
+        @InjectModel(SocialMedia.name) private socialMediaSchema: Model<SocialMediaDocument>,
         @InjectModel(Otp.name) private otpSchema: Model<OtpDocument>,
     ) {}
 
@@ -84,7 +85,7 @@ export class UserRepository {
         );
     }
 
-    async getSocialAccount(userId: string): Promise<Social | null> {
-        return await this.userSchema.findOne({ userId });
+    async getSocialAccount(userId: ObjectId) {
+        return await this.socialMediaSchema.findOne({ userId });
     }
 }

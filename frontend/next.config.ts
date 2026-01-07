@@ -2,7 +2,20 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
     images: {
-        remotePatterns: [new URL("https://lh3.googleusercontent.com/**"), new URL("https://cdn-icons-png.flaticon.com/**")],
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "lh3.googleusercontent.com",
+            },
+            {
+                protocol: "https",
+                hostname: "cdn-icons-png.flaticon.com",
+            },
+            {
+                protocol: "https",
+                hostname: "scontent.cdninstagram.com",
+            },
+        ],
     },
     experimental: {
         viewTransition: true,

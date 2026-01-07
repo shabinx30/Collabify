@@ -3,7 +3,7 @@ import { Document, Schema } from 'mongoose';
 
 @DSchema({ timestamps: true })
 export class SocialMedia {
-    @Prop({ required: true })
+    @Prop({ type: Schema.Types.ObjectId, ref: 'User', required: true })
     userId: Schema.Types.ObjectId;
 
     @Prop({ required: true })
@@ -21,7 +21,13 @@ export class SocialMedia {
     @Prop({ required: true })
     accountType: string;
 
-    @Prop()
+    @Prop({
+        type: {
+            accessToken: { type: String, requied: true },
+            expiresAt: { type: Date, requied: true },
+            lastRefreshedAt: { type: Date, requied: true },
+        },
+    })
     token: {
         accessToken: string;
         expiresAt: Date;
