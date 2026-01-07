@@ -3,6 +3,7 @@ import { UserService } from './user.service';
 import { TRoles } from 'src/common/interfaces/user/role';
 import { IGuser } from 'src/common/interfaces/user/user';
 import { FastifyReply } from 'fastify';
+import { ObjectId } from 'mongoose';
 
 @Controller()
 export class UserController {
@@ -20,8 +21,8 @@ export class UserController {
     }
 
     @Get('get-social-account')
-    async GetSocial(@Query('userId') userId: string, @Res({ passthrough: true }) reply: FastifyReply) {
-        const data = await this.userService.getSocialAccount(userId);
+    async GetSocial(@Query('userId') userId: unknown, @Res({ passthrough: true }) reply: FastifyReply) {
+        const data = await this.userService.getSocialAccount(userId as ObjectId);
         return reply.send(data);
     }
 }

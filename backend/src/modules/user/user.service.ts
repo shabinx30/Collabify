@@ -19,6 +19,7 @@ import { TRoles } from 'src/common/interfaces/user/role';
 import { UserDocument } from './schemas/user.schema';
 import { IGuser } from 'src/common/interfaces/user/user';
 import axios from 'axios';
+import { ObjectId } from 'mongoose';
 
 @Injectable()
 export class UserService {
@@ -312,7 +313,7 @@ export class UserService {
         }
     }
 
-    async getSocialAccount(userId: string) {
+    async getSocialAccount(userId: ObjectId) {
         const socialData = await this.userRepository.getSocialAccount(userId);
         if (!socialData) {
             throw new NotFoundException('Social account not found');

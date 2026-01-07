@@ -41,7 +41,8 @@ const SocialAccounts = () => {
     useEffect(() => {
         (async () => {
             const res = await getSocialAccount(user?.userId as string);
-            setSocialData(res);
+            console.log({res})
+            setSocialData(_ => res);
         })();
     }, []);
     if (socialData?.username) {
