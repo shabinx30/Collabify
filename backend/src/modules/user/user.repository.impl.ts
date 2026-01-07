@@ -3,6 +3,7 @@ import { User, UserDocument } from './schemas/user.schema';
 import { Model } from 'mongoose';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { Otp, OtpDocument } from './schemas/otp.schema';
+import { Social } from 'src/common/interfaces/social/social';
 
 @Injectable()
 export class UserRepository {
@@ -81,5 +82,9 @@ export class UserRepository {
             { role: 'creator' },
             { password: 0, role: 0, createdAt: 0, updatedAt: 0 },
         );
+    }
+
+    async getSocialAccount(userId: string): Promise<Social | null> {
+        return await this.userSchema.findOne({ userId });
     }
 }
