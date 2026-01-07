@@ -5,6 +5,7 @@ import { TSignInForm } from "@/lib/validations/signinFromData";
 import axios from "axios";
 import { IDecode, RoleType } from "@/types/auth/signup.type";
 import { cache } from "react";
+import { Social } from "@/types/profile/social.type";
 
 export const sendOtp = async (data: IEmail) => {
     try {
@@ -129,6 +130,16 @@ export const findBrands = async () => {
 export const searchCreators = async () => {
     try {
         const response = await clientApi.get("/creators");
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+};
+
+export const getSocialAccount = async (userId: string): Promise<Social> => {
+    try {
+        const response = await clientApi.get(`get-social-account?userId=${userId}`);
         return response.data;
     } catch (error) {
         console.log(error);

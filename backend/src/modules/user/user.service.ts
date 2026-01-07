@@ -18,6 +18,7 @@ import { JwtService } from '@nestjs/jwt';
 import { TRoles } from 'src/common/interfaces/user/role';
 import { UserDocument } from './schemas/user.schema';
 import { IGuser } from 'src/common/interfaces/user/user';
+import axios from 'axios';
 
 @Injectable()
 export class UserService {
@@ -307,6 +308,23 @@ export class UserService {
         } catch (error) {
             throw new InternalServerErrorException(
                 'An unexpected error has been occured while searching creators',
+            );
+        }
+    }
+
+    async getSocialAccount(userId: string) {
+        const socialData = await this.userRepository.getSocialAccount(userId);
+        if (!socialData) {
+            throw new NotFoundException('Social account not found');
+        }
+        try {
+            const res = await axios.get(
+                `https://graph.instagram.com/${socialData.platformUserId}?fields=id,username,account_type,media_count,followers_count,follows_count,website,profile_picture_url,biography&access_token=${socialData.token.accessToken}`,
+            );
+            return res.data;
+        } catch (error) {
+            throw new InternalServerErrorException(
+                'An unexpected error has been occured while getting social account',
             );
         }
     }
