@@ -87,7 +87,7 @@ const SignInForm = () => {
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full text-black bg-amber-400 hover:bg-amber-500 duration-200 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 cursor-pointer"
+                        className="w-full text-black bg-green-400 hover:bg-green-500 duration-200 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 cursor-pointer"
                     >
                         Sign In
                     </button>
@@ -97,7 +97,7 @@ const SignInForm = () => {
                     Don’t have an account yet?{" "}
                     <Link
                         href="/signup"
-                        className="font-medium text-black dark:text-[#FFBF00] hover:underline cursor-pointer"
+                        className="font-medium text-black dark:text-green-400 hover:underline cursor-pointer"
                     >
                         Join
                     </Link>

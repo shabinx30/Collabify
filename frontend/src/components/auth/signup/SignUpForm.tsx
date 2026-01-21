@@ -211,7 +211,7 @@ const SignUpForm = () => {
                                 Already have an account?{" "}
                                 <Link
                                     href="/signin"
-                                    className="font-medium text-black hover:underline dark:text-[#FFBF00] cursor-pointer"
+                                    className="font-medium text-black hover:underline dark:text-green-400 cursor-pointer"
                                 >
                                     Login
                                 </Link>

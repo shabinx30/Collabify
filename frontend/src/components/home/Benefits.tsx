@@ -6,7 +6,7 @@ const Benefits = () => {
             <h3 className="text-xl font-semibold">Why Choose us?</h3>
             <section className="bg-[#202020] dark:bg-black flex flex-col gap-[4em] p-4 rounded-3xl">
                 <div className="pt-2 pl-2">
-                    <h3 className="text-[#FFCF3E] text-xl font-semibold">
+                    <h3 className="text-green-400 text-xl font-semibold">
                         For Creators
                     </h3>
                     <p className="text-white">
@@ -55,7 +55,7 @@ const Benefits = () => {
             </section>
             <section className="bg-[#202020] dark:bg-black flex flex-col gap-[4em] p-4 rounded-3xl">
                 <div className="pt-2 pl-2">
-                    <h3 className="text-[#FFCF3E] text-xl font-semibold">
+                    <h3 className="text-green-400 text-xl font-semibold">
                         For Brands
                     </h3>
                     <p className="text-white">
