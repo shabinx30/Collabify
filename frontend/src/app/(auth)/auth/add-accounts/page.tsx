@@ -32,12 +32,12 @@ export default function AddAccountsPage() {
             <div className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3">
                 <AddButton
                     href="/api/auth/instagram"
-                    className="inline-flex items-center justify-center gap-2 rounded-full border border-amber-300 px-5 py-2.5 text-sm font-medium text-amber-400 hover:bg-amber-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-amber-300/60 active:bg-amber-300/90 transition-colors cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-green-300 px-5 py-2.5 text-sm font-medium text-green-400 hover:bg-green-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-green-300/60 active:bg-green-300/90 transition-colors cursor-pointer"
                 >
                     Instagram
                 </AddButton>
 
-                <AddButton className="inline-flex items-center justify-center gap-2 rounded-full border border-amber-300 px-5 py-2.5 text-sm font-medium text-amber-400 hover:bg-amber-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-amber-300/60 active:bg-amber-300/90 transition-colors cursor-pointer">
+                <AddButton className="inline-flex items-center justify-center gap-2 rounded-full border border-green-300 px-5 py-2.5 text-sm font-medium text-green-400 hover:bg-green-300 hover:text-black focus:outline-none focus:ring-2 focus:ring-green-300/60 active:bg-green-300/90 transition-colors cursor-pointer">
                     YouTube
                 </AddButton>
             </div>

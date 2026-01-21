@@ -38,27 +38,29 @@ const NavBar = () => {
 
     return (
         <nav className={"bg-white dark:bg-[#1b1b1b]"}>
-            <ul className={"flex py-2 justify-between items-center px-4"}>
-                <li className="flex-1 font-bold my-1 text-base md:text-xl">
+            <ul className={"flex py-3 justify-between items-center px-6"}>
+                <li className="flex-1 font-bold my-1 text-lg md:text-2xl">
                     {" "}
                     <Link href="/">Collabify</Link>{" "}
                 </li>
-                <ViewTransition name="search-bar">
-                    <li
-                        onClick={() => router.push("/search")}
-                        className="hidden md:flex flex-1 items-center px-4 gap-2 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-xl"
-                    >
-                        <FiSearch />
-                        <form onSubmit={handleSubmit} autoComplete="off">
-                            <input
-                                type="search"
-                                name="search"
-                                className="w-full h-10 outline-none"
-                                placeholder="Search"
-                            />
-                        </form>
-                    </li>
-                </ViewTransition>
+                {path && (
+                    <ViewTransition name="search-bar">
+                        <li
+                            onClick={() => router.push("/search")}
+                            className="hidden md:flex flex-1 items-center px-4 gap-2 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-xl"
+                        >
+                            <FiSearch />
+                            <form onSubmit={handleSubmit} autoComplete="off">
+                                <input
+                                    type="search"
+                                    name="search"
+                                    className="w-full h-10 outline-none"
+                                    placeholder="Search"
+                                />
+                            </form>
+                        </li>
+                    </ViewTransition>
+                )}
                 <li className="flex-1/3 lg:flex-1 flex text-sm items-center justify-end gap-6">
                     {user ? (
                         path !== user.username && (

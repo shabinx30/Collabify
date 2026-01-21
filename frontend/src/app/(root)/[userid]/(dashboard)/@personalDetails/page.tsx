@@ -11,7 +11,7 @@ const PersonalDetails = () => {
     }
     return (
         <section className="flex-1 min-w-0">
-            <h3 className="text-amber-400">Person Details</h3>
+            <h3 className="text-green-400">Person Details</h3>
             <div className="flex flex-col lg:flex-row bg-gray-100 dark:bg-[#2b2b2b] h-full min-h-fit rounded-xl p-2 sm:p-4 gap-4">
                 <div className="relative max-h-fit shrink-0 self-center lg:self-start">
                     <Image
@@ -44,7 +44,7 @@ const PersonalDetails = () => {
                             ) : (
                                 <input
                                     type="number"
-                                    className="custom-dotted-border rounded-xl p-1.5 outline-none focus:outline-amber-400 w-full lg:w-24 h-[2em] text-xs"
+                                    className="custom-dotted-border rounded-xl p-1.5 outline-none focus:outline-green-400 w-full lg:w-24 h-[2em] text-xs"
                                     placeholder="Eg:- 100$"
                                 />
                             )}
@@ -64,7 +64,7 @@ const PersonalDetails = () => {
                                     {data.categories.map((category, i) => (
                                         <p
                                             key={i}
-                                            className="bg-amber-400/5 px-2 pt-0.5 pb-1 text-xs text-amber-400 border border-amber-400 rounded-full max-w-fit"
+                                            className="bg-amber-400/5 px-2 pt-0.5 pb-1 text-xs text-green-400 border border-green-400 rounded-full max-w-fit"
                                         >
                                             {category}
                                         </p>
@@ -73,7 +73,7 @@ const PersonalDetails = () => {
                             ) : (
                                 <input
                                     type="text"
-                                    className="custom-dotted-border rounded-xl p-1.5 outline-none focus:outline-amber-400 w-full h-[2em] text-xs max-w-full"
+                                    className="custom-dotted-border rounded-xl p-1.5 outline-none focus:outline-green-400 w-full h-[2em] text-xs max-w-full"
                                     placeholder="Eg:- Content Creator"
                                 />
                             )}
@@ -89,7 +89,7 @@ const PersonalDetails = () => {
                             ) : (
                                 <input
                                     type="text"
-                                    className="custom-dotted-border rounded-xl p-1.5 outline-none focus:outline-amber-400 w-full lg:w-24 h-[2em] text-xs"
+                                    className="custom-dotted-border rounded-xl p-1.5 outline-none focus:outline-green-400 w-full lg:w-24 h-[2em] text-xs"
                                     placeholder="Eg:- Los Angeles, US"
                                 />
                             )}
