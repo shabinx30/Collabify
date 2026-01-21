@@ -3,6 +3,13 @@ import { FiSearch } from "react-icons/fi";
 import { BsStars } from "react-icons/bs";
 
 const Hero = () => {
+    const searchPlaceholders = [
+        "Top tech creators in creator in india",
+        "Fasion creators in india with 4 star rating",
+        "Instagram beauty influencers",
+        "Tech creators in Youtube",
+    ];
+
     return (
         <section className="w-full bg-white dark:bg-[#1b1b1b] flex flex-col items-center gap-4">
             <div className="overflow-hidden pb-1">
@@ -18,16 +25,26 @@ const Hero = () => {
                 </p>
             </div>
             <ViewTransition name="search-bar">
-                <div className="flex justify-between items-center mt-12 px-6 py-4 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl w-[50%]">
+                <div className="flex w-full md:w-[75%] lg:w-[60%] justify-between items-center mt-12 px-6 py-4 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl">
                     <div className="flex items-center gap-3 w-full">
                         <FiSearch size={18} />
-                        <form autoComplete="off" className="w-full">
+                        <form
+                            autoComplete="off"
+                            className="relative w-full overflow-hidden search-container text-sm md:text-base"
+                        >
                             <input
                                 type="search"
                                 name="search"
-                                className="w-full outline-none"
-                                placeholder="Search in any way you want..."
+                                className="relative w-full outline-none bg-transparent z-2"
+                                placeholder="Try"
                             />
+                            <div className="placeholder-scroll">
+                                {searchPlaceholders.map((val, i) => (
+                                    <div key={i} className="placeholder-item">
+                                        {`"${val}"`}
+                                    </div>
+                                ))}
+                            </div>
                         </form>
                     </div>
                     <BsStars size={20} className="text-green-400" />
