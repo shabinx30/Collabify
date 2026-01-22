@@ -14,7 +14,6 @@ async function verifyJWT(token: string, secret: string) {
 export async function proxy(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
     const token = request.cookies.get("accessToken")?.value;
-    console.log({ token });
 
     let isAuthenticated = false;
     if (token) {

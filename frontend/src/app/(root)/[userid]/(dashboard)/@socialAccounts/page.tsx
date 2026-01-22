@@ -11,15 +11,6 @@ import { getSocialAccount } from "@/services";
 import { useEffect, useState } from "react";
 import { Social } from "@/types/profile/social.type";
 
-// const profilesocialData = {
-//     name: "SHABIN",
-//     bio: "🧑‍💻 Web Developer",
-//     website: "https://shabeensharih.com",
-//     posts: 16,
-//     followers: "743M",
-//     following: 1214,
-// };
-
 // Reusable component for profile stats
 const ProfileStat = ({
     label,
@@ -36,16 +27,24 @@ const ProfileStat = ({
 
 const SocialAccounts = () => {
     const { user } = useSelector((state: RootState) => state.auth);
-    const [socialData, setSocialData] = useState<Social>();
+    const [socialData, setSocialData] = useState<Social | string>("pending");
 
     useEffect(() => {
         (async () => {
             const res = await getSocialAccount(user?.userId as string);
-            console.log({res})
-            setSocialData(_ => res);
+            setSocialData((_) => res);
         })();
     }, []);
-    if (socialData?.username) {
+
+    if (socialData === "pending") {
+        return (
+            <section className="flex justify-center items-center py-[6em]">
+                <p className="text-[#A8A8A8]">
+                    Gathering your Instagram Info...
+                </p>
+            </section>
+        );
+    } else if (typeof socialData === "object" && socialData?.username) {
         return (
             <>
                 <section className="flex-1 pt-8 md:pt-0 md:px-[2em] lg:px-[4em]">
@@ -156,7 +155,7 @@ const SocialAccounts = () => {
                                     >
                                         {socialData?.website.replace(
                                             "https://",
-                                            ""
+                                            "",
                                         )}
                                     </Link>
                                 </div>
