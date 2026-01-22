@@ -27,7 +27,7 @@ const ProfileStat = ({
 
 const SocialAccounts = () => {
     const { user } = useSelector((state: RootState) => state.auth);
-    const [socialData, setSocialData] = useState<Social | string>("pending");
+    const [socialData, setSocialData] = useState<Social | string>("loading");
 
     useEffect(() => {
         (async () => {
@@ -36,7 +36,7 @@ const SocialAccounts = () => {
         })();
     }, []);
 
-    if (socialData === "pending") {
+    if (socialData === "loading") {
         return (
             <section className="flex justify-center items-center py-[6em]">
                 <p className="text-[#A8A8A8]">
@@ -66,23 +66,23 @@ const SocialAccounts = () => {
                         <div className="block">
                             {/* Desktop header */}
                             {/* <div className="hidden md:flex duration-300">
-                            <h1 className="text-xl">{""}</h1>
-                            <button
-                                className={`mt-4 md:mt-0 md:ml-4 h-[2.2em] ${buttonStyle}`}
-                            >
-                                Edit Profile
-                            </button>
-                            <button className={`ml-2 h-[2.2em] ${buttonStyle}`}>
-                                View archive
-                            </button>
-                            <Image
-                                className="hidden cursor-pointer md:block dark:invert w-6 h-6 mx-2 my-0.5"
-                                src="https://cdn-icons-png.flaticon.com/512/5693/5693241.png"
-                                alt="settings"
-                                width={20}
-                                height={20}
-                            />
-                        </div> */}
+                                <h1 className="text-xl">{""}</h1>
+                                <button
+                                    className={`mt-4 md:mt-0 md:ml-4 h-[2.2em] ${buttonStyle}`}
+                                >
+                                    Edit Profile
+                                </button>
+                                <button className={`ml-2 h-[2.2em] ${buttonStyle}`}>
+                                    View archive
+                                </button>
+                                <Image
+                                    className="hidden cursor-pointer md:block dark:invert w-6 h-6 mx-2 my-0.5"
+                                    src="https://cdn-icons-png.flaticon.com/512/5693/5693241.png"
+                                    alt="settings"
+                                    width={20}
+                                    height={20}
+                                />
+                            </div> */}
 
                             {/* Mobile name */}
                             <p className="md:hidden text-base font-medium">
@@ -180,13 +180,13 @@ const SocialAccounts = () => {
 
                     {/* Mobile buttons */}
                     {/* <div className="flex md:hidden duration-300 w-full px-4 pt-4">
-                    <button className={`w-[50%] h-[2.5em] ${buttonStyle}`}>
-                        Edit Profile
-                    </button>
-                    <button className={`ml-2 w-[50%] h-[2.5em] ${buttonStyle}`}>
-                        Share profile
-                    </button>
-                </div> */}
+                        <button className={`w-[50%] h-[2.5em] ${buttonStyle}`}>
+                            Edit Profile
+                        </button>
+                        <button className={`ml-2 w-[50%] h-[2.5em] ${buttonStyle}`}>
+                            Share profile
+                        </button>
+                    </div> */}
                 </section>
                 <ProfileTabs userId={user?.username!} />
                 <Posts />
