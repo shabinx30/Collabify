@@ -14,19 +14,20 @@ async function verifyJWT(token: string, secret: string) {
 export async function proxy(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
     const token = request.cookies.get("accessToken")?.value;
+    console.log({ token });
 
     let isAuthenticated = false;
     if (token) {
         const payload = await verifyJWT(
             token,
-            process.env.ACCESS_TOKEN_SECRET!
+            process.env.ACCESS_TOKEN_SECRET!,
         );
         isAuthenticated = !!payload;
     }
 
     const protectedPaths = ["/dashboard", "/profile"];
     const isProtectedPath = protectedPaths.some((path) =>
-        pathname.startsWith(path)
+        pathname.startsWith(path),
     );
 
     const authPaths = ["/signin", "/signup"];
