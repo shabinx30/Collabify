@@ -47,7 +47,8 @@ export class AuthController {
 
         reply.setCookie('refreshToken', refreshToken, {
             httpOnly: true,
-            sameSite: 'strict',
+            sameSite: 'none', // ** switch to "lax" when hosted with same domain
+            // domain: ".shabeensharih.online", ** enable this when hosted with domain
             secure: true,
             maxAge: 7 * 24 * 60 * 60,
             path: '/',
@@ -55,7 +56,8 @@ export class AuthController {
 
         reply.setCookie('accessToken', accessToken, {
             httpOnly: true,
-            sameSite: 'strict',
+            sameSite: 'none', // ** switch to "lax" when hosted with same domain
+            // domain: ".shabeensharih.online", ** enable this when hosted with domain
             secure: true,
             maxAge: 15 * 60,
             path: '/',
@@ -81,7 +83,8 @@ export class AuthController {
 
         reply.setCookie('refreshToken', refreshToken as string, {
             httpOnly: true,
-            sameSite: 'strict',
+            sameSite: 'none', // ** switch to "lax" when hosted with same domain
+            // domain: ".shabeensharih.online", ** enable this when hosted with domain
             secure: true,
             maxAge: 7 * 24 * 60 * 60,
             path: '/',
@@ -89,7 +92,8 @@ export class AuthController {
 
         reply.setCookie('accessToken', accessToken as string, {
             httpOnly: true,
-            sameSite: 'strict',
+            sameSite: 'none', // ** switch to "lax" when hosted with same domain
+            // domain: ".shabeensharih.online", ** enable this when hosted with domain
             secure: true,
             maxAge: 15 * 60,
             path: '/',
@@ -119,7 +123,8 @@ export class AuthController {
 
         reply.setCookie('refreshToken', refreshToken, {
             httpOnly: true,
-            sameSite: 'strict',
+            sameSite: 'none', // ** switch to "lax" when hosted with same domain
+            // domain: ".shabeensharih.online", ** enable this when hosted with same domain
             secure: true,
             maxAge: 7 * 24 * 60 * 60,
             path: '/',
@@ -127,7 +132,8 @@ export class AuthController {
 
         reply.setCookie('accessToken', accessToken, {
             httpOnly: true,
-            sameSite: 'strict',
+            sameSite: 'none', // ** switch to "lax" when hosted with same domain
+            // domain: ".shabeensharih.online", ** enable this when hosted with domain
             secure: true,
             maxAge: 15 * 60,
             path: '/',
