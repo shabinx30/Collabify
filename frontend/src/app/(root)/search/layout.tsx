@@ -26,12 +26,13 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     }, []);
 
     return (
-        <div className="py-12 gap-10 flex flex-col items-center">
-            <div className="flex justify-center gap-2 w-1/2">
+        <div className="py-2 md:py-12 px-4 gap-10 flex flex-col items-center">
+            <div className="flex flex-col md:flex-row justify-center gap-2 w-full md:w-[75%] lg:w-[60%]">
                 <motion.span
                     initial={{ x: -100, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ type: "tween" }}
+                    className="hidden md:block"
                 >
                     <Link
                         href="/"
@@ -40,6 +41,29 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                         <IoChevronBackOutline size={20} />
                     </Link>
                 </motion.span>
+                <div className="flex md:hidden h-[2.5em] gap-1.5">
+                    <motion.span
+                        initial={{ x: -100, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ type: "tween" }}
+                        className="flex flex-1/2 md:hidden"
+                    >
+                        <Link
+                            href="/"
+                            className="flex flex-1 h-full items-center justify-center px-3.5 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl cursor-pointer"
+                        >
+                            <IoChevronBackOutline size={20} />
+                        </Link>
+                    </motion.span>
+                    <motion.span
+                        initial={{ x: 100, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ type: "tween" }}
+                        className="flex flex-1/2 md:hidden items-center justify-center px-3.5 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl cursor-pointer"
+                    >
+                        <PiSlidersHorizontalBold size={20} />
+                    </motion.span>
+                </div>
                 <ViewTransition name="search-bar">
                     <div className="flex w-full md:w-[75%] lg:w-[60%] justify-between items-center px-3 md:px-6 py-2.5 md:py-4 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl">
                         <div className="flex items-center gap-1.5 md:gap-3 w-full">
@@ -54,7 +78,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                                     className="relative w-full outline-none bg-transparent z-2"
                                     placeholder="Try"
                                 />
-                                <div className="placeholder-scroll">
+                                <div className="placeholder-scroll left-[22px] md:left-[30px]">
                                     {searchPlaceholders.map((val, i) => (
                                         <div
                                             key={i}
@@ -73,12 +97,12 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                     initial={{ x: 100, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     transition={{ type: "tween" }}
-                    className="flex items-center px-3.5 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl cursor-pointer"
+                    className="hidden md:flex items-center px-3.5 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl cursor-pointer"
                 >
                     <PiSlidersHorizontalBold size={20} />
                 </motion.span>
             </div>
-            <div>{children}</div>
+            {/* <div>{children}</div> */}
         </div>
     );
 };
