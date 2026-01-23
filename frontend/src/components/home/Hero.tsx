@@ -4,10 +4,10 @@ import { BsStars } from "react-icons/bs";
 
 const Hero = () => {
     const searchPlaceholders = [
-        "Top tech creators in creator in india",
-        "Fasion creators in india with 4 star rating",
-        "Instagram beauty influencers",
-        "Tech creators in Youtube",
+        "Who are the top tech creators in India?",
+        "Fashion creators in India with 4-star ratings",
+        "Find beauty influencers on Instagram",
+        "Best tech creators on YouTube",
     ];
 
     return (
@@ -38,7 +38,7 @@ const Hero = () => {
                                 className="relative w-full outline-none bg-transparent z-2"
                                 placeholder="Try"
                             />
-                            <div className="placeholder-scroll">
+                            <div className="placeholder-scroll left-[22px] md:left-[30px]">
                                 {searchPlaceholders.map((val, i) => (
                                     <div key={i} className="placeholder-item">
                                         {`"${val}"`}

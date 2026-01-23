@@ -38,7 +38,7 @@ const NavBar = () => {
 
     return (
         <nav className={"bg-white dark:bg-[#1b1b1b]"}>
-            <ul className={"flex py-3 justify-between items-center px-6"}>
+            <ul className={"flex py-3 justify-between items-center px-3 md:px-6"}>
                 <li className="flex-1 font-bold my-1 text-lg md:text-2xl">
                     {" "}
                     <Link href="/">Collabify</Link>{" "}

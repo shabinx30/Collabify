@@ -13,10 +13,10 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     const searchRef = useRef<HTMLInputElement>(null);
 
     const searchPlaceholders = [
-        "Top tech creators in creator in india",
-        "Fasion creators in india with 4 star rating",
-        "Instagram beauty influencers",
-        "Tech creators in Youtube",
+        "Who are the top tech creators in India?",
+        "Fashion creators in India with 4-star ratings",
+        "Find beauty influencers on Instagram",
+        "Best tech creators on YouTube",
     ];
 
     useEffect(() => {
@@ -41,8 +41,8 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                     </Link>
                 </motion.span>
                 <ViewTransition name="search-bar">
-                    <div className="flex w-full md:w-[75%] lg:w-[60%] justify-between items-center px-6 py-4 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl">
-                        <div className="flex items-center gap-3 w-full">
+                    <div className="flex w-full md:w-[75%] lg:w-[60%] justify-between items-center px-3 md:px-6 py-2 md:py-4 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl">
+                        <div className="flex items-center gap-1.5 md:gap-3 w-full">
                             <FiSearch size={18} />
                             <form
                                 autoComplete="off"
