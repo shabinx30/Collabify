@@ -18,6 +18,12 @@ export class SocialMedia {
     @Prop()
     profilePicture: string;
 
+    @Prop()
+    followers: number;
+
+    @Prop()
+    engagementRate: number;
+
     @Prop({ required: true })
     accountType: string;
 
@@ -37,3 +43,8 @@ export class SocialMedia {
 
 export type SocialMediaDocument = SocialMedia & Document;
 export const socialMediaSchema = SchemaFactory.createForClass(SocialMedia);
+
+socialMediaSchema.index({ userId: 1, platform: 1 });
+socialMediaSchema.index({ platform: 1 });
+socialMediaSchema.index({ followers: -1 });
+socialMediaSchema.index({ engagementRate: -1 });

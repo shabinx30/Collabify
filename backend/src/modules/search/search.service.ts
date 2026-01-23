@@ -16,7 +16,7 @@ export class SearchService {
         });
     }
 
-    async parseQuery(query: string) {
+    async parseQuery(query: string): Promise<string> {
         try {
             const response = await this.genAI.models.generateContent({
                 model: 'gemini-2.5-flash-lite',
@@ -34,7 +34,7 @@ export class SearchService {
                 },
             });
 
-            return response.text;
+            return response.text || '';
         } catch (error) {
             console.log({ error });
             throw new InternalServerErrorException('Failed to parse');
@@ -42,17 +42,114 @@ export class SearchService {
     }
 
     async searchCreators(query: string) {
-        if (!query || query.trim().length === 0) {
+        if (!query || query.trim().length === 0 || query.trim().length > 100) {
             throw new BadRequestException('Invalid query');
         }
 
         const parsedQuery = await this.parseQuery(query);
-        console.log({ parsedQuery });
+        const { platform, categories, location, minRating, sortBy } =
+            typeof parsedQuery === 'string'
+                ? JSON.parse(parsedQuery)
+                : parsedQuery;
 
-        try {
-            
-        } catch (error) {
-            throw new InternalServerErrorException('Failed to search');
-        }
+        const pipeline: any[] = [
+            // 1. Only creators
+            {
+                $match: {
+                    role: 'creator',
+                    isVerified: true,
+                },
+            },
+
+            // 2. Filter by niche (categories)
+            ...(categories
+                ? [
+                      {
+                          $match: {
+                              categories: { $in: categories },
+                          },
+                      },
+                  ]
+                : []),
+
+            // 3. Hierarchical location match
+            ...(location
+                ? [
+                      {
+                          $match: {
+                              location: {
+                                  $regex: `^${location}`,
+                                  $options: 'i',
+                              },
+                          },
+                      },
+                  ]
+                : []),
+
+            // 4. Minimum rating
+            ...(minRating
+                ? [
+                      {
+                          $match: {
+                              rating: { $gte: minRating },
+                          },
+                      },
+                  ]
+                : []),
+
+            // 5. Join social media accounts
+            {
+                $lookup: {
+                    from: 'socialmedias',
+                    localField: '_id',
+                    foreignField: 'userId',
+                    as: 'social',
+                },
+            },
+
+            // 6. Flatten social accounts
+            { $unwind: '$social' },
+
+            // 7. Platform filter
+            ...(platform
+                ? [
+                      {
+                          $match: {
+                              'social.platform': platform,
+                          },
+                      },
+                  ]
+                : []),
+
+            // 8. Sorting
+            ...(sortBy === 'followers'
+                ? [{ $sort: { 'social.followers': -1 } }]
+                : sortBy === 'engagement'
+                  ? [{ $sort: { 'social.engagementRate': -1 } }]
+                  : sortBy === 'rating'
+                    ? [{ $sort: { rating: -1 } }]
+                    : []),
+
+            // 9. Final output shape
+            {
+                $project: {
+                    _id: 1,
+                    username: 1,
+                    profile: 1,
+                    rating: 1,
+                    categories: 1,
+                    location: 1,
+                    social: {
+                        platform: '$social.platform',
+                        userName: '$social.userName',
+                        followers: '$social.followers',
+                        engagementRate: '$social.engagementRate',
+                    },
+                },
+            },
+        ];
+
+        const creators = await this.searchRepository.searchCreators(pipeline);
+        return creators;
     }
 }

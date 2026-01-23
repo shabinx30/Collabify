@@ -42,3 +42,8 @@ export class User {
 
 export type UserDocument = User & Document;
 export const userSchema = SchemaFactory.createForClass(User);
+
+userSchema.index({ role: 1, isVerified: 1 });
+userSchema.index({ categories: 1 });
+userSchema.index({ location: 1 });
+userSchema.index({ rating: -1 });
