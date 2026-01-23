@@ -73,7 +73,7 @@ export const otpStatus = async (data: IEmail) => {
 const _findUser = async (userid: string) => {
     try {
         const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/${userid}`
+            `${process.env.NEXT_PUBLIC_BASE_URL}/api/user/${userid}`,
         );
         return response.data;
     } catch (error) {
@@ -127,10 +127,15 @@ export const findBrands = async () => {
     }
 };
 
-export const searchCreators = async () => {
+export const searchCreators = async (config: {
+    next: { revalidate: number };
+}) => {
     try {
-        const response = await clientApi.get("/creators");
-        return response.data;
+        const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/creators`,
+            config,
+        ).then((res) => res.json());
+        return response;
     } catch (error) {
         console.log(error);
         throw error;
@@ -139,7 +144,9 @@ export const searchCreators = async () => {
 
 export const getSocialAccount = async (userId: string): Promise<Social> => {
     try {
-        const response = await clientApi.get(`get-social-account?userId=${userId}`);
+        const response = await clientApi.get(
+            `get-social-account?userId=${userId}`,
+        );
         return response.data;
     } catch (error) {
         console.log(error);
