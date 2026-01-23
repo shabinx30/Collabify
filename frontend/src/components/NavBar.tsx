@@ -61,7 +61,7 @@ const NavBar = () => {
                         </li>
                     </ViewTransition>
                 )}
-                <li className="flex-1/3 lg:flex-1 flex text-sm items-center justify-end gap-6">
+                <li className="flex-1/3 lg:flex-1 flex text-[0.7em] sm:text-xs md:text-base items-center justify-end gap-4 md:gap-6">
                     {user ? (
                         path !== user.username && (
                             <DropdownMenu>

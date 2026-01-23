@@ -25,12 +25,12 @@ const Hero = () => {
                 </p>
             </div>
             <ViewTransition name="search-bar">
-                <div className="flex w-full md:w-[75%] lg:w-[60%] justify-between items-center mt-12 px-6 py-4 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl">
-                    <div className="flex items-center gap-3 w-full">
+                <div className="flex w-full md:w-[75%] lg:w-[60%] justify-between items-center mt-12 px-3 md:px-6 py-3 md:py-4 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl">
+                    <div className="flex items-center gap-1.5 md:gap-3 w-full">
                         <FiSearch size={18} />
                         <form
                             autoComplete="off"
-                            className="relative w-full overflow-hidden search-container text-sm md:text-base"
+                            className="relative w-full overflow-hidden search-container text-xs md:text-base"
                         >
                             <input
                                 type="search"
