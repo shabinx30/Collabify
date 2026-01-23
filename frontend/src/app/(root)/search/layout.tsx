@@ -1,16 +1,20 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { ViewTransition } from "react";
+import { useEffect, useRef, ViewTransition, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { PiSlidersHorizontalBold } from "react-icons/pi";
 import { IoChevronBackOutline } from "react-icons/io5";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { BsStars } from "react-icons/bs";
+import { searchCreators } from "@/services";
+import { IProfileUser } from "@/types/profile/profile.type";
+import Tiles from "@/components/ui/Tiles";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
     const searchRef = useRef<HTMLInputElement>(null);
+    const [search, setSearch] = useState("");
+    const [creators, setCreators] = useState([]);
 
     const searchPlaceholders = [
         "Who are the top tech creators in India?",
@@ -18,6 +22,18 @@ const layout = ({ children }: { children: React.ReactNode }) => {
         "Find beauty influencers on Instagram",
         "Best tech creators on YouTube",
     ];
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearch(e.target.value);
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (!search || !search.trim()) return;
+        const res = await searchCreators(search);
+        console.log(res)
+        setCreators(() => res);
+    };
 
     useEffect(() => {
         if (searchRef.current) {
@@ -70,11 +86,13 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                             <FiSearch size={18} />
                             <form
                                 autoComplete="off"
+                                onSubmit={handleSubmit}
                                 className="relative w-full overflow-hidden search-container text-xs md:text-base"
                             >
                                 <input
                                     type="search"
                                     name="search"
+                                    onChange={handleChange}
                                     className="relative w-full outline-none bg-transparent z-2"
                                     placeholder="Try"
                                 />
@@ -102,7 +120,19 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                     <PiSlidersHorizontalBold size={20} />
                 </motion.span>
             </div>
-            {/* <div>{children}</div> */}
+            {!creators.length ? (
+                <div>{children}</div>
+            ) : (
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 py-[1em]">
+                    {creators && creators.length ? (
+                        creators.map((creator: IProfileUser, i: number) => (
+                            <Tiles key={i} creator={creator} />
+                        ))
+                    ) : (
+                        <p>No creators found</p>
+                    )}
+                </div>
+            )}
         </div>
     );
 };

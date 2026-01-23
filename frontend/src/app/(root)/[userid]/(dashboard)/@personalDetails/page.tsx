@@ -64,7 +64,7 @@ const PersonalDetails = () => {
                                     {data.categories.map((category, i) => (
                                         <p
                                             key={i}
-                                            className="bg-amber-400/5 px-2 pt-0.5 pb-1 text-xs text-green-400 border border-green-400 rounded-full max-w-fit"
+                                            className="bg-green-400/5 px-2 py-0.5 text-xs text-green-400 border border-green-400 rounded-full max-w-fit"
                                         >
                                             {category}
                                         </p>
