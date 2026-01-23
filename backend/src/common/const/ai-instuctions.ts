@@ -8,6 +8,7 @@ export const systemInstruction = `
     - Use null when a value is not mentioned or cannot be inferred.
     - Normalize all text to lowercase.
     - Return multiple categories as an array.
+    - If a category is mentioned, include closely related atmost 10 categories in the categories field (e.g., fashion → beauty, makeup, skincare, health).
 
     Location rules:
     - Country → "country"
