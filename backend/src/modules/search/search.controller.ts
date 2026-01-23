@@ -1,4 +1,4 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get, Query } from "@nestjs/common";
 import { SearchService } from "./search.service";
 
 
@@ -9,7 +9,7 @@ export class SearchController {
     ) {}
 
     @Get()
-    async searchCreators() {
-        return await this.searchService.searchCreators();
+    async searchCreators(@Query('query') query: string) {
+        return await this.searchService.searchCreators(query);
     }
 }

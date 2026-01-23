@@ -25,6 +25,9 @@ export class User {
     amount: number;
 
     @Prop()
+    rating: number;
+
+    @Prop()
     socialLinks?: string[];
 
     @Prop()
