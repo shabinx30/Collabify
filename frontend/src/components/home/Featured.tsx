@@ -1,9 +1,9 @@
 import Tiles from "../ui/Tiles";
 import { IProfileUser } from "@/types/profile/profile.type";
-import { searchCreators } from "@/services";
+import { featuredCreators } from "@/services";
 
 const Featured = async () => {
-    const creators = await searchCreators({
+    const creators = await featuredCreators({
         next: { revalidate: 60 },
     });
 

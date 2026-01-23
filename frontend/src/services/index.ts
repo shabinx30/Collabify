@@ -127,7 +127,7 @@ export const findBrands = async () => {
     }
 };
 
-export const searchCreators = async (config: {
+export const featuredCreators = async (config: {
     next: { revalidate: number };
 }) => {
     try {
@@ -147,6 +147,16 @@ export const getSocialAccount = async (userId: string): Promise<Social> => {
         const response = await clientApi.get(
             `get-social-account?userId=${userId}`,
         );
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+};
+
+export const searchCreators = async (query: string) => {
+    try {
+        const response = await clientApi.get(`search?query=${query}`);
         return response.data;
     } catch (error) {
         console.log(error);
