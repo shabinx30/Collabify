@@ -1,13 +1,11 @@
 import Tiles from "../ui/Tiles";
 import { IProfileUser } from "@/types/profile/profile.type";
+import { searchCreators } from "@/services";
 
 const Featured = async () => {
-    const creators = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/creators`,
-        {
-            next: { revalidate: 60 },
-        },
-    ).then((res) => res.json());
+    const creators = await searchCreators({
+        next: { revalidate: 60 },
+    });
 
     return (
         <section>
