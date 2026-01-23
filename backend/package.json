@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@fastify/cookie": "^11.0.2",
+    "@google/genai": "^1.38.0",
     "@nestjs/common": "^11.1.12",
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.1.12",
