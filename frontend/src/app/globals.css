@@ -100,10 +100,11 @@ input {
   outline: none;
 }
 
+
+/* search layout */
 .placeholder-scroll {
   position: absolute;
   top: 0;
-  left: 30px;
   height: 100%;
   display: flex;
   flex-direction: column;
