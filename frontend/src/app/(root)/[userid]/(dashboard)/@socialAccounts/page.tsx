@@ -143,22 +143,24 @@ const SocialAccounts = () => {
                             <div className="pt-8 hidden md:block gap-0">
                                 <p>{socialData?.username}</p>
                                 <p>{socialData?.biography}</p>
-                                <div className="flex text-[#00376B] dark:text-[#E0E2EF]">
-                                    <RiLinkM
-                                        size={16}
-                                        className="my-auto mr-1"
-                                    />
-                                    <Link
-                                        className="hover:underline text-sm font-semibold"
-                                        href={socialData?.website}
-                                        target="blank"
-                                    >
-                                        {socialData?.website.replace(
-                                            "https://",
-                                            "",
-                                        )}
-                                    </Link>
-                                </div>
+                                {socialData.website && (
+                                    <div className="flex text-[#00376B] dark:text-[#E0E2EF]">
+                                        <RiLinkM
+                                            size={16}
+                                            className="my-auto mr-1"
+                                        />
+                                        <Link
+                                            className="hover:underline text-sm font-semibold"
+                                            href={socialData?.website}
+                                            target="blank"
+                                        >
+                                            {socialData?.website?.replace(
+                                                "https://",
+                                                "",
+                                            )}
+                                        </Link>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </section>
@@ -166,16 +168,21 @@ const SocialAccounts = () => {
                     {/* Mobile bio section */}
                     <section className="pt-8 px-4 block md:hidden gap-0">
                         <p>{socialData?.biography}</p>
-                        <div className="flex text-[#00376B] dark:text-[#E0E2EF]">
-                            <RiLinkM size={16} className="my-auto mr-1" />
-                            <Link
-                                className="hover:underline text-sm font-semibold"
-                                href={socialData?.website}
-                                target="blank"
-                            >
-                                {socialData?.website.replace("https://", "")}
-                            </Link>
-                        </div>
+                        {socialData.website && (
+                            <div className="flex text-[#00376B] dark:text-[#E0E2EF]">
+                                <RiLinkM size={16} className="my-auto mr-1" />
+                                <Link
+                                    className="hover:underline text-sm font-semibold"
+                                    href={socialData?.website}
+                                    target="blank"
+                                >
+                                    {socialData?.website?.replace(
+                                        "https://",
+                                        "",
+                                    )}
+                                </Link>
+                            </div>
+                        )}
                     </section>
 
                     {/* Mobile buttons */}
