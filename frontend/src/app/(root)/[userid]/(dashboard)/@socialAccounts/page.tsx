@@ -63,7 +63,7 @@ const SocialAccounts = () => {
                             />
                         </div>
 
-                        <div className="block">
+                        <div className="block w-1/3">
                             {/* Desktop header */}
                             {/* <div className="hidden md:flex duration-300">
                                 <h1 className="text-xl">{""}</h1>
@@ -90,7 +90,7 @@ const SocialAccounts = () => {
                             </p>
 
                             {/* Stats section */}
-                            <div className="flex gap-1 md:gap-6 pt-2 md:pt-6 duration-300">
+                            <div className="flex w-fit md:gap-6 pt-2 md:pt-6 duration-300">
                                 {/* Mobile stats */}
                                 <div className="flex md:hidden gap-8">
                                     <ProfileStat
@@ -196,7 +196,7 @@ const SocialAccounts = () => {
                     </div> */}
                 </section>
                 <ProfileTabs userId={user?.username!} />
-                <Posts />
+                <Posts media={socialData.media} />
             </>
         );
     } else {

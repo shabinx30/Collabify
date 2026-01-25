@@ -320,9 +320,9 @@ export class UserService {
         }
         try {
             const res = await axios.get(
-                `https://graph.instagram.com/v19.0/${socialData.platformUserId}?fields=id,username,account_type,biography,website,profile_picture_url,followers_count,follows_count,media_count,media.limit(10){id,caption,media_type,media_url,permalink,timestamp,like_count,comments_count}&access_token=${socialData.token.accessToken}`
+                `https://graph.instagram.com/v19.0/${socialData.platformUserId}?fields=id,username,account_type,biography,website,profile_picture_url,followers_count,follows_count,media_count,media.limit(10){id,caption,media_type,media_url,permalink,timestamp,like_count,comments_count}&access_token=${socialData.token.accessToken}`,
             );
-            console.log(res.data)
+            console.dir(res.data, { depth: null });
             return res.data;
         } catch (error) {
             throw new InternalServerErrorException(
