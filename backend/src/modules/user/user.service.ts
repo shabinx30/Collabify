@@ -54,8 +54,10 @@ export class UserService {
             const payload = {
                 userId: exist._id,
                 username: exist.username,
+                profile: exist.profile,
                 email: exist.email,
                 role: exist.role,
+                isVerified: true,
             };
 
             const accessToken = await this.accessJwt.signAsync(payload);
@@ -190,6 +192,7 @@ export class UserService {
                 username: newUser.username,
                 email: newUser.email,
                 role: newUser.role,
+                isVerified: true,
             };
 
             const accessToken = await this.accessJwt.signAsync(payload);
@@ -255,6 +258,7 @@ export class UserService {
                     email,
                     profile: picture,
                     role,
+                    isVerified: true,
                 });
             }
 
@@ -316,13 +320,12 @@ export class UserService {
     async getSocialAccount(userId: ObjectId) {
         const socialData = await this.userRepository.getSocialAccount(userId);
         if (!socialData) {
-            throw new NotFoundException('Social account not found');
+            return null
         }
         try {
             const res = await axios.get(
                 `https://graph.instagram.com/v19.0/${socialData.platformUserId}?fields=id,username,account_type,biography,website,profile_picture_url,followers_count,follows_count,media_count,media.limit(10){id,caption,media_type,media_url,permalink,timestamp,like_count,comments_count}&access_token=${socialData.token.accessToken}`,
             );
-            console.dir(res.data, { depth: null });
             return res.data;
         } catch (error) {
             throw new InternalServerErrorException(
