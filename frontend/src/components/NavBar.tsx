@@ -38,7 +38,11 @@ const NavBar = () => {
 
     return (
         <nav className={"bg-white dark:bg-[#1b1b1b]"}>
-            <ul className={"flex py-3 justify-between items-center px-3 md:px-6"}>
+            <ul
+                className={
+                    "flex py-3 justify-between items-center px-3 md:px-6"
+                }
+            >
                 <li className="flex-1 font-bold my-1 text-lg md:text-2xl">
                     {" "}
                     <Link href="/">Collabify</Link>{" "}
@@ -62,7 +66,7 @@ const NavBar = () => {
                     </ViewTransition>
                 )}
                 <li className="flex-1/3 lg:flex-1 flex text-[0.7em] sm:text-xs md:text-base items-center justify-end gap-4 md:gap-6">
-                    {user ? (
+                    {user && user.isVerified ? (
                         path !== user.username && (
                             <DropdownMenu>
                                 <DropdownMenuTrigger

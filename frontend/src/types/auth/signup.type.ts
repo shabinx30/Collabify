@@ -10,6 +10,7 @@ export interface IUser {
     username: string;
     email: string;
     profile: string;
+    isVerified: boolean;
     role: RoleType;
 }
 
