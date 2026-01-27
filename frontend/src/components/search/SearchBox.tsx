@@ -3,22 +3,25 @@
 import { searchPlaceholders } from "@/const/search";
 import { searchCreators } from "@/services";
 import { TSearchBox } from "@/types/search.type";
-import { useRef, ViewTransition } from "react";
+import { useEffect, useRef, ViewTransition } from "react";
 import { BsStars } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const SearchBox = ({ setCreators }: TSearchBox) => {
-    const searchRef = useRef<string | null>(null);
+    const searchRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
+    const searchParams = useSearchParams();
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        searchRef.current = e.target.value;
+        if(searchRef.current) {
+            searchRef.current.value = e.target.value;
+        }
     };
 
-    const handleSubmitForSearch = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (!searchRef.current || !searchRef.current.trim()) return;
-        const res = await searchCreators(searchRef.current);
+    const handleSubmitForSearch = async (e?: React.FormEvent<HTMLFormElement>) => {
+        e?.preventDefault();
+        if (!searchRef.current || !searchRef.current.value.trim()) return;
+        const res = await searchCreators(searchRef.current.value);
         if (setCreators) {
             setCreators(() => res);
         }
@@ -26,9 +29,19 @@ const SearchBox = ({ setCreators }: TSearchBox) => {
 
     const handleSubmitForHome = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!searchRef.current || !searchRef.current.trim()) return;
-        router.push(`/search?query=${searchRef.current}`);
+        if (!searchRef.current || !searchRef.current.value || !searchRef.current.value.trim()) return;
+        router.push(`/search?query=${searchRef.current.value}`);
     };
+
+    useEffect(() => {
+        const query = searchParams.get("query");
+        if(searchRef.current) {
+            searchRef.current.value = query || "";
+        }
+        if (query) {
+            handleSubmitForSearch()
+        }
+    }, [searchParams]);
 
     return (
         <ViewTransition name="search-bar">
@@ -43,6 +56,7 @@ const SearchBox = ({ setCreators }: TSearchBox) => {
                         <input
                             type="search"
                             name="search"
+                            ref={searchRef}
                             onChange={handleChange}
                             className="relative w-full outline-none bg-transparent z-2"
                             placeholder="Try"
