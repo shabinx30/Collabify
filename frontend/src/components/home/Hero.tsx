@@ -9,7 +9,7 @@ const Hero = () => {
                     Symplifiying Influencer Marketing For Everyone
                 </h3>
             </div>
-            <div className="flex justify-center overflow-hidden">
+            <div className="flex justify-center overflow-hidden mb-[4em]">
                 <p className="text-gray-800 dark:text-gray-300/75 w-[75%] text-xs md:text-sm lg:w-[60%] text-center leading-[1.2] slide-up-3">
                     Discover a smarter way to connect with content creators,
                     launch campaigns, and grow your all in one simple, seamless
