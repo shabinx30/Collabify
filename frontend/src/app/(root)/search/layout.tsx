@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { IProfileUser } from "@/types/profile/profile.type";
 import Tiles from "@/components/ui/Tiles";
 import SearchBox from "@/components/search/SearchBox";
+import { BsSortDown } from "react-icons/bs";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
     const [creators, setCreators] = useState<IProfileUser[]>([]);
@@ -50,6 +51,14 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                     >
                         <PiSlidersHorizontalBold size={20} />
                     </motion.span>
+                    <motion.span
+                        initial={{ x: 100, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        transition={{ type: "tween" }}
+                        className="flex flex-1/2 md:hidden items-center justify-center px-3.5 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl cursor-pointer"
+                    >
+                        <BsSortDown size={20} />
+                    </motion.span>
                 </div>
                 <SearchBox setCreators={setCreators} />
                 <motion.span
@@ -59,6 +68,14 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                     className="hidden md:flex items-center px-3.5 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl cursor-pointer"
                 >
                     <PiSlidersHorizontalBold size={20} />
+                </motion.span>
+                <motion.span
+                    initial={{ x: 100, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ type: "tween" }}
+                    className="hidden md:flex items-center px-3.5 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl cursor-pointer"
+                >
+                    <BsSortDown size={20} />
                 </motion.span>
             </div>
             {!creators.length ? (
