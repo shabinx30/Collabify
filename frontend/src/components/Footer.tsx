@@ -4,7 +4,7 @@ import { LuFacebook } from "react-icons/lu";
 
 const Footer = () => {
     return (
-        <footer className="bg-amber-100 dark:bg-black p-4 sm:p-6 md:p-8">
+        <footer className="bg-green-200 dark:bg-black p-4 sm:p-6 md:p-8">
             <div className="flex flex-col md:flex-row py-6 md:py-8 lg:py-12 gap-8 md:gap-4">
                 {/* Logo Section */}
                 <div className="flex flex-1 justify-center md:justify-start">

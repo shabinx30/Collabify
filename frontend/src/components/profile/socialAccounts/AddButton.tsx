@@ -19,8 +19,8 @@ const AddButton = ({
 
     if (href && href?.endsWith("instagram")) {
         href += `?userId=${user?.userId}`;
-    }else { // TODO: Add support for other youtube accounts
-        return null; 
+    } else { // TODO: Add support for other youtube accounts
+        return null;
     }
 
     return (
