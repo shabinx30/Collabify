@@ -37,7 +37,7 @@ const NavBar = () => {
     };
 
     return (
-        <nav className={"bg-white dark:bg-[#1b1b1b]"}>
+        <nav className={"bg-white dark:bg-black"}>
             <ul
                 className={
                     "flex py-3 justify-between items-center px-3 md:px-6"

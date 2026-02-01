@@ -3,7 +3,7 @@ import SearchBox from "../search/SearchBox";
 const Hero = () => {
 
     return (
-        <section className="w-full bg-white dark:bg-[#1b1b1b] flex flex-col items-center gap-4">
+        <section className="w-full bg-white dark:bg-black flex flex-col items-center gap-4">
             <div className="overflow-hidden pb-1">
                 <h3 className="w-full text-2xl md:text-3xl lg:text-[2.5rem] font-semibold text-center slide-up">
                     Symplifiying Influencer Marketing For Everyone
