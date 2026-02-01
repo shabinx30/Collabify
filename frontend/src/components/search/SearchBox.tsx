@@ -13,12 +13,14 @@ const SearchBox = ({ setCreators }: TSearchBox) => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if(searchRef.current) {
+        if (searchRef.current) {
             searchRef.current.value = e.target.value;
         }
     };
 
-    const handleSubmitForSearch = async (e?: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmitForSearch = async (
+        e?: React.FormEvent<HTMLFormElement>,
+    ) => {
         e?.preventDefault();
         if (!searchRef.current || !searchRef.current.value.trim()) return;
         const res = await searchCreators(searchRef.current.value);
@@ -29,28 +31,37 @@ const SearchBox = ({ setCreators }: TSearchBox) => {
 
     const handleSubmitForHome = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!searchRef.current || !searchRef.current.value || !searchRef.current.value.trim()) return;
+        if (
+            !searchRef.current ||
+            !searchRef.current.value ||
+            !searchRef.current.value.trim()
+        )
+            return;
         router.push(`/search?query=${searchRef.current.value}`);
     };
 
     useEffect(() => {
         const query = searchParams.get("query");
-        if(searchRef.current) {
+        if (searchRef.current) {
             searchRef.current.value = query || "";
         }
         if (query) {
-            handleSubmitForSearch()
+            handleSubmitForSearch();
         }
     }, [searchParams]);
 
     return (
         <ViewTransition name="search-bar">
-            <div className="flex w-full md:w-[75%] lg:w-[60%] justify-between items-center px-3 md:px-6 py-2.5 md:py-4 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl">
+            <div className="searchbox flex w-full md:w-[75%] lg:w-[60%] justify-between items-center px-3 md:px-6 py-2.5 md:py-4 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl">
                 <div className="flex items-center gap-1.5 md:gap-3 w-full">
                     <FiSearch size={18} />
                     <form
                         autoComplete="off"
-                        onSubmit={setCreators ? handleSubmitForSearch : handleSubmitForHome}
+                        onSubmit={
+                            setCreators
+                                ? handleSubmitForSearch
+                                : handleSubmitForHome
+                        }
                         className="relative w-full overflow-hidden search-container text-xs md:text-base"
                     >
                         <input
@@ -70,7 +81,7 @@ const SearchBox = ({ setCreators }: TSearchBox) => {
                         </div>
                     </form>
                 </div>
-                <BsStars size={20} className="text-green-400" />
+                <BsStars size={20} className="text-green-300" />
             </div>
         </ViewTransition>
     );
