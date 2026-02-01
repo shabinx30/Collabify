@@ -268,6 +268,7 @@ export class UserService {
                 profile: exist ? exist.profile : picture,
                 email,
                 role: exist ? exist.role : role,
+                isVerified: true,
             });
 
             const refreshToken = await this.refreshJwt.signAsync({

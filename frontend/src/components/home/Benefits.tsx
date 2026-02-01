@@ -4,7 +4,7 @@ const Benefits = () => {
     return (
         <section className="flex flex-col gap-2">
             <h3 className="text-xl font-semibold">Why Choose us?</h3>
-            <section className="bg-[#202020] dark:bg-black flex flex-col gap-[4em] p-4 rounded-3xl">
+            <section className="bg-[#202020] flex flex-col gap-[4em] p-4 rounded-3xl">
                 <div className="pt-2 pl-2">
                     <h3 className="text-green-400 text-xl font-semibold">
                         For Creators
@@ -15,7 +15,7 @@ const Benefits = () => {
                     </p>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 items-center">
-                    <div className="aspect-square bg-white dark:bg-[#2b2b2b] rounded-xl p-1">
+                    <div className="aspect-square bg-white dark:bg-black rounded-xl p-1">
                         <div className="flex justify-center items-center h-[80%]">
                             <CiImageOn size={40} />
                         </div>
@@ -24,7 +24,7 @@ const Benefits = () => {
                             typesetting industry.
                         </p>
                     </div>
-                    <div className="aspect-square bg-white dark:bg-[#2b2b2b] rounded-xl p-1">
+                    <div className="aspect-square bg-white dark:bg-black rounded-xl p-1">
                         <div className="flex justify-center items-center h-[80%]">
                             <CiImageOn size={40} />
                         </div>
@@ -33,7 +33,7 @@ const Benefits = () => {
                             typesetting industry.
                         </p>
                     </div>
-                    <div className="aspect-square bg-white dark:bg-[#2b2b2b] rounded-xl p-1">
+                    <div className="aspect-square bg-white dark:bg-black rounded-xl p-1">
                         <div className="flex justify-center items-center h-[80%]">
                             <CiImageOn size={40} />
                         </div>
@@ -42,7 +42,7 @@ const Benefits = () => {
                             typesetting industry.
                         </p>
                     </div>
-                    <div className="aspect-square bg-white dark:bg-[#2b2b2b] rounded-xl p-1">
+                    <div className="aspect-square bg-white dark:bg-black rounded-xl p-1">
                         <div className="flex justify-center items-center h-[80%]">
                             <CiImageOn size={40} />
                         </div>
@@ -53,7 +53,7 @@ const Benefits = () => {
                     </div>
                 </div>
             </section>
-            <section className="bg-[#202020] dark:bg-black flex flex-col gap-[4em] p-4 rounded-3xl">
+            <section className="bg-[#202020] flex flex-col gap-[4em] p-4 rounded-3xl">
                 <div className="pt-2 pl-2">
                     <h3 className="text-green-400 text-xl font-semibold">
                         For Brands
@@ -64,7 +64,7 @@ const Benefits = () => {
                     </p>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 items-center">
-                    <div className="aspect-square bg-white dark:bg-[#2b2b2b] rounded-xl p-1">
+                    <div className="aspect-square bg-white dark:bg-black rounded-xl p-1">
                         <div className="flex justify-center items-center h-[80%]">
                             <CiImageOn size={40} />
                         </div>
@@ -73,7 +73,7 @@ const Benefits = () => {
                             typesetting industry.
                         </p>
                     </div>
-                    <div className="aspect-square bg-white dark:bg-[#2b2b2b] rounded-xl p-1">
+                    <div className="aspect-square bg-white dark:bg-black rounded-xl p-1">
                         <div className="flex justify-center items-center h-[80%]">
                             <CiImageOn size={40} />
                         </div>
@@ -82,7 +82,7 @@ const Benefits = () => {
                             typesetting industry.
                         </p>
                     </div>
-                    <div className="aspect-square bg-white dark:bg-[#2b2b2b] rounded-xl p-1">
+                    <div className="aspect-square bg-white dark:bg-black rounded-xl p-1">
                         <div className="flex justify-center items-center h-[80%]">
                             <CiImageOn size={40} />
                         </div>
@@ -91,7 +91,7 @@ const Benefits = () => {
                             typesetting industry.
                         </p>
                     </div>
-                    <div className="aspect-square bg-white dark:bg-[#2b2b2b] rounded-xl p-1">
+                    <div className="aspect-square bg-white dark:bg-black rounded-xl p-1">
                         <div className="flex justify-center items-center h-[80%]">
                             <CiImageOn size={40} />
                         </div>
