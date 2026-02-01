@@ -98,6 +98,9 @@ input[type=number] {
 
 input {
   outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 
@@ -153,4 +156,71 @@ input {
 
 .search-container input:not(:placeholder-shown)+.placeholder-scroll {
   display: none;
+}
+
+.searchbox {
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 0px rgba(123, 143, 241, 0);
+  animation: shadow-intro 4s ease 350ms forwards;
+}
+
+@keyframes shadow-intro {
+  0% {
+    box-shadow: 0 0 0px #00000000;
+  }
+
+  15% {
+    box-shadow: 0 0 20px #8d7bf1;
+  }
+
+  30% {
+    box-shadow: 0 0 20px #05dfd4;
+  }
+
+  60% {
+    box-shadow: 0 0 20px #8d7bf1;
+  }
+
+  85% {
+    box-shadow: 0 0 20px #05dfd4;
+  }
+
+  100% {
+    box-shadow: 0 0 0px #00000000;
+  }
+}
+
+/* SHADOW LAYER */
+.searchbox::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  z-index: -1;
+
+  box-shadow: 0 0 20px #7b8ff1;
+  opacity: 0;
+
+  animation: shadow-change 2s infinite alternate;
+  transition: opacity 400ms ease;
+}
+
+/* ACTIVATE SHADOW */
+.searchbox:focus-within::before {
+  opacity: 1;
+}
+
+@keyframes shadow-change {
+  0% {
+    box-shadow: 0 0 20px #8d7bf1;
+  }
+
+  50% {
+    box-shadow: 0 0 20px #05dfd4;
+  }
+
+  100% {
+    box-shadow: 0 0 20px #8d7bf1;
+  }
 }
