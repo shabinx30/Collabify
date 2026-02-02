@@ -17,7 +17,7 @@ const RoleSelector = ({ role, setRole }: IRoleSelector) => {
                     stiffness: 300,
                     damping: 30,
                 }}
-                className="absolute h-full w-1/2 rounded-xl dark:bg-[#312500] bg-green-400 dark:border-2 dark:border-green-400 z-0"
+                className="absolute h-full w-1/2 rounded-xl dark:bg-[#193100] bg-lime-500 dark:border-2 dark:border-lime-500 z-0"
             />
 
             {/* Buttons */}
@@ -25,7 +25,7 @@ const RoleSelector = ({ role, setRole }: IRoleSelector) => {
                 onClick={() => setRole(() => "brand")}
                 className={`flex-1 flex py-3 justify-center items-center gap-2 md:gap-3 z-10 cursor-pointer transition-colors duration-300 ${
                     role === "brand"
-                        ? "dark:text-green-400"
+                        ? "dark:text-lime-500"
                         : "dark:text-gray-300"
                 }`}
             >
@@ -36,7 +36,7 @@ const RoleSelector = ({ role, setRole }: IRoleSelector) => {
                 onClick={() => setRole(() => "creator")}
                 className={`flex-1 flex py-3 justify-center items-center gap-2 md:gap-3 z-10 cursor-pointer transition-colors duration-300 ${
                     role === "creator"
-                        ? "dark:text-green-400"
+                        ? "dark:text-lime-500"
                         : "dark:text-gray-300"
                 }`}
             >

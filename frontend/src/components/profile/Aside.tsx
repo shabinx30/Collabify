@@ -24,7 +24,7 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
 
     return (
         <div className="flex">
-            <div className="bg-white dark:bg-[#1b1b1b] border-r border-gray-200 dark:border-none hidden md:flex flex-col">
+            <div className="bg-white dark:bg-black border-r border-gray-200 dark:border-none hidden md:flex flex-col">
                 <ul className="p-4">
                     <li
                         onClick={() => {
@@ -33,7 +33,7 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
                         className={
                             "hover:bg-slate-800 hover:text-white dark:hover:bg-[#101010] duration-200 px-4 py-2 rounded-2xl flex gap-3 items-center cursor-pointer " +
                             (params.endsWith(user?.username || "") &&
-                                "bg-slate-900 dark:bg-[#0b0b0b] text-green-400 dark:text-green-300")
+                                "bg-slate-900 dark:bg-[#0b0b0b] text-lime-400 dark:text-lime-300")
                         }
                     >
                         <FaRegUser />
@@ -46,7 +46,7 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
                         className={
                             "hover:bg-slate-800 hover:text-white dark:hover:bg-[#101010] duration-200 px-3.5 py-2 rounded-2xl flex gap-2 items-center cursor-pointer " +
                             (params.endsWith("accounts") &&
-                                "bg-slate-900 dark:bg-[#0b0b0b] text-green-400 dark:text-green-300")
+                                "bg-slate-900 dark:bg-[#0b0b0b] text-lime-400 dark:text-lime-300")
                         }
                     >
                         <PiUserCircleDashed size={21} />
@@ -62,7 +62,7 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
                         className={
                             "hover:bg-slate-800 hover:text-white dark:hover:bg-[#101010] duration-200 px-4 py-2 rounded-2xl flex gap-3 items-center cursor-pointer " +
                             (params.endsWith("settings") &&
-                                "bg-slate-900 dark:bg-[#0b0b0b] text-green-400 dark:text-green-300")
+                                "bg-slate-900 dark:bg-[#0b0b0b] text-lime-400 dark:text-lime-300")
                         }
                     >
                         <LuSettings />

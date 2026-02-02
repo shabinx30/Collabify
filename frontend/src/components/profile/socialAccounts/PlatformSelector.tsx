@@ -1,6 +1,4 @@
 import { motion } from "framer-motion";
-import { IoBusiness } from "react-icons/io5";
-import { LuMicVocal } from "react-icons/lu";
 import { FaInstagram } from "react-icons/fa6";
 import { AiOutlineYoutube } from "react-icons/ai";
 import { useRouter, usePathname } from "next/navigation";
@@ -18,7 +16,7 @@ const PlatformSelector = ({
 
     const changeRoute = (route: string) => {
         path[2] = route
-        setPlatform(() => route);
+        setPlatform(() => route ? route : "instagram");
         router.replace(path.join('/'));
     };
 
@@ -35,15 +33,15 @@ const PlatformSelector = ({
                     stiffness: 300,
                     damping: 30,
                 }}
-                className="absolute h-full w-1/2 rounded-xl dark:bg-[#002b16] bg-green-400 dark:border-2 dark:border-green-400 z-0"
+                className="absolute h-full w-1/2 rounded-xl dark:bg-[#0e2b00] bg-lime-400 dark:border-2 dark:border-lime-400 z-0"
             />
 
             {/* Buttons */}
             <div
                 onClick={() => changeRoute("")}
                 className={`flex-1 flex py-3 justify-center items-center gap-2 md:gap-3 z-10 cursor-pointer transition-colors duration-300 ${
-                    platform === "brand"
-                        ? "dark:text-green-400"
+                    platform === "instagram"
+                        ? "dark:text-lime-400"
                         : "dark:text-gray-300"
                 }`}
             >
@@ -53,8 +51,8 @@ const PlatformSelector = ({
             <div
                 onClick={() => changeRoute("youtube")}
                 className={`flex-1 flex py-3 justify-center items-center gap-2 md:gap-3 z-10 cursor-pointer transition-colors duration-300 ${
-                    platform === "creator"
-                        ? "dark:text-green-400"
+                    platform === "youtube"
+                        ? "dark:text-lime-400"
                         : "dark:text-gray-300"
                 }`}
             >
