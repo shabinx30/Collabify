@@ -81,7 +81,7 @@ const SearchBox = ({ setCreators }: TSearchBox) => {
                         </div>
                     </form>
                 </div>
-                <BsStars size={20} className="text-green-300" />
+                <BsStars size={20} className="text-lime-400" />
             </div>
         </ViewTransition>
     );

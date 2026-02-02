@@ -139,7 +139,7 @@ const NavBar = () => {
                                 <p>Join as Brand</p>
                             </Link>
                             <Link href="/signup?type=creator">
-                                <p className="text-green-400">
+                                <p className="text-lime-500">
                                     Join as Creator
                                 </p>
                             </Link>
@@ -152,7 +152,7 @@ const NavBar = () => {
                                 <p>Join as Brand</p>
                             </Link>
                             <Link href="/signup?type=creator">
-                                <p className="text-green-400">
+                                <p className="text-lime-500">
                                     Join as Creator
                                 </p>
                             </Link>
