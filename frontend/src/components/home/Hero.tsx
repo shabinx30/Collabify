@@ -6,7 +6,7 @@ const Hero = () => {
         <section className="w-full bg-white dark:bg-black flex flex-col items-center gap-4">
             <div className="overflow-hidden pb-1">
                 <h3 className="w-full text-2xl md:text-3xl lg:text-[2.5rem] font-semibold text-center slide-up">
-                    Symplifiying Influencer Marketing For Everyone
+                    <span className="text-lime-400">Simplifying</span> Influencer Marketing For Everyone
                 </h3>
             </div>
             <div className="flex justify-center overflow-hidden mb-[4em]">

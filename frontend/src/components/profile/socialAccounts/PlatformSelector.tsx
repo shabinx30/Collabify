@@ -33,7 +33,7 @@ const PlatformSelector = ({
                     stiffness: 300,
                     damping: 30,
                 }}
-                className="absolute h-full w-1/2 rounded-xl dark:bg-[#0e2b00] bg-lime-400 dark:border-2 dark:border-lime-400 z-0"
+                className="absolute h-full w-1/2 rounded-xl bg-lime-400 z-0"
             />
 
             {/* Buttons */}
@@ -41,8 +41,8 @@ const PlatformSelector = ({
                 onClick={() => changeRoute("")}
                 className={`flex-1 flex py-3 justify-center items-center gap-2 md:gap-3 z-10 cursor-pointer transition-colors duration-300 ${
                     platform === "instagram"
-                        ? "dark:text-lime-400"
-                        : "dark:text-gray-300"
+                        ? "text-black"
+                        : "text-gray-300"
                 }`}
             >
                 <FaInstagram size={20} />
@@ -52,8 +52,8 @@ const PlatformSelector = ({
                 onClick={() => changeRoute("youtube")}
                 className={`flex-1 flex py-3 justify-center items-center gap-2 md:gap-3 z-10 cursor-pointer transition-colors duration-300 ${
                     platform === "youtube"
-                        ? "dark:text-lime-400"
-                        : "dark:text-gray-300"
+                        ? "text-black"
+                        : "text-gray-300"
                 }`}
             >
                 <AiOutlineYoutube size={20} />

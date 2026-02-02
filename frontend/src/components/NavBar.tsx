@@ -44,8 +44,7 @@ const NavBar = () => {
                 }
             >
                 <li className="flex-1 font-bold my-1 text-lg md:text-2xl">
-                    {" "}
-                    <Link href="/">Collabify</Link>{" "}
+                    <Link href="/">Collabify</Link>
                 </li>
                 {path && (
                     <ViewTransition name="search-bar">
@@ -139,9 +138,7 @@ const NavBar = () => {
                                 <p>Join as Brand</p>
                             </Link>
                             <Link href="/signup?type=creator">
-                                <p className="text-lime-500">
-                                    Join as Creator
-                                </p>
+                                <p className="text-lime-400">Join as Creator</p>
                             </Link>
                         </>
                     ) : path != "signin" ? (
@@ -152,9 +149,7 @@ const NavBar = () => {
                                 <p>Join as Brand</p>
                             </Link>
                             <Link href="/signup?type=creator">
-                                <p className="text-lime-500">
-                                    Join as Creator
-                                </p>
+                                <p className="text-lime-400">Join as Creator</p>
                             </Link>
                         </>
                     )}
