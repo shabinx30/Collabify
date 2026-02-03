@@ -10,8 +10,8 @@ const Benefits = () => {
                         For Creators
                     </h3>
                     <p className="text-white">
-                        A skilled pro who works independently, taking on
-                        projects they love on their own terms.
+                        Produces niche focused content and collaborates with
+                        brands to influence audience decisions.
                     </p>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 items-center">
@@ -20,8 +20,8 @@ const Benefits = () => {
                             <CiImageOn size={40} />
                         </div>
                         <p className="text-sm text-center">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry.
+                            Brands reach out to you based on relevance, no cold
+                            DMs, no chasing.
                         </p>
                     </div>
                     <div className="aspect-square bg-white dark:bg-black rounded-xl p-1">
@@ -29,8 +29,8 @@ const Benefits = () => {
                             <CiImageOn size={40} />
                         </div>
                         <p className="text-sm text-center">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry.
+                            You&rsquo;re matched by niche and engagement, not
+                            just follower count.
                         </p>
                     </div>
                     <div className="aspect-square bg-white dark:bg-black rounded-xl p-1">
@@ -38,8 +38,8 @@ const Benefits = () => {
                             <CiImageOn size={40} />
                         </div>
                         <p className="text-sm text-center">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry.
+                            See budgets, deliverables, and expectations before
+                            you accept.
                         </p>
                     </div>
                     <div className="aspect-square bg-white dark:bg-black rounded-xl p-1">
@@ -47,8 +47,8 @@ const Benefits = () => {
                             <CiImageOn size={40} />
                         </div>
                         <p className="text-sm text-center">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry.
+                            A professional profile helps you attract serious,
+                            repeat brands.
                         </p>
                     </div>
                 </div>
@@ -59,8 +59,8 @@ const Benefits = () => {
                         For Brands
                     </h3>
                     <p className="text-white">
-                        Someone with a goal or idea, looking to team up with the
-                        right talent to bring it to life.
+                        Partners with creators to reach targeted audiences and
+                        drive measurable marketing results.
                     </p>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 items-center">
@@ -69,8 +69,8 @@ const Benefits = () => {
                             <CiImageOn size={40} />
                         </div>
                         <p className="text-sm text-center">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry.
+                            Search creators by niche, audience, location, and
+                            engagement.
                         </p>
                     </div>
                     <div className="aspect-square bg-white dark:bg-black rounded-xl p-1">
@@ -78,8 +78,8 @@ const Benefits = () => {
                             <CiImageOn size={40} />
                         </div>
                         <p className="text-sm text-center">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry.
+                            Discover creators who convert, not just those who
+                            look popular.
                         </p>
                     </div>
                     <div className="aspect-square bg-white dark:bg-black rounded-xl p-1">
@@ -87,8 +87,8 @@ const Benefits = () => {
                             <CiImageOn size={40} />
                         </div>
                         <p className="text-sm text-center">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry.
+                            View real performance data before committing your
+                            budget.
                         </p>
                     </div>
                     <div className="aspect-square bg-white dark:bg-black rounded-xl p-1">
@@ -96,8 +96,8 @@ const Benefits = () => {
                             <CiImageOn size={40} />
                         </div>
                         <p className="text-sm text-center">
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry.
+                            Discover, connect, and collaborate, all in one
+                            platform.
                         </p>
                     </div>
                 </div>
