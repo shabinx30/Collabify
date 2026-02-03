@@ -42,7 +42,7 @@ const PlatformSelector = ({
                 className={`flex-1 flex py-3 justify-center items-center gap-2 md:gap-3 z-10 cursor-pointer transition-colors duration-300 ${
                     platform === "instagram"
                         ? "text-black"
-                        : "text-gray-300"
+                        : "text-gray-600 dark:text-gray-300"
                 }`}
             >
                 <FaInstagram size={20} />
@@ -53,7 +53,7 @@ const PlatformSelector = ({
                 className={`flex-1 flex py-3 justify-center items-center gap-2 md:gap-3 z-10 cursor-pointer transition-colors duration-300 ${
                     platform === "youtube"
                         ? "text-black"
-                        : "text-gray-300"
+                        : "text-gray-600 dark:text-gray-300"
                 }`}
             >
                 <AiOutlineYoutube size={20} />
