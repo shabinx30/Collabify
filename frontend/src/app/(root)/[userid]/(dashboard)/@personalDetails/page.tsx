@@ -11,7 +11,7 @@ const PersonalDetails = () => {
     }
     return (
         <section className="flex-1 min-w-0">
-            <h3 className="text-lime-400">Person Details</h3>
+            <h3 className="font-semibold dark:text-base mb-1">Person Details</h3>
             <div className="flex flex-col lg:flex-row bg-gray-100 dark:bg-[#2b2b2b] h-full min-h-fit rounded-xl p-2 sm:p-4 gap-4">
                 <div className="relative max-h-fit shrink-0 self-center lg:self-start">
                     <Image
