@@ -8,7 +8,7 @@ import { BsStars } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const SearchBox = ({ setCreators }: TSearchBox) => {
+const SearchBox = ({ setCreators, isSearched, setIsSearched }: TSearchBox) => {
     const searchRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -27,9 +27,12 @@ const SearchBox = ({ setCreators }: TSearchBox) => {
         if (setCreators) {
             setCreators(() => res);
         }
+        if (!isSearched && setIsSearched) {
+            setIsSearched(() => true);
+        }
     };
 
-    const handleSubmitForHome = async (e: React.FormEvent<HTMLFormElement>) => {
+    const redirectToSearch = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (
             !searchRef.current ||
@@ -57,11 +60,7 @@ const SearchBox = ({ setCreators }: TSearchBox) => {
                     <FiSearch size={18} />
                     <form
                         autoComplete="off"
-                        onSubmit={
-                            setCreators
-                                ? handleSubmitForSearch
-                                : handleSubmitForHome
-                        }
+                        onSubmit={redirectToSearch}
                         className="relative w-full overflow-hidden search-container text-xs md:text-base"
                     >
                         <input
