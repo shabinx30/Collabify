@@ -12,6 +12,7 @@ import { BsSortDown } from "react-icons/bs";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
     const [creators, setCreators] = useState<IProfileUser[]>([]);
+    const [isSearched, setIsSearched] = useState<boolean>(false);
 
     return (
         <div className="py-2 md:py-12 px-4 gap-10 flex flex-col items-center">
@@ -60,7 +61,11 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                         <BsSortDown size={20} />
                     </motion.span>
                 </div>
-                <SearchBox setCreators={setCreators} />
+                <SearchBox
+                    setCreators={setCreators}
+                    isSearched={isSearched}
+                    setIsSearched={setIsSearched}
+                />
                 <motion.span
                     initial={{ x: 100, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
@@ -79,7 +84,14 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                 </motion.span>
             </div>
             {!creators.length ? (
-                <div>{children}</div>
+                <div>
+                    {isSearched && (
+                        <div className="flex items-center justify-center">
+                            <p className="text-center">No creators found</p>
+                        </div>
+                    )}
+                    {children}
+                </div>
             ) : (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 py-[1em]">
                     {creators && creators.length ? (
