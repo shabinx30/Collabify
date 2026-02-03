@@ -23,9 +23,10 @@ const Benefits = () => {
                                         alt={ben.image}
                                         width={100}
                                         height={100}
+                                        loading="lazy"
                                     />
                                 </div>
-                                <div className="absolute h-1/2 bottom-0 flex items-end pb-3 text-lime-100 bg-linear-to-t from-black to-transparent text-sm text-center rounded-b-xl">
+                                <div className="absolute h-1/2 bottom-0 flex items-end p-3 text-white bg-linear-to-t from-black to-transparent text-sm text-left rounded-b-xl">
                                     {ben.text}
                                 </div>
                             </div>
