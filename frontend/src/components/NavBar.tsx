@@ -19,6 +19,7 @@ import {
 import { logoutUser } from "@/redux/slices/auth.slice";
 import { FormEvent, ViewTransition } from "react";
 import { googleLogout } from "@react-oauth/google";
+import { BsStars } from "react-icons/bs";
 
 const NavBar = () => {
     const pathnames = usePathname().split("/");
@@ -50,10 +51,10 @@ const NavBar = () => {
                     <ViewTransition name="search-bar">
                         <li
                             onClick={() => router.push("/search")}
-                            className="hidden md:flex flex-1 items-center px-4 gap-2 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-xl"
+                            className="hidden md:flex justify-between flex-1 items-center px-4 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-2xl"
                         >
-                            <FiSearch />
-                            <form onSubmit={handleSubmit} autoComplete="off">
+                            <form onSubmit={handleSubmit} autoComplete="off" className="flex items-center gap-2">
+                                <FiSearch />
                                 <input
                                     type="search"
                                     name="search"
@@ -61,6 +62,7 @@ const NavBar = () => {
                                     placeholder="Search"
                                 />
                             </form>
+                            <BsStars className="text-lime-400" />
                         </li>
                     </ViewTransition>
                 )}
