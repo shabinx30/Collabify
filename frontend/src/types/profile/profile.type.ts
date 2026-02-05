@@ -6,6 +6,7 @@ export interface IProfile {
 
 export interface IProfileUser extends Omit<IUser, "userId"> {
     _id?: string;
+    username: string;
     amount?: number;
     categories: string[];
     location?: string;

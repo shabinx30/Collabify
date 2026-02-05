@@ -24,6 +24,7 @@ const SearchBox = ({ setCreators, isSearched, setIsSearched }: TSearchBox) => {
         e?.preventDefault();
         if (!searchRef.current || !searchRef.current.value.trim()) return;
         const res = await searchCreators(searchRef.current.value);
+        console.log({res})
         if (setCreators) {
             setCreators(() => res);
         }

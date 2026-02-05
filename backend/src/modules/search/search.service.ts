@@ -133,7 +133,7 @@ export class SearchService {
             // 9. Final output shape
             {
                 $project: {
-                    _id: 1,
+                    _id: 0,
                     username: 1,
                     profile: 1,
                     rating: 1,

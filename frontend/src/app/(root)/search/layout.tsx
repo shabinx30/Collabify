@@ -96,7 +96,9 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 py-[1em]">
                     {creators && creators.length ? (
                         creators.map((creator: IProfileUser, i: number) => (
-                            <Tiles key={i} creator={creator} />
+                            <Link href={`/${creator.username}`} key={i}>
+                                <Tiles creator={creator} />
+                            </Link>
                         ))
                     ) : (
                         <p>No creators found</p>
