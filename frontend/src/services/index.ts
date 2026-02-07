@@ -128,7 +128,7 @@ export const findBrands = async () => {
 };
 
 export const featuredCreators = async (config: {
-    next: { revalidate: number };
+    next: { revalidate: number | false };
 }) => {
     try {
         const response = await fetch(

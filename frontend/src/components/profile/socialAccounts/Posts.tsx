@@ -22,7 +22,7 @@ const PostsPage = ({ media }: { media: Social["media"] }) => {
     } else {
         return (
             <div className="grid grid-cols-3 w-full gap-1 pt-[0.5em] pb-[6em]">
-                {media.data.map((post) => (
+                {media.data.map((post, i) => (
                     <div
                         onContextMenu={(e) => e.preventDefault()}
                         key={post.id}
@@ -30,7 +30,7 @@ const PostsPage = ({ media }: { media: Social["media"] }) => {
                     >
                         <Image
                             src={post.media_url}
-                            alt={post.caption}
+                            alt={post.caption || `post ${i}`}
                             loading="lazy"
                             fill
                             className="object-cover"
