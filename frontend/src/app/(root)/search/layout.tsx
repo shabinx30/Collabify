@@ -15,8 +15,8 @@ const layout = ({ children }: { children: React.ReactNode }) => {
     const [isSearched, setIsSearched] = useState<boolean>(false);
 
     return (
-        <div className="py-2 md:py-12 px-4 gap-10 flex flex-col items-center">
-            <div className="flex flex-col md:flex-row justify-center gap-2 w-full md:w-[75%] lg:w-[60%]">
+        <main className="py-2 md:py-12 gap-10 flex flex-col items-center px-4 md:px-[8.25%] lg:px-[20%]">
+            <div className="flex flex-col md:flex-row justify-center gap-2 w-full">
                 <motion.span
                     initial={{ x: -100, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
@@ -84,14 +84,14 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                 </motion.span>
             </div>
             {!creators.length ? (
-                <div>
+                <>
                     {isSearched && (
                         <div className="flex items-center justify-center">
                             <p className="text-center">No creators found</p>
                         </div>
                     )}
                     {children}
-                </div>
+                </>
             ) : (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 py-[1em]">
                     {creators && creators.length ? (
@@ -105,7 +105,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                     )}
                 </div>
             )}
-        </div>
+        </main>
     );
 };
 
