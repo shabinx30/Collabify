@@ -2,16 +2,15 @@
 
 import ProfileTabs from "@/components/profile/socialAccounts/Tabs";
 import Posts from "@/components/profile/socialAccounts/Posts";
-import { RootState } from "@/redux/store/store";
 import Image from "next/image";
 import Link from "next/link";
 import { RiLinkM } from "react-icons/ri";
-import { useSelector } from "react-redux";
 import { getSocialAccount } from "@/services";
 import { useEffect, useState } from "react";
 import { Social } from "@/types/profile/social.type";
 import { FiPlus } from "react-icons/fi";
 import AddButton from "@/components/profile/socialAccounts/AddButton";
+import { useUserData } from "@/contexts/UserDataContext";
 
 // Reusable component for profile stats
 const ProfileStat = ({
@@ -28,12 +27,12 @@ const ProfileStat = ({
 );
 
 const SocialAccounts = () => {
-    const { user } = useSelector((state: RootState) => state.auth);
     const [socialData, setSocialData] = useState<Social | string>("loading");
+    const { userData: data } = useUserData();
 
     useEffect(() => {
         (async () => {
-            const res = await getSocialAccount(user?.userId as string);
+            const res = await getSocialAccount(data?._id as string);
             setSocialData((_) => res);
         })();
     }, []);
@@ -197,7 +196,7 @@ const SocialAccounts = () => {
                         </button>
                     </div> */}
                 </section>
-                <ProfileTabs userId={user?.username!} />
+                <ProfileTabs userId={data?.username!} />
                 <Posts media={socialData.media} />
             </>
         );
