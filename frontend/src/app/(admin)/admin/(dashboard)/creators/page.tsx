@@ -59,7 +59,9 @@ const Creators = () => {
                                         <div className="flex items-center gap-3">
                                             <Avatar className="h-10 w-10 border-2 border-border">
                                                 <AvatarImage
-                                                    src={user.profile}
+                                                    src={`/api/image-proxy?url=${encodeURIComponent(
+                                                        user.profile
+                                                    )}`}
                                                     alt={user.username}
                                                 />
                                                 <AvatarFallback className="bg-secondary text-secondary-foreground">

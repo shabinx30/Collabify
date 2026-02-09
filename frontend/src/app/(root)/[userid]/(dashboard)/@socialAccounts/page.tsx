@@ -11,6 +11,8 @@ import { Social } from "@/types/profile/social.type";
 import { FiPlus } from "react-icons/fi";
 import AddButton from "@/components/profile/socialAccounts/AddButton";
 import { useUserData } from "@/contexts/UserDataContext";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store/store";
 
 // Reusable component for profile stats
 const ProfileStat = ({
@@ -28,6 +30,7 @@ const ProfileStat = ({
 
 const SocialAccounts = () => {
     const [socialData, setSocialData] = useState<Social | string>("loading");
+    const { user } = useSelector((state: RootState) => state.auth);
     const { userData: data } = useUserData();
 
     useEffect(() => {
@@ -202,18 +205,20 @@ const SocialAccounts = () => {
         );
     } else {
         return (
-            <section className="flex justify-center items-center py-[4em]">
+            <section className="flex justify-center items-center py-[6em]">
                 <div className="flex flex-col gap-4 items-center py-8">
                     <p className="text-gray-500 text-sm">
                         No account added yet!
                     </p>
-                    <AddButton
-                        href="/api/auth/instagram"
-                        className="bg-black dark:bg-white rounded-3xl text-white dark:text-black py-3 pl-4 pr-5 flex items-center gap-1 cursor-pointer"
-                    >
-                        <FiPlus />
-                        Add an Instagram account
-                    </AddButton>
+                    {user?.userId === data?._id && (
+                        <AddButton
+                            href="/api/auth/instagram"
+                            className="bg-black dark:bg-white rounded-3xl text-white dark:text-black py-3 pl-4 pr-5 flex items-center gap-1 cursor-pointer"
+                        >
+                            <FiPlus />
+                            Add an Instagram account
+                        </AddButton>
+                    )}
                 </div>
             </section>
         );

@@ -85,8 +85,9 @@ const NavBar = () => {
                                             width={100}
                                             height={100}
                                             src={
-                                                user.profile ||
-                                                "/images/icons/user.png"
+                                                user.profile
+                                                    ? `/api/image-proxy?url=${encodeURIComponent(user.profile)}`
+                                                    : "/images/icons/user.png"
                                             }
                                             alt={user.username}
                                         />

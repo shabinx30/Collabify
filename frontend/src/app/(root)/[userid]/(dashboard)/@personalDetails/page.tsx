@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store/store";
 import { FiEdit3 } from "react-icons/fi";
 import { RiTelegram2Line } from "react-icons/ri";
+import { ViewTransition } from "react";
 
 const PersonalDetails = () => {
     const { user } = useSelector((state: RootState) => state.auth);
@@ -22,19 +23,23 @@ const PersonalDetails = () => {
             <section className="bg-gray-100 dark:bg-[#2b2b2b] flex flex-col h-full rounded-3xl p-2 sm:p-4">
                 <div className="flex flex-col lg:flex-row gap-3">
                     <div className="relative max-h-fit shrink-0 self-center lg:self-start">
-                        <Image
-                            className={`min-w-44 rounded-2xl ${
-                                !profileUser.profile
-                                    ? "contrast-0 dark:contrast-100"
-                                    : ""
-                            }`}
-                            width={100}
-                            height={100}
-                            src={
-                                profileUser.profile || "/images/icons/user.png"
-                            }
-                            alt={profileUser.username}
-                        />
+                        <ViewTransition name={profileUser._id as string}>
+                            <Image
+                                className={`min-w-44 rounded-2xl ${
+                                    !profileUser.profile
+                                        ? "contrast-0 dark:contrast-100"
+                                        : ""
+                                }`}
+                                width={100}
+                                height={100}
+                                src={
+                                    profileUser.profile
+                                        ? `/api/image-proxy?url=${encodeURIComponent(profileUser.profile)}`
+                                        : "/images/icons/user.png"
+                                }
+                                alt={profileUser.username}
+                            />
+                        </ViewTransition>
                         <div className="absolute bottom-1 left-1 py-2 w-[calc(100%-8px)] bg-[#ffffff80] backdrop-blur-md rounded-full cursor-pointer">
                             <p className="text-center text-black text-xs">
                                 change profile photo
