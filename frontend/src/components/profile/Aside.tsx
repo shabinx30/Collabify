@@ -11,6 +11,7 @@ import { AppDispatch, RootState } from "@/redux/store/store";
 import { logoutUser } from "@/redux/slices/auth.slice";
 import { googleLogout } from "@react-oauth/google";
 import { useUserData } from "@/contexts/UserDataContext";
+import { CgBookmark } from "react-icons/cg";
 
 const Aside = ({ children }: { children: React.ReactNode }) => {
     const router = useRouter();
@@ -56,6 +57,21 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
                             <p className="hidden xl:block">
                                 Social Media Accounts
                             </p>
+                        </li>
+                        <li
+                            onClick={() => {
+                                router.push(
+                                    `/${user?.username}/saved-profiles`,
+                                );
+                            }}
+                            className={
+                                "hover:bg-slate-800 hover:text-white dark:hover:bg-[#101010] duration-200 px-3.5 py-2 rounded-2xl flex gap-2 items-center cursor-pointer " +
+                                (params.endsWith("saved-profiles") &&
+                                    "bg-slate-900 dark:bg-[#0b0b0b] text-lime-400 dark:text-lime-300")
+                            }
+                        >
+                            <CgBookmark size={21} />
+                            <p className="hidden xl:block">Saved Profiles</p>
                         </li>
                     </ul>
                     <ul className="p-4">

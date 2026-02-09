@@ -7,10 +7,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     const [platform, setPlatform] = useState("instagram")
 
     return (
-        <>
+        <div>
             <PlatformSelector platform={platform} setPlatform={setPlatform} />
             {children}
-        </>
+        </div>
     );
 };
 

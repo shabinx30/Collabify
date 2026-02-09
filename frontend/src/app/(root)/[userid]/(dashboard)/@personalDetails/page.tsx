@@ -125,7 +125,7 @@ const PersonalDetails = () => {
                             Edit
                         </button>
                     ) : (
-                        <button className="flex items-center gap-2 justify-center bg-lime-400 px-4 py-3 rounded-2xl w-full cursor-pointer">
+                        <button className="flex items-center gap-2 justify-center dark:text-black bg-lime-400 px-4 py-3 rounded-2xl w-full cursor-pointer">
                             <RiTelegram2Line size={20} />
                             Chat
                         </button>

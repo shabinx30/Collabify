@@ -10,4 +10,5 @@ export interface IProfileUser extends Omit<IUser, "userId"> {
     amount?: number;
     categories: string[];
     location?: string;
+    images?: string[];
 }
