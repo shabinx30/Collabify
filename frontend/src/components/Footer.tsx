@@ -51,7 +51,7 @@ const Footer = () => {
                     >
                         <FaInstagram
                             size={20}
-                            className="sm:w-6 sm:h-6 bg-white text-black p-1 rounded-full"
+                            className="sm:w-6 sm:h-6 bg-lime-300 text-black p-1 rounded-full"
                         />
                     </a>
                     <a 
@@ -63,7 +63,7 @@ const Footer = () => {
                     >
                         <FaXTwitter
                             size={20}
-                            className="sm:w-6 sm:h-6 bg-white text-black p-1 rounded-full"
+                            className="sm:w-6 sm:h-6 bg-lime-300 text-black p-1 rounded-full"
                         />
                     </a>
                     <a 
@@ -75,7 +75,7 @@ const Footer = () => {
                     >
                         <LuFacebook
                             size={20}
-                            className="sm:w-6 sm:h-6 bg-white text-black p-1 rounded-full"
+                            className="sm:w-6 sm:h-6 bg-lime-300 text-black p-1 rounded-full"
                         />
                     </a>
                 </div>
