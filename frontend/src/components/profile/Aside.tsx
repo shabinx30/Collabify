@@ -17,14 +17,14 @@ const Aside = ({ children }: { children: React.ReactNode }) => {
     const dispatch = useDispatch<AppDispatch>();
     const params = usePathname();
     const { user } = useSelector((state: RootState) => state.auth);
-    const { userData: data } = useUserData();
+    const { userData: profileUser } = useUserData();
 
     const handleLogout = () => {
         googleLogout();
         dispatch(logoutUser(router));
     };
 
-    if (user?.userId == data?._id) {
+    if (user?.userId == profileUser?._id) {
         return (
             <div className="flex">
                 <div className="bg-white dark:bg-black border-r border-gray-200 dark:border-none hidden md:flex flex-col">
