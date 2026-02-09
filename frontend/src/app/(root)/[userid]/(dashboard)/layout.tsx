@@ -6,21 +6,24 @@ const Layout = async ({
     personalDetails,
     earning,
     socialAccounts,
+    images,
 }: {
     children: React.ReactNode;
     personalDetails: React.ReactNode;
     earning: React.ReactNode;
     socialAccounts: React.ReactNode;
+    images: React.ReactNode;
 }) => {
     return (
-        <main className="flex flex-col gap-8 p-2 sm:p-4">
+        <main className="flex flex-col gap-4 p-2 sm:p-4">
             <section className="flex flex-col md:flex-row flex-1 gap-4">
                 {personalDetails}
                 {earning}
                 {children}
                 <Logout />
             </section>
-            <section className="bg-gray-100 dark:bg-black rounded-3xl mt-2">
+            {images}
+            <section className="bg-gray-100 dark:bg-black rounded-3xl">
                 {socialAccounts}
             </section>
         </main>

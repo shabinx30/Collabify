@@ -22,6 +22,9 @@ export class User {
     profile: string;
 
     @Prop()
+    images?: string[];
+
+    @Prop()
     amount: number;
 
     @Prop()
