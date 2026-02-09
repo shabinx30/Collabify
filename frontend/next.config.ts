@@ -16,6 +16,14 @@ const nextConfig: NextConfig = {
                 hostname: "scontent.cdninstagram.com",
             },
         ],
+        localPatterns: [
+            {
+                pathname: "/api/image-proxy",
+            },
+            {
+                pathname: "/images/**",
+            },
+        ],
     },
     experimental: {
         viewTransition: true,
