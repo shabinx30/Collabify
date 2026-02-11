@@ -224,3 +224,44 @@ input {
     box-shadow: 0 0 20px #8d7bf1;
   }
 }
+
+
+/* animations */
+
+/* === iOS Push Transition === */
+
+::view-transition-new(.slide-in) {}
+
+::view-transition-old(.slide-out) {}
+
+.slide-in {
+  animation: SlideIn 450ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.slide-out {
+  animation: SlideOut 450ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* New page comes from right */
+@keyframes SlideIn {
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+}
+
+/* Old page shifts left slightly with depth */
+@keyframes SlideOut {
+  from {
+    transform: translateX(0%) scale(1);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(-30%) scale(0.98);
+    opacity: 0.95;
+  }
+}
