@@ -3,4 +3,5 @@ export const searchPlaceholders = [
     "Fashion creators in India with 4-star ratings",
     "Find beauty influencers on Instagram",
     "Best tech creators on YouTube",
+    "Who are the top tech creators in India?",
 ];
