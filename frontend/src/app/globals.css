@@ -113,6 +113,7 @@ input {
   flex-direction: column;
   justify-content: start;
   align-items: flex-start;
+  /* width: 75%; */
   pointer-events: none;
   z-index: 1;
   animation: scrollText 8s infinite cubic-bezier(0.4, 0, 0.2, 1);
