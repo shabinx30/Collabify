@@ -5,4 +5,6 @@ export interface TSearchBox {
     setCreators?: Dispatch<SetStateAction<IProfileUser[]>>;
     isSearched?: boolean;
     setIsSearched?: Dispatch<SetStateAction<boolean>>;
+    isInSearchPage?: boolean;
+    wrapInView: boolean;
 }

@@ -52,8 +52,9 @@ export class SearchService {
                 ? JSON.parse(parsedQuery)
                 : parsedQuery;
 
+
         const pipeline: any[] = [
-            // 1. Only creators
+            // 1. Only verified creators
             {
                 $match: {
                     role: 'creator',
@@ -61,18 +62,23 @@ export class SearchService {
                 },
             },
 
-            // 2. Filter by niche (categories)
-            ...(categories
+            // 2. Categories (regex search on array elements)
+            ...(categories && categories.length
                 ? [
                       {
                           $match: {
-                              categories: { $in: categories },
+                              categories: {
+                                  $elemMatch: {
+                                      $regex: categories.join('|'),
+                                      $options: 'i',
+                                  },
+                              },
                           },
                       },
                   ]
                 : []),
 
-            // 3. Hierarchical location match
+            // 3. Location (prefix match)
             ...(location
                 ? [
                       {
@@ -97,40 +103,57 @@ export class SearchService {
                   ]
                 : []),
 
-            // 5. Join social media accounts
+            // 5. Lookup social accounts (WITH optional platform filter)
             {
                 $lookup: {
                     from: 'socialmedias',
-                    localField: '_id',
-                    foreignField: 'userId',
+                    let: { userId: '$_id' },
+                    pipeline: [
+                        {
+                            $match: {
+                                $expr: { $eq: ['$userId', '$$userId'] },
+                            },
+                        },
+                        ...(platform
+                            ? [
+                                  {
+                                      $match: { platform },
+                                  },
+                              ]
+                            : []),
+                    ],
                     as: 'social',
                 },
             },
 
-            // 6. Flatten social accounts
-            { $unwind: '$social' },
-
-            // 7. Platform filter
-            ...(platform
+            // 6. Sorting
+            ...(sortBy === 'followers'
                 ? [
                       {
-                          $match: {
-                              'social.platform': platform,
+                          $addFields: {
+                              maxFollowers: {
+                                  $max: '$social.followers',
+                              },
                           },
                       },
+                      { $sort: { maxFollowers: -1 } },
                   ]
-                : []),
-
-            // 8. Sorting
-            ...(sortBy === 'followers'
-                ? [{ $sort: { 'social.followers': -1 } }]
                 : sortBy === 'engagement'
-                  ? [{ $sort: { 'social.engagementRate': -1 } }]
+                  ? [
+                        {
+                            $addFields: {
+                                maxEngagement: {
+                                    $max: '$social.engagementRate',
+                                },
+                            },
+                        },
+                        { $sort: { maxEngagement: -1 } },
+                    ]
                   : sortBy === 'rating'
                     ? [{ $sort: { rating: -1 } }]
                     : []),
 
-            // 9. Final output shape
+            // 7. Final projection
             {
                 $project: {
                     _id: 0,
@@ -140,10 +163,10 @@ export class SearchService {
                     categories: 1,
                     location: 1,
                     social: {
-                        platform: '$social.platform',
-                        userName: '$social.userName',
-                        followers: '$social.followers',
-                        engagementRate: '$social.engagementRate',
+                        platform: 1,
+                        userName: 1,
+                        followers: 1,
+                        engagementRate: 1,
                     },
                 },
             },

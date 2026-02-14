@@ -8,7 +8,13 @@ import { BsStars } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { useRouter, useSearchParams } from "next/navigation";
 
-const SearchBox = ({ setCreators, isSearched, setIsSearched }: TSearchBox) => {
+const SearchBox = ({
+    setCreators,
+    isSearched,
+    setIsSearched,
+    isInSearchPage,
+    wrapInView,
+}: TSearchBox) => {
     const searchRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -24,7 +30,7 @@ const SearchBox = ({ setCreators, isSearched, setIsSearched }: TSearchBox) => {
         e?.preventDefault();
         if (!searchRef.current || !searchRef.current.value.trim()) return;
         const res = await searchCreators(searchRef.current.value);
-        console.log({res})
+        console.log({ res });
         if (setCreators) {
             setCreators(() => res);
         }
@@ -55,8 +61,10 @@ const SearchBox = ({ setCreators, isSearched, setIsSearched }: TSearchBox) => {
     }, [searchParams]);
 
     return (
-        <ViewTransition name="search-bar">
-            <div className="searchbox flex w-full md:w-[75%] lg:w-[60%] justify-between items-center px-3 md:px-6 py-2.5 md:py-4 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl">
+        <Wrapper wrapInView={wrapInView}>
+            <div
+                className={`searchbox flex w-full ${!isInSearchPage ? "w-[75%] lg:w-[60%]" : ""} justify-between items-center px-3 md:px-6 py-2.5 md:py-4 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl`}
+            >
                 <div className="flex items-center gap-1.5 md:gap-3 w-full">
                     <FiSearch size={18} />
                     <form
@@ -83,7 +91,21 @@ const SearchBox = ({ setCreators, isSearched, setIsSearched }: TSearchBox) => {
                 </div>
                 <BsStars size={20} className="text-lime-400" />
             </div>
-        </ViewTransition>
+        </Wrapper>
+    );
+};
+
+const Wrapper = ({
+    children,
+    wrapInView,
+}: {
+    children: React.ReactNode;
+    wrapInView?: boolean;
+}) => {
+    return wrapInView ? (
+        <ViewTransition name="search-bar">{children}</ViewTransition>
+    ) : (
+        children
     );
 };
 
