@@ -16,7 +16,7 @@ const Hero = () => {
                     platform.
                 </p>
             </div>
-            <SearchBox />
+            <SearchBox wrapInView={true} />
         </section>
     );
 };

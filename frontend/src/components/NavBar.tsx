@@ -21,7 +21,11 @@ import { FormEvent, ViewTransition } from "react";
 import { googleLogout } from "@react-oauth/google";
 import { BsStars } from "react-icons/bs";
 
-const NavBar = () => {
+const NavBar = ({
+    children: SearchComponents,
+}: {
+    children?: React.ReactNode;
+}) => {
     const pathnames = usePathname().split("/");
     const path = pathnames[1];
     const { user } = useSelector((state: RootState) => state.auth);
@@ -41,19 +45,23 @@ const NavBar = () => {
         <nav className={"bg-white dark:bg-black"}>
             <ul
                 className={
-                    "flex py-3 justify-between items-center px-3 md:px-6"
+                    "flex py-3 justify-between items-center px-3 md:px-6 gap-4"
                 }
             >
                 <li className="flex-1 font-bold my-1 text-lg md:text-2xl">
                     <Link href="/">Collabify</Link>
                 </li>
-                {path && (
+                {path && !SearchComponents && (
                     <ViewTransition name="search-bar">
                         <li
                             onClick={() => router.push("/search")}
-                            className="hidden md:flex justify-between flex-1 items-center px-4 border border-[#868686] dark:border-gray-600 bg-gray-100 dark:bg-[#2b2b2b] rounded-2xl"
+                            className="hidden md:flex justify-between flex-1 items-center px-4 bg-gray-100 dark:bg-[#2b2b2b] rounded-2xl"
                         >
-                            <form onSubmit={handleSubmit} autoComplete="off" className="flex items-center gap-2">
+                            <form
+                                onSubmit={handleSubmit}
+                                autoComplete="off"
+                                className="flex items-center gap-2"
+                            >
                                 <FiSearch />
                                 <input
                                     type="search"
@@ -66,7 +74,12 @@ const NavBar = () => {
                         </li>
                     </ViewTransition>
                 )}
-                <li className="flex-1/3 lg:flex-1 flex text-[0.7em] sm:text-xs md:text-base items-center justify-end gap-4 md:gap-6">
+                {SearchComponents && (
+                    <li className="hidden md:block md:min-w-[75%] lg:min-w-[60%] xl:min-w-[50%]">
+                        {SearchComponents}
+                    </li>
+                )}
+                <li className="flex-1/3 md:flex-1 flex text-[0.7em] sm:text-xs md:text-base items-center justify-end gap-4 md:gap-6">
                     {user && user.isVerified ? (
                         path !== user.username && (
                             <DropdownMenu>
@@ -74,8 +87,10 @@ const NavBar = () => {
                                     asChild
                                     className="border-none"
                                 >
-                                    <div className="flex gap-4 items-center hover:bg-gray-200 dark:hover:bg-[#3b3b3b] duration-200 pl-4 rounded-full cursor-default">
-                                        <h3>{user.username}</h3>
+                                    <div className={`flex ${SearchComponents ? "p-0" : "pl-4"} gap-4 items-center hover:bg-gray-200 dark:hover:bg-[#3b3b3b] duration-200 rounded-full cursor-default`}>
+                                        {!SearchComponents && (
+                                            <h3>{user.username}</h3>
+                                        )}
                                         <Image
                                             className={`w-9 h-9 rounded-full ${
                                                 !user.profile
