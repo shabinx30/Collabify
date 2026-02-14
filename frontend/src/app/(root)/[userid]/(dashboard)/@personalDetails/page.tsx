@@ -7,6 +7,7 @@ import { RootState } from "@/redux/store/store";
 import { FiEdit3 } from "react-icons/fi";
 import { RiTelegram2Line } from "react-icons/ri";
 import { ViewTransition } from "react";
+import { CgBookmark } from "react-icons/cg";
 
 const PersonalDetails = () => {
     const { user } = useSelector((state: RootState) => state.auth);
@@ -123,17 +124,23 @@ const PersonalDetails = () => {
                         </div>
                     </div>
                 </div>
-                <div className="h-full flex items-end">
+                <div className="h-full flex items-end gap-2">
                     {user?.userId == profileUser._id ? (
                         <button className="flex items-center gap-2 justify-center text-lime-500 hover:bg-lime-400 hover:text-black hover:border-lime-400 duration-200 border-2 px-4 py-3 rounded-2xl w-full cursor-pointer">
                             <FiEdit3 size={20} />
                             Edit
                         </button>
                     ) : (
-                        <button className="flex items-center gap-2 justify-center dark:text-black bg-lime-400 px-4 py-3 rounded-2xl w-full cursor-pointer">
-                            <RiTelegram2Line size={20} />
-                            Chat
-                        </button>
+                        <>
+                            <button className="flex items-center gap-2 justify-center dark:text-black bg-lime-400 px-4 py-3 rounded-2xl w-full cursor-pointer">
+                                <RiTelegram2Line size={20} />
+                                Chat
+                            </button>
+                            <button className="flex items-center gap-2 justify-center dark:text-black bg-lime-400 px-4 py-3 rounded-2xl w-full cursor-pointer">
+                                <CgBookmark size={20} />
+                                Save
+                            </button>
+                        </>
                     )}
                 </div>
             </section>
