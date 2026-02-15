@@ -241,9 +241,7 @@ export class UserService {
         try {
             const { given_name, email, picture } = userData;
 
-            const exist = await this.userRepository.findByEmail(
-                email as string,
-            );
+            const exist = await this.userRepository.findByEmail(email);
             let user: UserDocument | null = null;
 
             if (exist) {
@@ -321,7 +319,7 @@ export class UserService {
     async getSocialAccount(userId: ObjectId) {
         const socialData = await this.userRepository.getSocialAccount(userId);
         if (!socialData) {
-            return null
+            return null;
         }
         try {
             const res = await axios.get(

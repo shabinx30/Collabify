@@ -1,7 +1,11 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, userSchema } from './schemas/user.schema';
-import { AdminUserController, UserController, AuthController } from './user.controller';
+import {
+    AdminUserController,
+    UserController,
+    AuthController,
+} from './user.controller';
 import { UserService } from './user.service';
 import { Otp, otpSchema } from './schemas/otp.schema';
 import { UserRepository } from './user.repository.impl';

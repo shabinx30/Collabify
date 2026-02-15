@@ -32,7 +32,7 @@ async function bootstrap() {
     );
 
     await app.register(cookie as any, {
-        secret: process.env.COOKIE_SECRET
+        secret: process.env.COOKIE_SECRET,
     });
 
     const port = process.env.PORT || 4002;

@@ -52,7 +52,6 @@ export class SearchService {
                 ? JSON.parse(parsedQuery)
                 : parsedQuery;
 
-
         const pipeline: any[] = [
             // 1. Only verified creators
             {

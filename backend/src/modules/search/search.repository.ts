@@ -1,7 +1,7 @@
-import { Injectable, InternalServerErrorException } from "@nestjs/common";
-import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
-import { User, UserDocument } from "../user/schemas/user.schema";
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { User, UserDocument } from '../user/schemas/user.schema';
 
 @Injectable()
 export class SearchRepository {
@@ -14,7 +14,9 @@ export class SearchRepository {
             const creators = await this.userSchema.aggregate(pipeline);
             return creators;
         } catch (error) {
-            throw new InternalServerErrorException('Failed to search while searching creators');
+            throw new InternalServerErrorException(
+                'Failed to search while searching creators',
+            );
         }
     }
 }

@@ -9,7 +9,8 @@ import { SocialMedia, SocialMediaDocument } from './schemas/socialMedia.schema';
 export class UserRepository {
     constructor(
         @InjectModel(User.name) private userSchema: Model<UserDocument>,
-        @InjectModel(SocialMedia.name) private socialMediaSchema: Model<SocialMediaDocument>,
+        @InjectModel(SocialMedia.name)
+        private socialMediaSchema: Model<SocialMediaDocument>,
         @InjectModel(Otp.name) private otpSchema: Model<OtpDocument>,
     ) {}
 

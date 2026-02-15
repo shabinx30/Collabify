@@ -1,1 +1,1 @@
-export type TRoles = "brand" | "creator"
+export type TRoles = 'brand' | 'creator';
