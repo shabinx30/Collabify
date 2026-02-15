@@ -21,8 +21,13 @@ export class UserController {
     }
 
     @Get('get-social-account')
-    async GetSocial(@Query('userId') userId: unknown, @Res({ passthrough: true }) reply: FastifyReply) {
-        const data = await this.userService.getSocialAccount(userId as ObjectId);
+    async GetSocial(
+        @Query('userId') userId: unknown,
+        @Res({ passthrough: true }) reply: FastifyReply,
+    ) {
+        const data = await this.userService.getSocialAccount(
+            userId as ObjectId,
+        );
         return reply.send(data);
     }
 }
@@ -32,9 +37,12 @@ export class AuthController {
     constructor(private readonly userService: UserService) {}
 
     @Post('signup')
-    async createUser(@Body('email') email: string, @Res({passthrough: true}) reply: FastifyReply) {
+    async createUser(
+        @Body('email') email: string,
+        @Res({ passthrough: true }) reply: FastifyReply,
+    ) {
         const res = await this.userService.createUser(email);
-        return reply.send(res)
+        return reply.send(res);
     }
 
     @Post('signin')
