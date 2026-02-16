@@ -2,6 +2,7 @@ import {
     Injectable,
     InternalServerErrorException,
     BadRequestException,
+    Inject,
 } from '@nestjs/common';
 import { SearchRepository } from './search.repository';
 import { GoogleGenAI } from '@google/genai';
@@ -10,7 +11,10 @@ import { systemInstruction } from '../../common/const/ai-instuctions';
 @Injectable()
 export class SearchService {
     private readonly genAI: GoogleGenAI;
-    constructor(private readonly searchRepository: SearchRepository) {
+    constructor(
+        private readonly searchRepository: SearchRepository,
+        @Inject('REDIS_CLIENT') private readonly redisService,
+    ) {
         this.genAI = new GoogleGenAI({
             apiKey: process.env.GEMINI_API_KEY,
         });
@@ -42,8 +46,15 @@ export class SearchService {
     }
 
     async searchCreators(query: string) {
-        if (!query || query.trim().length === 0 || query.trim().length > 100) {
+        query = query.trim();
+
+        if (!query || query.length === 0 || query.length > 200) {
             throw new BadRequestException('Invalid query');
+        }
+
+        const cachedResult = await this.redisService.get(`search:${query}`);
+        if (cachedResult) {
+            return JSON.parse(cachedResult);
         }
 
         const parsedQuery = await this.parseQuery(query);
@@ -172,6 +183,11 @@ export class SearchService {
         ];
 
         const creators = await this.searchRepository.searchCreators(pipeline);
+        await this.redisService.set(
+            `search:${query}`,
+            JSON.stringify(creators),
+            60,
+        );
         return creators;
     }
 }
