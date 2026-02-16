@@ -321,9 +321,19 @@ export class UserService {
         }
     }
 
-    async searchCreators() {
+    async searchFeaturedCreators() {
         try {
-            return await this.userRepository.searchCreators();
+            return await this.userRepository.searchFeaturedCreators();
+        } catch (error) {
+            throw new InternalServerErrorException(
+                'An unexpected error has been occured while searching creators',
+            );
+        }
+    }
+
+    async searchInstagramCreators() {
+        try {
+            return await this.userRepository.searchInstagramCreators();
         } catch (error) {
             throw new InternalServerErrorException(
                 'An unexpected error has been occured while searching creators',

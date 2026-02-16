@@ -14,9 +14,15 @@ export class UserController {
         return await this.userService.getUser(username);
     }
 
-    @Get('creators')
+    @Get('featured-creators')
     async GetCreators(_, @Res({ passthrough: true }) reply: FastifyReply) {
-        const creators = await this.userService.searchCreators();
+        const creators = await this.userService.searchFeaturedCreators();
+        return reply.send(creators);
+    }
+
+    @Get('instagram-creators')
+    async GetInstagramCreators(_, @Res({ passthrough: true }) reply: FastifyReply) {
+        const creators = await this.userService.searchInstagramCreators();
         return reply.send(creators);
     }
 

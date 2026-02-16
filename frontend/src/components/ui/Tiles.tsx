@@ -2,11 +2,27 @@ import { IProfileUser } from "@/types/profile/profile.type";
 import Image from "next/image";
 import { ViewTransition } from "react";
 
-const Tiles = ({ creator }: { creator: IProfileUser }) => {
+const Tiles = ({
+    creator,
+    wrapInView,
+}: {
+    creator: IProfileUser;
+    wrapInView: boolean;
+}) => {
     return (
         <div className="aspect-9/14">
             <div className="relative h-[84%] w-full">
-                <ViewTransition name={creator._id}>
+                {wrapInView ? (
+                    <ViewTransition name={creator._id}>
+                        <Image
+                            className="object-cover w-full h-full rounded-xl"
+                            src={creator.profile ?? "/images/infu-1.jpeg"}
+                            alt="infu"
+                            fill
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                    </ViewTransition>
+                ) : (
                     <Image
                         className="object-cover w-full h-full rounded-xl"
                         src={creator.profile ?? "/images/infu-1.jpeg"}
@@ -14,7 +30,7 @@ const Tiles = ({ creator }: { creator: IProfileUser }) => {
                         fill
                         sizes="(max-width: 768px) 100vw, 50vw"
                     />
-                </ViewTransition>
+                )}
             </div>
             <div className="flex justify-between text-[0.9rem]">
                 <div>

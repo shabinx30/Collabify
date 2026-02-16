@@ -55,11 +55,45 @@ export class UserRepository {
         );
     }
 
-    async searchCreators() {
+    async searchFeaturedCreators() {
         return await this.userSchema.find(
             { role: 'creator' },
             { password: 0, role: 0, createdAt: 0, updatedAt: 0 },
         );
+    }
+
+    async searchInstagramCreators() {
+        return await this.userSchema.aggregate([
+            {
+                $match: {
+                    role: 'creator',
+                },
+            },
+            {
+                $lookup: {
+                    from: 'socialmedias',
+                    let: { userId: '$_id' },
+                    pipeline: [
+                        {
+                            $match: {
+                                $expr: {
+                                    $and: [
+                                        { $eq: ['$userId', '$$userId'] },
+                                        { $eq: ['$platform', 'instagram'] },
+                                    ],
+                                },
+                            },
+                        },
+                    ],
+                    as: 'socialMedia',
+                },
+            },
+            {
+                $match: {
+                    socialMedia: { $ne: [] },
+                },
+            },
+        ]);
     }
 
     async getSocialAccount(userId: ObjectId) {
