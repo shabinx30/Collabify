@@ -12,10 +12,11 @@ const Tiles = ({
     return (
         <div className="aspect-9/14">
             <div className="relative h-[84%] w-full">
+                <div className="absolute z-10 inset-0 bg-linear-to-b from-black/60 to-transparent h-1/4 rounded-2xl" />
                 {wrapInView ? (
                     <ViewTransition name={creator._id}>
                         <Image
-                            className="object-cover w-full h-full rounded-xl"
+                            className="object-cover w-full h-full rounded-2xl"
                             src={creator.profile ?? "/images/infu-1.jpeg"}
                             alt="infu"
                             fill
@@ -24,13 +25,14 @@ const Tiles = ({
                     </ViewTransition>
                 ) : (
                     <Image
-                        className="object-cover w-full h-full rounded-xl"
+                        className="object-cover w-full h-full rounded-2xl"
                         src={creator.profile ?? "/images/infu-1.jpeg"}
                         alt="infu"
                         fill
                         sizes="(max-width: 768px) 100vw, 50vw"
                     />
                 )}
+                <p className="absolute z-20 top-2 left-2.5 text-white text-sm font-semibold">{creator.username}</p>
             </div>
             <div className="flex justify-between text-[0.9rem]">
                 <div>

@@ -10,7 +10,10 @@ const Instagram = async () => {
 
     return (
         <section className="w-full">
-            <h1 className="font-semibold text-xl">Instagram</h1>
+            <div className="flex items-end justify-between">
+                <h1 className="font-semibold text-xl">Instagram</h1>
+                <p className="text-primary cursor-pointer text-sm">View All</p>
+            </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 py-[1em]">
                 {creators && creators.length ? (
                     creators.map((creator: IProfileUser, i: number) => (
