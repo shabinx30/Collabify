@@ -27,6 +27,7 @@ export class UserService {
         private userRepository: UserRepository,
         @Inject('ACCESS_JWT') private readonly accessJwt: JwtService,
         @Inject('REFRESH_JWT') private readonly refreshJwt: JwtService,
+        @Inject('REDIS_CLIENT') private readonly redisService,
     ) {}
 
     async createUser(email: string): Promise<object> {
@@ -321,10 +322,16 @@ export class UserService {
         if (!socialData) {
             return null;
         }
+        const cacheKey = `socialAccount:${userId}`;
+        const cachedData = await this.redisService.get(cacheKey);
+        if (cachedData) {
+            return JSON.parse(cachedData);
+        }
         try {
             const res = await axios.get(
                 `https://graph.instagram.com/v19.0/${socialData.platformUserId}?fields=id,username,account_type,biography,website,profile_picture_url,followers_count,follows_count,media_count,media.limit(10){id,caption,media_type,media_url,permalink,timestamp,like_count,comments_count}&access_token=${socialData.token.accessToken}`,
             );
+            await this.redisService.set(cacheKey, JSON.stringify(res.data));
             return res.data;
         } catch (error) {
             throw new InternalServerErrorException(
