@@ -81,7 +81,7 @@ const Otp = () => {
                             "We have sent an OTP (One Time Password) to your email"
                         }
                     </p>
-                    <p className="text-sm text-center text-green-400">
+                    <p className="text-sm text-center text-lime-400">
                         {user?.email}
                     </p>
                 </div>
@@ -105,7 +105,7 @@ const Otp = () => {
                 </div>
                 <p className="text-sm text-center flex justify-center gap-1 items-center">
                     <FiClock />
-                    <span className="text-green-400">
+                    <span className="text-lime-400">
                         {`${Math.floor(time / 60)}:${(time % 60)
                             .toString()
                             .padStart(2, "0")}`}
@@ -115,7 +115,7 @@ const Otp = () => {
                         onClick={() => time === 0 && handleResend()}
                         className={
                             time == 0
-                                ? "text-green-400 hover:underline cursor-pointer"
+                                ? "text-lime-400 hover:underline cursor-pointer"
                                 : "text-gray-400 cursor-not-allowed"
                         }
                     >
@@ -124,7 +124,7 @@ const Otp = () => {
                 </p>
                 <button
                     type="submit"
-                    className="bg-green-400 w-full py-2 text-black rounded-2xl cursor-pointer"
+                    className="bg-lime-400 w-full py-2 text-black rounded-2xl cursor-pointer"
                 >
                     Submit
                 </button>

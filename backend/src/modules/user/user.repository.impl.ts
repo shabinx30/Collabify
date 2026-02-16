@@ -2,7 +2,6 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from './schemas/user.schema';
 import { Model, ObjectId } from 'mongoose';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { Otp, OtpDocument } from './schemas/otp.schema';
 import { SocialMedia, SocialMediaDocument } from './schemas/socialMedia.schema';
 
 @Injectable()
@@ -11,7 +10,6 @@ export class UserRepository {
         @InjectModel(User.name) private userSchema: Model<UserDocument>,
         @InjectModel(SocialMedia.name)
         private socialMediaSchema: Model<SocialMediaDocument>,
-        @InjectModel(Otp.name) private otpSchema: Model<OtpDocument>,
     ) {}
 
     async createUser(data: Partial<UserDocument>): Promise<UserDocument> {
@@ -35,28 +33,6 @@ export class UserRepository {
                 'An unexpected error occurred while find user with mail',
             );
         }
-    }
-
-    async createOtp(data) {
-        try {
-            const newOtp = new this.otpSchema(data);
-            return newOtp.save();
-        } catch (error) {
-            console.log(error);
-            throw new InternalServerErrorException('Error while creating otp');
-        }
-    }
-
-    async createOrUpdateOtp(email: string, otp: number) {
-        return this.otpSchema.findOneAndUpdate(
-            { email },
-            { otp, createdAt: new Date(), lastOtpSentAt: new Date() },
-            { upsert: true, new: true },
-        );
-    }
-
-    async findOtpByEmail(email: string) {
-        return await this.otpSchema.findOne({ email });
     }
 
     async findByName(username: string) {

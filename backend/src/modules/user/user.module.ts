@@ -7,7 +7,6 @@ import {
     AuthController,
 } from './user.controller';
 import { UserService } from './user.service';
-import { Otp, otpSchema } from './schemas/otp.schema';
 import { UserRepository } from './user.repository.impl';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { SocialMedia, socialMediaSchema } from './schemas/socialMedia.schema';
@@ -17,7 +16,6 @@ import { SocialMedia, socialMediaSchema } from './schemas/socialMedia.schema';
         MongooseModule.forFeature([
             { name: User.name, schema: userSchema },
             { name: SocialMedia.name, schema: socialMediaSchema },
-            { name: Otp.name, schema: otpSchema },
         ]),
         JwtModule.register({}),
     ],
