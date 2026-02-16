@@ -132,7 +132,22 @@ export const featuredCreators = async (config: {
 }) => {
     try {
         const response = await fetch(
-            `${process.env.NEXT_PUBLIC_API_URL}/creators`,
+            `${process.env.NEXT_PUBLIC_API_URL}/featured-creators`,
+            config,
+        ).then((res) => res.json());
+        return response;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+};
+
+export const instagramCreators = async (config: {
+    next: { revalidate: number | false };
+}) => {
+    try {
+        const response = await fetch(
+            `${process.env.NEXT_PUBLIC_API_URL}/instagram-creators`,
             config,
         ).then((res) => res.json());
         return response;
