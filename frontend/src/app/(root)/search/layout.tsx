@@ -102,7 +102,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
                         {creators && creators.length ? (
                             creators.map((creator: IProfileUser, i: number) => (
                                 <Link href={`/${creator.username}`} key={i}>
-                                    <Tiles creator={creator} key={i} />
+                                    <Tiles creator={creator} wrapInView={true} key={i} />
                                 </Link>
                             ))
                         ) : (
