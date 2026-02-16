@@ -13,10 +13,16 @@ const LoginWith = ({ role }: { role?: RoleType }) => {
     const handleLogin = (credentialResponse: CredentialResponse) => {
         if (credentialResponse && credentialResponse.credential) {
             const decode = jwtDecode(credentialResponse.credential) as IDecode;
+            let highResImage = decode.picture;
+            if (/=s\d+/.test(decode.picture)) {
+                highResImage = decode.picture.replace(/=s\d+(-c)?/, "=s400-c");
+            } else {
+                highResImage += "=s400-c";
+            }
             const userData = {
                 given_name: decode.given_name,
                 email: decode.email,
-                picture: decode.picture,
+                picture: highResImage,
             };
             dispatch(signInWith({ userData, role, router }));
         }
