@@ -85,9 +85,15 @@ export class UserService {
 
     async sendOtp(email: string) {
         const otp = generateOtp();
-        const newOtp = await this.userRepository.createOrUpdateOtp(email, otp);
 
-        if (!newOtp) {
+        console.log({ email, otp });
+        const status = await this.redisService.set(
+            `otp:${email}`,
+            JSON.stringify({ otp, lastOtpSentAt: Date.now() }),
+            300,
+        );
+
+        if (!status) {
             throw new InternalServerErrorException("Can't create otp");
         }
 
@@ -105,7 +111,7 @@ export class UserService {
         //     await transport.sendMail({
         //         from: process.env.USER,
         //         to: email,
-        //         subject: 'Welcome to _',
+        //         subject: 'Welcome to Collabify',
         //         text: `Here is your joining otp(one time password): ${otp}`,
         //     });
 
@@ -122,19 +128,26 @@ export class UserService {
     }
 
     async resendOtp(email: string) {
-        const PreviousOtp = await this.userRepository.findOtpByEmail(email);
+        const PreviousOtp = await this.redisService.get(`otp:${email}`);
+
+        const parsedOtp = JSON.parse(PreviousOtp);
 
         const now = new Date();
         const cooldownMs = 60 * 1000;
 
         if (
-            PreviousOtp?.lastOtpSentAt &&
-            now.getTime() - PreviousOtp.lastOtpSentAt.getTime() < cooldownMs
+            parsedOtp?.lastOtpSentAt &&
+            now.getTime() - new Date(parsedOtp.lastOtpSentAt).getTime() < cooldownMs
         ) {
             throw new BadRequestException('Please wait before resending OTP');
         }
         const otp = generateOtp();
-        const newOtp = await this.userRepository.createOrUpdateOtp(email, otp);
+        console.log({ email, otp });
+        const newOtp = await this.redisService.set(
+            `otp:${email}`,
+            JSON.stringify({ otp, lastOtpSentAt: Date.now() }),
+            300,
+        );
 
         if (!newOtp) {
             throw new InternalServerErrorException("Can't create otp");
@@ -151,7 +164,7 @@ export class UserService {
             await transport.sendMail({
                 from: process.env.USER,
                 to: email,
-                subject: 'Welcome to _',
+                subject: 'Welcome to Collabify',
                 text: `Here is your joining otp(one time password): ${otp}`,
             });
 
@@ -169,13 +182,13 @@ export class UserService {
 
     async verifyOtp(userDto: SignUpDto, otp: number) {
         try {
-            const storedOtp = await this.userRepository.findOtpByEmail(
-                userDto.email,
+            const storedOtp = await this.redisService.get(
+                `otp:${userDto.email}`,
             );
             if (!storedOtp) {
                 return { message: 'Could not find the otp' };
             }
-            if (storedOtp.otp !== otp) {
+            if (JSON.parse(storedOtp).otp !== otp) {
                 return { message: 'not matching' };
             }
 
@@ -217,9 +230,10 @@ export class UserService {
 
     async otpStatus(email: string) {
         try {
-            const Otp = await this.userRepository.findOtpByEmail(email);
-            if (Otp && Otp.lastOtpSentAt) {
-                return { sendTime: Otp.lastOtpSentAt };
+            const Otp = await this.redisService.get(`otp:${email}`);
+            const parsedOtp = JSON.parse(Otp);
+            if (parsedOtp && parsedOtp.lastOtpSentAt) {
+                return { sendTime: parsedOtp.lastOtpSentAt };
             }
             return { exist: false };
         } catch (error) {
