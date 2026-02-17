@@ -16,7 +16,7 @@ const Tiles = ({
                 {wrapInView ? (
                     <ViewTransition name={creator._id}>
                         <Image
-                            className="object-cover w-full h-full rounded-2xl group-hover:scale-110 duration-500"
+                            className="object-cover w-full h-full rounded-2xl group-hover:scale-110 duration-300"
                             src={creator.profile ?? "/images/infu-1.jpeg"}
                             alt="infu"
                             fill
@@ -25,7 +25,7 @@ const Tiles = ({
                     </ViewTransition>
                 ) : (
                     <Image
-                        className="object-cover w-full h-full rounded-2xl group-hover:scale-110 duration-500"
+                        className="object-cover w-full h-full rounded-2xl group-hover:scale-110 duration-300"
                         src={creator.profile ?? "/images/infu-1.jpeg"}
                         alt="infu"
                         fill
