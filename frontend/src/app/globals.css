@@ -155,7 +155,7 @@ input {
 
 }
 
-.search-container input:not(:placeholder-shown)+.placeholder-scroll {
+.search-container textarea:not(:placeholder-shown)+.placeholder-scroll {
   display: none;
 }
 
@@ -226,43 +226,29 @@ input {
   }
 }
 
-
-/* animations */
-
-/* === iOS Push Transition === */
-
-::view-transition-new(.slide-in) {}
-
-::view-transition-old(.slide-out) {}
-
-.slide-in {
-  animation: SlideIn 450ms cubic-bezier(0.32, 0.72, 0, 1);
+.searchbox textarea {
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #898989 #00000000;
+  scrollbar-arrow-color: #00000000;
 }
 
-.slide-out {
-  animation: SlideOut 450ms cubic-bezier(0.32, 0.72, 0, 1);
+.searchbox textarea::-webkit-scrollbar {
+  width: 6px;
 }
 
-/* New page comes from right */
-@keyframes SlideIn {
-  from {
-    transform: translateX(100%);
-  }
-
-  to {
-    transform: translateX(0%);
-  }
+.searchbox textarea::-webkit-scrollbar-track {
+  background: #2bff00;
 }
 
-/* Old page shifts left slightly with depth */
-@keyframes SlideOut {
-  from {
-    transform: translateX(0%) scale(1);
-    opacity: 1;
-  }
+.searchbox textarea::-webkit-scrollbar-thumb {
+  background: #ff1e1e;
+}
 
-  to {
-    transform: translateX(-30%) scale(0.98);
-    opacity: 0.95;
-  }
+.searchbox textarea::-webkit-scrollbar-thumb:hover {
+  background: #3c00ff;
+}
+
+.searchbox textarea::-webkit-scrollbar-button {
+  display: none;
 }
