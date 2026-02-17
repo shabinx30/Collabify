@@ -19,7 +19,7 @@ export interface Social {
             like_count: number;
             timestamp: string;
         }[];
-        paging: {
+        paging?: {
             cursors: {
                 before: string;
                 after: string;
