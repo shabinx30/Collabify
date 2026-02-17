@@ -8,8 +8,10 @@ const Home = () => {
     return (
         <main className="flex flex-col gap-[3em] py-[2em] bg-white dark:bg-black px-[1em] lg:px-[6em] xl:px-[12em]">
             <Hero />
-            <Featured/>
-            <Instagram/>
+            <section className="flex flex-col">
+                <Featured />
+                <Instagram />
+            </section>
             <Benefits />
         </main>
     );
