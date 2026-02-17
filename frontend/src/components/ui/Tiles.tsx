@@ -11,12 +11,12 @@ const Tiles = ({
 }) => {
     return (
         <div className="aspect-9/14">
-            <div className="relative h-[84%] w-full">
+            <div className="relative h-[84%] w-full group overflow-hidden rounded-2xl">
                 <div className="absolute z-10 inset-0 bg-linear-to-b from-black/60 to-transparent h-1/4 rounded-2xl" />
                 {wrapInView ? (
                     <ViewTransition name={creator._id}>
                         <Image
-                            className="object-cover w-full h-full rounded-2xl"
+                            className="object-cover w-full h-full rounded-2xl group-hover:scale-110 duration-500"
                             src={creator.profile ?? "/images/infu-1.jpeg"}
                             alt="infu"
                             fill
@@ -25,7 +25,7 @@ const Tiles = ({
                     </ViewTransition>
                 ) : (
                     <Image
-                        className="object-cover w-full h-full rounded-2xl"
+                        className="object-cover w-full h-full rounded-2xl group-hover:scale-110 duration-500"
                         src={creator.profile ?? "/images/infu-1.jpeg"}
                         alt="infu"
                         fill
