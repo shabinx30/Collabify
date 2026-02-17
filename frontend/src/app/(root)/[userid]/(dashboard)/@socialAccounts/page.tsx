@@ -53,7 +53,7 @@ const SocialAccounts = () => {
                                 username={data?.username as string}
                             />
                         </section>
-                        <h3 className="absolute flex items-center gap-2 text-black top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/4 text-center">
+                        <h3 className="absolute flex items-center gap-2 top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/4 text-center">
                             <IoMdLock size={20} />
                             Login to see this profile
                         </h3>
