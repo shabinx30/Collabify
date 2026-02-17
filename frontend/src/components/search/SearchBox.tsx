@@ -96,10 +96,10 @@ const SearchBox = ({
     return (
         <Wrapper wrapInView={wrapInView}>
             <div
-                className={`searchbox flex w-full ${!isInSearchPage ? "w-[75%] lg:w-[60%]" : ""} justify-between items-center px-3 md:px-6 py-2.5 md:py-3 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl`}
+                className={`searchbox flex w-full ${!isInSearchPage ? "w-[75%] lg:w-[60%]" : ""} justify-between items-start px-3 md:px-6 py-2.5 md:py-3 bg-gray-100 dark:bg-[#2b2b2b] rounded-3xl`}
             >
-                <div className="flex items-center gap-1.5 md:gap-3 w-full">
-                    <FiSearch size={18} />
+                <div className="flex items-start gap-1.5 md:gap-3 w-full">
+                    <FiSearch size={18} className="mt-2" />
                     <form
                         autoComplete="off"
                         onSubmit={redirectToSearch}
@@ -123,7 +123,7 @@ const SearchBox = ({
                         </div>
                     </form>
                 </div>
-                <BsStars size={20} className="text-lime-400 ml-2" />
+                <BsStars size={20} className="text-lime-400 ml-2 mt-2" />
             </div>
         </Wrapper>
     );
