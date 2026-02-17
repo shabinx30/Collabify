@@ -2,7 +2,7 @@ import Link from "next/link";
 import Tiles from "../ui/Tiles";
 import { IProfileUser } from "@/types/profile/profile.type";
 import { instagramCreators } from "@/services";
-import { GoArrowUp, GoArrowUpRight } from "react-icons/go";
+import { GoArrowUp } from "react-icons/go";
 
 const Instagram = async () => {
     const creators = await instagramCreators({
@@ -13,7 +13,7 @@ const Instagram = async () => {
         <section className="w-full">
             <div className="flex items-end justify-between">
                 <h1 className="font-semibold text-xl">Instagram</h1>
-                <div className="relative text-primary cursor-pointer text-sm flex items-center group hover:text-lime-500 transition-colors duration-150 w-fit">
+                <div className="relative text-primary cursor-pointer text-sm flex items-center group transition-colors duration-150 w-fit hover:text-lime-500">
                     <p className="absolute left-0 whitespace-nowrap transition-transform duration-200 group-hover:translate-x-[-24px]">
                         View All
                     </p>
@@ -21,7 +21,7 @@ const Instagram = async () => {
                     <div className="pl-[30px]">
                         <GoArrowUp
                             size={17}
-                            className="transition-transform opacity-0 duration-300 group-hover:rotate-90 group-hover:opacity-100"
+                            className="opacity-0 duration-300 group-hover:rotate-90 group-hover:opacity-100 text-lime-500"
                         />
                     </div>
                 </div>
