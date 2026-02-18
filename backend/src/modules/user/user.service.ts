@@ -3,6 +3,7 @@ import {
     HttpException,
     Inject,
     Injectable,
+    UnauthorizedException,
 } from '@nestjs/common';
 import {
     InternalServerErrorException,
@@ -48,7 +49,7 @@ export class UserService {
         }
 
         if (await compare(userDto.password, exist.password)) {
-            throw new BadRequestException('Email or Password is not matching');
+            throw new UnauthorizedException('Email or Password is not matching');
         }
 
         try {
@@ -181,16 +182,16 @@ export class UserService {
     }
 
     async verifyOtp(userDto: SignUpDto, otp: number) {
+        const storedOtp = await this.redisService.get(
+            `otp:${userDto.email}`,
+        );
+        if (!storedOtp) {
+            throw new NotFoundException('Could not find the otp');
+        }
+        if (JSON.parse(storedOtp).otp !== otp) {
+            throw new BadRequestException('Otp is not matching');
+        }
         try {
-            const storedOtp = await this.redisService.get(
-                `otp:${userDto.email}`,
-            );
-            if (!storedOtp) {
-                return { message: 'Could not find the otp' };
-            }
-            if (JSON.parse(storedOtp).otp !== otp) {
-                return { message: 'not matching' };
-            }
 
             const { password, ...userData } = userDto;
             const hashedPassword = await hashPassword(password);

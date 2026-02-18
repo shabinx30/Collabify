@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FiClock } from "react-icons/fi";
 import { AppDispatch, RootState } from "@/redux/store/store";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,14 +7,18 @@ import { IUser } from "@/types/auth/signup.type";
 import { SignupFormOutput } from "@/lib/validations/signupFormData";
 import useTimer from "@/hooks/auth/useTimer";
 import { useRouter } from "next/navigation";
+import Error from "../alert/Error";
+import toast from "react-hot-toast";
 
 const Otp = () => {
     const length = 4;
     const [otp, setOtp] = useState(Array(length).fill(""));
     const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
-    const { user } = useSelector((state: RootState) => state.auth);
+    const { user, isLoading, error } = useSelector(
+        (state: RootState) => state.auth,
+    );
     const dispatch = useDispatch<AppDispatch>();
-    const router = useRouter()
+    const router = useRouter();
 
     const handleChange = (value: string, index: number) => {
         if (!/^\d*$/.test(value)) return;
@@ -30,7 +34,7 @@ const Otp = () => {
 
     const handleKeyDown = (
         e: React.KeyboardEvent<HTMLInputElement>,
-        index: number
+        index: number,
     ) => {
         if (e.key === "Backspace" && !otp[index] && index > 0) {
             inputsRef.current[index - 1]?.focus();
@@ -61,13 +65,24 @@ const Otp = () => {
             verifyUserOtp({
                 formData: user as IUser & SignupFormOutput,
                 otp: Number(Enteredotp),
-                router
-            })
+                router,
+            }),
         );
     };
 
     // timer manager
     const { time, handleResend } = useTimer(user);
+
+    useEffect(() => {
+        if (error) {
+            toast.custom((t) => (
+                <Error
+                    t={t}
+                    message={error?.message || "Something went wrong"}
+                />
+            ));
+        }
+    }, [error]);
 
     return (
         <div className="section min-w-full flex flex-col gap-10 items-center justify-center">
@@ -124,9 +139,10 @@ const Otp = () => {
                 </p>
                 <button
                     type="submit"
+                    disabled={isLoading}
                     className="bg-lime-400 w-full py-2 text-black rounded-2xl cursor-pointer"
                 >
-                    Submit
+                    {isLoading ? "Verifying..." : "Submit"}
                 </button>
             </form>
         </div>

@@ -17,7 +17,7 @@ export interface IUser {
 export interface IAuthState {
     token: null | string;
     user: null | IUser;
-    error: string | null;
+    error: IError | null;
     isLoading: boolean;
 }
 
@@ -25,4 +25,10 @@ export interface IDecode {
     given_name: string;
     email: string;
     picture: string;
+}
+
+export interface IError {
+    message: string;
+    error: string;
+    statusCode: number;
 }
