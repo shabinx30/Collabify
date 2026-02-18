@@ -49,7 +49,7 @@ export class UserService {
         }
 
         if (await compare(userDto.password, exist.password)) {
-            throw new UnauthorizedException('Email or Password is not matching');
+            throw new BadRequestException('Email or Password is not matching');
         }
 
         try {

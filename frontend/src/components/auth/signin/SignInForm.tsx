@@ -11,9 +11,12 @@ import { useDispatch, useSelector } from "react-redux";
 import LoginWith from "../LoginWith";
 import { useRouter } from "next/navigation";
 import CardAnim from "../CardAnim";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
+import Error from "@/components/alert/Error";
 
 const SignInForm = () => {
-    const { isLoading } = useSelector((state: RootState) => state.auth);
+    const { isLoading, error } = useSelector((state: RootState) => state.auth);
     const dispatch = useDispatch<AppDispatch>();
     const router = useRouter();
 
@@ -26,6 +29,17 @@ const SignInForm = () => {
     const onSubmit = (formData: TSignInForm) => {
         dispatch(signIn({ formData, router }));
     };
+
+    useEffect(() => {
+        if (error) {
+            toast.custom((t) => (
+                <Error
+                    t={t}
+                    message={error?.message || "Something went wrong"}
+                />
+            ));
+        }
+    }, [error]);
 
     return (
         <CardAnim>
@@ -89,7 +103,7 @@ const SignInForm = () => {
                         disabled={isLoading}
                         className="w-full text-black bg-lime-400 hover:bg-lime-500 duration-200 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 cursor-pointer"
                     >
-                        Sign In
+                        {isLoading ? "Signing In..." : "Sign In"}
                     </button>
                     <LoginWith />
                 </div>
