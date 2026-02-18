@@ -16,8 +16,7 @@ import { AppDispatch, RootState } from "@/redux/store/store";
 import Otp from "../Otp";
 import { AnimatePresence, motion } from "framer-motion";
 import { errorClass, regularClass } from "@/const/auth";
-import { sendOtp } from "@/services";
-import { addUser } from "@/redux/slices/auth.slice";
+import { addUser, signUpUser } from "@/redux/slices/auth.slice";
 import LoginWith from "../LoginWith";
 import { isValidUserType } from "@/lib/utils";
 import CardAnim from "../CardAnim";
@@ -30,7 +29,7 @@ const SignUpForm = () => {
     const { user, isLoading } = useSelector((state: RootState) => state.auth);
 
     const [role, setRole] = useState<RoleType>(
-        isValidUserType(typeParam) ? typeParam : "brand"
+        isValidUserType(typeParam) ? typeParam : "brand",
     );
 
     const {
@@ -41,8 +40,8 @@ const SignUpForm = () => {
     } = useForm<SignupFormInput>({ resolver: zodResolver(signupSchema) });
 
     const onSubmit = async (formData: SignupFormInput) => {
-        const data = await sendOtp({ email: formData.email });
-        if (data.message == "success") {
+        const res = await dispatch(signUpUser({ email: formData.email }));
+        if (res.meta.requestStatus === "fulfilled") {
             const user = { ...formData, role: role };
             delete user.confirmPassword;
             // temperorly add user
