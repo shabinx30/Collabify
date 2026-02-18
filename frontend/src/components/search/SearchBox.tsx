@@ -3,7 +3,7 @@
 import { searchPlaceholders } from "@/const/search";
 import { searchCreators } from "@/services";
 import { TSearchBox } from "@/types/search.type";
-import { useEffect, useRef, useState, ViewTransition } from "react";
+import { useEffect, useRef, ViewTransition } from "react";
 import { BsStars } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { useRouter, useSearchParams } from "next/navigation";

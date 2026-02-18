@@ -1,4 +1,3 @@
-import React from "react";
 import { type Toast } from "react-hot-toast";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import "./alert.css";
