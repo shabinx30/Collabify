@@ -145,8 +145,8 @@ const auth = createSlice({
                 state.token = action.payload.token;
             })
             .addCase(verifyUserOtp.rejected, (state, action) => {
-                ((state.isLoading = false),
-                    (state.error = action.payload as IError));
+                state.error = action.payload as IError;
+                state.isLoading = false;
             })
             .addCase(signIn.pending, (state) => {
                 ((state.isLoading = true), (state.error = null));
