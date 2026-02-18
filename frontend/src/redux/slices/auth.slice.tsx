@@ -1,6 +1,6 @@
 import { TSignInForm } from "@/lib/validations/signinFromData";
 import { SignupFormOutput } from "@/lib/validations/signupFormData";
-import { logout, signInUser, signInWithGoogle, verifyOtp } from "@/services";
+import { logout, sendOtp, signInUser, signInWithGoogle, verifyOtp } from "@/services";
 import { IAuthState, IDecode, IError, IUser, RoleType } from "@/types/auth/signup.type";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { isAxiosError } from "axios";
@@ -16,6 +16,26 @@ const initialState: IAuthState = {
     isLoading: false,
 };
 
+export const signUpUser = createAsyncThunk(
+    "auth/sign-up",
+    async (
+        {
+            email,
+        }: {
+            email: string;
+        },
+        { rejectWithValue },
+    ) => {
+        try {
+            await sendOtp({email});
+        } catch (error) {
+            if (isAxiosError(error) && error.response) {
+                return rejectWithValue(error.response.data);
+            }
+            return rejectWithValue(error);
+        }
+    },
+);
 export const verifyUserOtp = createAsyncThunk(
     "auth/verify-otp",
     async (
@@ -171,6 +191,17 @@ const auth = createSlice({
                 state.token = action.payload.token;
             })
             .addCase(signInWith.rejected, (state, action) => {
+                state.error = action.payload as IError;
+                state.isLoading = false;
+            })
+            .addCase(signUpUser.pending, (state) => {
+                ((state.isLoading = true), (state.error = null));
+            })
+            .addCase(signUpUser.fulfilled, (state) => {
+                state.isLoading = false;
+                state.error = null;
+            })
+            .addCase(signUpUser.rejected, (state, action) => {
                 state.error = action.payload as IError;
                 state.isLoading = false;
             })
