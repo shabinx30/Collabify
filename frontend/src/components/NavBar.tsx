@@ -20,6 +20,11 @@ import { logoutUser } from "@/redux/slices/auth.slice";
 import { FormEvent, ViewTransition } from "react";
 import { googleLogout } from "@react-oauth/google";
 import { BsStars } from "react-icons/bs";
+import { FaRegUser } from "react-icons/fa";
+import { LuSettings } from "react-icons/lu";
+import { PiUserCircleDashed } from "react-icons/pi";
+import { CgBookmark } from "react-icons/cg";
+import { TbLogout } from "react-icons/tb";
 
 const NavBar = ({
     children: SearchComponents,
@@ -87,7 +92,9 @@ const NavBar = ({
                                     asChild
                                     className="border-none"
                                 >
-                                    <div className={`flex ${SearchComponents ? "p-0" : "pl-4"} gap-4 items-center hover:bg-gray-200 dark:hover:bg-[#3b3b3b] duration-200 rounded-full cursor-default`}>
+                                    <div
+                                        className={`flex ${SearchComponents ? "p-0" : "pl-4"} gap-4 items-center hover:bg-gray-200 dark:hover:bg-[#3b3b3b] duration-200 rounded-full cursor-default`}
+                                    >
                                         {!SearchComponents && (
                                             <h3>{user.username}</h3>
                                         )}
@@ -109,8 +116,8 @@ const NavBar = ({
                                     </div>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent
-                                    className="w-56"
-                                    align="center"
+                                    className="w-60 mt-2"
+                                    align="start"
                                 >
                                     <DropdownMenuLabel>
                                         My Account
@@ -118,6 +125,7 @@ const NavBar = ({
                                     <DropdownMenuGroup>
                                         <Link href={`/${user.username}`}>
                                             <DropdownMenuItem>
+                                                <FaRegUser />
                                                 Profile
                                                 <DropdownMenuShortcut>
                                                     ⇧⌘P
@@ -125,9 +133,32 @@ const NavBar = ({
                                             </DropdownMenuItem>
                                         </Link>
                                         <Link
+                                            href={`/${user.username}/accounts`}
+                                        >
+                                            <DropdownMenuItem>
+                                                <PiUserCircleDashed size={17} />
+                                                Social Accounts
+                                                <DropdownMenuShortcut>
+                                                    ⌘A
+                                                </DropdownMenuShortcut>
+                                            </DropdownMenuItem>
+                                        </Link>
+                                        <Link
+                                            href={`/${user.username}/saved-profiles`}
+                                        >
+                                            <DropdownMenuItem>
+                                                <CgBookmark size={18} />
+                                                Saved Profiles
+                                                <DropdownMenuShortcut>
+                                                    ⌘S
+                                                </DropdownMenuShortcut>
+                                            </DropdownMenuItem>
+                                        </Link>
+                                        <Link
                                             href={`/${user.username}/settings`}
                                         >
                                             <DropdownMenuItem>
+                                                <LuSettings size={16} />
                                                 Settings
                                                 <DropdownMenuShortcut>
                                                     ⌘S
@@ -144,6 +175,7 @@ const NavBar = ({
                                         }
                                         className="text-red-500"
                                     >
+                                        <TbLogout size={17} />
                                         Log out
                                     </DropdownMenuItem>
                                 </DropdownMenuContent>
