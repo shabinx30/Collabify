@@ -77,7 +77,11 @@ const _findUser = async (userid: string) => {
         );
         return response.data;
     } catch (error) {
-        console.log(error);
+        if (axios.isAxiosError(error)) {
+            if (error.response?.status === 404) {
+                return null;
+            }
+        }
         throw error;
     }
 };
