@@ -83,6 +83,13 @@ const SearchBox = ({
         router.push(`/search?query=${searchRef.current.value}`);
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            redirectToSearch(e as any);
+        }
+    };
+
     useEffect(() => {
         const query = searchParams.get("query");
         if (searchRef.current) {
@@ -109,6 +116,7 @@ const SearchBox = ({
                             name="search"
                             ref={searchRef}
                             onChange={handleChange}
+                            onKeyDown={handleKeyDown}
                             rows={1}
                             className="w-full bg-transparent outline-none resize-none leading-6 pt-1"
                             style={{ overflowY: "hidden" }}
