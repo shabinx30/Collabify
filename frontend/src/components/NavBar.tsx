@@ -25,6 +25,7 @@ import { LuSettings } from "react-icons/lu";
 import { PiUserCircleDashed } from "react-icons/pi";
 import { CgBookmark } from "react-icons/cg";
 import { TbLogout } from "react-icons/tb";
+import { HiOutlinePaintBrush } from "react-icons/hi2";
 
 const NavBar = ({
     children: SearchComponents,
@@ -92,36 +93,51 @@ const NavBar = ({
                                     asChild
                                     className="border-none"
                                 >
-                                    <div
-                                        className={`flex ${SearchComponents ? "p-0" : "pl-4"} gap-4 items-center hover:bg-gray-200 dark:hover:bg-[#3b3b3b] duration-200 rounded-full cursor-default`}
-                                    >
-                                        {!SearchComponents && (
-                                            <h3>{user.username}</h3>
-                                        )}
-                                        <Image
-                                            className={`w-9 h-9 rounded-full ${
-                                                !user.profile
-                                                    ? "contrast-0 dark:contrast-100"
-                                                    : ""
-                                            }`}
-                                            width={100}
-                                            height={100}
-                                            src={
-                                                user.profile
-                                                    ? `/api/image-proxy?url=${encodeURIComponent(user.profile)}`
-                                                    : "/images/icons/user.png"
-                                            }
-                                            alt={user.username}
-                                        />
-                                    </div>
+                                    <Image
+                                        className={`w-9 rounded-full ${
+                                            !user.profile
+                                                ? "contrast-0 dark:contrast-100"
+                                                : ""
+                                        }`}
+                                        width={20}
+                                        height={20}
+                                        src={
+                                            user.profile
+                                                ? `/api/image-proxy?url=${encodeURIComponent(user.profile)}`
+                                                : "/images/icons/user.png"
+                                        }
+                                        alt={user.username}
+                                    />
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent
                                     className="w-60 mt-2"
                                     align="start"
                                 >
                                     <DropdownMenuLabel>
-                                        My Account
+                                        <Link href={`/${user.username}`}>
+                                            <div className="flex flex-col items-center justify-center gap-2">
+                                                <Image
+                                                    className={`w-14 rounded-full ${
+                                                        !user.profile
+                                                            ? "contrast-0 dark:contrast-100"
+                                                            : ""
+                                                    }`}
+                                                    width={40}
+                                                    height={40}
+                                                    src={
+                                                        user.profile
+                                                            ? `/api/image-proxy?url=${encodeURIComponent(user.profile)}`
+                                                            : "/images/icons/user.png"
+                                                    }
+                                                    alt={user.username}
+                                                />
+                                                <h3 className="text-black dark:text-white text-[1.1em]">
+                                                    {user.username}
+                                                </h3>
+                                            </div>
+                                        </Link>
                                     </DropdownMenuLabel>
+                                    <DropdownMenuSeparator />
                                     <DropdownMenuGroup>
                                         <Link href={`/${user.username}`}>
                                             <DropdownMenuItem>
@@ -151,6 +167,17 @@ const NavBar = ({
                                                 Saved Profiles
                                                 <DropdownMenuShortcut>
                                                     ⌘S
+                                                </DropdownMenuShortcut>
+                                            </DropdownMenuItem>
+                                        </Link>
+                                        <Link
+                                            href={`/${user.username}/settings#appearance`}
+                                        >
+                                            <DropdownMenuItem>
+                                                <HiOutlinePaintBrush size={16} />
+                                                Appearance
+                                                <DropdownMenuShortcut>
+                                                    ⌘T
                                                 </DropdownMenuShortcut>
                                             </DropdownMenuItem>
                                         </Link>
