@@ -13,7 +13,7 @@ const PostsPage = ({ media }: { media: Social["media"] }) => {
                     />
                 </div>
                 <div className="flex justify-center items-center">
-                    <h1 className="text-xl md:text-2xl items-center font-bold pt-2">
+                    <h1 className="text-xl md:text-2xl items-center font-semibold pt-2">
                         No Post Yet
                     </h1>
                 </div>

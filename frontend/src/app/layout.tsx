@@ -40,7 +40,7 @@ export default function RootLayout({
                     }
                 >
                     <Toaster position="top-center" reverseOrder={false} />
-                    <main className="flex flex-1 flex-col">{children}</main>
+                    <main className="flex flex-1 flex-col font-sans">{children}</main>
                 </GoogleOAuthProvider>
             </body>
         </html>
