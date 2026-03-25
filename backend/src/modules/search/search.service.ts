@@ -23,7 +23,7 @@ export class SearchService {
     async parseQuery(query: string): Promise<string> {
         try {
             const response = await this.genAI.models.generateContent({
-                model: 'gemini-3.1-flash-lite',
+                model: 'gemini-3.1-flash-lite-preview',
                 contents: [
                     {
                         role: 'user',
