@@ -37,9 +37,9 @@ const Footer = () => {
             </div>
             
             {/* Bottom Section */}
-            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-4 items-center pt-4 border-t border-gray-400">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-4 items-center pt-4 border-t border-[#2b2b2b]">
                 <p className="text-xs sm:text-sm text-gray-400 text-center sm:text-left">
-                    All right reserved &copy; 2025
+                    All right reserved <span className="text-base">&copy;</span> 2025
                 </p>
                 <div className="flex gap-3 sm:gap-2">
                     <a 

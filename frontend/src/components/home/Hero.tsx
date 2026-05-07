@@ -5,8 +5,8 @@ const Hero = () => {
     return (
         <section className="w-full bg-white dark:bg-black flex flex-col items-center gap-4">
             <div className="overflow-hidden pb-1">
-                <h3 className="w-full text-3xl md:text-4xl lg:text-[3.75rem] font-bold text-center slide-up">
-                    Discover the <span className="text-lime-400 italic font-normal">Righ</span> Voice
+                <h3 className="w-full text-3xl md:text-4xl lg:text-[3.75rem] font-bold text-center slide-up tracking-tight">
+                    Discover the <span className="text-lime-400 italic font-serif font-normal tracking-tighter">Right</span> Voice
                 </h3>
             </div>
             <div className="flex justify-center overflow-hidden mb-[4em]">
